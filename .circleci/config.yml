@@ -1,0 +1,50 @@
+version: 2.1
+
+jobs:
+  test-frontend:
+    docker:
+      - image: node:16-alpine3.11
+    steps:
+      - checkout
+      - run:
+          name: "Install dependencies"
+          command: |
+            cd frontend
+            npm install
+      - run:
+          name: "Run tests"
+          command: |
+            cd frontend
+            npm run test
+  check-frontend-linting:
+    docker:
+      - image: node:16-alpine3.11
+    steps:
+      - checkout
+      - run:
+          name: "Install dependencies"
+          command: |
+            cd frontend
+            npm install
+      - run:
+          name: "Run eslint"
+          command: |
+            cd frontend
+            npx eslint .
+  check-frontend-formatting:
+    docker:
+      - image: node:16-alpine3.11
+    steps:
+      - checkout
+      - run:
+          name: "Run prettier"
+          command: |
+            cd frontend
+            npx prettier --check .
+
+workflows:
+  frontend-checks:
+    jobs:
+      - test-frontend
+      - check-frontend-linting
+      - check-frontend-formatting
