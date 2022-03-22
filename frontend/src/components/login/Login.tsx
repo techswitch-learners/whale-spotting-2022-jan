@@ -1,5 +1,4 @@
 import React, { FormEvent, useState, useContext } from "react";
-import { loginUser } from "../../api/apiClient";
 import { LoginContext } from "../login/LoginManager";
 
 export const Login: React.FunctionComponent = () => {
@@ -10,12 +9,8 @@ export const Login: React.FunctionComponent = () => {
 
   function tryLogin(event: FormEvent) {
     event.preventDefault();
-    loginUser(username, password)
-      .then(() => {
-        loginContext.logIn(username, password);
-        setError(undefined);
-      })
-      .catch((err) => setError(err.message));
+    loginContext.logIn(username, password);
+    setError(undefined);
   }
 
   return (
