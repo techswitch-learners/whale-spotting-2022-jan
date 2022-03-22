@@ -11,7 +11,10 @@ namespace WhaleSpotting.Repositories
 {
     public interface ILocationsRepo
     {
-       List < Locations> GetAllLocations();
+       List < Location> GetAllLocations();
+       List < Location> GetPopularLocations();
+
+
     }
     
     public class LocationsRepo : ILocationsRepo
@@ -24,7 +27,14 @@ namespace WhaleSpotting.Repositories
             _context = context;
         }
 
-        public List<Locations> GetAllLocations()
+        public List<Location> GetAllLocations()
+        {
+            return context
+                .Locations
+                .ToList();
+        }
+
+           public List<Location> GetPopularLocations()
         {
             return context
                 .Locations

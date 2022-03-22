@@ -3,7 +3,7 @@ using System.Collections.Generic;
 namespace WhaleSpotting.Models.Database
 {
 
-    public class Locations
+    public class Location
     {
         public int Id { get; set; }
         public int Latitude { get; set; }
@@ -11,6 +11,8 @@ namespace WhaleSpotting.Models.Database
         public string Name { get; set; }
         public string Description { get; set; }
         public List<string> Amenities { get; set; }
+
+        
 
     }
 
