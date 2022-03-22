@@ -31,6 +31,6 @@ namespace WhaleSpotting.Repositories
                 .ToList();
         }
     }
-}
+
 
 }
