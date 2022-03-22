@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using WhaleSpotting.Models.Database;
+using WhaleSpotting.Models.Request;
 
 namespace WhaleSpotting.Repositories
 {
@@ -11,14 +12,26 @@ namespace WhaleSpotting.Repositories
 
         Sighting GetMostRecentSighting();
 
-        Sighting Create();
+        Sighting Create(CreateSightingRequest newSighting);
 
         Sighting GetById(int id);
 
-        
-        
         void Delete(Sighting sighting);
 
+    }
+
+    public class SightingsRepo
+    {
+        private readonly WhaleSpottingDbContext _context;
+
+        public SightingsRepo(WhaleSpottingDbContext context)
+        {
+            _context = context;
+        }
+        public List<Sighting> GetAllSigthings()
+        {
+            return _context.Sightings.ToList();
+        }
     }
 
 
