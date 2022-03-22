@@ -8,6 +8,7 @@ namespace WhaleSpotting
     public class WhaleSpottingDbContext : DbContext
     {
         public DbSet<User> Users { get; set; }
+        public DbSet<Species> Species { get; set; }
 
         protected override void OnConfiguring(
             DbContextOptionsBuilder optionsBuilder
