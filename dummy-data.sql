@@ -1,6 +1,6 @@
 TRUNCATE "SpeciesTrip", "Trips", "Destinations", "SightingSpecies", "Sightings", "Locations", "Species" RESTART IDENTITY;
 
-INSERT INTO "Species" ("Id", "Name", "PhotoUrl", "Description", "EndangeredStatus")
+INSERT INTO "Species" ("Id", "Name", "PhotoUrl", "Description", "EndangeredStatus") 
 VALUES
 	(
 		2,
