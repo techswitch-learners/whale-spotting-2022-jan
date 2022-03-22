@@ -16,7 +16,7 @@ namespace WhaleSpotting.Repositories
 
         Sighting GetById(int id);
 
-        void Delete(Sighting sighting);
+        void Delete(int id);
 
     }
 
@@ -31,6 +31,41 @@ namespace WhaleSpotting.Repositories
         public List<Sighting> GetAllSigthings()
         {
             return _context.Sightings.ToList();
+        }
+        public Sighting GetMostRecentSighting()
+        {
+            return _context.Sightings.OrderBy(x => x.Date).First();
+        }
+        public Sighting Create(CreateSightingRequest newSighting)
+        {
+            var insertedResult = _context.Sightings.Add( new Sighting
+            {
+                Longitude = newSighting.Longitude,
+                Latitude = newSighting.Latitude,
+                Date = newSighting.Date,
+                Location = new Location
+                    {
+                        Name = newSighting.LocationName,
+                    },
+                Description = newSighting.Description,
+                PhotoUrl = newSighting.PhotoUrl,
+                UserId = newSighting.UserId,
+                Species = newSighting.Species,
+
+            });
+            _context.SaveChanges();
+            return insertedResult.Entity;
+        }
+        public Sighting GetById(int id)
+        {
+            return _context.Sightings
+            .Single(sighting => sighting.Id == id);
+        }
+        public void Delete(int id)
+        {
+            var sighting = GetById(id);
+            _context.Sightings.Remove(sighting);
+            _context.SaveChanges();
         }
     }
 

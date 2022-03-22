@@ -12,7 +12,7 @@ namespace WhaleSpotting.Models.Database
         public string Description { get; set; }
         public Species Species { get; set; }
         public string PhotoUrl { get; set; }
-        public string UserId { get; set; }
+        public int UserId { get; set; }
         public User User { get; set; }
 
         

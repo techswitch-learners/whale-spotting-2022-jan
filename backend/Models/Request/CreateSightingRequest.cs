@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System;
+using WhaleSpotting.Models.Database;
 
 namespace WhaleSpotting.Models.Request
 {
@@ -18,7 +19,7 @@ namespace WhaleSpotting.Models.Request
         public string LocationName { get; set; }
 
         [Required]
-        public string Species { get; set; }
+        public Species Species { get; set; }
 
         [Required]
         [StringLength(400)]
@@ -28,7 +29,7 @@ namespace WhaleSpotting.Models.Request
         public string PhotoUrl { get; set; }
 
         [Required]
-        public string Username { get; set; }
+        public int UserId { get; set; }
       
     }
 }
