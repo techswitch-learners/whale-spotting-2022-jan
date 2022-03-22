@@ -1,13 +1,13 @@
 import React, { createContext, useState } from "react";
 
 type LoginContextType = {
-  isLoggedIn: boolean,
-  isAdmin: boolean,
-  username: string,
-  password: string,
-  logIn: (username: string, password: string) => void,
-  logOut: () => void,
-}
+  isLoggedIn: boolean;
+  isAdmin: boolean;
+  username: string;
+  password: string;
+  logIn: (username: string, password: string) => void;
+  logOut: () => void;
+};
 
 export const LoginContext = createContext<LoginContextType>({
   isLoggedIn: false,
