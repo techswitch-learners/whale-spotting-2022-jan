@@ -46,7 +46,8 @@ namespace WhaleSpotting.Repositories
                 Name = newUser.Name,
                 HashedPassword = hashed,
                 Salt = salt,
-                Username = newUser.Username
+                Username = newUser.Username,
+                Email=newUser.Email
             });
 
             _context.SaveChanges();
