@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using WhaleSpotting;
@@ -10,9 +11,10 @@ using WhaleSpotting;
 namespace WhaleSpotting.Migrations
 {
     [DbContext(typeof(WhaleSpottingDbContext))]
-    partial class WhaleSpottingDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220322123205_CreateLocation")]
+    partial class CreateLocation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,11 +35,11 @@ namespace WhaleSpotting.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("text");
 
-                    b.Property<float>("Latitude")
-                        .HasColumnType("real");
+                    b.Property<int>("Latitude")
+                        .HasColumnType("integer");
 
-                    b.Property<float>("Longitude")
-                        .HasColumnType("real");
+                    b.Property<int>("Longitude")
+                        .HasColumnType("integer");
 
                     b.Property<string>("Name")
                         .HasColumnType("text");
@@ -45,33 +47,6 @@ namespace WhaleSpotting.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Locations");
-                });
-
-            modelBuilder.Entity("WhaleSpotting.Models.Database.Species", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<string>("Description")
-                        .HasColumnType("text");
-
-                    b.Property<string>("EndangeredStatus")
-                        .HasColumnType("text");
-
-                    b.Property<string>("LatinName")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("text");
-
-                    b.Property<string>("PhotoUrl")
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Species");
                 });
 
             modelBuilder.Entity("WhaleSpotting.Models.Database.User", b =>
