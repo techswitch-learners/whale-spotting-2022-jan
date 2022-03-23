@@ -1,14 +1,21 @@
 import React, { FormEvent, useState, useContext } from "react";
+import { login } from "../../clients/apiClients";
 import { LoginContext } from "../login/LoginManager";
 
 export const Login: React.FunctionComponent = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(undefined);
+  const [error, setError] = useState<string>();
   const loginContext = useContext(LoginContext);
 
-  function tryLogin(event: FormEvent) {
+  async function tryLogin(event: FormEvent) {
     event.preventDefault();
+    try {
+      await login(username, password);
+    } catch (e) {
+      setError((e as Error).message);
+      return;
+    }
     loginContext.logIn(username, password);
     setError(undefined);
   }
