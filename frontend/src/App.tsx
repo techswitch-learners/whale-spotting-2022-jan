@@ -7,21 +7,17 @@ import { Footer } from "./components/footer/Footer";
 import { Login } from "./components/login/Login";
 import { LoginContext } from "./components/login/LoginManager";
 
-
-
 const Routes: React.FunctionComponent = () => {
   return (
     <Switch>
-      <Route path="/home" component={Home}/>
-        
-      <Route exact path="/login" component={Login}/>
+      <Route path="/" component={Home} />
+
+      <Route exact path="/login" component={Login} />
     </Switch>
   );
 };
 
 const App: React.FunctionComponent = () => {
-
-  
   return (
     <Router>
       <LoginManager>

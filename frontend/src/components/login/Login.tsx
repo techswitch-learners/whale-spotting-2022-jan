@@ -1,7 +1,7 @@
 import React, { FormEvent, useState, useContext } from "react";
 import { login } from "../../clients/apiClients";
 import { LoginContext } from "../login/LoginManager";
-import "./Login.scss"
+import "./Login.scss";
 
 export const Login: React.FunctionComponent = () => {
   const [username, setUsername] = useState("");
@@ -25,7 +25,7 @@ export const Login: React.FunctionComponent = () => {
     <div className="login">
       {error && <p>Login failed</p>}
       <h1>Log In to Whale Spotting!</h1>
-      <form onSubmit={tryLogin}>
+      <form onSubmit={tryLogin} className="login-form">
         <label className="field">
           Username
           <input
@@ -34,6 +34,7 @@ export const Login: React.FunctionComponent = () => {
             placeholder="Username"
             required
             onChange={(event) => setUsername(event.target.value)}
+            className="login-input"
           />
         </label>
         <label className="field">
@@ -44,6 +45,7 @@ export const Login: React.FunctionComponent = () => {
             placeholder="Password"
             required
             onChange={(event) => setPassword(event.target.value)}
+            className="login-input"
           />
         </label>
 
