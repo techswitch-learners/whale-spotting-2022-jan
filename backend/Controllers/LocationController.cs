@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace WhaleSpotting.Controllers {
   [ApiController]
-  [Route("/location")]
+  [Route("/locations")]
   public class LocationController : ControllerBase {
     private readonly ILocationsRepo _locations;
 
