@@ -4,13 +4,13 @@ import { Home } from "./components/homepage/Home";
 import { Navbar } from "./components/navbar/Navbar";
 import { LoginManager } from "./components/login/LoginManager";
 import { Footer } from "./components/footer/Footer";
-import { SignUpForm } from "./Pages/SignUp/SignUp";
+import { CreateUser, SignUpForm } from "./Pages/SignUp/SignUp";
 
 const Routes: React.FunctionComponent = () => {
   return (
     <Switch>
       <Route path="/sign-up">
-        <SignUpForm />
+        <CreateUser />
       </Route>
       <Route path="/">
         <Home />
