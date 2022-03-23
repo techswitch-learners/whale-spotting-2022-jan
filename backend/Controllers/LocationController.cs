@@ -18,10 +18,6 @@ namespace WhaleSpotting.Controllers {
 
     [HttpGet]
     public ActionResult<List<Location>> GetAllLocations() {
-      if (!ModelState.IsValid) {
-        return BadRequest(ModelState);
-      }
-
       return _locations.GetAllLocations();
     }   
   }
