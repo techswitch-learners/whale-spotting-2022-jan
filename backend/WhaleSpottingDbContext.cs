@@ -8,6 +8,7 @@ namespace WhaleSpotting
     public class WhaleSpottingDbContext : DbContext
     {
         public DbSet<User> Users { get; set; }
+        public DbSet<Species> Species { get; set; }
         public DbSet<Location> Locations{ get; set; }
         public DbSet<Sighting> Sightings { get; set; }
 
