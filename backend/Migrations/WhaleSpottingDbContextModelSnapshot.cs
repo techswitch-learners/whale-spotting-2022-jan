@@ -60,14 +60,8 @@ namespace WhaleSpotting.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("text");
 
-                    b.Property<double>("Latitude")
-                        .HasColumnType("double precision");
-
                     b.Property<int?>("LocationId")
                         .HasColumnType("integer");
-
-                    b.Property<double>("Longitude")
-                        .HasColumnType("double precision");
 
                     b.Property<string>("PhotoUrl")
                         .HasColumnType("text");

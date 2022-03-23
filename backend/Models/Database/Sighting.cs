@@ -6,8 +6,6 @@ namespace WhaleSpotting.Models.Database
     {
         public int Id { get; set; }
         public DateTime Date { get; set; }
-        public double Latitude { get; set; }
-        public double Longitude { get; set; }
         public Location Location { get; set; }
         public string Description { get; set; }
         public Species Species { get; set; }

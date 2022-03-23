@@ -7,10 +7,6 @@ namespace WhaleSpotting.Models.Request
     public class CreateSightingRequest
     {
 
-        public double Latitude { get; set; }
-
-        public double Longitude { get; set; }
-
         [Required]
         public DateTime Date { get; set; }
 

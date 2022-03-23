@@ -40,8 +40,6 @@ namespace WhaleSpotting.Repositories
         {
             var insertedResult = _context.Sightings.Add( new Sighting
             {
-                Longitude = newSighting.Longitude,
-                Latitude = newSighting.Latitude,
                 Date = newSighting.Date,
                 Location = new Location
                     {

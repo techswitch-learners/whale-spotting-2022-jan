@@ -11,8 +11,8 @@ using WhaleSpotting;
 namespace WhaleSpotting.Migrations
 {
     [DbContext(typeof(WhaleSpottingDbContext))]
-    [Migration("20220322155107_EditFieldTypesOnSightingModel")]
-    partial class EditFieldTypesOnSightingModel
+    [Migration("20220323102823_CreateSightingsModel")]
+    partial class CreateSightingsModel
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -35,11 +35,11 @@ namespace WhaleSpotting.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("text");
 
-                    b.Property<int>("Latitude")
-                        .HasColumnType("integer");
+                    b.Property<float>("Latitude")
+                        .HasColumnType("real");
 
-                    b.Property<int>("Longitude")
-                        .HasColumnType("integer");
+                    b.Property<float>("Longitude")
+                        .HasColumnType("real");
 
                     b.Property<string>("Name")
                         .HasColumnType("text");
@@ -62,14 +62,8 @@ namespace WhaleSpotting.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("text");
 
-                    b.Property<double>("Latitude")
-                        .HasColumnType("double precision");
-
                     b.Property<int?>("LocationId")
                         .HasColumnType("integer");
-
-                    b.Property<double>("Longitude")
-                        .HasColumnType("double precision");
 
                     b.Property<string>("PhotoUrl")
                         .HasColumnType("text");
