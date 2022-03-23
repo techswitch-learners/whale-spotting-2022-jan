@@ -1,5 +1,6 @@
 import React, { FormEvent, useState, useContext } from "react";
 import { LoginContext } from "../login/LoginManager";
+import "./Login.scss"
 
 export const Login: React.FunctionComponent = () => {
   const [username, setUsername] = useState("");
@@ -14,7 +15,7 @@ export const Login: React.FunctionComponent = () => {
   }
 
   return (
-    <div>
+    <div className="login">
       {error && <p>{error}</p>}
       <h1>Log In to Whale Spotting!</h1>
       <form onSubmit={tryLogin}>
