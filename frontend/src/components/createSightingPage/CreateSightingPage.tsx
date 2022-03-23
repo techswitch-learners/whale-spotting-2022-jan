@@ -1,5 +1,5 @@
 import React, { useEffect, useState, FormEvent } from "react";
-import { fetchSpecies } from "../../api/ApiClient";
+import { fetchSpecies } from "../../clients/apiClients";
 
 export function CreateSightingPage(): JSX.Element{
     const [date, setDate] = useState("");
