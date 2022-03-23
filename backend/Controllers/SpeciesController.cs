@@ -5,6 +5,7 @@ using WhaleSpotting.Services;
 using WhaleSpotting.Repositories;
 using WhaleSpotting.Helpers;
 using System.Collections.Generic;
+using WhaleSpotting.Models.Database;
 
 namespace WhaleSpotting.Controllers
 {
