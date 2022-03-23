@@ -12,6 +12,7 @@ namespace WhaleSpotting.Repositories
     {
        List < Location> GetAllLocations();
        List < Location> GetPopularLocations();
+       Location CreateLocation(Location location);
     }
     public class LocationsRepo : ILocationsRepo
     {
@@ -32,6 +33,16 @@ namespace WhaleSpotting.Repositories
             return context
                 .Locations
                 .ToList();
+        }
+        public Location CreateLocation(Location location)
+        {
+            var locationToAdd = new Location{
+                Latitude = location.Latitude,
+                Longitude = location.Longitude,
+                Name = location.Name,
+                Description = location.Description
+            };
+            return locationToAdd;
         }
     }
 }
