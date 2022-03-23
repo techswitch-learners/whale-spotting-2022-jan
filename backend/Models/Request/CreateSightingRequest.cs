@@ -15,7 +15,7 @@ namespace WhaleSpotting.Models.Request
         public string LocationName { get; set; }
 
         [Required]
-        public Species Species { get; set; }
+        public int SpeciesId { get; set; }
 
         [Required]
         [StringLength(400)]

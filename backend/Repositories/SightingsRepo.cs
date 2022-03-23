@@ -48,7 +48,7 @@ namespace WhaleSpotting.Repositories
                 Description = newSighting.Description,
                 PhotoUrl = newSighting.PhotoUrl,
                 UserId = newSighting.UserId,
-                Species = newSighting.Species,
+                SpeciesId = newSighting.SpeciesId,
 
             });
             _context.SaveChanges();
