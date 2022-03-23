@@ -47,40 +47,6 @@ namespace WhaleSpotting.Migrations
                     b.ToTable("Locations");
                 });
 
-            modelBuilder.Entity("WhaleSpotting.Models.Database.Sighting", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("text");
-
-                    b.Property<int?>("LocationId")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("PhotoUrl")
-                        .HasColumnType("text");
-
-                    b.Property<int>("Species")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("LocationId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Sightings");
-                });
-
             modelBuilder.Entity("WhaleSpotting.Models.Database.User", b =>
                 {
                     b.Property<int>("Id")
@@ -106,23 +72,6 @@ namespace WhaleSpotting.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("WhaleSpotting.Models.Database.Sighting", b =>
-                {
-                    b.HasOne("WhaleSpotting.Models.Database.Location", "Location")
-                        .WithMany()
-                        .HasForeignKey("LocationId");
-
-                    b.HasOne("WhaleSpotting.Models.Database.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Location");
-
-                    b.Navigation("User");
                 });
 #pragma warning restore 612, 618
         }
