@@ -19,8 +19,7 @@ namespace WhaleSpotting.Repositories
         void Delete(int id);
 
     }
-
-    public class SightingsRepo
+    public class SightingsRepo : ISightingsRepo
     {
         private readonly WhaleSpottingDbContext _context;
 
@@ -28,7 +27,7 @@ namespace WhaleSpotting.Repositories
         {
             _context = context;
         }
-        public List<Sighting> GetAllSigthings()
+        public List<Sighting> GetAllSightings()
         {
             return _context.Sightings.ToList();
         }
@@ -66,6 +65,4 @@ namespace WhaleSpotting.Repositories
             _context.SaveChanges();
         }
     }
-
-
 }
