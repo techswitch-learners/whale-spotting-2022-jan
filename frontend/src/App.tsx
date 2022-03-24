@@ -13,12 +13,13 @@ const Routes: React.FunctionComponent = () => {
       {/* <Route path="/sign-up">
         <CreateUser />
       </Route> */}
-      <Route path="/">
-        <Home />
-      </Route>
       <Route path="/sightings">
         <SightingListPage />
       </Route>
+      <Route path="/">
+        <Home />
+      </Route>
+
     </Switch>
   );
 };

@@ -33,20 +33,15 @@ export async function fetchSightings(): Promise<Array<Sighting>> {
     )
 }
 
-
-
 export function SightingListPage(): JSX.Element {
     const [sightings, setSightings] = useState<Array<Sighting>>([]);
-   
+    console.log("inside SightingListPage");
     useEffect(
         () => {
             fetchSightings().then(setSightings);
         },
         []
-    );
-    
-    
-    
+    ); 
     
     return (
         <>
