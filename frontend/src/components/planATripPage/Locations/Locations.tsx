@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Select from "react-select";
 import { fetchLocations, Location } from "../../../clients/apiClient";
-
+import { WeatherForecast } from "../WeatherForecast/WeatherForecast";
 type Options = {
   value: string;
   label: string;
@@ -9,10 +9,6 @@ type Options = {
 export function Locations(): JSX.Element {
   const [locations, setLocations] = useState<Array<Location>>();
   const options: Array<Options> = [];
-  const option: Options = {
-    value: "",
-    label: "",
-  };
 
   useEffect(() => {
     fetchLocations().then((response) => setLocations(response));
@@ -23,18 +19,22 @@ export function Locations(): JSX.Element {
   }
 
   locations.forEach((location: Location) => {
-    option.value = location.id.toString();
-    option.label = location.name;
-    console.log("Value = " + option.value + ", label = " + option.label);
-    options.push(option);
+    options.push({
+      value: location.id.toString(),
+      label: location.name,
+    });
   });
-
-  console.log("Options = " + options[5].label);
-  console.log("Options = " + options[1].label);
+  const latitude = 0;
+  const longitude = 51;
   return (
-    <section className="get-location">
-      <h1>Where do you want go Whale spotting?</h1>
-      <Select options={options} />
-    </section>
+    <div>
+      <section className="get-location">
+        <h1>Where do you want to go Whale Spotting?</h1>
+        <Select options={options} />
+      </section>
+      <section>
+        <WeatherForecast latitude={latitude} longitude={longitude} />
+      </section>
+    </div>
   );
 }
