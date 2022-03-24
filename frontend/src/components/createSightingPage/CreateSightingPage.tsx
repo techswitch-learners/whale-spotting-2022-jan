@@ -1,9 +1,17 @@
-import React, { useState, FormEvent } from "react";
+import React, { useState, FormEvent, useEffect } from "react";
 import { format, parse } from "date-fns";
+import {
+  fetchLocations,
+  fetchSpecies,
+  Species,
+  Location,
+} from "../../clients/apiClient";
 
 export function CreateSightingPage(): JSX.Element {
   const [date, setDate] = useState<Date>(new Date());
+  const [locations, setLocations] = useState<Location[]>([]);
   const [location, setLocation] = useState("");
+  const [speciesList, setSpeciesList] = useState<Species[]>([]);
   const [species, setSpecies] = useState<string>("");
   const [description, setDescription] = useState("");
   const [photoUrl, setPhotoUrl] = useState("");
@@ -13,8 +21,10 @@ export function CreateSightingPage(): JSX.Element {
     event.preventDefault();
   };
 
-  const whales = ["Orca", "Blue Whale", "Humpback Whale"];
-  const locations = ["Cambridge", "Mount Everest", "North Pole"];
+  useEffect(() => {
+    fetchSpecies().then((response) => setSpeciesList(response));
+    fetchLocations().then((response) => setLocations(response));
+  }, []);
 
   const handleSpeciesChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSpecies(event.target.value);
@@ -43,11 +53,11 @@ export function CreateSightingPage(): JSX.Element {
           Location
           <select onChange={(e) => handleLocationChange(e)}>
             <option selected disabled>
-              Choose one
+              Select Location
             </option>
             {locations.map((location, key) => (
               <option key={key} value={key}>
-                {location}
+                {location.name}
               </option>
             ))}
           </select>
@@ -56,11 +66,11 @@ export function CreateSightingPage(): JSX.Element {
           Whale Type
           <select onChange={(e) => handleSpeciesChange(e)}>
             <option selected disabled>
-              Choose one
+              Select Species
             </option>
-            {whales.map((whale, key) => (
+            {speciesList.map((species, key) => (
               <option key={key} value={key}>
-                {whale}
+                {species.name}
               </option>
             ))}
           </select>
