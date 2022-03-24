@@ -15,15 +15,13 @@ export const Navbar: React.FunctionComponent = () => {
         {!loginContext.isLoggedIn ? (
           <div>
             <Link to="/login">
-              <a className="button is-primary">
-                <strong>Login</strong>
-              </a>
+              <a className="button is-primary">Login</a>
             </Link>
           </div>
         ) : (
           <Link to="/">
             <a className="button is-primary" onClick={loginContext.logOut}>
-              <strong>Logout</strong>
+              Logout
             </a>
           </Link>
         )}
