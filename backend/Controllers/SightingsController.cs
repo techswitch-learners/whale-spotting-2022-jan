@@ -98,6 +98,38 @@ namespace WhaleSpotting.Controllers
             }
 
         }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete([FromRoute] int id, [FromHeader(Name = "Authorization")] string authHeader)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (authHeader is null)
+            {
+                return new UnauthorizedResult();
+            }
+
+            var encodedUsernamePassword = authHeader.Substring("Basic ".Length).Trim();
+            string usernamePassword = AuthHelper.Base64Decode(encodedUsernamePassword);
+            string username = usernamePassword.Split(":")[0];
+
+            User user = _usersRepo.GetByUsername(username);
+            var sighting = _sightingsRepo.GetById(id);
+            if (user.Id != sighting.UserId)
+            {
+                return StatusCode(
+                    StatusCodes.Status403Forbidden,
+                    "You are not allowed to delete other people's sightings..."
+                );
+            }
+
+
+            _sightingsRepo.Delete(id);
+            return Ok();
+        }
     }
 
 }
