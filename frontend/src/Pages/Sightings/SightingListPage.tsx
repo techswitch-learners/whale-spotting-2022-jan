@@ -1,12 +1,16 @@
+import { type } from "os";
 import React, {useContext, useEffect, useState} from "react";
 
-
+export interface Species {
+    name: string;
+    latinName: string;
+}
 export interface Sighting {
     //id: number;
     date: Date;
     //location: string;
     description: string;
-    //species: string; //to check with sighting controller
+    species: Species; //to check with sighting controller
     //photoUrl: string;
     //user: string; //to check with sighting controller
 }
@@ -23,11 +27,13 @@ export async function fetchSightings(): Promise<Array<Sighting>> {
         [
             {
                 date: new Date(),
-                description: "Sighting 1"
+                description: "Sighting 1",
+                species: {name: "aaa", latinName:"bbb"}
             },
             {
                 date: new Date(),
-                description: "Sighting 2"
+                description: "Sighting 2",
+                species: {name: "aaa", latinName:"bbb"}
             }
         ]
     )
@@ -51,6 +57,7 @@ export function SightingListPage(): JSX.Element {
                 {sightings.map((s, i) =>
                     <li key={i}>
                         <p>{s.description}</p>
+                        <p>{s.species.name}</p>
                         <p>{s.date.toDateString()}</p>
                     </li>
                 )}
