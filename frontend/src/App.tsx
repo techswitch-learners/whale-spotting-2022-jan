@@ -10,9 +10,8 @@ import { LoginContext } from "./components/login/LoginManager";
 const Routes: React.FunctionComponent = () => {
   return (
     <Switch>
-      <Route path="/" component={Home} />
-
       <Route exact path="/login" component={Login} />
+      <Route path="/" component={Home} />
     </Switch>
   );
 };
