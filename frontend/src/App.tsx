@@ -11,7 +11,7 @@ const Routes: React.FunctionComponent = () => {
     <Switch>
       <Route path="/">
         <Home />
-        <PlanATripPage/>
+        <PlanATripPage />
       </Route>
     </Switch>
   );

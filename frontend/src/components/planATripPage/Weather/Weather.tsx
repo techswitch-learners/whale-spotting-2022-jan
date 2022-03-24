@@ -1,3 +1,1 @@
-export function Weather (){
-
-}
+export function Weather() {}

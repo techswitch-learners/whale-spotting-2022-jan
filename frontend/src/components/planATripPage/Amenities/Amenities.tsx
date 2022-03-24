@@ -1,3 +1,1 @@
-export function Amenities (){
-
-}
+export function Amenities() {}
