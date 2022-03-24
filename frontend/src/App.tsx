@@ -4,15 +4,15 @@ import { Home } from "./components/homepage/Home";
 import { Navbar } from "./components/navbar/Navbar";
 import { LoginManager } from "./components/login/LoginManager";
 import { Footer } from "./components/footer/Footer";
+import { CreateUser, SignUpForm } from "./Pages/SignUp/SignUp";
 import { SightingListPage } from "./Pages/Sightings/SightingListPage";
-//import { CreateUser, SignUpForm } from "./Pages/SignUp/SignUp";
 
 const Routes: React.FunctionComponent = () => {
   return (
     <Switch>
-      {/* <Route path="/sign-up">
+      <Route path="/sign-up">
         <CreateUser />
-      </Route> */}
+      </Route>
       <Route path="/">
         <Home />
       </Route>
