@@ -6,7 +6,7 @@ using WhaleSpotting.Repositories;
 using WhaleSpotting.Helpers;
 using System.Collections.Generic;
 using WhaleSpotting.Models.Database;
-
+using Microsoft.AspNetCore.Http;
 namespace WhaleSpotting.Controllers
 {
     [ApiController]
@@ -70,6 +70,13 @@ namespace WhaleSpotting.Controllers
             string username = usernamePassword.Split(":")[0];
 
             User user = _usersRepo.GetByUsername(username);
+            if (user.Id != newSighting.UserId)
+            {
+                return StatusCode(
+                    StatusCodes.Status403Forbidden,
+                    "You are not allowed to create a post for a different user"
+                );
+            }
 
             try
             {
@@ -82,9 +89,12 @@ namespace WhaleSpotting.Controllers
                     return Created("/", newSighting);
                 }
             }
-            catch (Exception)
+            catch (BadHttpRequestException)
             {
-                return new UnauthorizedResult();
+                return StatusCode(
+                    StatusCodes.Status400BadRequest,
+                    "Could not create post"
+                );
             }
 
         }
