@@ -3,6 +3,7 @@ import { Home } from "./components/homepage/Home";
 import { Navbar } from "./components/navbar/Navbar";
 import { LoginManager } from "./components/login/LoginManager";
 import { Footer } from "./components/footer/Footer";
+import { CreateSightingPage } from "./components/createSightingPage/CreateSightingPage";
 import { CreateUser, SignUpForm } from "./Pages/SignUp/SignUp";
 import { Login } from "./components/login/Login";
 
@@ -14,6 +15,9 @@ const Routes: React.FunctionComponent = () => {
       </Route>
       <Route path="/login">
         <Login />
+      </Route>
+      <Route path="/sightings/create">
+        <CreateSightingPage />
       </Route>
       <Route path="/">
         <Home />
