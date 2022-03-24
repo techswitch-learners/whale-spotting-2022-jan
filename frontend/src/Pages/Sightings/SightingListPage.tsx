@@ -1,5 +1,6 @@
 import { type } from "os";
 import React, { useContext, useEffect, useState } from "react";
+//import './SightingListPage.scss';
 
 export interface Species {
   name: string;
@@ -64,19 +65,23 @@ export function SightingListPage(): JSX.Element {
   return (
     <>
       <h1 className="title">Sightings</h1>
-      <ul>
+      <ul className="sighting_list">
         {sightings.map((s, i) => (
-          <li key={i}>
-            <h2>{s.description}</h2>
-            <p>
-              Species: {s.species.name} ({s.species.latinName})
-            </p>
-            <p>Sighting Location: {s.location.name}</p>
-            <p>On: {s.date.toDateString()}</p>
-            <img src={s.photoUrl} width="200" />
-            <p>
-              Seen by: {s.user.name} ({s.user.username})
-            </p>
+          <li className="sighting_list_item" key={i}>
+            <div className="sighting">
+                <h2 className="sighting_h2">{s.description}</h2>
+                <img className="sighting_img" src={s.photoUrl} width="200" height="100"/>
+                <div className="sighting_info">
+                <p>
+                Species: {s.species.name} ({s.species.latinName})
+                </p>
+                <p>Sighting Location: {s.location.name}</p>
+                <p>On: {s.date.toDateString()}</p>
+                <p>
+                Seen by: {s.user.name} ({s.user.username})
+                </p>
+                </div>
+            </div>
           </li>
         ))}
       </ul>
