@@ -16,12 +16,12 @@ export interface Location {
   amenities: string[];
 }
 
-export async function fetchSpecies() {
+export async function fetchSpecies(): Promise<Array<Species>> {
   const response = await fetch(`https://localhost:5001/species`);
   return await response.json();
 }
 
-export async function fetchLocations() {
+export async function fetchLocations(): Promise<Array<Location>> {
   const response = await fetch(`https://localhost:5001/locations`);
   return await response.json();
 }

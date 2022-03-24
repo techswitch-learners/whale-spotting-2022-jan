@@ -12,7 +12,7 @@ const Routes: React.FunctionComponent = () => {
       <Route exact path="/">
         <Home />
       </Route>
-      <Route exact path="/create-sighting" component={CreateSightingPage}/>
+      <Route exact path="/create-sighting" component={CreateSightingPage} />
     </Switch>
   );
 };
