@@ -69,18 +69,23 @@ export function SightingListPage(): JSX.Element {
         {sightings.map((s, i) => (
           <li className="sighting_list_item" key={i}>
             <div className="sighting">
-                <h2 className="sighting_h2">{s.description}</h2>
-                <img className="sighting_img" src={s.photoUrl} width="200" height="100"/>
-                <div className="sighting_info">
+              <h2 className="sighting_h2">{s.description}</h2>
+              <img
+                className="sighting_img"
+                src={s.photoUrl}
+                width="200"
+                height="100"
+              />
+              <div className="sighting_info">
                 <p>
-                Species: {s.species.name} ({s.species.latinName})
+                  Species: {s.species.name} ({s.species.latinName})
                 </p>
                 <p>Sighting Location: {s.location.name}</p>
                 <p>On: {s.date.toDateString()}</p>
                 <p>
-                Seen by: {s.user.name} ({s.user.username})
+                  Seen by: {s.user.name} ({s.user.username})
                 </p>
-                </div>
+              </div>
             </div>
           </li>
         ))}
