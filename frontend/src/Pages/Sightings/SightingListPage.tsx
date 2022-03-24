@@ -1,6 +1,6 @@
 import { type } from "os";
 import React, { useContext, useEffect, useState } from "react";
-import './SightingListPage.scss';
+//import './SightingListPage.scss';
 
 export interface Species {
   name: string;
