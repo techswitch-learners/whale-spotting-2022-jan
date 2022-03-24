@@ -1,23 +1,31 @@
 import React, { FormEvent, useState, useContext } from "react";
+import { login } from "../../clients/apiClients";
 import { LoginContext } from "../login/LoginManager";
+import "./Login.scss";
 
 export const Login: React.FunctionComponent = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(undefined);
+  const [error, setError] = useState<string>();
   const loginContext = useContext(LoginContext);
 
-  function tryLogin(event: FormEvent) {
+  async function tryLogin(event: FormEvent) {
     event.preventDefault();
+    try {
+      await login(username, password);
+    } catch (e) {
+      setError((e as Error).message);
+      return;
+    }
     loginContext.logIn(username, password);
     setError(undefined);
   }
 
   return (
-    <div>
-      {error && <p>{error}</p>}
-      <h1>Log In</h1>
-      <form onSubmit={tryLogin}>
+    <div className="login">
+      {error && <p>Login failed</p>}
+      <h1>Log In to Whale Spotting!</h1>
+      <form onSubmit={tryLogin} className="login-form">
         <label className="field">
           Username
           <input
@@ -26,6 +34,7 @@ export const Login: React.FunctionComponent = () => {
             placeholder="Username"
             required
             onChange={(event) => setUsername(event.target.value)}
+            className="login-input"
           />
         </label>
         <label className="field">
@@ -36,6 +45,7 @@ export const Login: React.FunctionComponent = () => {
             placeholder="Password"
             required
             onChange={(event) => setPassword(event.target.value)}
+            className="login-input"
           />
         </label>
 
