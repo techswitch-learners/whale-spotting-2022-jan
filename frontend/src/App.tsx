@@ -5,10 +5,14 @@ import { Navbar } from "./components/navbar/Navbar";
 import { LoginManager } from "./components/login/LoginManager";
 import { Footer } from "./components/footer/Footer";
 import { CreateSightingPage } from "./components/createSightingPage/CreateSightingPage";
+import { CreateUser, SignUpForm } from "./Pages/SignUp/SignUp";
 
 const Routes: React.FunctionComponent = () => {
   return (
     <Switch>
+      <Route path="/sign-up">
+        <CreateUser />
+      </Route>
       <Route exact path="/">
         <Home />
       </Route>
