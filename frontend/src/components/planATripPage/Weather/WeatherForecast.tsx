@@ -14,6 +14,7 @@ export function WeatherForecast({
   longitude: number;
 }): JSX.Element {
   const [weather, setWeather] = useState<Array<Weather>>();
+
   useEffect(() => {
     getWeather(latitude, longitude).then((response) => {
       setWeather(
@@ -24,7 +25,7 @@ export function WeatherForecast({
         }))
       );
     });
-  }, []);
+  }, [latitude, longitude]);
 
   if (!weather) {
     return <section>Loading...</section>;
