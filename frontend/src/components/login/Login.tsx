@@ -24,7 +24,8 @@ export const Login: React.FunctionComponent = () => {
   return (
     <div className="login">
       {error && <p>Login failed</p>}
-      <h1>Log In to Whale Spotting!</h1>
+      <h1>Whale-come to Whale Spotting!</h1>
+      <h3>Please login below</h3>
       <form onSubmit={tryLogin} className="login-form">
         <label className="field">
           Username
@@ -49,7 +50,9 @@ export const Login: React.FunctionComponent = () => {
           />
         </label>
 
-        <button type="submit">Log In</button>
+        <button className="submit-button-login" type="submit">
+          Log In
+        </button>
       </form>
     </div>
   );
