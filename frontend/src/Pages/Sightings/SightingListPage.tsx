@@ -1,6 +1,5 @@
-import { type } from "os";
-import React, { useContext, useEffect, useState } from "react";
-//import './SightingListPage.scss';
+import { useEffect, useState } from "react";
+import "./SightingListPage.scss";
 
 export interface Species {
   name: string;
@@ -26,13 +25,6 @@ export interface Sighting {
 }
 
 export async function fetchSightings(): Promise<Array<Sighting>> {
-  // const response = await fetch(`https://localhost:5001/sightings`,  {
-  //     method: "GET",
-  //     headers: {
-  //         "Content-Type": "application/json"
-  //     }
-  // });
-  // return await response.json();
   return Promise.resolve([
     {
       date: new Date(),
@@ -69,14 +61,9 @@ export function SightingListPage(): JSX.Element {
         {sightings.map((s, i) => (
           <li className="sighting_list_item" key={i}>
             <div className="sighting">
-              <h2 className="sighting_h2">{s.description}</h2>
-              <img
-                className="sighting_img"
-                src={s.photoUrl}
-                width="200"
-                height="100"
-              />
-              <div className="sighting_info">
+              <h2>{s.description}</h2>
+              <img src={s.photoUrl} width="200" height="100" />
+              <div className="info">
                 <p>
                   Species: {s.species.name} ({s.species.latinName})
                 </p>
