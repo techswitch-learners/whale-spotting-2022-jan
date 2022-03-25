@@ -34,7 +34,7 @@ export interface Sighting {
   user: User;
 }
 
-export async function GetAllSightings() {
+export async function GetAllSightings(): Promise<Array<Sighting>> {
   const response = await fetch(`https://localhost:5001/sightings`, {
     method: "GET",
     headers: {
