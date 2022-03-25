@@ -57,9 +57,8 @@ namespace WhaleSpotting.Controllers
                 return new UnauthorizedResult();
             }
 
-            var encodedUsernamePassword = authHeader.Substring("Basic ".Length).Trim();
-            string usernamePassword = AuthHelper.Base64Decode(encodedUsernamePassword);
-            string username = usernamePassword.Split(":")[0];
+            string username = AuthHelper.GetUsernamePassword(authHeader).Split(":")[0];
+            string usernamePassword = AuthHelper.GetUsernamePassword(authHeader);
 
             var user = new User();
 
@@ -117,9 +116,9 @@ namespace WhaleSpotting.Controllers
                 return new UnauthorizedResult();
             }
 
-            var encodedUsernamePassword = authHeader.Substring("Basic ".Length).Trim();
-            string usernamePassword = AuthHelper.Base64Decode(encodedUsernamePassword);
-            string username = usernamePassword.Split(":")[0];
+            string username = AuthHelper.GetUsernamePassword(authHeader).Split(":")[0];
+            string usernamePassword = AuthHelper.GetUsernamePassword(authHeader);
+
 
             User user = _usersRepo.GetByUsername(username);
             var sighting = _sightingsRepo.GetById(id);
