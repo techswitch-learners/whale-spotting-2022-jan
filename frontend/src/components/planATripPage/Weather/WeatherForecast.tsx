@@ -18,7 +18,7 @@ export function WeatherForecast({
     getWeather(latitude, longitude).then((response) => {
       setWeather(
         response.daily.map((day) => ({
-          temp: day.temp.day,
+          temp: Math.floor(day.temp.day - 273.15),
           description: day.weather[0].description,
           icon: day.weather[0].icon,
         }))
@@ -33,15 +33,17 @@ export function WeatherForecast({
   return (
     <section className="get-weather">
       <h1>5 day Weather Forecast</h1>
-      <ol className="weather">
-        {weather?.map((w, i) => (
+      <ul className="weather">
+        {weather?.slice(0, 5).map((w, i) => (
           <li key={i}>
-            {w.temp}
-            {w.description}
-            {w.icon}
+            {w.temp}&#176; Celcius.
+            <img
+              src={`https://openweathermap.org/img/wn/${w.icon}@2x.png`}
+            ></img>
+            Expect {w.description}.
           </li>
         ))}
-      </ol>
+      </ul>
     </section>
   );
 }
