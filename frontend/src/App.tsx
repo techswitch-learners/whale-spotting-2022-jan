@@ -6,12 +6,16 @@ import { Footer } from "./components/footer/Footer";
 import { CreateSightingPage } from "./components/createSightingPage/CreateSightingPage";
 import { CreateUser, SignUpForm } from "./Pages/SignUp/SignUp";
 import { Login } from "./components/login/Login";
+import { SightingListPage } from "./Pages/Sightings/SightingListPage";
 
 const Routes: React.FunctionComponent = () => {
   return (
     <Switch>
       <Route path="/sign-up">
         <CreateUser />
+      </Route>
+      <Route path="/sightings">
+        <SightingListPage />
       </Route>
       <Route path="/login">
         <Login />
