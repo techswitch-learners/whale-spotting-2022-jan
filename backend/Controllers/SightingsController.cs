@@ -68,7 +68,7 @@ namespace WhaleSpotting.Controllers
                 user = _usersRepo.GetByUsername(username);
             }
 
-            catch (NullReferenceException)
+            catch (InvalidOperationException)
             {
                 return StatusCode(
                     StatusCodes.Status403Forbidden,
