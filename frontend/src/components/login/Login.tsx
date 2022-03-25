@@ -1,4 +1,5 @@
 import React, { FormEvent, useState, useContext } from "react";
+import { Link } from "react-router-dom";
 import { login } from "../../clients/apiClients";
 import { LoginContext } from "../login/LoginManager";
 import "./Login.scss";
@@ -27,33 +28,37 @@ export const Login: React.FunctionComponent = () => {
       <h1>Whale-come to Whale Spotting!</h1>
       <h3>Please login below</h3>
       <form onSubmit={tryLogin} className="login-form">
-        <label className="field">
-          Username
-          <input
-            type={"text"}
-            value={username}
-            placeholder="Username"
-            required
-            onChange={(event) => setUsername(event.target.value)}
-            className="login-input"
-          />
-        </label>
-        <label className="field">
-          Password
-          <input
-            type={"password"}
-            value={password}
-            placeholder="Password"
-            required
-            onChange={(event) => setPassword(event.target.value)}
-            className="login-input"
-          />
-        </label>
-
-        <button className="submit-button-login" type="submit">
+        <div className="row mb-2">
+          <div className="col-sm-10">
+            <input
+              type={"text"}
+              value={username}
+              placeholder="Username"
+              required
+              onChange={(event) => setUsername(event.target.value)}
+              className="login-input"
+            />
+          </div>
+        </div>
+        <div className="row mb-2">
+          <div className="col-sm-10">
+            <input
+              type={"password"}
+              value={password}
+              placeholder="Password"
+              required
+              onChange={(event) => setPassword(event.target.value)}
+              className="login-input"
+            />
+          </div>
+        </div>
+        <button className="submit-button-login btn btn-primary" type="submit">
           Log In
         </button>
       </form>
+      <p>
+        Not a member? <Link to="/sign-up">Sign up!</Link>
+      </p>
     </div>
   );
 };
