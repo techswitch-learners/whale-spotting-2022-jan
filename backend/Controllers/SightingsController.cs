@@ -61,7 +61,21 @@ namespace WhaleSpotting.Controllers
             string usernamePassword = AuthHelper.Base64Decode(encodedUsernamePassword);
             string username = usernamePassword.Split(":")[0];
 
-            User user = _usersRepo.GetByUsername(username);
+            var user = new User();
+
+            try
+            {
+                user = _usersRepo.GetByUsername(username);
+            }
+
+            catch (NullReferenceException)
+            {
+                return StatusCode(
+                    StatusCodes.Status403Forbidden,
+                    "Please login if you would like to report a sighting"
+                );
+            }
+            
             if (user.Id != newSighting.UserId)
             {
                 return StatusCode(
