@@ -32,7 +32,7 @@ namespace WhaleSpotting.Controllers
         [HttpGet("")]
         public ActionResult<List<Sighting>> GetAllSightings()
         {
-            
+
             return _sightingsRepo.GetAllSightings();
         }
 
@@ -70,16 +70,15 @@ namespace WhaleSpotting.Controllers
                 );
             }
 
+            var check = _authservice.IsAuthenticated(usernamePassword);
+
+            if (!check)
+                return new UnauthorizedResult();
+
             try
             {
-                var check = _authservice.IsAuthenticated(usernamePassword);
-                if (!check)
-                    return new UnauthorizedResult();
-                else
-                {
-                    var sighting = _sightingsRepo.Create(newSighting);
-                    return Created("/", newSighting);
-                }
+                var sighting = _sightingsRepo.Create(newSighting);
+                return Created("/", newSighting);
             }
             catch (BadHttpRequestException)
             {
@@ -88,8 +87,8 @@ namespace WhaleSpotting.Controllers
                     "Could not create post"
                 );
             }
-
         }
+
 
         [HttpDelete("{id}")]
         public IActionResult Delete([FromRoute] int id, [FromHeader(Name = "Authorization")] string authHeader)
