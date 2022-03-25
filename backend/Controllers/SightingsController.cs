@@ -32,21 +32,13 @@ namespace WhaleSpotting.Controllers
         [HttpGet("")]
         public ActionResult<List<Sighting>> GetAllSightings()
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
+            
             return _sightingsRepo.GetAllSightings();
         }
 
         [HttpGet("recent")]
         public ActionResult<Sighting> GetMostRecentSighting()
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
 
             return _sightingsRepo.GetMostRecentSighting();
         }
