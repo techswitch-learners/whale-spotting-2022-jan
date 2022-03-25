@@ -8,7 +8,9 @@ type Options = {
 };
 export function Locations(): JSX.Element {
   const [locations, setLocations] = useState<Array<Location>>();
-  const [selectedLocation, setSelectedLocation] = useState<string>("");
+  const [selectedLocationId, setSelectedLocationId] = useState<string>("");
+  const [latitude, setLatitude] = useState<any>();
+  const [longitude, setLongitude] = useState<any>();
   const options: Array<Options> = [];
 
   useEffect(() => {
@@ -24,12 +26,12 @@ export function Locations(): JSX.Element {
       label: location.name,
     });
   });
-  const latitude = -34;
-  const longitude = 19;
+
   const isSelectOption = (v: any): v is Options => {
     if ((v as Options).value !== undefined) return v.value;
     return false;
   };
+
   return (
     <div>
       <section className="get-location">
@@ -37,16 +39,22 @@ export function Locations(): JSX.Element {
         <Select
           onChange={(v) => {
             if (isSelectOption(v)) {
-              setSelectedLocation(v.value);
+              setSelectedLocationId(v.value);
+              const selectedLocation = locations.find((e) => e.id == +v.value);
+              setLatitude(selectedLocation?.latitude);
+              setLongitude(selectedLocation?.longitude);
             }
           }}
           options={options}
         />
-        you chose:{selectedLocation}
       </section>
-      <section>
-        <WeatherForecast latitude={latitude} longitude={longitude} />
-      </section>
+      {selectedLocationId ? (
+        <section>
+          <WeatherForecast latitude={latitude} longitude={longitude} />
+        </section>
+      ) : (
+        <> </>
+      )}
     </div>
   );
 }
