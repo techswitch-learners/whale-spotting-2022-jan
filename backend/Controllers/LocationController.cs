@@ -3,6 +3,7 @@ using WhaleSpotting.Models.Request;
 using WhaleSpotting.Repositories;
 using WhaleSpotting.Models.Database;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace WhaleSpotting.Controllers {
   [ApiController]
@@ -23,6 +24,16 @@ namespace WhaleSpotting.Controllers {
       }
 
       return _locations.GetAllLocations();
+    }   
+
+   [HttpGet("popular")]
+    public ActionResult<List<Location>> GetPopularLocations() {
+      if (!ModelState.IsValid) {
+        return BadRequest(ModelState);
+      }
+
+      return _locations.GetPopularLocations();
+  
     }   
   }
 }
