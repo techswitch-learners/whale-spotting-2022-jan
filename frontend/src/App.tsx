@@ -4,8 +4,10 @@ import { Navbar } from "./components/navbar/Navbar";
 import { LoginManager } from "./components/login/LoginManager";
 import { Footer } from "./components/footer/Footer";
 import { PlanATripPage } from "./components/planATripPage/PlanATripPage";
+import { CreateSightingPage } from "./components/createSightingPage/CreateSightingPage";
 import { CreateUser, SignUpForm } from "./Pages/SignUp/SignUp";
 import { Login } from "./components/login/Login";
+import { SightingListPage } from "./Pages/Sightings/SightingListPage";
 
 const Routes: React.FunctionComponent = () => {
   return (
@@ -13,8 +15,14 @@ const Routes: React.FunctionComponent = () => {
       <Route path="/sign-up">
         <CreateUser />
       </Route>
+      <Route path="/sightings">
+        <SightingListPage />
+      </Route>
       <Route path="/login">
         <Login />
+      </Route>
+      <Route path="/sightings/create">
+        <CreateSightingPage />
       </Route>
       <Route exact path="/">
         <Home />

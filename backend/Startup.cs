@@ -58,6 +58,7 @@ namespace WhaleSpotting
       services.AddTransient<IUsersRepo, UsersRepo>();
       services.AddTransient<ILocationsRepo, LocationsRepo>();
       services.AddTransient<ISpeciesRepo, SpeciesRepo>();
+      services.AddTransient<ISightingsRepo, SightingsRepo>();
 
       services.AddTransient<IAuthService, AuthService>();
     }

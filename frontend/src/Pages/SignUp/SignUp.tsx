@@ -1,33 +1,7 @@
 import React, { FormEvent, useState } from "react";
 import { Link } from "react-router-dom";
-
+import { createUser } from "../../clients/apiClients";
 type FromStatus = "READY" | "SUBMITTING" | "ERROR" | "FINISHED";
-
-export interface User {
-  id: number;
-  name: string;
-  username: string;
-}
-export interface NewUser {
-  name: string;
-  username: string;
-  email: string;
-  password: string;
-}
-
-export async function createUser(newUser: NewUser) {
-  const response = await fetch(`https://localhost:5001/users/`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(newUser),
-  });
-
-  if (!response.ok) {
-    throw new Error(await response.json());
-  }
-}
 
 export function SignUpForm(): JSX.Element {
   const [name, setName] = useState("");
