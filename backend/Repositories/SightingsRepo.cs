@@ -40,10 +40,7 @@ namespace WhaleSpotting.Repositories
             var insertedResult = _context.Sightings.Add( new Sighting
             {
                 Date = newSighting.Date,
-                Location = new Location
-                    {
-                        Name = newSighting.LocationName,
-                    },
+                LocationId = newSighting.LocationId,
                 Description = newSighting.Description,
                 PhotoUrl = newSighting.PhotoUrl,
                 UserId = newSighting.UserId,
