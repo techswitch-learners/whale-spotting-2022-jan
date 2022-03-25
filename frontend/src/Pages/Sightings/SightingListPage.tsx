@@ -41,7 +41,7 @@ export async function fetchSightings(): Promise<Array<Sighting>> {
       species: { name: "aaa", latinName: "bbb" },
       location: { name: "Edinburg" },
       photoUrl:
-        "https://static.independent.co.uk/2022/02/06/08/newFile.jpg?quality=75&width=982&height=726&auto=webp",
+        "https://cdn.britannica.com/37/75637-050-B425E8F1/Killer-whale.jpg",
       user: { name: "Zuhal", username: "ZuhKur" },
     },
   ]);
@@ -62,7 +62,7 @@ export function SightingListPage(): JSX.Element {
           <li className="sighting_list_item" key={i}>
             <div className="sighting">
               <h2>{s.description}</h2>
-              <img src={s.photoUrl} width="200" height="100" />
+              <img src={s.photoUrl} width="200" />
               <div className="info">
                 <p>
                   Species: {s.species.name} ({s.species.latinName})
