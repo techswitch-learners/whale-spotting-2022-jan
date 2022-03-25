@@ -71,7 +71,7 @@ namespace WhaleSpotting.Controllers
             {
                 return StatusCode(
                     StatusCodes.Status401Unauthorized,
-                    "The username is not valid"
+                    "The given username is not valid"
                 );
             }
             
