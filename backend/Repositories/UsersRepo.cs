@@ -12,6 +12,10 @@ namespace WhaleSpotting.Repositories
     public interface IUsersRepo
     {
         User Create(CreateUserRequest newUser);
+
+        User GetById(int id);
+
+        User GetByUsername(string username);
     }
 
     public class UsersRepo : IUsersRepo
@@ -53,6 +57,18 @@ namespace WhaleSpotting.Repositories
             _context.SaveChanges();
 
             return insertResponse.Entity;
+        }
+
+        public User GetById(int id)
+        {
+            return _context.Users
+                .Single(user => user.Id == id);
+        }
+
+        public User GetByUsername(string username)
+        {
+            return _context.Users
+                .Single(user => user.Username == username);
         }
     }
 }
