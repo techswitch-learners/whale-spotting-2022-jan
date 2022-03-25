@@ -70,8 +70,8 @@ namespace WhaleSpotting.Controllers
             catch (InvalidOperationException)
             {
                 return StatusCode(
-                    StatusCodes.Status403Forbidden,
-                    "Please login if you would like to report a sighting"
+                    StatusCodes.Status401Unauthorized,
+                    "The username is not valid"
                 );
             }
             
