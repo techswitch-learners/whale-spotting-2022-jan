@@ -140,7 +140,7 @@ namespace WhaleSpotting.Migrations
             modelBuilder.Entity("WhaleSpotting.Models.Database.Sighting", b =>
                 {
                     b.HasOne("WhaleSpotting.Models.Database.Location", "Location")
-                        .WithMany("Sightings")
+                        .WithMany()
                         .HasForeignKey("LocationId");
 
                     b.HasOne("WhaleSpotting.Models.Database.Species", "Species")
@@ -160,11 +160,6 @@ namespace WhaleSpotting.Migrations
                     b.Navigation("Species");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("WhaleSpotting.Models.Database.Location", b =>
-                {
-                    b.Navigation("Sightings");
                 });
 #pragma warning restore 612, 618
         }

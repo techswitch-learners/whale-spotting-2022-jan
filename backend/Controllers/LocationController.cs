@@ -4,6 +4,7 @@ using WhaleSpotting.Repositories;
 using WhaleSpotting.Models.Database;
 using System.Collections.Generic;
 using System.Linq;
+using WhaleSpotting.Models.Response;
 
 namespace WhaleSpotting.Controllers {
   [ApiController]
@@ -26,14 +27,23 @@ namespace WhaleSpotting.Controllers {
       return _locations.GetAllLocations();
     }   
 
-   [HttpGet("popular")]
-    public ActionResult<List<Location>> GetPopularLocations() {
-      if (!ModelState.IsValid) {
-        return BadRequest(ModelState);
-      }
+    [HttpGet("popular")]
+    public ActionResult<List<ReducedLocationResponse>> GetPopularLocations()
+    {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
 
-      return _locations.GetPopularLocations();
-  
-    }   
+            return _locations.GetPopularLocations()
+            .Select(l => new ReducedLocationResponse
+            {
+                Id = l.Id,
+                Name = l.Name,
+                Sightings = l.Sightings
+                  .Select(s => new ReducedSightingResponse { Id = s.Id  })
+                  .ToList()
+            }).ToList();
+    }
   }
 }
