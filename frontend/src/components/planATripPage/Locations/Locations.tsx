@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import Select from "react-select";
 import { fetchLocations, Location } from "../../../clients/apiClients";
 import { WeatherForecast } from "../Weather/WeatherForecast";
+import { Amenities } from "../Amenities/Amenities";
+
 type Options = {
   value: string;
   label: string;
@@ -51,6 +53,13 @@ export function Locations(): JSX.Element {
       {selectedLocationId ? (
         <section>
           <WeatherForecast latitude={latitude} longitude={longitude} />
+        </section>
+      ) : (
+        <> </>
+      )}
+      {selectedLocationId ? (
+        <section>
+          <Amenities locationId={parseInt(selectedLocationId)} />
         </section>
       ) : (
         <> </>

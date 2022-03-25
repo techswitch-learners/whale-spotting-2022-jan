@@ -16,8 +16,10 @@ const Routes: React.FunctionComponent = () => {
       <Route path="/login">
         <Login />
       </Route>
-      <Route path="/">
+      <Route exact path="/">
         <Home />
+      </Route>
+      <Route path="/plantrip">
         <PlanATripPage />
       </Route>
     </Switch>

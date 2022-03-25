@@ -34,7 +34,9 @@ export async function fetchLocations(): Promise<Array<Location>> {
   }
   return await response.json();
 }
-export async function fetchLocationById(): Promise<Location> {
+export async function fetchLocationById(
+  locationId: number
+): Promise<Array<Location>> {
   const response = await fetch(`https://localhost:5001/locations`, {
     method: "GET",
     headers: {
