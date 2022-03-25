@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { type } from "os";
+import React, { useContext, useEffect, useState } from "react";
 import "./SightingListPage.scss";
 
 export interface Species {
@@ -25,6 +26,13 @@ export interface Sighting {
 }
 
 export async function fetchSightings(): Promise<Array<Sighting>> {
+  // const response = await fetch(`https://localhost:5001/sightings`,  {
+  //     method: "GET",
+  //     headers: {
+  //         "Content-Type": "application/json"
+  //     }
+  // });
+  // return await response.json();
   return Promise.resolve([
     {
       date: new Date(),
@@ -33,7 +41,7 @@ export async function fetchSightings(): Promise<Array<Sighting>> {
       location: { name: "Cardiff" },
       photoUrl:
         "https://cdn.britannica.com/37/75637-050-B425E8F1/Killer-whale.jpg",
-      user: { name: "Ija", username: "IjaSab" },
+      user: { name: "Ija", username: "IjaSap" },
     },
     {
       date: new Date(),
@@ -41,7 +49,16 @@ export async function fetchSightings(): Promise<Array<Sighting>> {
       species: { name: "aaa", latinName: "bbb" },
       location: { name: "Edinburg" },
       photoUrl:
-        "https://cdn.britannica.com/37/75637-050-B425E8F1/Killer-whale.jpg",
+        "https://static.independent.co.uk/2022/02/06/08/newFile.jpg?quality=75&width=982&height=726&auto=webp",
+      user: { name: "Zuhal", username: "ZuhKur" },
+    },
+    {
+      date: new Date(),
+      description: "Sighting 3",
+      species: { name: "whale shark", latinName: "Rhincodon typus" },
+      location: { name: "Edinburg" },
+      photoUrl:
+        "https://i.natgeofe.com/n/a7928401-ba65-4d1a-a1fb-138621d18c13/3636516_3x2.jpg",
       user: { name: "Zuhal", username: "ZuhKur" },
     },
   ]);
@@ -61,9 +78,14 @@ export function SightingListPage(): JSX.Element {
         {sightings.map((s, i) => (
           <li className="sighting_list_item" key={i}>
             <div className="sighting">
-              <h2>{s.description}</h2>
-              <img src={s.photoUrl} width="200" />
-              <div className="info">
+              <h2 className="sighting_h2">{s.description}</h2>
+              <img
+                className="sighting_img"
+                src={s.photoUrl}
+                width="200"
+                height="100"
+              />
+              <div className="sighting_info">
                 <p>
                   Species: {s.species.name} ({s.species.latinName})
                 </p>
