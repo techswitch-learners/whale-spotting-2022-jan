@@ -28,13 +28,6 @@ export interface Sighting {
 }
 
 export async function fetchSightings(): Promise<Array<Sighting>> {
-  // const response = await fetch(`https://localhost:5001/sightings`,  {
-  //     method: "GET",
-  //     headers: {
-  //         "Content-Type": "application/json"
-  //     }
-  // });
-  // return await response.json();
   return Promise.resolve([
     {
       id: 1,
