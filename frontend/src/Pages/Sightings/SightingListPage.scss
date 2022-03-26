@@ -12,7 +12,6 @@
   position: relative;
   box-sizing: border-box;
   margin: 1rem;
-  width: calc(90% / 3);
 }
 .sighting {
   border: solid;
@@ -26,14 +25,13 @@
     color: #22646e;
   }
   img {
-    width: 20vw;
-    height: 10vw;
     display: block;
     margin-left: auto;
     margin-right: auto;
     transition: transform 0.25s ease;
     position: relative;
     max-width: 70%;
+    border-radius: 25px;
   }
 
   img:hover {
@@ -49,13 +47,20 @@
 @media (min-width: 900px) {
   .sighting {
     display: grid;
-    grid-template-columns: 0.3fr 0.7fr;
+    grid-template-columns: 0.4fr 0.6fr;
+    grid-template-rows: 0.2fr 0.8fr;
+    h2 {
+      grid-column: 1/3;
+      grid-row: 1/2;
+      width: 100%;
+    }
     img {
       grid-column: 1/2;
-      width: 80%;
+      grid-row: 2/3;
     }
     .sighting_info {
       grid-column: 2/3;
+      grid-row: 2/3;
     }
   }
   .sighting_list_item {
@@ -66,13 +71,20 @@
 @media (min-width: 600px) and (max-width: 900px) {
   .sighting {
     display: grid;
-    grid-template-columns: 0.4fr 0.6fr;
+    grid-template-columns: 0.5fr 0.5fr;
+    grid-template-rows: 0.2fr 0.8fr;
+    h2 {
+      grid-column: 1/3;
+      grid-row: 1/2;
+      width: 100%;
+    }
     img {
       grid-column: 1/2;
-      width: 80%;
+      grid-row: 2/3;
     }
     .sighting_info {
       grid-column: 2/3;
+      grid-row: 2/3;
     }
   }
   .sighting_list_item {
