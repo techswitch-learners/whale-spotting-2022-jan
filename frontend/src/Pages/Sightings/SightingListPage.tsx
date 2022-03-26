@@ -22,12 +22,7 @@ export function SightingListPage(): JSX.Element {
                 {s.species.name} ({s.species.latinName})
               </h2>
 
-              <img
-                src={s.photoUrl}
-                alt={s.description}
-                width="200"
-                height="100"
-              />
+              <img src={s.photoUrl} alt={s.description} />
 
               <div className="sighting_info">
                 <p>About: {s.description}</p>
