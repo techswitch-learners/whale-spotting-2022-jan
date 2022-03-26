@@ -5,6 +5,8 @@
   justify-content: space-between;
   list-style-type: none;
   padding: 0;
+  box-sizing: content-box;
+  width: calc(95% / 2);
 }
 .sighting_list_item {
   flex-grow: 1;
@@ -12,6 +14,7 @@
   position: relative;
   box-sizing: border-box;
   margin: 1rem;
+  box-sizing: content-box;
 }
 .sighting {
   border: solid;
@@ -25,6 +28,7 @@
     color: #22646e;
   }
   img {
+    border-radius: 10%;
     display: block;
     margin-left: auto;
     margin-right: auto;

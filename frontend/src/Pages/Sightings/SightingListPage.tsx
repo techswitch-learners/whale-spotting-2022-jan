@@ -32,8 +32,9 @@ export async function fetchSightings(): Promise<Array<Sighting>> {
     {
       id: 1,
       date: new Date(),
-      description: "Sighting 1",
-      species: { name: "aaa", latinName: "bbb" },
+      description:
+        "The blue whale (Balaenoptera musculus) is a marine mammal and a baleen whale. Reaching a maximum confirmed length of 29.9 meters (98 ft) and weighing up to 199 metric tons (196 long tons; 219 short tons), it is the largest animal known to have ever existed. The blue whale's long and slender body can be of various shades of greyish-blue dorsally and somewhat lighter underneath.",
+      species: { name: "Blue Whale", latinName: "Balaenoptera musculus" },
       location: { name: "Cardiff" },
       photoUrl:
         "https://cdn.britannica.com/37/75637-050-B425E8F1/Killer-whale.jpg",
@@ -42,8 +43,9 @@ export async function fetchSightings(): Promise<Array<Sighting>> {
     {
       id: 2,
       date: new Date(),
-      description: "Sighting 2",
-      species: { name: "aaa", latinName: "bbb" },
+      description:
+        "The humpback whale (Megaptera novaeangliae) is a species of baleen whale. It is a rorqual; a member of the family Balaenopteridae. Adults range in length from 14–17 m (46–56 ft) and weighing up to 40 metric tons (44 short tons). The humpback has a distinctive body shape, with long pectoral fins and a knobbly head. It is known for breaching and other distinctive surface behaviors, making it popular with whale watchers. Males produce a complex song typically lasting 4 to 33 minutes.",
+      species: { name: "Humpback Whale", latinName: "Megaptera novaeangliae" },
       location: { name: "Edinburg" },
       photoUrl:
         "https://static.independent.co.uk/2022/02/06/08/newFile.jpg?quality=75&width=982&height=726&auto=webp",
@@ -52,12 +54,46 @@ export async function fetchSightings(): Promise<Array<Sighting>> {
     {
       id: 3,
       date: new Date(),
-      description: "Sighting 3",
-      species: { name: "whale shark", latinName: "Rhincodon typus" },
+      description:
+        "The beluga whale (Delphinapterus leucas) is an Arctic and sub-Arctic cetacean. It is one of two members of the family Monodontidae, along with the narwhal, and the only member of the genus Delphinapterus. It is also known as the white whale, as it is the only cetacean to regularly occur with this colour; the sea canary, due to its high-pitched calls; and the melonhead, though that more commonly refers to the melon-headed whale, which is an oceanic dolphin.",
+      species: { name: "Beluga Whale", latinName: "Delphinapterus leucas" },
       location: { name: "Edinburg" },
       photoUrl:
         "https://i.natgeofe.com/n/a7928401-ba65-4d1a-a1fb-138621d18c13/3636516_3x2.jpg",
       user: { name: "Zuhal", username: "ZuhKur" },
+    },
+    {
+      id: 4,
+      date: new Date(),
+      description:
+        "The blue whale (Balaenoptera musculus) is a marine mammal and a baleen whale. Reaching a maximum confirmed length of 29.9 meters (98 ft) and weighing up to 199 metric tons (196 long tons; 219 short tons), it is the largest animal known to have ever existed. The blue whale's long and slender body can be of various shades of greyish-blue dorsally and somewhat lighter underneath.",
+      species: { name: "Blue Whale", latinName: "Balaenoptera musculus" },
+      location: { name: "Cardiff" },
+      photoUrl:
+        "https://cdn.britannica.com/37/75637-050-B425E8F1/Killer-whale.jpg",
+      user: { name: "Ija", username: "IjaSap" },
+    },
+    {
+      id: 5,
+      date: new Date(),
+      description:
+        "The blue whale (Balaenoptera musculus) is a marine mammal and a baleen whale. Reaching a maximum confirmed length of 29.9 meters (98 ft) and weighing up to 199 metric tons (196 long tons; 219 short tons), it is the largest animal known to have ever existed. The blue whale's long and slender body can be of various shades of greyish-blue dorsally and somewhat lighter underneath.",
+      species: { name: "Blue Whale", latinName: "Balaenoptera musculus" },
+      location: { name: "Cardiff" },
+      photoUrl:
+        "https://cdn.britannica.com/37/75637-050-B425E8F1/Killer-whale.jpg",
+      user: { name: "Ija", username: "IjaSap" },
+    },
+    {
+      id: 6,
+      date: new Date(),
+      description:
+        "The blue whale (Balaenoptera musculus) is a marine mammal and a baleen whale. Reaching a maximum confirmed length of 29.9 meters (98 ft) and weighing up to 199 metric tons (196 long tons; 219 short tons), it is the largest animal known to have ever existed. The blue whale's long and slender body can be of various shades of greyish-blue dorsally and somewhat lighter underneath.",
+      species: { name: "Blue Whale", latinName: "Balaenoptera musculus" },
+      location: { name: "Cardiff" },
+      photoUrl:
+        "https://cdn.britannica.com/37/75637-050-B425E8F1/Killer-whale.jpg",
+      user: { name: "Ija", username: "IjaSap" },
     },
   ]);
 }
@@ -76,7 +112,9 @@ export function SightingListPage(): JSX.Element {
         {sightings.map((s, i) => (
           <li className="sighting_list_item" key={i}>
             <div className="sighting">
-              <h2>{s.description}</h2>
+              <h2>
+                {s.species.name} ({s.species.latinName})
+              </h2>
 
               <img
                 src={s.photoUrl}
@@ -86,9 +124,7 @@ export function SightingListPage(): JSX.Element {
               />
 
               <div className="sighting_info">
-                <p>
-                  Species: {s.species.name} ({s.species.latinName})
-                </p>
+                <p>About sighting: {s.description}</p>
                 <p>Sighting Location: {s.location.name}</p>
                 <p>On: {s.date.toDateString()}</p>
                 <p>
