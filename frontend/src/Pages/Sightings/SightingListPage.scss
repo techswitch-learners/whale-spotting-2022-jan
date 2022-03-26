@@ -12,7 +12,7 @@
   position: relative;
   box-sizing: border-box;
   margin: 1rem;
-  //width: calc(90%/3);
+  width: calc(90% / 3);
 }
 .sighting {
   border: solid;
@@ -44,36 +44,36 @@
   }
 }
 
-@media (min-width: 900px) {
-  .sighting {
-    display: grid;
-    grid-template-columns: 0.3fr 0.7fr;
-    img {
-      grid-column: 1/2;
-      width: 80%;
-    }
-    .sighting_info {
-      grid-column: 2/3;
-    }
-  }
-  .sighting_list_item {
-    width: 100%;
-  }
-}
+// @media (min-width: 900px) {
+//   .sighting {
+//     display: grid;
+//     grid-template-columns: 0.3fr 0.7fr;
+//     img {
+//       grid-column: 1/2;
+//       width: 80%;
+//     }
+//     .sighting_info {
+//       grid-column: 2/3;
+//     }
+//   }
+//   .sighting_list_item {
+//     width: 100%;
+//   }
+// }
 
-@media (min-width: 600px) and (max-width: 900px) {
-  .sighting {
-    display: grid;
-    grid-template-columns: 0.4fr 0.6fr;
-    img {
-      grid-column: 1/2;
-      width: 80%;
-    }
-    .sighting_info {
-      grid-column: 2/3;
-    }
-  }
-  .sighting_list_item {
-    width: 100%;
-  }
-}
+// @media (min-width: 600px) and (max-width: 900px) {
+//   .sighting {
+//     display: grid;
+//     grid-template-columns: 0.4fr 0.6fr;
+//     img {
+//       grid-column: 1/2;
+//       width: 80%;
+//     }
+//     .sighting_info {
+//       grid-column: 2/3;
+//     }
+//   }
+//   .sighting_list_item {
+//     width: 100%;
+//   }
+// }
