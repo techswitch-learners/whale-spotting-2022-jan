@@ -12,7 +12,7 @@
   position: relative;
   box-sizing: border-box;
   margin: 1rem;
-  //width: calc(90%/3);
+  width: calc(90% / 3);
 }
 .sighting {
   border: solid;
@@ -26,6 +26,8 @@
     color: #22646e;
   }
   img {
+    width: 20vw;
+    height: 10vw;
     display: block;
     margin-left: auto;
     margin-right: auto;
