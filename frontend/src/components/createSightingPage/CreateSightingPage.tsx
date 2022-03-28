@@ -5,7 +5,7 @@ import {
   fetchSpecies,
   Species,
   Location,
-} from "../../clients/apiClient";
+} from "../../clients/apiClients";
 
 export function CreateSightingPage(): JSX.Element {
   const [date, setDate] = useState<Date>(new Date());
