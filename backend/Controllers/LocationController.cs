@@ -19,12 +19,32 @@ namespace WhaleSpotting.Controllers {
     }
 
     [HttpGet]
-    public ActionResult<List<Location>> GetAllLocations() {
+    public ActionResult<List<ExtendedLocationResponse>> GetAllLocations() {
       if (!ModelState.IsValid) {
         return BadRequest(ModelState);
       }
 
-      return _locations.GetAllLocations();
+      return _locations.GetAllLocations()
+      .Select(l => new ExtendedLocationResponse
+            {
+                Id = l.Id,
+                Name = l.Name,
+                Latitude = l.Latitude,
+                Longitude = l.Longitude,
+                Description = l.Description,
+                Sightings = l.Sightings
+                  .Select(s => new SightingResponse { 
+                    Id = s.Id,
+                    Date = s.Date,
+                    LocationId = s.LocationId,
+                    Description = s.Description,
+                    SpeciesId = s.SpeciesId,
+                    PhotoUrl = s.PhotoUrl,
+                    UserId = s.UserId
+                    })
+                  .ToList(),
+                Amenities = l.Amenities
+            }).ToList();
     }   
 
     [HttpGet("popular")]
