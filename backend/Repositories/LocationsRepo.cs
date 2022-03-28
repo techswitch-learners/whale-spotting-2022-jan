@@ -5,6 +5,7 @@ using WhaleSpotting.Models.Database;
 using WhaleSpotting.Models.Request;
 using System.Security.Cryptography;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+using Microsoft.EntityFrameworkCore;
 
 namespace WhaleSpotting.Repositories
 {
@@ -25,12 +26,16 @@ namespace WhaleSpotting.Repositories
         {
             return context
                 .Locations
+                .Include(l => l.Sightings)
                 .ToList();
         }
         public List<Location> GetPopularLocations()
         {
             return context
                 .Locations
+                .Include(l => l.Sightings)
+                .OrderByDescending(l => l.Sightings.Count)
+                .Take(2)
                 .ToList();
         }
     }
