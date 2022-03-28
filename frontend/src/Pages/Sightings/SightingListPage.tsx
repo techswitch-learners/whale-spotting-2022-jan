@@ -4,12 +4,23 @@ import "./SightingListPage.scss";
 import { Link } from "react-router-dom";
 import { Sighting } from "../../clients/apiClients";
 import { GetAllSightings } from "../../clients/apiClients";
+import Modal from "react-bootstrap/Modal";
 
 export function SightingListPage(): JSX.Element {
   const [sightings, setSightings] = useState<Array<Sighting>>([]);
   useEffect(() => {
     GetAllSightings().then(setSightings);
   }, []);
+
+  const [isOpen, setIsOpen] = React.useState(false);
+
+  const showModal = () => {
+    setIsOpen(true);
+  };
+
+  const hideModal = () => {
+    setIsOpen(false);
+  };
 
   return (
     <>
@@ -22,7 +33,14 @@ export function SightingListPage(): JSX.Element {
                 {s.species.name} ({s.species.latinName})
               </h2>
 
-              <img src={s.photoUrl} alt={s.description} />
+              <button onClick={showModal}>
+                <img
+                  src={s.photoUrl}
+                  alt={s.description}
+                  width="200"
+                  height="100"
+                />
+              </button>
 
               <div className="sighting_info">
                 <p>About: {s.description}</p>
@@ -41,6 +59,21 @@ export function SightingListPage(): JSX.Element {
                 Launch demo modal
               </button>
             </div>
+
+            <Modal show={isOpen} onHide={hideModal}>
+              <Modal.Body>
+                <img
+                  src={s.photoUrl}
+                  alt={s.description}
+                  width="200"
+                  height="100"
+                />
+              </Modal.Body>
+
+              <Modal.Footer>
+                <button onClick={hideModal}>Cancel</button>
+              </Modal.Footer>
+            </Modal>
           </li>
         ))}
       </ul>
