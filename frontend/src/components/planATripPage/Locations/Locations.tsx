@@ -19,7 +19,7 @@ export function Locations(): JSX.Element {
     fetchLocations().then((response) => setLocations(response));
   }, []);
 
-  if (!locations) {
+  if (locations === undefined) {
     return <section>Loading...</section>;
   }
   locations.forEach((location: Location) => {

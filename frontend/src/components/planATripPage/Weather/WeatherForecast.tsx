@@ -37,7 +37,7 @@ export function WeatherForecast({
       <ul className="weather">
         {weather?.slice(0, 5).map((w, i) => (
           <li key={i}>
-            {w.temp}&#176; Celcius.
+            {w.temp}&#176; °C
             <img
               src={`https://openweathermap.org/img/wn/${w.icon}@2x.png`}
             ></img>
