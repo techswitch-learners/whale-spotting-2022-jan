@@ -44,6 +44,7 @@ namespace WhaleSpotting.Repositories
         {
             return context
                 .Locations
+                .Include(l => l.Sightings)
                 .Single(location => location.Id == locationId);
         }
     }
