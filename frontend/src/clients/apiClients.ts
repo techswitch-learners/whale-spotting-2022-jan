@@ -9,6 +9,24 @@ export interface NewUser {
   email: string;
   password: string;
 }
+export interface Species {
+  name: string;
+  latinName: string;
+}
+
+export interface Location {
+  name: string;
+}
+
+export interface Sighting {
+  id: number;
+  date: Date;
+  location: Location;
+  description: string;
+  species: Species;
+  photoUrl: string;
+  user: User;
+}
 
 export const login = async (
   username: string,
@@ -37,3 +55,13 @@ export async function createUser(newUser: NewUser) {
     throw new Error(await response.json());
   }
 }
+
+export const GetMostRecentSighting = async () => {
+  const response = await fetch(`https://localhost:5001/sightings/recent`);
+  const data = response.json();
+
+  if (!response.ok) {
+    throw new Error(await response.json());
+  }
+  return data;
+};
