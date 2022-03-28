@@ -1,14 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { GetPopularLocations, Location } from "../../../clients/apiClients";
 
 export function PopularLocations() {
-  return (
-    <section>
-      <h1>See locations with the most whale sightings:</h1>
-      <ol>
-        <li>Location Name 1: # of sightings</li>
-        <li>Location Name 2: # of sightings</li>
-        <li>Location Name 3: # of sightings</li>
-      </ol>
-    </section>
-  );
+  const [popularLocations, setPopularLocations] = useState<Array<Location>>();
+  useEffect(() => {
+    GetPopularLocations().then(setPopularLocations);
+  }, []);
+  if (popularLocations === undefined) {
+    return <section>Loading...</section>;
+  } else
+    return (
+      <section>
+        <h1>See locations with the most whale sightings:</h1>
+        <ol>
+          <li>
+            Location Name 1: {popularLocations[0].name}, with a total of{" "}
+            {popularLocations[0].sightings.length} sightings!
+          </li>
+          <li>
+            Location Name 2: {popularLocations[1].name}, with a total of{" "}
+            {popularLocations[1].sightings.length} sightings!
+          </li>
+        </ol>
+      </section>
+    );
 }
