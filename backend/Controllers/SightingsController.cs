@@ -122,7 +122,7 @@ namespace WhaleSpotting.Controllers
 
             User user = _usersRepo.GetByUsername(username);
             var sighting = _sightingsRepo.GetById(id);
-            if (user.Id != sighting.UserId)
+            if (user.Id != sighting.CreatedByUserId)
             {
                 return StatusCode(
                     StatusCodes.Status403Forbidden,

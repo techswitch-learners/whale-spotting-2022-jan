@@ -34,7 +34,7 @@ namespace WhaleSpotting.Repositories
                 .Sightings
                 .Include(l => l.Location)
                 .Include(s => s.Species)
-                .Include(u => u.User)
+                .Include(u => u.CreatedBy)
                 .ToList();
         }
 
@@ -50,7 +50,7 @@ namespace WhaleSpotting.Repositories
                 LocationId = newSighting.LocationId,
                 Description = newSighting.Description,
                 PhotoUrl = newSighting.PhotoUrl,
-                UserId = newSighting.UserId,
+                CreatedByUserId = newSighting.UserId,
                 SpeciesId = newSighting.SpeciesId,
 
             });
