@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using WhaleSpotting.Models.Database;
 using WhaleSpotting.Models.Request;
+using Microsoft.EntityFrameworkCore;
 
 namespace WhaleSpotting.Repositories
 {
@@ -29,8 +30,14 @@ namespace WhaleSpotting.Repositories
         }
         public List<Sighting> GetAllSightings()
         {
-            return _context.Sightings.ToList();
+            return _context
+                .Sightings
+                .Include(l => l.Location)
+                .Include(s => s.Species)
+                .Include(u => u.User)
+                .ToList();
         }
+
         public Sighting GetMostRecentSighting()
         {
             return _context.Sightings.OrderBy(x => x.Date).First();
