@@ -12,16 +12,6 @@ export function SightingListPage(): JSX.Element {
     GetAllSightings().then(setSightings);
   }, []);
 
-  const [isOpen, setIsOpen] = React.useState(false);
-
-  const showModal = () => {
-    setIsOpen(true);
-  };
-
-  const hideModal = () => {
-    setIsOpen(false);
-  };
-
   return (
     <>
       <h1 className="title">Sightings</h1>
@@ -32,48 +22,21 @@ export function SightingListPage(): JSX.Element {
               <h2>
                 {s.species.name} ({s.species.latinName})
               </h2>
-
-              <button onClick={showModal}>
-                <img
-                  src={s.photoUrl}
-                  alt={s.description}
-                  width="200"
-                  height="100"
-                />
-              </button>
-
               <div className="sighting_info">
                 <p>About: {s.description}</p>
                 <p>Sighting Location: {s.location.name}</p>
+                <img
+                  src={s.photoUrl}
+                  alt={s.description}
+                  width="400"
+                  height="200"
+                />
                 <p>On: {s.date}</p>
                 <p>
                   Seen by: {s.user.name} ({s.user.username})
                 </p>
               </div>
-              <button
-                type="button"
-                className="btn btn-primary"
-                data-bs-toggle="modal"
-                data-bs-target="#exampleModal"
-              >
-                Launch demo modal
-              </button>
             </div>
-
-            <Modal show={isOpen} onHide={hideModal}>
-              <Modal.Body>
-                <img
-                  src={s.photoUrl}
-                  alt={s.description}
-                  width="200"
-                  height="100"
-                />
-              </Modal.Body>
-
-              <Modal.Footer>
-                <button onClick={hideModal}>Cancel</button>
-              </Modal.Footer>
-            </Modal>
           </li>
         ))}
       </ul>

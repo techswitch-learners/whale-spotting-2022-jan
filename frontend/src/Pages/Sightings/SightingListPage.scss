@@ -6,7 +6,7 @@
   list-style-type: none;
   padding: 0;
   box-sizing: content-box;
-  width: calc(95% / 2);
+  // width: calc(95% / 2);
 }
 .sighting_list_item {
   flex-grow: 1;
@@ -16,6 +16,7 @@
   margin: 1rem;
   box-sizing: content-box;
 }
+
 .sighting {
   border: solid;
   border-width: 0.2rem;
@@ -27,19 +28,28 @@
     text-align: center;
     color: #22646e;
   }
+  .modal-width {
+    width: 70% !important;
+  }
+  .modal-height {
+    height: 70% !important;
+  }
+
   img {
-    border-radius: 10%;
+    text-align: center;
+    border-radius: 5%;
     display: block;
     margin-left: auto;
     margin-right: auto;
     transition: transform 0.25s ease;
     position: relative;
     max-width: 70%;
-    border-radius: 25px;
+    margin-bottom: 2.75em;
   }
 
   img:hover {
-    transform: scale(1.5);
+    z-index: 1;
+    transform: scale(2);
   }
 
   .sighting_info {
@@ -59,6 +69,7 @@
       width: 100%;
     }
     img {
+      text-align: center;
       grid-column: 1/2;
       grid-row: 2/3;
     }
