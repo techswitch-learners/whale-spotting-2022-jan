@@ -8,6 +8,8 @@ import {
   createSighting,
 } from "../../clients/apiClients";
 import { LoginContext } from "../login/LoginManager";
+import { Link } from "react-router-dom";
+
 type FromStatus = "READY" | "SUBMITTING" | "ERROR" | "FINISHED";
 
 export function CreateSightingPage(): JSX.Element {
@@ -56,6 +58,15 @@ export function CreateSightingPage(): JSX.Element {
   ) => {
     setLocationId(Number(event.target.value));
   };
+
+  if (status === "FINISHED") {
+    return (
+      <div>
+        <p>Form Submitted Successfully!</p>
+        <Link to="/Sightings">Move to the list of sightings?</Link>
+      </div>
+    );
+  }
 
   return (
     <main>
@@ -113,7 +124,9 @@ export function CreateSightingPage(): JSX.Element {
             onChange={(event) => setPhotoUrl(event.target.value)}
           />
         </label>
-        <button type="submit">Create Sighting</button>
+        <button disabled={status === "SUBMITTING"} type="submit">
+          Create Sighting
+        </button>
       </form>
       {status === "ERROR" ? (
         <div>
