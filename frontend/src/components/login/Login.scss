@@ -1,11 +1,24 @@
+@import "../../styles/constants.scss";
+
 .login,
 .login-form {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  box-sizing: border-box;
 }
 
 .login-input {
   margin: 2em;
+}
+
+.login {
+  background-color: $color-background;
+  font-family: $font-family;
+  color: $color-font;
+}
+
+.submit-button-login {
+  margin-bottom: 2em;
 }
