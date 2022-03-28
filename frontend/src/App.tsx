@@ -7,6 +7,7 @@ import { CreateSightingPage } from "./components/createSightingPage/CreateSighti
 import { CreateUser, SignUpForm } from "./Pages/SignUp/SignUp";
 import { Login } from "./components/login/Login";
 import { SightingListPage } from "./Pages/Sightings/SightingListPage";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const Routes: React.FunctionComponent = () => {
   return (

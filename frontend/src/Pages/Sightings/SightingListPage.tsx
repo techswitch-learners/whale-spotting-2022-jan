@@ -108,22 +108,29 @@ export function SightingListPage(): JSX.Element {
   return (
     <>
       <h1 className="title">Sightings</h1>
-      <ul className="sighting_list">
+      <ul className="list-group list-group-flush">
         {sightings.map((s, i) => (
-          <li className="sighting_list_item" key={i}>
-            <div className="sighting">
-              <h2>
+          <li className="list-group-item" key={i}>
+            <div className="card">
+              <div className="modal" z-index="-1">
+                <div className="modal-dialog">
+                  <div className="modal-content">
+                    <div className="modal-body">
+                      <img
+                        className="card-img-top"
+                        src={s.photoUrl}
+                        alt="Card image cap"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="card-body">
+              <h5 className="card-title">
                 {s.species.name} ({s.species.latinName})
-              </h2>
-
-              <img
-                src={s.photoUrl}
-                alt={s.description}
-                width="200"
-                height="100"
-              />
-
-              <div className="sighting_info">
+              </h5>
+              <div className="card-text">
                 <p>About sighting: {s.description}</p>
                 <p>Sighting Location: {s.location.name}</p>
                 <p>On: {s.date.toDateString()}</p>
@@ -131,6 +138,14 @@ export function SightingListPage(): JSX.Element {
                   Seen by: {s.user.name} ({s.user.username})
                 </p>
               </div>
+              <button
+                type="button"
+                className="btn btn-primary"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal"
+              >
+                Launch demo modal
+              </button>
             </div>
           </li>
         ))}
