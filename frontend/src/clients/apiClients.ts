@@ -14,10 +14,6 @@ export interface Species {
   latinName: string;
 }
 
-export interface Location {
-  name: string;
-}
-
 export interface Sighting {
   id: number;
   date: Date;
@@ -34,7 +30,9 @@ export interface Species {
 }
 
 export interface Location {
+  id: number;
   name: string;
+  sightings: Sighting[];
 }
 
 export interface User {
@@ -93,6 +91,17 @@ export async function createUser(newUser: NewUser) {
 export const GetMostRecentSighting = async () => {
   const response = await fetch(`https://localhost:5001/sightings/recent`);
   const data = response.json();
+
+  if (!response.ok) {
+    throw new Error(await response.json());
+  }
+  return data;
+};
+
+export const GetPopularLocations = async () => {
+  const response = await fetch(`https://localhost:5001/locations/popular`);
+  const data = await response.json();
+  console.log(data);
 
   if (!response.ok) {
     throw new Error(await response.json());
