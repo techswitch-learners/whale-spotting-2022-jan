@@ -54,7 +54,6 @@ export interface NewSighting {
   speciesId: number;
   description: string;
   photoUrl: string;
-  userId: number;
 }
 
 function getAuthorizationHeader(username: string, password: string) {

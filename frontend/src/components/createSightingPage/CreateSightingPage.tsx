@@ -1,24 +1,45 @@
-import React, { useState, FormEvent, useEffect } from "react";
+import React, { useState, FormEvent, useEffect, useContext } from "react";
 import { format, parse } from "date-fns";
 import {
   fetchLocations,
   fetchSpecies,
   Species,
   Location,
+  createSighting,
 } from "../../clients/apiClients";
+import { LoginContext } from "../login/LoginManager";
+type FromStatus = "READY" | "SUBMITTING" | "ERROR" | "FINISHED";
 
 export function CreateSightingPage(): JSX.Element {
   const [date, setDate] = useState<Date>(new Date());
   const [locations, setLocations] = useState<Location[]>([]);
-  const [location, setLocation] = useState("");
+  const [locationId, setLocationId] = useState<number>();
   const [speciesList, setSpeciesList] = useState<Species[]>([]);
-  const [species, setSpecies] = useState<string>("");
+  const [speciesId, setSpeciesId] = useState<number>();
   const [description, setDescription] = useState("");
   const [photoUrl, setPhotoUrl] = useState("");
-  const [userId, setUserId] = useState("");
+  const [status, setStatus] = useState<FromStatus>("READY");
+  const { username, password } = useContext(LoginContext);
 
   const submitForm = (event: FormEvent) => {
     event.preventDefault();
+    setStatus("SUBMITTING");
+    if (!locationId || !speciesId) {
+      return <div>Cannot create sighting</div>;
+    }
+    createSighting(
+      {
+        date,
+        locationId,
+        speciesId,
+        description,
+        photoUrl,
+      },
+      username,
+      password
+    )
+      .then(() => setStatus("FINISHED"))
+      .catch(() => setStatus("ERROR"));
   };
 
   useEffect(() => {
@@ -27,12 +48,12 @@ export function CreateSightingPage(): JSX.Element {
   }, []);
 
   const handleSpeciesChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSpecies(event.target.value);
+    setSpeciesId(Number(event.target.value));
   };
   const handleLocationChange = (
     event: React.ChangeEvent<HTMLSelectElement>
   ) => {
-    setLocation(event.target.value);
+    setLocationId(Number(event.target.value));
   };
 
   return (
@@ -56,7 +77,7 @@ export function CreateSightingPage(): JSX.Element {
               Select Location
             </option>
             {locations.map((location, key) => (
-              <option key={key} value={key}>
+              <option key={location.id} value={location.id}>
                 {location.name}
               </option>
             ))}
@@ -69,7 +90,7 @@ export function CreateSightingPage(): JSX.Element {
               Select Species
             </option>
             {speciesList.map((species, key) => (
-              <option key={key} value={key}>
+              <option key={species.id} value={species.id}>
                 {species.name}
               </option>
             ))}

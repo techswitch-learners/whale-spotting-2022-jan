@@ -75,13 +75,7 @@ namespace WhaleSpotting.Controllers
                 );
             }
             
-            if (user.Id != newSighting.UserId)
-            {
-                return StatusCode(
-                    StatusCodes.Status403Forbidden,
-                    "You are not allowed to create a post for a different user"
-                );
-            }
+            newSighting.UserId = user.Id;
 
             var check = _authservice.IsAuthenticated(usernamePassword);
 
