@@ -90,7 +90,7 @@ export async function createUser(newUser: NewUser) {
 
 export const GetMostRecentSighting = async () => {
   const response = await fetch(`https://localhost:5001/sightings/recent`);
-  const data = response.json();
+  const data = await response.json();
 
   if (!response.ok) {
     throw new Error(await response.json());
@@ -101,7 +101,6 @@ export const GetMostRecentSighting = async () => {
 export const GetPopularLocations = async () => {
   const response = await fetch(`https://localhost:5001/locations/popular`);
   const data = await response.json();
-  console.log(data);
 
   if (!response.ok) {
     throw new Error(await response.json());
