@@ -25,7 +25,8 @@ export function CreateSightingPage(): JSX.Element {
     event.preventDefault();
     setStatus("SUBMITTING");
     if (!locationId || !speciesId) {
-      return <div>Cannot create sighting</div>;
+      setStatus("ERROR");
+      return;
     }
     createSighting(
       {
@@ -58,7 +59,8 @@ export function CreateSightingPage(): JSX.Element {
 
   return (
     <main>
-      <h1>Report a Sighting!</h1>
+      <h1>Hello {username}!</h1>
+      <h2>Report a Sighting!</h2>
       <form onSubmit={submitForm}>
         <label htmlFor="date">
           Date
@@ -113,6 +115,13 @@ export function CreateSightingPage(): JSX.Element {
         </label>
         <button type="submit">Create Sighting</button>
       </form>
+      {status === "ERROR" ? (
+        <div>
+          <p>ERROR: Please make sure all fields have been filled in</p>
+        </div>
+      ) : (
+        <></>
+      )}
     </main>
   );
 }

@@ -75,7 +75,6 @@ namespace WhaleSpotting.Controllers
                 );
             }
             
-            newSighting.UserId = user.Id;
 
             var check = _authservice.IsAuthenticated(usernamePassword);
 
@@ -84,7 +83,7 @@ namespace WhaleSpotting.Controllers
 
             try
             {
-                var sighting = _sightingsRepo.Create(newSighting);
+                var sighting = _sightingsRepo.Create(newSighting, user.Id);
                 return Created("/", newSighting);
             }
             catch (BadHttpRequestException)
