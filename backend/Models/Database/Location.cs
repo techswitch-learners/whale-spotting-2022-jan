@@ -9,6 +9,7 @@ namespace WhaleSpotting.Models.Database
         public float Longitude { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        public List<Sighting> Sightings { get; set; }
         public List<string> Amenities { get; set; }
     }
 }

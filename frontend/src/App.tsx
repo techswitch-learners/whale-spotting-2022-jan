@@ -15,14 +15,14 @@ const Routes: React.FunctionComponent = () => {
       <Route path="/sign-up">
         <CreateUser />
       </Route>
+      <Route path="/sightings/create">
+        <CreateSightingPage />
+      </Route>
       <Route path="/sightings">
         <SightingListPage />
       </Route>
       <Route path="/login">
         <Login />
-      </Route>
-      <Route path="/sightings/create">
-        <CreateSightingPage />
       </Route>
       <Route path="/">
         <Home />
