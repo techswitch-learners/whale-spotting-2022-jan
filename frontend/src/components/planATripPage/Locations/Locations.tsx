@@ -37,7 +37,7 @@ export function Locations(): JSX.Element {
   return (
     <div>
       <section className="get-location">
-        <h1>Where do you want to go Whale Spotting?</h1>
+        <h2>Where do you want to go Whale Spotting?</h2>
         <Select
           onChange={(v) => {
             if (isSelectOption(v)) {

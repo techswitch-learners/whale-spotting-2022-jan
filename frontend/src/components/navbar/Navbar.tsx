@@ -9,7 +9,7 @@ export const Navbar: React.FunctionComponent = () => {
   return (
     <nav role="navigation" aria-label="main navigation">
       <Link to="/">
-        <img src="/logo.png" alt="Whale Spotting logo" />
+        <img src="/logo.png" width={"100px"} alt="Whale Spotting logo" />
       </Link>
       <Link to="/plantrip">
         <a className="button is-primary">Plan a Trip!</a>
