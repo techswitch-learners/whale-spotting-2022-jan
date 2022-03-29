@@ -122,7 +122,11 @@ export function CreateSightingPage(): JSX.Element {
             onChange={(event) => setPhotoUrl(event.target.value)}
           />
           <label></label>
-          <button disabled={status === "SUBMITTING"} type="submit">
+          <button
+            className="reportSighting__button btn btn-primary"
+            disabled={status === "SUBMITTING"}
+            type="submit"
+          >
             Create Sighting
           </button>
         </div>

@@ -32,9 +32,13 @@
     padding: 1em;
     grid-row: auto;
   }
-  button {
-    color: $color-background;
-    background-color: #b1d3e3;
+  // button {
+  //   color: $color-background;
+  //   background-color: #b1d3e3;
+  //   width: 50%;
+  // }
+  .reportSighting__button {
+    margin-bottom: 2em;
     width: 50%;
   }
 }
