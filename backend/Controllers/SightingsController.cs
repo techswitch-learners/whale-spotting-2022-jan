@@ -119,18 +119,38 @@ namespace WhaleSpotting.Controllers
             string username = AuthHelper.GetUsernamePassword(authHeader).Split(":")[0];
             string usernamePassword = AuthHelper.GetUsernamePassword(authHeader);
 
+            var user = new User();
+            try
+            {
+                user = _usersRepo.GetByUsername(username);
+            }
 
-            User user = _usersRepo.GetByUsername(username);
+            catch (InvalidOperationException)
+            {
+                return StatusCode(
+                    StatusCodes.Status401Unauthorized,
+                    "The given username is not valid"
+                );
+            }
+
+            var check = _authservice.IsAuthenticated(usernamePassword);
+            
+            if (!check)
+            {
+                return new UnauthorizedResult();
+            }
+                
             var sighting = _sightingsRepo.GetById(id);
-            if (user.Id != sighting.CreatedByUserId)
+            
+            
+            if (user.Id != sighting.CreatedByUserId && user.Role == 0)
             {
                 return StatusCode(
                     StatusCodes.Status403Forbidden,
                     "You are not allowed to delete other people's sightings..."
                 );
             }
-
-
+         
             _sightingsRepo.Delete(id);
             return Ok();
         }
