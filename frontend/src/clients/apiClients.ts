@@ -10,6 +10,40 @@ export interface NewUser {
   password: string;
 }
 
+export interface Species {
+  name: string;
+  latinName: string;
+}
+
+export interface Location {
+  name: string;
+}
+
+export interface User {
+  name: string;
+  username: string;
+}
+
+export interface Sighting {
+  id: number;
+  date: Date;
+  location: Location;
+  description: string;
+  species: Species;
+  photoUrl: string;
+  user: User;
+}
+
+export async function GetAllSightings(): Promise<Array<Sighting>> {
+  const response = await fetch(`https://localhost:5001/sightings`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+}
+
 export const login = async (
   username: string,
   password: string
