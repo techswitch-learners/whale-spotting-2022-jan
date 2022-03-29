@@ -101,7 +101,68 @@ namespace WhaleSpotting.Controllers
                 );
             }
         }
+        [HttpPatch]
+        [Route("{id}/approve")]
+        public ActionResult Approve(
+            [FromRoute] int id,
+            [FromHeader(Name = "Authorization")] 
+            string authHeader)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
+            if (authHeader is null)
+            {
+                return new UnauthorizedResult();
+            }
+
+            string username = AuthHelper.GetUsernamePassword(authHeader).Split(":")[0];
+            string usernamePassword = AuthHelper.GetUsernamePassword(authHeader);
+
+            var user = new User();
+
+            try
+            {
+                user = _usersRepo.GetByUsername(username);
+            }
+
+            catch (InvalidOperationException)
+            {
+                return StatusCode(
+                    StatusCodes.Status401Unauthorized,
+                    "The given username is not valid"
+                );
+            }
+            
+            if (user.Role == 0)
+            {
+                return StatusCode(
+                    StatusCodes.Status403Forbidden,
+                    "You are not allowed to approve a sighting"
+                );
+            }
+
+            var check = _authservice.IsAuthenticated(usernamePassword);
+
+            if (!check)
+                return new UnauthorizedResult();
+
+            try
+            {
+                var appSighting = new ApproveSightingRequest(user);
+                var sighting = _sightingsRepo.Approve(id, appSighting);
+                return Ok();
+            }
+            catch (BadHttpRequestException)
+            {
+                return StatusCode(
+                    StatusCodes.Status400BadRequest,
+                    "Could not approve sighting"
+                );
+            }
+        }
 
         [HttpDelete("{id}")]
         public IActionResult Delete([FromRoute] int id, [FromHeader(Name = "Authorization")] string authHeader)

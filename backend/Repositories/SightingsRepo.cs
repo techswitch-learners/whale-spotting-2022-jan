@@ -16,6 +16,7 @@ namespace WhaleSpotting.Repositories
         Sighting Create(CreateSightingRequest newSighting);
 
         Sighting GetById(int id);
+        Sighting Approve(int sightingId, ApproveSightingRequest appSighting);
 
         void Delete(int id);
 
@@ -61,6 +62,18 @@ namespace WhaleSpotting.Repositories
         {
             return _context.Sightings
             .Single(sighting => sighting.Id == id);
+        }
+        public Sighting Approve(
+            int sightingId, 
+            ApproveSightingRequest appSighting
+            )
+        {
+            var sightingToApprove = GetById(sightingId);
+            sightingToApprove.ApprovedBy = appSighting.ApprovedBy;
+            _context.Sightings.Update(sightingToApprove);
+            _context.SaveChanges();
+
+            return sightingToApprove;
         }
         public void Delete(int id)
         {
