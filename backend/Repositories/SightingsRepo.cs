@@ -45,7 +45,6 @@ namespace WhaleSpotting.Repositories
                 .Include(l => l.Location)
                 .Include(s => s.Species)
                 .Include(u => u.User)
-                .ToList()
                 .OrderByDescending(x => x.Date).First();
         }
         public Sighting Create(CreateSightingRequest newSighting)
