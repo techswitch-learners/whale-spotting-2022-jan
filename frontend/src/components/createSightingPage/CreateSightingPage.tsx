@@ -8,6 +8,7 @@ import {
   createSighting,
 } from "../../clients/apiClients";
 import { LoginContext } from "../login/LoginManager";
+import "./CreateSightingPage.scss";
 import { Link } from "react-router-dom";
 
 type FromStatus = "READY" | "SUBMITTING" | "ERROR" | "FINISHED";
@@ -69,23 +70,25 @@ export function CreateSightingPage(): JSX.Element {
   }
 
   return (
-    <main>
-      <h1>Hello {username}!</h1>
-      <h2>Report a Sighting!</h2>
+    <main className="reportSighting">
+      <div className="reportSighting__header">
+        <h1>Hello {username}!</h1>
+        <h2>Report a Sighting!</h2>
+      </div>
+
       <form onSubmit={submitForm}>
-        <label htmlFor="date">
-          Date
+        <div className="reportSighting__form">
+          <label htmlFor="date">Date</label>
           <input
+            id="date"
             type="date"
             value={format(date, "yyyy-MM-dd")}
             onChange={(event) =>
               setDate(parse(event.target.value, "yyyy-MM-dd", new Date()))
             }
           />
-        </label>
-        <label>
-          Location
-          <select onChange={(e) => handleLocationChange(e)}>
+          <label htmlFor="location">Location</label>
+          <select id="location" onChange={(e) => handleLocationChange(e)}>
             <option selected disabled>
               Select Location
             </option>
@@ -95,10 +98,8 @@ export function CreateSightingPage(): JSX.Element {
               </option>
             ))}
           </select>
-        </label>
-        <label>
-          Whale Type
-          <select onChange={(e) => handleSpeciesChange(e)}>
+          <label htmlFor="species">Whale Type</label>
+          <select id="species" onChange={(e) => handleSpeciesChange(e)}>
             <option selected disabled>
               Select Species
             </option>
@@ -108,22 +109,19 @@ export function CreateSightingPage(): JSX.Element {
               </option>
             ))}
           </select>
-        </label>
-        <div></div>
-        <label>
-          Description
+          <label htmlFor="description">Description</label>
           <input
+            id="description"
             value={description}
             onChange={(event) => setDescription(event.target.value)}
           />
-        </label>
-        <label>
-          Photo
+          <label htmlFor="photo">Photo</label>
           <input
+            id="photo"
             value={photoUrl}
             onChange={(event) => setPhotoUrl(event.target.value)}
           />
-        </label>
+        </div>
         <button disabled={status === "SUBMITTING"} type="submit">
           Create Sighting
         </button>

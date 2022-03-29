@@ -1,0 +1,35 @@
+@import "../../styles/constants.scss";
+
+.reportSighting {
+  background-color: $color-background;
+  font-family: $font-family;
+  color: $color-font;
+}
+
+.reportSighting__header {
+  background-color: $color-block-blackground;
+  font-family: $font-family;
+  color: $color-font;
+  text-align: center;
+}
+
+.reportSighting__form {
+  display: grid;
+  grid-template-columns: [labels] auto [controls] auto;
+  grid-auto-flow: row;
+  grid-gap: 0.8em;
+  padding: 1.2em;
+  margin: 0;
+  width: 50%;
+
+  label {
+    grid-column: labels;
+    width: 100px;
+  }
+  input {
+    grid-column: controls;
+    border: none;
+    padding: 1em;
+    grid-row: auto;
+  }
+}
