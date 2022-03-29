@@ -19,7 +19,7 @@
   grid-auto-flow: row;
   grid-gap: 0.8em;
   padding: 1.2em;
-  margin: 0;
+  margin: auto;
   width: 50%;
 
   label {
@@ -31,5 +31,9 @@
     border: none;
     padding: 1em;
     grid-row: auto;
+  }
+  button {
+    color: $color-background;
+    background-color: #b1d3e3;
   }
 }

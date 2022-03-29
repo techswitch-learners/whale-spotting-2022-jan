@@ -121,10 +121,11 @@ export function CreateSightingPage(): JSX.Element {
             value={photoUrl}
             onChange={(event) => setPhotoUrl(event.target.value)}
           />
+
+          <button disabled={status === "SUBMITTING"} type="submit">
+            Create Sighting
+          </button>
         </div>
-        <button disabled={status === "SUBMITTING"} type="submit">
-          Create Sighting
-        </button>
       </form>
       {status === "ERROR" ? (
         <div>
