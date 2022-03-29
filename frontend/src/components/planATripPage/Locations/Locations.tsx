@@ -59,6 +59,7 @@ export function Locations(): JSX.Element {
       )}
       {selectedLocationId ? (
         <section>
+          <p>selectedLocationId = {selectedLocationId}</p>
           <Amenities locationId={parseInt(selectedLocationId)} />
         </section>
       ) : (

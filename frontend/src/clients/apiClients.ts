@@ -15,10 +15,6 @@ export interface Species {
   latinName: string;
 }
 
-export interface Location {
-  name: string;
-}
-
 export interface User {
   name: string;
   username: string;
@@ -94,15 +90,16 @@ export async function fetchLocations(): Promise<Array<Location>> {
   }
   return await response.json();
 }
-export async function fetchLocationById(
-  locationId: number
-): Promise<Array<Location>> {
-  const response = await fetch(`https://localhost:5001/locations`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+export async function fetchLocationById(locationId: number): Promise<Location> {
+  const response = await fetch(
+    `https://localhost:5001/locations/${locationId}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
   if (!response.ok) {
     throw new Error(await response.json());
   }

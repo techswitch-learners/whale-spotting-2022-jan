@@ -19,10 +19,6 @@ namespace WhaleSpotting.Controllers {
     }
 
     [HttpGet]
-<<<<<<< HEAD
-    public ActionResult<List<Location>> GetAllLocations() {
-      return _locations.GetAllLocations();
-=======
     public ActionResult<List<ExtendedLocationResponse>> GetAllLocations() {
       if (!ModelState.IsValid) {
         return BadRequest(ModelState);
@@ -79,7 +75,6 @@ namespace WhaleSpotting.Controllers {
       var location = _locations.GetLocationById(locationId);
       
       return new ExtendedLocationResponse(location);
->>>>>>> main
     }   
   }
 }
