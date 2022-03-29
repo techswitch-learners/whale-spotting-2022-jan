@@ -40,7 +40,7 @@ namespace WhaleSpotting.Repositories
 
         public Sighting GetMostRecentSighting()
         {
-            return _context.Sightings.OrderByDescending(x => x.Date).First();
+            return GetAllSightings().OrderByDescending(x => x.Date).First();
         }
         public Sighting Create(CreateSightingRequest newSighting)
         {
