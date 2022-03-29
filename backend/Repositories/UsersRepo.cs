@@ -16,6 +16,7 @@ namespace WhaleSpotting.Repositories
         User GetById(int id);
 
         User GetByUsername(string username);
+        User UpdateRole(int id, UpdateUserRoleRequest update);
     }
 
     public class UsersRepo : IUsersRepo
@@ -70,6 +71,18 @@ namespace WhaleSpotting.Repositories
         {
             return _context.Users
                 .Single(user => user.Username == username);
+        }
+
+        public User UpdateRole(int id, UpdateUserRoleRequest update)
+        {
+            var user = GetById(id);
+
+            user.Role = update.Role;
+
+            _context.Users.Update(user);
+            _context.SaveChanges();
+
+            return user;
         }
     }
 }
