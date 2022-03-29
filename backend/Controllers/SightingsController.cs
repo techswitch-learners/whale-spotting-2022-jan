@@ -72,10 +72,42 @@ namespace WhaleSpotting.Controllers
         }
 
         [HttpGet("recent")]
-        public ActionResult<Sighting> GetMostRecentSighting()
+        public ActionResult<ExtendedSightingResponse> GetMostRecentSighting()
         {
-
-            return _sightingsRepo.GetMostRecentSighting();
+            var s = _sightingsRepo.GetMostRecentSighting();
+            var result = new ExtendedSightingResponse
+            {
+                Id = s.Id,
+                Date = s.Date,
+                Location = new Location
+                    {
+                        Id = s.LocationId,
+                        Name = s.Location.Name,
+                        Latitude = s.Location.Latitude,
+                        Longitude = s.Location.Longitude,
+                        Description = s.Location.Description,
+                        Amenities = s.Location.Amenities
+                    },
+                Description = s.Description,
+                Species = new Species
+                    {
+                        Id = s.SpeciesId,
+                        Name = s.Species.Name,
+                        LatinName = s.Species.LatinName,
+                        PhotoUrl = s.Species.PhotoUrl,
+                        Description = s.Species.Description,
+                        EndangeredStatus = s.Species.EndangeredStatus
+                    },
+                PhotoUrl = s.PhotoUrl,
+                User = new UserResponse
+                    {
+                        Id = s.UserId,
+                        Name = s.User.Name,
+                        Email = s.User.Email,
+                        Username = s.User.Username
+                    }
+            };
+            return result;
         }
 
         [HttpPost]
