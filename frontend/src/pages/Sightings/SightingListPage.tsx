@@ -13,22 +13,23 @@ export function SightingListPage(): JSX.Element {
   }, []);
 
   return (
-    <div className="sighting-list-body">
-      <h1 className="sigthing-list-title">Sightings</h1>
+    <div className="sighting__list__body">
+      <h1 className="sigthing__list__title">Sightings</h1>
       <ul className="list-group list-group-flush">
         {sightings.map((s, i) => (
-          <li className="sighting_list_item" key={i}>
-            <div className="sighting">
-              <h2>
+          <li className="sighting__list__item" key={i}>
+            <div className="sighting__card">
+              <h2 className="sighting__card__title">
                 {s.species.name} ({s.species.latinName})
               </h2>
               <img
+                className="sighting__image"
                 src={s.photoUrl}
                 alt={s.description}
                 width="700"
                 height="300"
               />
-              <div className="sighting_info">
+              <div className="sighting__card__info">
                 <p>About: {s.description}</p>
                 <p>Sighting Location: {s.location.name}</p>
                 <p>On: {s.date}</p>

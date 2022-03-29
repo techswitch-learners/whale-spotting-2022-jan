@@ -1,9 +1,9 @@
 @import "../../styles/constants.scss";
-.sighting-list-body {
+.sighting__list__body {
   font-family: $font-family;
   background-color: $color-background;
 }
-.sigthing-list-title {
+.sigthing__list__title {
   padding-top: 0.5em;
   color: white;
   text-align: center;
@@ -17,7 +17,7 @@
   box-sizing: content-box;
   // width: calc(95% / 2);
 }
-.sighting_list_item {
+.sighting__list__item {
   list-style-type: none;
   flex-grow: 1;
   align-self: end;
@@ -25,28 +25,22 @@
   margin: 1rem;
 }
 
-.sighting {
+.sighting__card {
   background-color: $color-secondary;
   border: solid;
   border-width: 0.2rem;
   border-color: #3b89ac;
   border-radius: 25px;
 
-  h2 {
+  .sighting__card__title {
     padding-top: 0.5em;
     padding-left: 0.5em;
     padding-right: 0.5em;
     text-align: center;
     color: #22646e;
   }
-  .modal-width {
-    width: 70% !important;
-  }
-  .modal-height {
-    height: 70% !important;
-  }
 
-  img {
+  .sighting__image {
     margin-top: 2.75em;
     text-align: center;
     border-radius: 5%;
@@ -58,7 +52,7 @@
     margin-bottom: 2.75em;
   }
 
-  .sighting_info {
+  .sighting__card__info {
     padding-left: 0.5em;
     margin-bottom: 0.5em;
     margin: 0.3rem;
@@ -67,58 +61,58 @@
 }
 
 @media (min-width: 900px) {
-  .sighting {
+  .sighting__card {
     margin-left: 5em;
     margin-right: 5em;
     display: grid;
     grid-template-columns: 0.4fr 0.6fr;
     grid-template-rows: 0.2fr 0.8fr;
-    h2 {
+    .sighting__card__title {
       padding-top: 2em;
       text-align: left;
       grid-column: 2/3;
       grid-row: 1/1;
       width: 100%;
     }
-    img {
+    .sighting__image {
       margin-bottom: 8em;
       border: #003851;
       grid-column: 1/2;
       grid-row: 2/2;
     }
-    .sighting_info {
+    .sighting__card__info {
       font-size: large;
       padding-top: 2.75em;
       grid-column: 2/3;
       grid-row: 2/3;
     }
   }
-  .sighting_list_item {
+  .sighting__list__item {
     padding: 1em;
     width: 100%;
   }
 }
 
 @media (min-width: 600px) and (max-width: 900px) {
-  .sighting {
+  .sighting__card {
     display: grid;
     grid-template-columns: 0.5fr 0.5fr;
     grid-template-rows: 0.2fr 0.8fr;
-    h2 {
+    .sighting__card__title {
       grid-column: 1/3;
       grid-row: 1/2;
       width: 100%;
     }
-    img {
+    .sighting__image {
       grid-column: 1/2;
       grid-row: 2/3;
     }
-    .sighting_info {
+    .sighting__card__info {
       grid-column: 2/3;
       grid-row: 2/3;
     }
   }
-  .sighting_list_item {
+  .sighting__list__item {
     width: 100%;
   }
 }
