@@ -48,6 +48,12 @@ export function Locations(): JSX.Element {
             }
           }}
           options={options}
+          styles={{
+            control: (styles) => ({
+              ...styles,
+              opacity: "0.5",
+            }),
+          }}
         />
       </section>
       {selectedLocationId ? (
