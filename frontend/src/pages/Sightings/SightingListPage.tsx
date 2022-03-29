@@ -25,8 +25,8 @@ export function SightingListPage(): JSX.Element {
               <img
                 src={s.photoUrl}
                 alt={s.description}
-                width="400"
-                height="200"
+                width="700"
+                height="300"
               />
               <div className="sighting_info">
                 <p>About: {s.description}</p>
