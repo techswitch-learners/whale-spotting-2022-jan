@@ -1,10 +1,11 @@
 import React from "react";
 import { Locations } from "./Locations/Locations";
+import "./PlanAtripPage.scss";
 
 export const PlanATripPage = () => {
   return (
-    <main>
-      <h1>Plan a Trip</h1>
+    <main className="planATrip__main">
+      <h1 className="title">Plan a Trip</h1>
       <Locations />
     </main>
   );

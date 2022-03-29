@@ -16,7 +16,7 @@ export function Amenities({ locationId }: { locationId: number }): JSX.Element {
 
   return (
     <section className="get-amenities">
-      <h1>Amenities</h1>
+      <h1 className="title">Amenities</h1>
       {amenities?.map((a, i) => (
         <li key={i}>{a}</li>
       ))}

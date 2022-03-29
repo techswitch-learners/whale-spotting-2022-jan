@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getWeather } from "../../../clients/weatherClient";
+import "./WeatherForecast.scss";
 
 type Weather = {
   temp: number;
@@ -36,12 +37,23 @@ export function WeatherForecast({
       <h1>5 day Weather Forecast</h1>
       <ul className="weather">
         {weather?.slice(0, 5).map((w, i) => (
-          <li key={i}>
-            {w.temp}&#176; °C
+          <li className="weather__list" key={i}>
+            {/* {w.temp}&#176; °C
             <img
               src={`https://openweathermap.org/img/wn/${w.icon}@2x.png`}
             ></img>
-            Expect {w.description}.
+            <p> Expect {w.description}.</p> */}
+            <div className="card weather__card">
+              <img
+                src={`https://openweathermap.org/img/wn/${w.icon}@2x.png`}
+                className="card-img-top weather_card_img"
+                alt="..."
+              />
+              <div className="card-body">
+                <h5 className="card-title">{w.temp}&#176; °C</h5>
+                <p className="weather_card-text"> Expect {w.description}.</p>
+              </div>
+            </div>
           </li>
         ))}
       </ul>

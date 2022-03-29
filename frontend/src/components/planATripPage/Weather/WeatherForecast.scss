@@ -1,0 +1,16 @@
+.weather {
+  display: flex;
+  // flex-direction: column;
+  list-style: none;
+}
+
+.weather__list {
+  margin-right: 2em;
+}
+.weather__card {
+  width: 7em;
+  height: 10em;
+}
+.weather_card-text {
+  font-size: 2em;
+}
