@@ -5,15 +5,19 @@ import { LoginManager } from "./components/login/LoginManager";
 import { Footer } from "./components/footer/Footer";
 import { PlanATripPage } from "./components/planATripPage/PlanATripPage";
 import { CreateSightingPage } from "./components/createSightingPage/CreateSightingPage";
-import { CreateUser, SignUpForm } from "./Pages/SignUp/SignUp";
+import { CreateUser, SignUpForm } from "./pages/SignUp/SignUp";
 import { Login } from "./components/login/Login";
-import { SightingListPage } from "./Pages/Sightings/SightingListPage";
+import { SightingListPage } from "./pages/Sightings/SightingListPage";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const Routes: React.FunctionComponent = () => {
   return (
     <Switch>
       <Route path="/sign-up">
         <CreateUser />
+      </Route>
+      <Route path="/sightings/create">
+        <CreateSightingPage />
       </Route>
       <Route path="/sightings">
         <SightingListPage />
@@ -24,11 +28,12 @@ const Routes: React.FunctionComponent = () => {
       <Route path="/sightings/create">
         <CreateSightingPage />
       </Route>
-      <Route exact path="/">
-        <Home />
-      </Route>
+      {/* <Route exact path="/"> */}
       <Route path="/plantrip">
         <PlanATripPage />
+      </Route>
+      <Route path="/">
+        <Home />
       </Route>
     </Switch>
   );
