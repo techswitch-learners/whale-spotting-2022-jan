@@ -10,12 +10,18 @@ export function RecentSighting() {
 
   if (recentSighting == undefined) {
     return <div> Loading ... </div>;
-  } else
+  } else {
+    const today = new Date();
+    const date2 = new Date(recentSighting.date);
+
+    const diff = Math.abs(today.getTime() - date2.getTime());
+    const diffDays = Math.ceil(diff / (1000 * 3600 * 24));
+
     return (
       <section className="recent-sighting">
         <h1>Most Recent Whale Sighting 🐳</h1>
         <p>
-          A {recentSighting?.species.name} Spotted on {recentSighting?.date} at{" "}
+          A {recentSighting?.species.name} Spotted {diffDays} days ago at{" "}
           {recentSighting?.location.name}
         </p>
         <div className="img-container">
@@ -29,4 +35,5 @@ export function RecentSighting() {
         <p className="p-5">{recentSighting?.description}</p>
       </section>
     );
+  }
 }

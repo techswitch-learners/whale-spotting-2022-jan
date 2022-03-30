@@ -57,6 +57,7 @@ export async function GetAllSightings(): Promise<Array<Sighting>> {
       "Content-Type": "application/json",
     },
   });
+
   return await response.json();
 }
 
@@ -95,6 +96,8 @@ export const GetMostRecentSighting = async () => {
   if (!response.ok) {
     throw new Error(await response.json());
   }
+  console.log(data);
+
   return data;
 };
 
