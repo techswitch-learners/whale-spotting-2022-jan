@@ -26,17 +26,16 @@
     grid-column: labels;
     width: 100px;
   }
-  input {
+
+  input,
+  select,
+  textarea {
     grid-column: controls;
     border: none;
-    padding: 1em;
+    padding: 0.2em;
     grid-row: auto;
   }
-  // button {
-  //   color: $color-background;
-  //   background-color: #b1d3e3;
-  //   width: 50%;
-  // }
+
   .reportSighting__button {
     margin-bottom: 2em;
     width: 50%;
@@ -44,8 +43,11 @@
 }
 
 .reportSighting__error {
-  color: red;
+  color: pink;
   font-size: larger;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  justify-self: center;
 }
 
 @media (min-width: 900px) {

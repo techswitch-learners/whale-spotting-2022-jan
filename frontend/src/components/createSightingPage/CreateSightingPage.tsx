@@ -73,7 +73,7 @@ export function CreateSightingPage(): JSX.Element {
     <main className="reportSighting">
       <div className="reportSighting__header">
         <h1>Hello {username}!</h1>
-        <h2>Report a Sighting!</h2>
+        <h2>Report a Sighting</h2>
       </div>
 
       <form onSubmit={submitForm}>
@@ -110,14 +110,17 @@ export function CreateSightingPage(): JSX.Element {
             ))}
           </select>
           <label htmlFor="description">Description</label>
-          <input
+          <textarea
             id="description"
+            placeholder="Describe your sighting"
+            rows={3}
             value={description}
             onChange={(event) => setDescription(event.target.value)}
           />
           <label htmlFor="photo">Photo</label>
           <input
             id="photo"
+            placeholder="Photo URL"
             value={photoUrl}
             onChange={(event) => setPhotoUrl(event.target.value)}
           />
@@ -129,15 +132,15 @@ export function CreateSightingPage(): JSX.Element {
           >
             Create Sighting
           </button>
+          {status === "ERROR" ? (
+            <div className="reportSighting__error">
+              <p>ERROR: Please make sure all fields have been filled in</p>
+            </div>
+          ) : (
+            <></>
+          )}
         </div>
       </form>
-      {status === "ERROR" ? (
-        <div className="reportSighting__error">
-          <p>ERROR: Please make sure all fields have been filled in</p>
-        </div>
-      ) : (
-        <></>
-      )}
     </main>
   );
 }
