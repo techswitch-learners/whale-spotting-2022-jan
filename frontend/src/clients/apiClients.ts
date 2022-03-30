@@ -34,6 +34,10 @@ export interface Sighting {
   user: User;
 }
 
+function getAuthorizationHeader(username: string, password: string) {
+  return `Basic ${btoa(`${username}:${password}`)}`;
+}
+
 export async function GetAllSightings(): Promise<Array<Sighting>> {
   const response = await fetch(`https://localhost:5001/sightings`, {
     method: "GET",
@@ -67,6 +71,26 @@ export async function createUser(newUser: NewUser) {
     body: JSON.stringify(newUser),
   });
 
+  if (!response.ok) {
+    throw new Error(await response.json());
+  }
+}
+
+export async function approveSighting(
+  id: number,
+  username: string,
+  password: string
+) {
+  const response = await fetch(
+    `https://localhost:5001/sightings/${id}/approve`,
+    {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: getAuthorizationHeader(username, password),
+      },
+    }
+  );
   if (!response.ok) {
     throw new Error(await response.json());
   }

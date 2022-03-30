@@ -11,6 +11,9 @@ export const Navbar: React.FunctionComponent = () => {
       <Link to="/">
         <img src="/logo.png" alt="Whale Spotting logo" />
       </Link>
+      <Link to="/sightings">
+        <a>All Sightings</a>
+      </Link>
       <div>
         {!loginContext.isLoggedIn ? (
           <div>

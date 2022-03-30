@@ -1,15 +1,27 @@
 import { type } from "os";
-import React, { useContext, useEffect, useState } from "react";
+import React, { FormEvent, useContext, useEffect, useState } from "react";
 import "./SightingListPage.scss";
 import { Link } from "react-router-dom";
-import { Sighting } from "../../clients/apiClients";
+import { approveSighting, Sighting } from "../../clients/apiClients";
 import { GetAllSightings } from "../../clients/apiClients";
+import { LoginContext } from "../../components/login/LoginManager";
+import { set } from "date-fns";
 
 export function SightingListPage(): JSX.Element {
   const [sightings, setSightings] = useState<Array<Sighting>>([]);
+  const [sightingId, setSightingId] = useState<number>();
+  const { username, password, isAdmin } = useContext(LoginContext);
+
   useEffect(() => {
     GetAllSightings().then(setSightings);
   }, []);
+
+  const submitForm = (event: FormEvent) => {
+    event.preventDefault();
+    if (sightingId) {
+      approveSighting(sightingId, username, password);
+    }
+  };
 
   return (
     <>
@@ -31,6 +43,24 @@ export function SightingListPage(): JSX.Element {
                 <p>
                   Seen by: {s.user.name} ({s.user.username})
                 </p>
+                {isAdmin ? (
+                  <div>
+                    <form onSubmit={submitForm}>
+                      <button
+                        value={s.id}
+                        onClick={() => setSightingId(s.id)}
+                        type="submit"
+                      >
+                        Confirm
+                      </button>
+                    </form>
+                    <form>
+                      <button type="submit">Delete</button>
+                    </form>
+                  </div>
+                ) : (
+                  <> </>
+                )}
               </div>
             </div>
           </li>
