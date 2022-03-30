@@ -89,7 +89,7 @@ export function CreateSightingPage(): JSX.Element {
             <option selected disabled>
               Select Location
             </option>
-            {locations.map((location, key) => (
+            {locations.map((location) => (
               <option key={location.id} value={location.id}>
                 {location.name}
               </option>
@@ -102,7 +102,7 @@ export function CreateSightingPage(): JSX.Element {
             <option selected disabled>
               Select Species
             </option>
-            {speciesList.map((species, key) => (
+            {speciesList.map((species) => (
               <option key={species.id} value={species.id}>
                 {species.name}
               </option>

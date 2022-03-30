@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Select from "react-select";
 import { fetchLocations, Location } from "../../../clients/apiClients";
 import { WeatherForecast } from "../Weather/WeatherForecast";
@@ -12,8 +12,8 @@ type Options = {
 export function Locations(): JSX.Element {
   const [locations, setLocations] = useState<Array<Location>>();
   const [selectedLocationId, setSelectedLocationId] = useState<string>("");
-  const [latitude, setLatitude] = useState<any>();
-  const [longitude, setLongitude] = useState<any>();
+  const [latitude, setLatitude] = useState<number>();
+  const [longitude, setLongitude] = useState<number>();
   const options: Array<Options> = [];
 
   useEffect(() => {
@@ -30,9 +30,8 @@ export function Locations(): JSX.Element {
     });
   });
 
-  const isSelectOption = (v: any): v is Options => {
-    if ((v as Options).value !== undefined) return v.value;
-    return false;
+  const isSelectOption = (v: unknown): v is Options => {
+    return (v as Options).value !== undefined;
   };
 
   return (
@@ -59,7 +58,9 @@ export function Locations(): JSX.Element {
           }}
         />
       </section>
-      {selectedLocationId ? (
+      {selectedLocationId &&
+      latitude !== undefined &&
+      longitude !== undefined ? (
         <section>
           <WeatherForecast latitude={latitude} longitude={longitude} />
         </section>

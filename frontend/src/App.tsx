@@ -5,7 +5,7 @@ import { LoginManager } from "./components/login/LoginManager";
 import { Footer } from "./components/footer/Footer";
 import { PlanATripPage } from "./components/planATripPage/PlanATripPage";
 import { CreateSightingPage } from "./components/createSightingPage/CreateSightingPage";
-import { CreateUser, SignUpForm } from "./pages/SignUp/SignUp";
+import { CreateUser } from "./pages/SignUp/SignUp";
 import { Login } from "./components/login/Login";
 import { SightingListPage } from "./pages/Sightings/SightingListPage";
 import "bootstrap/dist/css/bootstrap.min.css";
