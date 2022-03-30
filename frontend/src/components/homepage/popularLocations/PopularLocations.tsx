@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { GetPopularLocations, Location } from "../../../clients/apiClients";
+import "./PopularLocations.scss";
 
 export function PopularLocations() {
   const [popularLocations, setPopularLocations] = useState<Array<Location>>();

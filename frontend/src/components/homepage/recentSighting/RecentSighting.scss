@@ -1,3 +1,4 @@
+@import "../../../styles/constants.scss";
 .recent-sighting {
   display: flex;
   flex-direction: column;
@@ -9,4 +10,9 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
+}
+.recent-sighting__img {
+  border-color: $color-background;
+  // background-color: $color-background;
+  border-radius: 45%;
 }

@@ -28,8 +28,10 @@ export function RecentSighting() {
 
     return (
       <section className="recent-sighting">
-        <h1>Most Recent Whale Sighting 🐳</h1>
-        <p>
+        <h1 className="recent-sighting__title">
+          Most Recent Whale Sighting 🐳
+        </h1>
+        <p className="recent-sighting__text">
           {article} {recentSighting?.species.name} Spotted {diffDays} days ago
           at {recentSighting?.location.name}
         </p>
@@ -37,11 +39,13 @@ export function RecentSighting() {
           <img
             src={recentSighting?.photoUrl}
             width="250px"
-            className="rounded-pill"
+            className="recent-sighting__img"
           />
-          <p>Spotted by {recentSighting.user.username}</p>
+          <p className="recent-sighting__text">
+            Spotted by {recentSighting.user.username}
+          </p>
         </div>
-        <p className="p-5">{recentSighting?.description}</p>
+        <p className="recent-sighting__text">{recentSighting?.description}</p>
       </section>
     );
   }
