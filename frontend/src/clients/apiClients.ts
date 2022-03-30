@@ -32,6 +32,7 @@ export interface Sighting {
   species: Species;
   photoUrl: string;
   user: User;
+  approvedBy: User;
 }
 
 function getAuthorizationHeader(username: string, password: string) {

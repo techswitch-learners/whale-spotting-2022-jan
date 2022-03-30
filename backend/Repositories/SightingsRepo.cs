@@ -36,6 +36,7 @@ namespace WhaleSpotting.Repositories
                 .Include(l => l.Location)
                 .Include(s => s.Species)
                 .Include(u => u.CreatedBy)
+                .Include(a => a.ApprovedBy)
                 .ToList();
         }
 

@@ -43,6 +43,7 @@ export function SightingListPage(): JSX.Element {
                 <p>
                   Seen by: {s.user.name} ({s.user.username})
                 </p>
+                {s.approvedBy !== null ? <p>Confirmed ☑</p> : <></>}
                 {isAdmin ? (
                   <div>
                     <form onSubmit={submitForm}>
