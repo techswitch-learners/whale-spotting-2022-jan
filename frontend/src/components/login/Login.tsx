@@ -56,11 +56,7 @@ export const Login: React.FunctionComponent = () => {
             />
           </div>
         </div>
-        <button
-          className="submit-button-login btn btn-primary"
-          type="submit"
-          // onClick={(loginContext.isLoggedIn) => loginContext.isLoggedIn(true)}
-        >
+        <button className="submit-button-login btn btn-primary" type="submit">
           Log In
         </button>
       </form>
