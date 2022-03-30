@@ -1,6 +1,6 @@
 @import "../../styles/constants.scss";
 
-.planATrip__main {
+.plan-a-trip__main {
   background-image: url("https://www.code-animal.com/wp-content/uploads/2019/10/3672740-killer-whale-wallpapers-scaled.jpg");
   background-position: center center;
   background-attachment: fixed;
@@ -13,7 +13,7 @@
   padding: 0.5em;
   list-style: none;
 }
-.planATrip__title {
+.plan-a-trip__title {
   // width: 50%;
   background-color: $color-background;
   font-family: $font-family;

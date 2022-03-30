@@ -37,8 +37,8 @@ export function Locations(): JSX.Element {
 
   return (
     <div>
-      <section className="planATrip__location">
-        <p className="planATrip__text">
+      <section className="plan-a-trip__location">
+        <p className="plan-a-trip__text">
           Where do you want to go Whale Spotting?
         </p>
         <Select

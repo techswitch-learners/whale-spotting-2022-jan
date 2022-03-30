@@ -35,20 +35,20 @@ export function WeatherForecast({
   }
 
   return (
-    <section className="planATrip">
-      <h2 className="planATrip__sub-title">Weather Forecast</h2>
+    <section className="plan-a-trip">
+      <h2 className="plan-a-trip__sub-title">Weather Forecast</h2>
       <Carousel className="plantATrip__carousel">
         {weather?.slice(0, 5).map((w, i) => (
           <Carousel.Item className="plantATrip__carousel-item" key={i}>
-            <h3 className="planATrip__capttion-title">Day {i + 1}</h3>
+            <h3 className="plan-a-trip__caption-title">Day {i + 1}</h3>
             <img
-              className=" planATrip__icon  "
+              className="plan-a-trip__icon"
               src={`https://openweathermap.org/img/wn/${w.icon}@2x.png`}
               alt={`slide ${i}`}
             />
             <Carousel.Caption>
-              <h3 className="planATrip__capttion-title">{w.temp} °C</h3>
-              <p className="planATrip__caption-text">{w.description}</p>
+              <h3 className="plan-a-trip__caption-title">{w.temp} °C</h3>
+              <p className="plan-a-trip__caption-text">{w.description}</p>
             </Carousel.Caption>
           </Carousel.Item>
         ))}

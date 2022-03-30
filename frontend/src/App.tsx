@@ -28,7 +28,6 @@ const Routes: React.FunctionComponent = () => {
       <Route path="/sightings/create">
         <CreateSightingPage />
       </Route>
-      {/* <Route exact path="/"> */}
       <Route path="/plantrip">
         <PlanATripPage />
       </Route>

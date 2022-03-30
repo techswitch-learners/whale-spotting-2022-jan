@@ -4,8 +4,8 @@ import "./PlanAtripPage.scss";
 
 export const PlanATripPage = () => {
   return (
-    <main className="planATrip__main">
-      <h1 className="planATrip__title">Plan a Trip</h1>
+    <main className="plan-a-trip__main">
+      <h1 className="plan-a-trip__title">Plan a Trip</h1>
       <Locations />
     </main>
   );

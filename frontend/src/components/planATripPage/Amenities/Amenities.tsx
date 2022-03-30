@@ -15,10 +15,10 @@ export function Amenities({ locationId }: { locationId: number }): JSX.Element {
   }
 
   return (
-    <section className="planATrip__amenities">
-      <h2 className="planATrip__sub-title">Amenities</h2>
+    <section className="plan-a-trip__amenities">
+      <h2 className="plan-a-trip__sub-title">Amenities</h2>
       {amenities?.map((a, i) => (
-        <li className="planATrip__text" key={i}>
+        <li className="plan-a-trip__text" key={i}>
           {a}
         </li>
       ))}
