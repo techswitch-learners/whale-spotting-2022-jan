@@ -1,5 +1,5 @@
 import React, { FormEvent, useState, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { login } from "../../clients/apiClients";
 import { LoginContext } from "../login/LoginManager";
 import "./Login.scss";
@@ -24,7 +24,11 @@ export const Login: React.FunctionComponent = () => {
 
   return (
     <div className="login">
-      {error && <p>Login failed</p>}
+      {error && (
+        <p className="login__failure__notification">
+          Login failed. Please try again.
+        </p>
+      )}
       <h1 className="mb-4 mt-2">Whale-come!</h1>
       <h3>Please login below</h3>
       <form onSubmit={tryLogin} className="login-form">
@@ -52,7 +56,11 @@ export const Login: React.FunctionComponent = () => {
             />
           </div>
         </div>
-        <button className="submit-button-login btn btn-primary" type="submit">
+        <button
+          className="submit-button-login btn btn-primary"
+          type="submit"
+          // onClick={(loginContext.isLoggedIn) => loginContext.isLoggedIn(true)}
+        >
           Log In
         </button>
       </form>
