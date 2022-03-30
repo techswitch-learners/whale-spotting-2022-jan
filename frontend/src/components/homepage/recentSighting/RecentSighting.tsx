@@ -1,12 +1,12 @@
 import ar from "date-fns/esm/locale/ar/index.js";
 import React, { useEffect, useState } from "react";
-import { GetMostRecentSighting, Sighting } from "../../../clients/apiClients";
+import { getMostRecentSighting, Sighting } from "../../../clients/apiClients";
 import "./RecentSighting.scss";
 
 export function RecentSighting() {
   const [recentSighting, setRecentSighting] = useState<Sighting>();
   useEffect(() => {
-    GetMostRecentSighting().then(setRecentSighting);
+    getMostRecentSighting().then(setRecentSighting);
   }, []);
 
   if (recentSighting == undefined) {
