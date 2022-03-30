@@ -49,7 +49,7 @@ export function CreateSightingPage(): JSX.Element {
   useEffect(() => {
     fetchSpecies().then((response) => setSpeciesList(response));
     fetchLocations().then((response) => setLocations(response));
-  }, []);
+  }, [date]);
 
   const handleSpeciesChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSpeciesId(Number(event.target.value));
@@ -59,15 +59,6 @@ export function CreateSightingPage(): JSX.Element {
   ) => {
     setLocationId(Number(event.target.value));
   };
-
-  if (status === "FINISHED") {
-    return (
-      <div>
-        <p>Form Submitted Successfully!</p>
-        <Link to="/Sightings">Move to the list of sightings?</Link>
-      </div>
-    );
-  }
 
   return (
     <main className="reportSighting">
@@ -135,6 +126,14 @@ export function CreateSightingPage(): JSX.Element {
           {status === "ERROR" ? (
             <div className="reportSighting__error">
               <p>ERROR: Please make sure all fields have been filled in</p>
+            </div>
+          ) : (
+            <></>
+          )}
+          {status === "FINISHED" ? (
+            <div className="reportSighting__success">
+              Form submitted successfully.&ensp;
+              <Link to="/Sightings">List of sightings</Link>
             </div>
           ) : (
             <></>

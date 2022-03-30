@@ -49,6 +49,16 @@
   grid-column-end: 3;
   justify-self: center;
 }
+.reportSighting__success {
+  color: $color-font;
+  font-size: larger;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  justify-self: center;
+  a {
+    color: $color-font;
+  }
+}
 
 @media (min-width: 900px) {
   .reportSighting__form {
