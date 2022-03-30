@@ -16,6 +16,7 @@ namespace WhaleSpotting.Repositories
         User GetById(int id);
 
         User GetByUsername(string username);
+        User UpdateRole(int id, UpdateUserRoleRequest update);
     }
 
     public class UsersRepo : IUsersRepo
@@ -51,7 +52,8 @@ namespace WhaleSpotting.Repositories
                 HashedPassword = hashed,
                 Salt = salt,
                 Username = newUser.Username,
-                Email=newUser.Email
+                Email=newUser.Email,
+                Role = UserType.MEMBER
             });
 
             _context.SaveChanges();
@@ -69,6 +71,18 @@ namespace WhaleSpotting.Repositories
         {
             return _context.Users
                 .Single(user => user.Username == username);
+        }
+
+        public User UpdateRole(int id, UpdateUserRoleRequest update)
+        {
+            var user = GetById(id);
+
+            user.Role = update.Role;
+
+            _context.Users.Update(user);
+            _context.SaveChanges();
+
+            return user;
         }
     }
 }
