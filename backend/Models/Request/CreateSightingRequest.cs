@@ -22,9 +22,6 @@ namespace WhaleSpotting.Models.Request
 
         [Required]
         public string PhotoUrl { get; set; }
-
-        [Required]
-        public int UserId { get; set; }
       
     }
 }
