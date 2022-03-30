@@ -6,7 +6,7 @@ export function Amenities({ locationId }: { locationId: number }): JSX.Element {
 
   useEffect(() => {
     fetchLocationById(locationId).then((response) => {
-      setAmenities(response[0].amenities);
+      setAmenities(response.amenities);
     });
   }, [locationId]);
 

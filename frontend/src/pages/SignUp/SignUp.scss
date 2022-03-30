@@ -1,0 +1,33 @@
+@import "../../styles/constants.scss";
+
+.signup__form__body {
+  background-color: $color-background;
+  font-family: $font-family;
+  color: $color-font;
+}
+
+.signup__form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.signup__form__title {
+  text-align: center;
+  padding: 0.5em;
+}
+
+.form__input {
+  margin: 1em;
+}
+
+.signup__page__login__link {
+  text-align: center;
+  padding: 0.5em;
+}
+
+.signup__form__secondary__title {
+  text-align: center;
+}

@@ -7,6 +7,9 @@ using WhaleSpotting.Helpers;
 using System.Collections.Generic;
 using WhaleSpotting.Models.Database;
 using Microsoft.AspNetCore.Http;
+using WhaleSpotting.Models.Response;
+using System.Linq;
+
 namespace WhaleSpotting.Controllers
 {
     [ApiController]
@@ -30,17 +33,81 @@ namespace WhaleSpotting.Controllers
         }
 
         [HttpGet("")]
-        public ActionResult<List<Sighting>> GetAllSightings()
+        public ActionResult<List<ExtendedSightingResponse>> GetAllSightings()
         {
 
-            return _sightingsRepo.GetAllSightings();
+            return _sightingsRepo.GetAllSightings()
+            .Select( s => new ExtendedSightingResponse
+            {
+                Id = s.Id,
+                Date = s.Date,
+                Location = new Location
+                    {
+                       Id = s.LocationId,
+                       Name = s.Location.Name,
+                       Latitude = s.Location.Latitude,
+                       Longitude = s.Location.Longitude,
+                       Description = s.Location.Description,
+                       Amenities = s.Location.Amenities
+                    },
+                Description = s.Description,
+                Species = new Species
+                    {
+                        Id = s.SpeciesId,
+                        Name = s.Species.Name,
+                        LatinName = s.Species.LatinName,
+                        PhotoUrl = s.Species.PhotoUrl,
+                        Description = s.Species.Description,
+                        EndangeredStatus = s.Species.EndangeredStatus
+                    },
+                PhotoUrl = s.PhotoUrl,
+                User = new UserResponse
+                    {
+                        Id = s.UserId,
+                        Name = s.User.Name,
+                        Email = s.User.Email,
+                        Username = s.User.Username
+                    }
+            }).ToList();
         }
 
         [HttpGet("recent")]
-        public ActionResult<Sighting> GetMostRecentSighting()
+        public ActionResult<ExtendedSightingResponse> GetMostRecentSighting()
         {
-
-            return _sightingsRepo.GetMostRecentSighting();
+            var s = _sightingsRepo.GetMostRecentSighting();
+            var result = new ExtendedSightingResponse
+            {
+                Id = s.Id,
+                Date = s.Date,
+                Location = new Location
+                    {
+                        Id = s.LocationId,
+                        Name = s.Location.Name,
+                        Latitude = s.Location.Latitude,
+                        Longitude = s.Location.Longitude,
+                        Description = s.Location.Description,
+                        Amenities = s.Location.Amenities
+                    },
+                Description = s.Description,
+                Species = new Species
+                    {
+                        Id = s.SpeciesId,
+                        Name = s.Species.Name,
+                        LatinName = s.Species.LatinName,
+                        PhotoUrl = s.Species.PhotoUrl,
+                        Description = s.Species.Description,
+                        EndangeredStatus = s.Species.EndangeredStatus
+                    },
+                PhotoUrl = s.PhotoUrl,
+                User = new UserResponse
+                    {
+                        Id = s.UserId,
+                        Name = s.User.Name,
+                        Email = s.User.Email,
+                        Username = s.User.Username
+                    }
+            };
+            return result;
         }
 
         [HttpPost]
@@ -75,13 +142,6 @@ namespace WhaleSpotting.Controllers
                 );
             }
             
-            if (user.Id != newSighting.UserId)
-            {
-                return StatusCode(
-                    StatusCodes.Status403Forbidden,
-                    "You are not allowed to create a post for a different user"
-                );
-            }
 
             var check = _authservice.IsAuthenticated(usernamePassword);
 
@@ -90,7 +150,7 @@ namespace WhaleSpotting.Controllers
 
             try
             {
-                var sighting = _sightingsRepo.Create(newSighting);
+                var sighting = _sightingsRepo.Create(newSighting, user.Id);
                 return Created("/", newSighting);
             }
             catch (BadHttpRequestException)
