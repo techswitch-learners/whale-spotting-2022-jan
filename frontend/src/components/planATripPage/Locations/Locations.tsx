@@ -3,6 +3,7 @@ import Select from "react-select";
 import { fetchLocations, Location } from "../../../clients/apiClients";
 import { WeatherForecast } from "../Weather/WeatherForecast";
 import { Amenities } from "../Amenities/Amenities";
+import "./Locations.scss";
 
 type Options = {
   value: string;
@@ -36,8 +37,10 @@ export function Locations(): JSX.Element {
 
   return (
     <div>
-      <section className="get-location">
-        <h2>Where do you want to go Whale Spotting?</h2>
+      <section className="planATrip__location">
+        <p className="planATrip__text">
+          Where do you want to go Whale Spotting?
+        </p>
         <Select
           onChange={(v) => {
             if (isSelectOption(v)) {
@@ -48,6 +51,12 @@ export function Locations(): JSX.Element {
             }
           }}
           options={options}
+          styles={{
+            control: (styles) => ({
+              ...styles,
+              opacity: "0.8",
+            }),
+          }}
         />
       </section>
       {selectedLocationId ? (

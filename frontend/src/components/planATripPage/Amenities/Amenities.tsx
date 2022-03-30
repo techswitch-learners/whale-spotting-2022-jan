@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { fetchLocationById } from "../../../clients/apiClients";
-
+import "./Amenities.scss";
 export function Amenities({ locationId }: { locationId: number }): JSX.Element {
   const [amenities, setAmenities] = useState<Array<string>>();
 
@@ -15,10 +15,12 @@ export function Amenities({ locationId }: { locationId: number }): JSX.Element {
   }
 
   return (
-    <section className="get-amenities">
-      <h1 className="title">Amenities</h1>
+    <section className="planATrip__amenities">
+      <h2 className="planATrip__sub-title">Amenities</h2>
       {amenities?.map((a, i) => (
-        <li key={i}>{a}</li>
+        <li className="planATrip__text" key={i}>
+          {a}
+        </li>
       ))}
     </section>
   );

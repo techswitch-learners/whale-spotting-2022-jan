@@ -35,19 +35,20 @@ export function WeatherForecast({
   }
 
   return (
-    <section className="get-weather">
-      <h1>5 day Weather Forecast</h1>
-      <Carousel>
+    <section className="planATrip">
+      <h2 className="planATrip__sub-title">Weather Forecast</h2>
+      <Carousel className="plantATrip__carousel">
         {weather?.slice(0, 5).map((w, i) => (
-          <Carousel.Item key={i}>
+          <Carousel.Item className="plantATrip__carousel-item" key={i}>
+            <h3 className="planATrip__capttion-title">Day {i + 1}</h3>
             <img
-              className="d-block w-100"
+              className=" planATrip__icon  "
               src={`https://openweathermap.org/img/wn/${w.icon}@2x.png`}
               alt={`slide ${i}`}
             />
             <Carousel.Caption>
-              <h3>{w.temp}&#176; °C</h3>
-              <p>{w.description}</p>
+              <h3 className="planATrip__capttion-title">{w.temp} °C</h3>
+              <p className="planATrip__caption-text">{w.description}</p>
             </Carousel.Caption>
           </Carousel.Item>
         ))}
