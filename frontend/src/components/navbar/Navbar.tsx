@@ -12,7 +12,7 @@ export const Navbar: React.FunctionComponent = () => {
         <img src="/logo.png" alt="Whale Spotting logo" />
       </Link>
       <Link to="/sign-up">
-        <a>Sing Up</a>
+        <a>Sign Up</a>
       </Link>
       <span> </span>
       <Link to="/sightings/create">
