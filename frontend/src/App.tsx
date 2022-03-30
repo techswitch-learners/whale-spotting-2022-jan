@@ -14,10 +14,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 const Routes: React.FunctionComponent = () => {
   const loginContext = useContext(LoginContext);
 
-  if (!loginContext.isLoggedIn) {
-    return <Login />;
-  }
-
   return (
     <Switch>
       <Route path="/sign-up">
