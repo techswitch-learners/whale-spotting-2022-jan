@@ -42,33 +42,35 @@ export function RecentSighting() {
           {article} {recentSighting?.species.name} Spotted {diffDays} days ago
           at {recentSighting?.location.name}
         </p>
-        <div className="img-container">
-          <ReactCardFlip isFlipped={isFlipped} flipDirection="vertical">
-            <section>
-              <div className="recent-sighting__img-back">
-                <img
-                  src={recentSighting.photoUrl}
-                  width="500px"
-                  onClick={handleClick}
-                ></img>
-              </div>
-            </section>
+        <ReactCardFlip
+          isFlipped={isFlipped}
+          flipDirection="vertical"
+          containerClassName="img-container"
+        >
+          <section>
+            <div className="recent-sighting__img-front">
+              <img
+                src={recentSighting.photoUrl}
+                width="500px"
+                onClick={handleClick}
+              ></img>
+            </div>
+          </section>
 
-            <section>
-              <div className="recent-sighting__img-back" onClick={handleClick}>
-                <ol>
-                  <li>{recentSighting.species.latinName}</li>
-                  <li>Spotted By:{recentSighting.user.username}</li>
-                  <li>
-                    {" "}
-                    Want to see it yourself? Plan your own trip to{" "}
-                    <Link to="/login">{recentSighting.location.name}</Link>
-                  </li>
-                </ol>
-              </div>
-            </section>
-          </ReactCardFlip>
-        </div>
+          <section>
+            <div className="recent-sighting__img-back" onClick={handleClick}>
+              <ol className="recent-sighting__text">
+                <li>{recentSighting.species.latinName}</li>
+                <li>Spotted By:{recentSighting.user.username}</li>
+                <li>
+                  {" "}
+                  Want to see it yourself? Plan your own trip to{" "}
+                  <Link to="/login">{recentSighting.location.name}</Link>
+                </li>
+              </ol>
+            </div>
+          </section>
+        </ReactCardFlip>
         <p className="recent-sighting__text">{recentSighting?.description}</p>
       </section>
     );

@@ -16,6 +16,22 @@
   border-color: $color-background;
   border-radius: 45%;
 }
+
+.recent-sighting__img-front img {
+  width: 80vw;
+}
+
+.recent-sighting__img-front :hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.recent-sighting__img-back {
+  height: 40vh;
+}
+.recent-sighting__img-back .recent-sighting__text {
+  height: 80%;
+}
 .recent-sighting__title {
   background-color: $color-background;
   color: $color-font;
@@ -30,4 +46,5 @@
   font-size: small;
   background-color: adjust-hue($color: #0000002a, $degrees: 0);
   padding: 0.5rem;
+  list-style: none;
 }
