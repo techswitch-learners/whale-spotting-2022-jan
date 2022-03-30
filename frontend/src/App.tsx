@@ -10,6 +10,7 @@ import { CreateUser } from "./pages/SignUp/SignUp";
 import { Login } from "./components/login/Login";
 import { SightingListPage } from "./pages/Sightings/SightingListPage";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Redirect } from "react-router-dom";
 
 const Routes: React.FunctionComponent = () => {
   const loginContext = useContext(LoginContext);
@@ -24,7 +25,12 @@ const Routes: React.FunctionComponent = () => {
         <SightingListPage />
       </Route>
       <Route path="/login">
-        {loginContext.isLoggedIn ? <Home /> : <Login />}
+        <Login />
+        {loginContext.isLoggedIn ? (
+          <Redirect to="/" />
+        ) : (
+          <Redirect to="/login" />
+        )}
       </Route>
       <Route path="/">
         <Home />
