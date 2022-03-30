@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using WhaleSpotting;
@@ -10,9 +11,10 @@ using WhaleSpotting;
 namespace WhaleSpotting.Migrations
 {
     [DbContext(typeof(WhaleSpottingDbContext))]
-    partial class WhaleSpottingDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220328145409_AddRoleToUserModel")]
+    partial class AddRoleToUserModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -54,12 +56,6 @@ namespace WhaleSpotting.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<int?>("ApprovedByUserId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("CreatedByUserId")
-                        .HasColumnType("integer");
-
                     b.Property<DateTime>("Date")
                         .HasColumnType("timestamp without time zone");
 
@@ -75,15 +71,16 @@ namespace WhaleSpotting.Migrations
                     b.Property<int>("SpeciesId")
                         .HasColumnType("integer");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
+
                     b.HasKey("Id");
-
-                    b.HasIndex("ApprovedByUserId");
-
-                    b.HasIndex("CreatedByUserId");
 
                     b.HasIndex("LocationId");
 
                     b.HasIndex("SpeciesId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Sightings");
                 });
@@ -147,16 +144,6 @@ namespace WhaleSpotting.Migrations
 
             modelBuilder.Entity("WhaleSpotting.Models.Database.Sighting", b =>
                 {
-                    b.HasOne("WhaleSpotting.Models.Database.User", "ApprovedBy")
-                        .WithMany()
-                        .HasForeignKey("ApprovedByUserId");
-
-                    b.HasOne("WhaleSpotting.Models.Database.User", "CreatedBy")
-                        .WithMany()
-                        .HasForeignKey("CreatedByUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("WhaleSpotting.Models.Database.Location", "Location")
                         .WithMany("Sightings")
                         .HasForeignKey("LocationId")
@@ -169,13 +156,17 @@ namespace WhaleSpotting.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("ApprovedBy");
-
-                    b.Navigation("CreatedBy");
+                    b.HasOne("WhaleSpotting.Models.Database.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Location");
 
                     b.Navigation("Species");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("WhaleSpotting.Models.Database.Location", b =>

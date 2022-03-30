@@ -3,9 +3,15 @@ using System.Text.Json.Serialization;
 
 namespace WhaleSpotting.Models.Database
 {
+    public enum UserType
+    {
+        MEMBER,
+        ADMIN,
+    }
     public class User
     {
         public int Id { get; set; }
+        public UserType Role { get; set; }
 
         public string Name { get; set; }
 
