@@ -49,7 +49,7 @@ export function CreateSightingPage(): JSX.Element {
   useEffect(() => {
     fetchSpecies().then((response) => setSpeciesList(response));
     fetchLocations().then((response) => setLocations(response));
-  }, [date]);
+  }, []);
 
   const handleSpeciesChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSpeciesId(Number(event.target.value));
