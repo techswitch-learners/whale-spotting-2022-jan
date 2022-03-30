@@ -10,6 +10,7 @@ export interface NewUser {
   password: string;
 }
 export interface Species {
+  description: string;
   name: string;
   latinName: string;
 }
@@ -22,11 +23,6 @@ export interface Sighting {
   species: Species;
   photoUrl: string;
   user: User;
-}
-
-export interface Species {
-  name: string;
-  latinName: string;
 }
 
 export interface Location {

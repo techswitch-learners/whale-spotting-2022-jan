@@ -5,14 +5,7 @@
   align-items: center;
 }
 
-.image-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-}
 .recent-sighting__img {
   border-color: $color-background;
-  // background-color: $color-background;
   border-radius: 45%;
 }

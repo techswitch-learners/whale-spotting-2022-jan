@@ -2,9 +2,12 @@ import ar from "date-fns/esm/locale/ar/index.js";
 import React, { useEffect, useState } from "react";
 import { GetMostRecentSighting, Sighting } from "../../../clients/apiClients";
 import "./RecentSighting.scss";
+import ReactCardFlip from "react-card-flip";
 
 export function RecentSighting() {
   const [recentSighting, setRecentSighting] = useState<Sighting>();
+  const [isFlipped, setIsFlipped] = useState(false);
+
   useEffect(() => {
     GetMostRecentSighting().then(setRecentSighting);
   }, []);
@@ -12,6 +15,10 @@ export function RecentSighting() {
   if (recentSighting == undefined) {
     return <div> Loading ... </div>;
   } else {
+    const handleClick = () => {
+      setIsFlipped(!isFlipped);
+    };
+
     const today = new Date();
     const date2 = new Date(recentSighting.date);
 
@@ -36,11 +43,24 @@ export function RecentSighting() {
           at {recentSighting?.location.name}
         </p>
         <div className="img-container">
-          <img
-            src={recentSighting?.photoUrl}
-            width="250px"
-            className="recent-sighting__img"
-          />
+          <ReactCardFlip isFlipped={isFlipped} flipDirection="vertical">
+            <section>
+              <div className="recent-sighting__img">
+                <img
+                  src={recentSighting.photoUrl}
+                  width="250px"
+                  onClick={handleClick}
+                ></img>
+              </div>
+            </section>
+
+            <section>
+              <div className="recent-sighting__img" onClick={handleClick}>
+                <p>{recentSighting.species.latinName}</p>
+                <p>{recentSighting.species.description}</p>
+              </div>
+            </section>
+          </ReactCardFlip>
           <p className="recent-sighting__text">
             Spotted by {recentSighting.user.username}
           </p>
