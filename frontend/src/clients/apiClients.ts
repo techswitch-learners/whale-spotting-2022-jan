@@ -158,7 +158,7 @@ export async function createSighting(
   }
 }
 
-export const GetPopularLocations = async () => {
+export const getPopularLocations = async () => {
   const response = await fetch(`https://localhost:5001/locations/popular`);
   const data = await response.json();
 

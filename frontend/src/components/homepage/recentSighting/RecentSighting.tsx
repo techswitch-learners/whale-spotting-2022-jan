@@ -1,5 +1,4 @@
-import ar from "date-fns/esm/locale/ar/index.js";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { getMostRecentSighting, Sighting } from "../../../clients/apiClients";
 import "./RecentSighting.scss";
 
