@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+//import { useState } from "react";
 import { Link } from "react-router-dom";
 import { LoginContext } from "../login/LoginManager";
 import "./Navbar.scss";
@@ -6,6 +7,7 @@ import { slide as Menu } from "react-burger-menu";
 
 export const Navbar: React.FunctionComponent = () => {
   const loginContext = useContext(LoginContext);
+  //const [isLoggedIn, setisLoggedIn] = useState(loginContext.isLoggedIn)
 
   return (
     // <nav role="navigation" aria-label="main navigation">
@@ -34,19 +36,56 @@ export const Navbar: React.FunctionComponent = () => {
       <Link to="/">
         <img src="/logo.png" alt="Whale Spotting logo" />
       </Link>
+      <div>
+        {!loginContext.isLoggedIn ? (
+          <div>
+            <Link className="button is-primary" to="/login">
+              Login
+            </Link>
+          </div>
+        ) : (
+          <Link
+            to="/"
+            className="button is-primary"
+            onClick={loginContext.logOut}
+          >
+            Logout
+          </Link>
+        )}
+      </div>
       <Menu right>
-        <a id="home" className="menu-item" href="/">
+        <Link id="home" className="menu-item" to="/">
           Home
-        </a>
-        <a id="sightings" className="menu-item" href="/sightings">
+        </Link>
+        <Link id="sightings" className="menu-item" to="/sightings">
           Sightings
-        </a>
-        <a id="ReportSighting" className="menu-item" href="/sightings/create">
+        </Link>
+        <Link id="sightings" className="menu-item" to="/sightings/create">
           Report a sighting
-        </a>
-        <a id="Login" className="menu-item" href="/Login">
+        </Link>
+        {/* <a id="ReportSighting" className="menu-item" href="/sightings/create">
+          Report a sighting
+        </a> */}
+        <div>
+          {!loginContext.isLoggedIn ? (
+            <div>
+              <Link className="button is-primary" to="/login">
+                Login
+              </Link>
+            </div>
+          ) : (
+            <Link
+              to="/"
+              className="button is-primary"
+              onClick={loginContext.logOut}
+            >
+              Logout
+            </Link>
+          )}
+        </div>
+        {/* <a id="Login" className="menu-item" href="/Login">
           Login
-        </a>
+        </a> */}
       </Menu>
     </div>
   );

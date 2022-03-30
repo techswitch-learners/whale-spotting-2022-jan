@@ -1,6 +1,9 @@
+@import "../../styles/constants.scss";
+
 .navbar__menu {
+  background-color: #bfd2d9; //$color-background;
   img {
-    width: 15rem;
+    width: 10rem;
   }
 }
 /* Position and sizing of burger button */
