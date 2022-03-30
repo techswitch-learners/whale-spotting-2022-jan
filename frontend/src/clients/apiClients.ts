@@ -98,13 +98,37 @@ export async function createUser(newUser: NewUser) {
   }
 }
 
-export async function fetchSpecies(): Promise<Array<Species>> {
-  const response = await fetch(`https://localhost:5001/species`);
+export async function fetchLocations(): Promise<Array<Location>> {
+  const response = await fetch(`https://localhost:5001/locations`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(await response.json());
+  }
+  return await response.json();
+}
+export async function fetchLocationById(locationId: number): Promise<Location> {
+  const response = await fetch(
+    `https://localhost:5001/locations/${locationId}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  if (!response.ok) {
+    throw new Error(await response.json());
+  }
   return await response.json();
 }
 
-export async function fetchLocations(): Promise<Array<Location>> {
-  const response = await fetch(`https://localhost:5001/locations`);
+export async function fetchSpecies(): Promise<Array<Species>> {
+  const response = await fetch(`https://localhost:5001/species`);
   return await response.json();
 }
 
