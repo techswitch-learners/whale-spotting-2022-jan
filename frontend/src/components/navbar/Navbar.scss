@@ -5,6 +5,12 @@
   img {
     width: 10rem;
   }
+  .menu-item-disabled {
+    color: currentColor;
+    cursor: not-allowed;
+    opacity: 0.5;
+    text-decoration: none;
+  }
 }
 /* Position and sizing of burger button */
 .bm-burger-button {

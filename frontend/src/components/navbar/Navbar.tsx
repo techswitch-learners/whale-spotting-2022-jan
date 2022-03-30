@@ -41,7 +41,7 @@ export const Navbar: React.FunctionComponent = () => {
     //   </div>
     <div className="navbar__menu">
       <Link to="/">
-        <img src="/logo.png" width={"100px"} alt="Whale Spotting logo" />
+        <img src="/logo.png" alt="Whale Spotting logo" />
       </Link>
       <Menu right>
         <Link id="home" className="menu-item" to="/">
@@ -51,8 +51,10 @@ export const Navbar: React.FunctionComponent = () => {
           Sightings
         </Link>
         <Link
-          id="sightings_create"
-          className="menu-item"
+          id="ReportSighting"
+          className={
+            !loginContext.isLoggedIn ? "menu-item-disabled" : "menu-item"
+          }
           to="/sightings/create"
         >
           Report a sighting
@@ -60,9 +62,6 @@ export const Navbar: React.FunctionComponent = () => {
         <Link id="plantrip" className="menu-item" to="/plantrip">
           Plan a Trip!
         </Link>
-        {/* <a id="ReportSighting" className="menu-item" href="/sightings/create">
-          Report a sighting
-        </a> */}
         <Link id="signup" className="menu-item" to="/sign-up">
           Sign Up
         </Link>
