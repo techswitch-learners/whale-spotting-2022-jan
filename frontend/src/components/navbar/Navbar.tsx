@@ -7,10 +7,18 @@ export const Navbar: React.FunctionComponent = () => {
   const loginContext = useContext(LoginContext);
 
   return (
-    <nav role="navigation" aria-label="main navigation">
+    <nav className="navbar" role="navigation" aria-label="main navigation">
       <Link to="/">
-        <img src="/logo.png" alt="Whale Spotting logo" />
+        <img src="/logo.png" width={"100px"} alt="Whale Spotting logo" />
       </Link>
+      <Link to="/plantrip" className="button is-primary">
+        Plan a Trip!
+      </Link>
+      <Link to="/sign-up">Sign Up</Link>
+      <span> </span>
+      <Link to="/sightings/create">Report Sighting</Link>
+      <span> </span>
+      <Link to="/sightings">All Sightings</Link>
       <div>
         {!loginContext.isLoggedIn ? (
           <div>

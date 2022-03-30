@@ -1,8 +1,6 @@
-import { type } from "os";
-import React, { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./SightingListPage.scss";
 import "../../styles/constants.scss";
-import { Link } from "react-router-dom";
 import { Sighting } from "../../clients/apiClients";
 import { GetAllSightings } from "../../clients/apiClients";
 
