@@ -1,5 +1,5 @@
 import React, { FormEvent, useState, useContext } from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { login } from "../../clients/apiClients";
 import { LoginContext } from "../login/LoginManager";
 import "./Login.scss";
