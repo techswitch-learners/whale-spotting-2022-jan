@@ -71,8 +71,9 @@ export function RecentSighting() {
             </div>
           </section>
         </ReactCardFlip>
-        <p className="recent-sighting__text">
-          "{recentSighting?.description}" - {recentSighting.user.username}
+        <p className="recent-sighting__text recent-sighting__text__description">
+          &quot;{recentSighting?.description}&quot; -{" "}
+          {recentSighting.user.username}
         </p>
       </section>
     );
