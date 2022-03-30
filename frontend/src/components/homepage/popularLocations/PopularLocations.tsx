@@ -17,12 +17,12 @@ export function PopularLocations() {
         </h1>
         <ol className="popular-locations__text">
           <li>
-            {popularLocations[0].name}: {popularLocations[0].sightings.length}{" "}
-            whale sightings
+            <h5>{popularLocations[0].name}:</h5>
+            {popularLocations[0].sightings.length} whale sightings
           </li>
           <li>
-            {popularLocations[1].name}: {popularLocations[1].sightings.length}{" "}
-            whale sightings
+            <h5>{popularLocations[1].name}:</h5>
+            {popularLocations[1].sightings.length} whale sightings
           </li>
         </ol>
       </section>
