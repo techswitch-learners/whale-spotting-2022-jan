@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 import { Home } from "./components/homepage/Home";
 import { useContext } from "react";
 import { LoginContext } from "./components/login/LoginManager";
@@ -25,6 +30,11 @@ const Routes: React.FunctionComponent = () => {
       </Route>
       <Route path="/login">
         <Login />
+        {loginContext.isLoggedIn ? (
+          <Redirect to="/" />
+        ) : (
+          <Redirect to="/login" />
+        )}
       </Route>
       <Route path="/">
         <Home />

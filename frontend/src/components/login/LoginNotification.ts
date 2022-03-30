@@ -3,6 +3,6 @@ import "react-toastify/dist/ReactToastify.css";
 
 toast.configure();
 
-export const Notify = () => {
+export const notifyOfSuccessfulLogin = () => {
   toast.success("You are now logged in!");
 };
