@@ -38,11 +38,29 @@
 .plantATrip__carousel-item {
   padding: 0.5rem;
 }
+
 .planATrip__icon {
-  padding-bottom: 80px;
+  padding-bottom: 6em;
   padding-top: 0;
   justify-self: center;
   align-self: center;
+  padding-left: 1.8em;
+}
+@media (min-width: 768px) {
+  .planATrip__icon {
+    padding-left: 8em;
+  }
+}
+@media (min-width: 1024px) {
+  .planATrip__icon {
+    padding-bottom: 5em;
+    padding-left: 12em;
+  }
+}
+@media (min-width: 1180px) {
+  .planATrip__icon {
+    padding-left: 16em;
+  }
 }
 .planATrip__capttion-title {
   margin-top: 0;
