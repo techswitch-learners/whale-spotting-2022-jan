@@ -24,7 +24,7 @@ const Routes: React.FunctionComponent = () => {
         <SightingListPage />
       </Route>
       <Route path="/login">
-        <Login />
+        {loginContext.isLoggedIn ? <Home /> : <Login />}
       </Route>
       <Route path="/">
         <Home />
