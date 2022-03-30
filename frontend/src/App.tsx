@@ -5,6 +5,7 @@ import { LoginContext } from "./components/login/LoginManager";
 import { Navbar } from "./components/navbar/Navbar";
 import { LoginManager } from "./components/login/LoginManager";
 import { Footer } from "./components/footer/Footer";
+import { PlanATripPage } from "./components/planATripPage/PlanATripPage";
 import { CreateSightingPage } from "./components/createSightingPage/CreateSightingPage";
 import { CreateUser } from "./pages/SignUp/SignUp";
 import { Login } from "./components/login/Login";
@@ -31,6 +32,9 @@ const Routes: React.FunctionComponent = () => {
         ) : (
           <Redirect to="/login" />
         )}
+      </Route>
+      <Route path="/plantrip">
+        <PlanATripPage />
       </Route>
       <Route path="/">
         <Home />
