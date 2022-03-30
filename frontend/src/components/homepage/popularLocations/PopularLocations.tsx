@@ -12,8 +12,10 @@ export function PopularLocations() {
   } else
     return (
       <section>
-        <h1>See locations with the most whale sightings:</h1>
-        <ol>
+        <h1 className="popular-locations__title">
+          Popular Whale sighting locations
+        </h1>
+        <ol className="popular-locations__text">
           <li>
             Location Name 1: {popularLocations[0].name}, with a total of{" "}
             {popularLocations[0].sightings.length} sightings!
