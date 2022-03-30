@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Select from "react-select";
 import { fetchLocations, Location } from "../../../clients/apiClients";
 import { WeatherForecast } from "../Weather/WeatherForecast";
 import { Amenities } from "../Amenities/Amenities";
+import "./Locations.scss";
 
 type Options = {
   value: string;
@@ -11,8 +12,8 @@ type Options = {
 export function Locations(): JSX.Element {
   const [locations, setLocations] = useState<Array<Location>>();
   const [selectedLocationId, setSelectedLocationId] = useState<string>("");
-  const [latitude, setLatitude] = useState<any>();
-  const [longitude, setLongitude] = useState<any>();
+  const [latitude, setLatitude] = useState<number>();
+  const [longitude, setLongitude] = useState<number>();
   const options: Array<Options> = [];
 
   useEffect(() => {
@@ -29,15 +30,16 @@ export function Locations(): JSX.Element {
     });
   });
 
-  const isSelectOption = (v: any): v is Options => {
-    if ((v as Options).value !== undefined) return v.value;
-    return false;
+  const isSelectOption = (v: unknown): v is Options => {
+    return (v as Options).value !== undefined;
   };
 
   return (
     <div>
-      <section className="get-location">
-        <h1>Where do you want to go Whale Spotting?</h1>
+      <section className="plan-a-trip__location">
+        <p className="plan-a-trip__text">
+          Where do you want to go Whale Spotting?
+        </p>
         <Select
           onChange={(v) => {
             if (isSelectOption(v)) {
@@ -48,9 +50,17 @@ export function Locations(): JSX.Element {
             }
           }}
           options={options}
+          styles={{
+            control: (styles) => ({
+              ...styles,
+              opacity: "0.8",
+            }),
+          }}
         />
       </section>
-      {selectedLocationId ? (
+      {selectedLocationId &&
+      latitude !== undefined &&
+      longitude !== undefined ? (
         <section>
           <WeatherForecast latitude={latitude} longitude={longitude} />
         </section>

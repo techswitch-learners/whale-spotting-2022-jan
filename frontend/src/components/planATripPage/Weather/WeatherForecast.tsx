@@ -1,5 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { getWeather } from "../../../clients/weatherClient";
+import "./WeatherForecast.scss";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Carousel } from "react-bootstrap";
 
 type Weather = {
   temp: number;
@@ -32,19 +35,24 @@ export function WeatherForecast({
   }
 
   return (
-    <section className="get-weather">
-      <h1>5 day Weather Forecast</h1>
-      <ul className="weather">
+    <section className="plan-a-trip">
+      <h2 className="plan-a-trip__sub-title">Weather Forecast</h2>
+      <Carousel className="plantATrip__carousel">
         {weather?.slice(0, 5).map((w, i) => (
-          <li key={i}>
-            {w.temp}&#176;C
+          <Carousel.Item className="plantATrip__carousel-item" key={i}>
+            <h3 className="plan-a-trip__caption-title">Day {i + 1}</h3>
             <img
+              className="plan-a-trip__icon"
               src={`https://openweathermap.org/img/wn/${w.icon}@2x.png`}
-            ></img>
-            Expect {w.description}.
-          </li>
+              alt={`slide ${i}`}
+            />
+            <Carousel.Caption>
+              <h3 className="plan-a-trip__caption-title">{w.temp} °C</h3>
+              <p className="plan-a-trip__caption-text">{w.description}</p>
+            </Carousel.Caption>
+          </Carousel.Item>
         ))}
-      </ul>
+      </Carousel>
     </section>
   );
 }
