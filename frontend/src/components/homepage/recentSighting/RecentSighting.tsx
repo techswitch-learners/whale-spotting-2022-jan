@@ -1,3 +1,4 @@
+import ar from "date-fns/esm/locale/ar/index.js";
 import React, { useEffect, useState } from "react";
 import { GetMostRecentSighting, Sighting } from "../../../clients/apiClients";
 import "./RecentSighting.scss";
@@ -17,12 +18,20 @@ export function RecentSighting() {
     const diff = Math.abs(today.getTime() - date2.getTime());
     const diffDays = Math.ceil(diff / (1000 * 3600 * 24));
 
+    let article;
+    const l = recentSighting.species.name[0];
+    if (l == "A" || l == "E" || l == "I" || l == "O" || l == "U") {
+      article = "An";
+    } else {
+      article = "A";
+    }
+
     return (
       <section className="recent-sighting">
         <h1>Most Recent Whale Sighting 🐳</h1>
         <p>
-          A {recentSighting?.species.name} Spotted {diffDays} days ago at{" "}
-          {recentSighting?.location.name}
+          {article} {recentSighting?.species.name} Spotted {diffDays} days ago
+          at {recentSighting?.location.name}
         </p>
         <div className="img-container">
           <img
