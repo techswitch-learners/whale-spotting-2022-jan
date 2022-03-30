@@ -7,7 +7,7 @@ export const Navbar: React.FunctionComponent = () => {
   const loginContext = useContext(LoginContext);
 
   return (
-    <nav role="navigation" aria-label="main navigation">
+    <nav className="navbar" role="navigation" aria-label="main navigation">
       <Link to="/">
         <img src="/logo.png" width={"100px"} alt="Whale Spotting logo" />
       </Link>
