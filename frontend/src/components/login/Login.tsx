@@ -3,6 +3,7 @@ import { Link, Redirect } from "react-router-dom";
 import { login } from "../../clients/apiClients";
 import { LoginContext } from "../login/LoginManager";
 import "./Login.scss";
+import { Notify } from "./LoginNotification";
 
 export const Login: React.FunctionComponent = () => {
   const [username, setUsername] = useState("");
@@ -19,6 +20,7 @@ export const Login: React.FunctionComponent = () => {
       return;
     }
     loginContext.logIn(username, password);
+    Notify();
     setError(undefined);
   }
 
