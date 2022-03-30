@@ -6,7 +6,7 @@ import { Navbar } from "./components/navbar/Navbar";
 import { LoginManager } from "./components/login/LoginManager";
 import { Footer } from "./components/footer/Footer";
 import { CreateSightingPage } from "./components/createSightingPage/CreateSightingPage";
-import { CreateUser, SignUpForm } from "./pages/SignUp/SignUp";
+import { CreateUser } from "./pages/SignUp/SignUp";
 import { Login } from "./components/login/Login";
 import { SightingListPage } from "./pages/Sightings/SightingListPage";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -16,11 +16,9 @@ const Routes: React.FunctionComponent = () => {
 
   return (
     <Switch>
-      <Route path="/sign-up">
-        <CreateUser />
-      </Route>
+      <Route path="/sign-up">{<CreateUser />}</Route>
       <Route path="/sightings/create">
-        <CreateSightingPage />
+        {loginContext.isLoggedIn ? <CreateSightingPage /> : <Login />}
       </Route>
       <Route path="/sightings">
         <SightingListPage />
