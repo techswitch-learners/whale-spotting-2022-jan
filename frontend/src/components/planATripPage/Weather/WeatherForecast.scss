@@ -1,0 +1,73 @@
+@import "../../../styles/constants.scss";
+
+.weather {
+  display: flex;
+  list-style: none;
+  font-family: $font-family;
+  color: $color-font;
+}
+
+.weather__list {
+  margin-right: 2em;
+}
+.weather__card {
+  width: 7em;
+  height: 10em;
+}
+.weather_card-text {
+  background-color: $color-background;
+  font-size: 2em;
+}
+.plan-a-trip__sub-title {
+  margin-top: 0.5rem;
+  font-family: $font-family;
+  font-size: medium;
+  width: 50%;
+  color: $color-font;
+  padding: 0.5rem;
+  background-color: $color-background;
+}
+.plantATrip__carousel {
+  width: 50%;
+  height: 35vh;
+  padding: 0.5rem;
+  background-color: $color-background;
+  background-color: adjust-hue($color: #0000006e, $degrees: 0);
+  color: $color-font;
+}
+.plantATrip__carousel-item {
+  padding: 0.5rem;
+}
+
+.plan-a-trip__icon {
+  padding-bottom: 6em;
+  padding-top: 0;
+  justify-self: center;
+  align-self: center;
+  padding-left: 1.8em;
+}
+@media (min-width: 768px) {
+  .plan-a-trip__icon {
+    padding-left: 8em;
+  }
+}
+@media (min-width: 1024px) {
+  .plan-a-trip__icon {
+    padding-bottom: 5em;
+    padding-left: 12em;
+  }
+}
+@media (min-width: 1180px) {
+  .plan-a-trip__icon {
+    padding-left: 16em;
+  }
+}
+.plan-a-trip__caption-title {
+  margin-top: 0;
+  padding-top: 0px;
+  font-size: medium;
+}
+.plan-a-trip__caption-text {
+  margin-top: 0;
+  padding-top: 0;
+}

@@ -8,6 +8,7 @@ import {
   createSighting,
 } from "../../clients/apiClients";
 import { LoginContext } from "../login/LoginManager";
+import "./CreateSightingPage.scss";
 import { Link } from "react-router-dom";
 
 type FromStatus = "READY" | "SUBMITTING" | "ERROR" | "FINISHED";
@@ -59,82 +60,86 @@ export function CreateSightingPage(): JSX.Element {
     setLocationId(Number(event.target.value));
   };
 
-  if (status === "FINISHED") {
-    return (
-      <div>
-        <p>Form Submitted Successfully!</p>
-        <Link to="/Sightings">Move to the list of sightings?</Link>
-      </div>
-    );
-  }
-
   return (
-    <main>
-      <h1>Hello {username}!</h1>
-      <h2>Report a Sighting!</h2>
+    <main className="reportSighting">
+      <div className="reportSighting__header">
+        <h1>Hello {username}!</h1>
+        <h2>Report a Sighting</h2>
+      </div>
+
       <form onSubmit={submitForm}>
-        <label htmlFor="date">
-          Date
+        <div className="reportSighting__form">
+          <label htmlFor="date">Date</label>
           <input
+            id="date"
             type="date"
             value={format(date, "yyyy-MM-dd")}
             onChange={(event) =>
               setDate(parse(event.target.value, "yyyy-MM-dd", new Date()))
             }
           />
-        </label>
-        <label>
-          Location
-          <select onChange={(e) => handleLocationChange(e)}>
+          <label htmlFor="location">Location</label>
+          <select id="location" onChange={(e) => handleLocationChange(e)}>
             <option selected disabled>
               Select Location
             </option>
-            {locations.map((location, key) => (
+            {locations.map((location) => (
               <option key={location.id} value={location.id}>
                 {location.name}
               </option>
             ))}
           </select>
-        </label>
-        <label>
-          Whale Type
-          <select onChange={(e) => handleSpeciesChange(e)}>
+          <label htmlFor="species">Whale Type</label>
+          <select id="species" onChange={(e) => handleSpeciesChange(e)}>
             <option selected disabled>
               Select Species
             </option>
-            {speciesList.map((species, key) => (
+            {speciesList.map((species) => (
               <option key={species.id} value={species.id}>
                 {species.name}
               </option>
             ))}
           </select>
-        </label>
-        <div></div>
-        <label>
-          Description
-          <input
+          <label htmlFor="description">Description</label>
+          <textarea
+            id="description"
+            placeholder="Describe your sighting"
+            rows={3}
             value={description}
             onChange={(event) => setDescription(event.target.value)}
           />
-        </label>
-        <label>
-          Photo
+          <label htmlFor="photo">Photo</label>
           <input
+            id="photo"
+            placeholder="Photo URL"
             value={photoUrl}
             onChange={(event) => setPhotoUrl(event.target.value)}
           />
-        </label>
-        <button disabled={status === "SUBMITTING"} type="submit">
-          Create Sighting
-        </button>
-      </form>
-      {status === "ERROR" ? (
-        <div>
-          <p>ERROR: Please make sure all fields have been filled in</p>
+          <label></label>
+          <button
+            className="reportSighting__button btn btn-primary"
+            disabled={status === "SUBMITTING"}
+            type="submit"
+          >
+            Create Sighting
+          </button>
+          {status === "ERROR" ? (
+            <div className="reportSighting__error">
+              <p>ERROR: Please make sure all fields have been filled in</p>
+            </div>
+          ) : (
+            <></>
+          )}
+          {status === "FINISHED" ? (
+            <div className="reportSighting__success">
+              Form submitted successfully.&ensp;
+              <Link to="/Sightings">List of sightings</Link>
+            </div>
+          ) : (
+            <></>
+          )}
         </div>
-      ) : (
-        <></>
-      )}
+      </form>
     </main>
   );
 }
