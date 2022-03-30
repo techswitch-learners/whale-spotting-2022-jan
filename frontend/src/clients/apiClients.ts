@@ -10,17 +10,13 @@ export interface NewUser {
   password: string;
 }
 
-export interface Species {
-  name: string;
-  latinName: string;
-}
-
 export interface Location {
   id: number;
   latitude: number;
   longitude: number;
   name: string;
   description: string;
+  sightings: Sighting[];
   amenities: string[];
 }
 
@@ -67,6 +63,7 @@ export async function GetAllSightings(): Promise<Array<Sighting>> {
       "Content-Type": "application/json",
     },
   });
+
   return await response.json();
 }
 
@@ -98,13 +95,47 @@ export async function createUser(newUser: NewUser) {
   }
 }
 
-export async function fetchSpecies(): Promise<Array<Species>> {
-  const response = await fetch(`https://localhost:5001/species`);
+export const getMostRecentSighting = async () => {
+  const response = await fetch(`https://localhost:5001/sightings/recent`);
+  const data = await response.json();
+  if (!response.ok) {
+    throw new Error(await response.json());
+  }
+  return data;
+};
+
+export async function fetchLocations(): Promise<Array<Location>> {
+  const response = await fetch(`https://localhost:5001/locations`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(await response.json());
+  }
   return await response.json();
 }
 
-export async function fetchLocations(): Promise<Array<Location>> {
-  const response = await fetch(`https://localhost:5001/locations`);
+export async function fetchLocationById(locationId: number): Promise<Location> {
+  const response = await fetch(
+    `https://localhost:5001/locations/${locationId}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  if (!response.ok) {
+    throw new Error(await response.json());
+  }
+  return await response.json();
+}
+
+export async function fetchSpecies(): Promise<Array<Species>> {
+  const response = await fetch(`https://localhost:5001/species`);
   return await response.json();
 }
 
@@ -126,3 +157,13 @@ export async function createSighting(
     throw new Error(await response.json());
   }
 }
+
+export const getPopularLocations = async () => {
+  const response = await fetch(`https://localhost:5001/locations/popular`);
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(await response.json());
+  }
+  return data;
+};
