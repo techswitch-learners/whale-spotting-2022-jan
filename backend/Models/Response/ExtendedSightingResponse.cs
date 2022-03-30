@@ -22,10 +22,10 @@ namespace WhaleSpotting.Models.Response
             PhotoUrl = sighting.PhotoUrl;
             User = new UserResponse
             {
-                Id = sighting.Id,
-                Name = sighting.User.Name,
-                Username = sighting.User.Username,
-                Email = sighting.User.Email
+                Id = sighting.CreatedByUserId,
+                Name = sighting.CreatedBy.Name,
+                Email = sighting.CreatedBy.Email,
+                Username = sighting.CreatedBy.Username
             };
         }
         public ExtendedSightingResponse()

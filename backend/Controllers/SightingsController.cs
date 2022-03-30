@@ -63,10 +63,10 @@ namespace WhaleSpotting.Controllers
                 PhotoUrl = s.PhotoUrl,
                 User = new UserResponse
                     {
-                        Id = s.UserId,
-                        Name = s.User.Name,
-                        Email = s.User.Email,
-                        Username = s.User.Username
+                        Id = s.CreatedByUserId,
+                        Name = s.CreatedBy.Name,
+                        Email = s.CreatedBy.Email,
+                        Username = s.CreatedBy.Username
                     }
             }).ToList();
         }
@@ -101,10 +101,10 @@ namespace WhaleSpotting.Controllers
                 PhotoUrl = s.PhotoUrl,
                 User = new UserResponse
                     {
-                        Id = s.UserId,
-                        Name = s.User.Name,
-                        Email = s.User.Email,
-                        Username = s.User.Username
+                        Id = s.CreatedByUserId,
+                        Name = s.CreatedBy.Name,
+                        Email = s.CreatedBy.Email,
+                        Username = s.CreatedBy.Username
                     }
             };
             return result;
