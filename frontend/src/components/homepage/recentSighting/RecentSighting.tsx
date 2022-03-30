@@ -8,21 +8,25 @@ export function RecentSighting() {
     GetMostRecentSighting().then(setRecentSighting);
   }, []);
 
-  return (
-    <section className="recent-sighting">
-      <h1>Most Recent Whale Sighting 🐳</h1>
-      <p>
-        A {recentSighting?.species} Spotted on {recentSighting?.date} at{" "}
-        {recentSighting?.location}
-      </p>
-      <div className="img-container">
-        <img
-          src={recentSighting?.photoUrl}
-          width="250px"
-          className="rounded-pill"
-        />
-      </div>
-      <p className="p-5">{recentSighting?.description}</p>
-    </section>
-  );
+  if (recentSighting == undefined) {
+    return <div> Loading ... </div>;
+  } else
+    return (
+      <section className="recent-sighting">
+        <h1>Most Recent Whale Sighting 🐳</h1>
+        <p>
+          A {recentSighting?.species.name} Spotted on {recentSighting?.date} at{" "}
+          {recentSighting?.location.name}
+        </p>
+        <div className="img-container">
+          <img
+            src={recentSighting?.photoUrl}
+            width="250px"
+            className="rounded-pill"
+          />
+          <p>Spotted by {recentSighting.user.username}</p>
+        </div>
+        <p className="p-5">{recentSighting?.description}</p>
+      </section>
+    );
 }
