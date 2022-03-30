@@ -9,19 +9,16 @@ export const Navbar: React.FunctionComponent = () => {
   return (
     <nav className="navbar" role="navigation" aria-label="main navigation">
       <Link to="/">
-        <img src="/logo.png" alt="Whale Spotting logo" />
+        <img src="/logo.png" width={"100px"} alt="Whale Spotting logo" />
       </Link>
-      <Link to="/sign-up">
-        <a>Sign Up</a>
+      <Link to="/plantrip" className="button is-primary">
+        Plan a Trip!
       </Link>
+      <Link to="/sign-up">Sign Up</Link>
       <span> </span>
-      <Link to="/sightings/create">
-        <a>Report Sighting</a>
-      </Link>
+      <Link to="/sightings/create">Report Sighting</Link>
       <span> </span>
-      <Link to="/sightings">
-        <a>All Sightings</a>
-      </Link>
+      <Link to="/sightings">All Sightings</Link>
       <div>
         {!loginContext.isLoggedIn ? (
           <div>

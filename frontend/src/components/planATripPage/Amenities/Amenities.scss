@@ -1,0 +1,16 @@
+@import "../../../styles/constants.scss";
+
+.plan-a-trip__text {
+  color: $color-font;
+  padding-left: 0.5rem;
+}
+.plan-a-trip__amenities {
+  background-color: $color-background;
+  height: fit-content;
+  width: 50%;
+  font-size: small;
+  margin-bottom: 1rem;
+  color: $color-font;
+  padding-bottom: 0.5rem;
+  font-family: $font-family;
+}
