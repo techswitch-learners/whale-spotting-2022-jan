@@ -41,11 +41,7 @@ export function RecentSighting() {
           {article} {recentSighting?.species.name} Spotted {diffDays} days ago
           at {recentSighting?.location.name}
         </p>
-        <ReactCardFlip
-          isFlipped={isFlipped}
-          flipDirection="vertical"
-          containerClassName="img-container"
-        >
+        <ReactCardFlip isFlipped={isFlipped} flipDirection="vertical">
           <section>
             <div className="recent-sighting__img-front">
               <img

@@ -1,17 +1,5 @@
 @import "../../../styles/constants.scss";
-// .recent-sighting {
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   width:98vw;
-// }
 
-// .image-container {
-//   display: flex;
-//   flex-direction: row;
-//   justify-content: center;
-//   align-items: center;
-// }
 .recent-sighting__img {
   border-color: $color-background;
   border-radius: 45%;
@@ -20,12 +8,10 @@
 .recent-sighting__img-front img {
   width: 80vw;
 }
-
 .recent-sighting__img-front :hover {
   cursor: pointer;
   opacity: 0.8;
 }
-
 .recent-sighting__img-back {
   height: 40vh;
 }
