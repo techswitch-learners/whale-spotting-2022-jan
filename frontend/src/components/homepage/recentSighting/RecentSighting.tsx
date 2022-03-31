@@ -36,30 +36,33 @@ export function RecentSighting() {
           </div>
         </section>
         <h1 className="recent-sighting__title">Most Recent Whale Sighting</h1>
-        <section className="recent-sighting_text-container">
+        <section className="recent-sighting__text-container">
           <section className="recent-sighting__text recent-sighting__left">
             <p>
               {article} {recentSighting?.species.name} (Latin name:{" "}
               {recentSighting.species.latinName}) spotted {diffDays} days ago at{" "}
               {recentSighting?.location.name} by {recentSighting.user.username}.
             </p>
-            <p>Description of the sighting: {recentSighting?.description}</p>
+            <p className="recent-sighting__text__description">
+              {" "}
+              {recentSighting?.description}{" "}
+            </p>
           </section>
           <section className="recent-sighting__text recent-sighting__right">
             <h2 className="recent-sighting__box-heading">
-              Report your own sighting!
+              Report your whale sighting!
             </h2>
-            <Button
-              variant="light"
-              className="recent-sighting__post-sighting-button"
-            >
-              <Link to="/sightings/create">
+            <Link to="/sightings/create">
+              <Button
+                variant="light"
+                className="recent-sighting__post-sighting-button"
+              >
                 <img
                   src="https://freepngimg.com/download/icon/1000188-spouting-whale-emoji-free-icon-hq.png"
                   width="30px"
                 />
-              </Link>
-            </Button>{" "}
+              </Button>{" "}
+            </Link>
           </section>
         </section>
       </section>

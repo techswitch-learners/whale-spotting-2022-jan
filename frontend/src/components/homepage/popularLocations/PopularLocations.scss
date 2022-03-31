@@ -4,40 +4,50 @@
   background-color: adjust-hue($color: #00000071, $degrees: 0);
   color: $color-font;
   font-size: large;
-  width: 60vw;
-  padding: 0.5rem;
+  width: 100vw;
+  padding: 1rem;
 }
 .popular-locations__text {
-  list-style: none;
   background-color: $color-background;
   color: $color-font;
-  width: 60vw;
-  font-size: small;
-  background-color: adjust-hue($color: #0000002a, $degrees: 0);
+  font-size: medium;
+  // background-color: adjust-hue($color: #0000002a, $degrees: 0);
+  background-color: adjust-hue($color: #0000005d, $degrees: 0);
   padding: 0.5rem;
+  margin: 0.5em;
+  text-decoration: none;
 }
-.popular-locations_text-container {
+.popular-locations__text-container {
   display: flex;
+  width: 98vw;
 }
 .popular-locations__left {
   width: 60vw;
+  height: 40vh;
 }
 .popular-locations__right {
   width: 30vw;
+  height: 40vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
+  background-color: $color-background;
+  border-radius: 1em;
 }
-.popular-locations__post-sighting-button {
-  width: 60%;
-  height: 40%;
+.popular-locations__post-location-button {
+  width: 6em;
+  height: 3em;
 }
 .popular-locations__text__description {
   font-style: italic;
 }
-
-.popular-locations_text-container {
-  display: flex;
+.popular-locations__list-item {
+  list-style: none;
+  padding-left: 0;
+  font-size: medium;
+}
+.popular-locations__box-heading {
+  font-size: 1.2em;
 }

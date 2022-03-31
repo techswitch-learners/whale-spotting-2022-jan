@@ -10,11 +10,12 @@
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
-  height: 200vh;
+  height: 300vh;
 }
 
 .homepage__title {
-  color: $color-background;
-  width: 98vw;
-  padding: 0.5rem;
+  background-color: $color-background;
+  color: white;
+  width: 100vw;
+  padding: 1rem;
 }
