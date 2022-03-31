@@ -20,7 +20,7 @@ namespace WhaleSpotting.Models.Response
             Description = sighting.Description;
             SpeciesId = sighting.SpeciesId;
             PhotoUrl = sighting.PhotoUrl;
-            UserId = sighting.UserId;
+            UserId = sighting.CreatedByUserId;
         }
         public SightingResponse()
         {

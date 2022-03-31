@@ -23,9 +23,9 @@ namespace WhaleSpotting.Models.Response
             User = new UserResponse
             {
                 Id = sighting.Id,
-                Name = sighting.User.Name,
-                Username = sighting.User.Username,
-                Email = sighting.User.Email
+                Name = sighting.CreatedBy.Name,
+                Username = sighting.CreatedBy.Username,
+                Email = sighting.CreatedBy.Email
             };
         }
         public ExtendedSightingResponse()
