@@ -1,25 +1,22 @@
-import { type } from "os";
-import React, { FormEvent, useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./SightingListPage.scss";
-import { Link } from "react-router-dom";
 import { approveSighting, Sighting } from "../../clients/apiClients";
 import { GetAllSightings } from "../../clients/apiClients";
 import { LoginContext } from "../../components/login/LoginManager";
-import { set } from "date-fns";
 
 export function SightingListPage(): JSX.Element {
   const [sightings, setSightings] = useState<Array<Sighting>>([]);
-  const [sightingId, setSightingId] = useState<number>();
   const { username, password, isAdmin } = useContext(LoginContext);
 
   useEffect(() => {
     GetAllSightings().then(setSightings);
   }, []);
 
-  const submitForm = (event: FormEvent) => {
-    event.preventDefault();
+  const confirmWhaleSighting = (sightingId: number) => {
     if (sightingId) {
-      approveSighting(sightingId, username, password);
+      approveSighting(sightingId, username, password).then(() =>
+        GetAllSightings().then(setSightings)
+      );
     }
   };
 
@@ -48,20 +45,21 @@ export function SightingListPage(): JSX.Element {
                   Seen by: {s.user.name} ({s.user.username})
                 </p>
                 {s.approvedBy !== null ? <p>Confirmed ☑</p> : <></>}
+
                 {isAdmin ? (
                   <div>
-                    <form onSubmit={submitForm}>
-                      <button
-                        value={s.id}
-                        onClick={() => setSightingId(s.id)}
-                        type="submit"
-                      >
-                        Confirm
-                      </button>
-                    </form>
-                    <form>
-                      <button type="submit">Delete</button>
-                    </form>
+                    <button
+                      value={s.id}
+                      disabled={!!s.approvedBy}
+                      onClick={() => {
+                        confirmWhaleSighting(s.id);
+                      }}
+                      type="submit"
+                    >
+                      Confirm
+                    </button>
+
+                    <button type="submit">Delete</button>
                   </div>
                 ) : (
                   <> </>
