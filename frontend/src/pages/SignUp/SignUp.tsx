@@ -23,8 +23,8 @@ export function SignUpForm(): JSX.Element {
   if (status === "FINISHED") {
     return (
       <div>
-        <p>Form Submitted Succesfully!</p>
-        <Link to="/">Return to your feed?</Link>
+        <p>Thanks for signing up!</p>
+        <Link to="/login">Please login here to continue</Link>
       </div>
     );
   }
