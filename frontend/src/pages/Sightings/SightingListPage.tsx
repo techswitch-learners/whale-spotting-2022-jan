@@ -33,7 +33,7 @@ export function SightingListPage(): JSX.Element {
 
   return (
     <div className="sighting__list__body">
-      <h1 className="sigthing__list__title">Sightings</h1>
+      <h1 className="sighting__list__title">Sightings</h1>
       <ul className="list-group list-group-flush">
         {sightings.map((s, i) => (
           <li className="sighting__list__item" key={i}>
@@ -45,8 +45,8 @@ export function SightingListPage(): JSX.Element {
                 className="sighting__image"
                 src={s.photoUrl}
                 alt={s.description}
-                width="700"
-                height="300"
+                width="250px"
+                // height="300"
               />
               <div className="sighting__card__info">
                 <p>About: {s.description}</p>
@@ -58,8 +58,9 @@ export function SightingListPage(): JSX.Element {
                 {s.approvedBy !== null ? <p>Confirmed ☑</p> : <></>}
 
                 {isAdmin ? (
-                  <div>
+                  <div className="sighting__card__btns">
                     <button
+                      className="sighting__button btn btn-primary"
                       value={s.id}
                       disabled={!!s.approvedBy}
                       onClick={() => {
@@ -70,6 +71,7 @@ export function SightingListPage(): JSX.Element {
                       Confirm
                     </button>
                     <button
+                      className="sighting__button btn btn-primary"
                       value={s.id}
                       onClick={() => {
                         deleteWhaleSighting(s.id);
