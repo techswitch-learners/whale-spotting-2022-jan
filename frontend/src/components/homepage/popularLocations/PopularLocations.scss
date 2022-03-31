@@ -4,15 +4,39 @@
   background-color: adjust-hue($color: #00000071, $degrees: 0);
   color: $color-font;
   font-size: large;
-  width: 80vw;
+  width: 60vw;
   padding: 0.5rem;
 }
 .popular-locations__text {
   list-style: none;
   background-color: $color-background;
   color: $color-font;
-  width: 80vw;
+  width: 60vw;
   font-size: small;
   background-color: adjust-hue($color: #0000002a, $degrees: 0);
   padding: 0.5rem;
+}
+.popular-locations_text-container {
+  display: flex;
+}
+.popular-locations__left {
+  width: 60vw;
+}
+.popular-locations__right {
+  width: 30vw;
+  display: flex;
+  flex-direction: column;
+  // align-items: center;
+  justify-content: center;
+}
+.popular-locations__post-sighting-button {
+  width: 60%;
+  height: 40%;
+}
+.popular-locations__text__description {
+  font-style: italic;
+}
+
+.popular-locations_text-container {
+  display: flex;
 }
