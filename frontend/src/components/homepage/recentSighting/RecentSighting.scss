@@ -30,13 +30,30 @@
 .recent-sighting__text {
   background-color: $color-background;
   color: $color-font;
-  width: 50vw;
   font-size: small;
   background-color: adjust-hue($color: #0000002a, $degrees: 0);
   padding: 0.5rem;
   list-style: none;
   margin: 0.5em;
 }
+.recent-sighting__left {
+  width: 60vw;
+}
+.recent-sighting__right {
+  width: 30vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.recent-sighting__post-sighting-button {
+  width: 60%;
+  height: 40%;
+}
 .recent-sighting__text__description {
   font-style: italic;
+}
+
+.recent-sighting_text-container {
+  display: flex;
 }
