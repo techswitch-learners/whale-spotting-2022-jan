@@ -38,7 +38,7 @@ export const HorizontalMenu: React.FunctionComponent = () => {
           </Link>
 
           <Link id="sightings" className="menu-item" to="/sightings">
-            List of sightings
+            Sightings
           </Link>
           <Link
             id="ReportSighting"
