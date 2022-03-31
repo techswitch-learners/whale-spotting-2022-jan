@@ -13,7 +13,7 @@ namespace WhaleSpotting.Repositories
 
         Sighting GetMostRecentSighting();
 
-        Sighting Create(CreateSightingRequest newSighting);
+        Sighting Create(CreateSightingRequest newSighting, int userId);
 
         Sighting GetById(int id);
         Sighting Approve(int sightingId, ApproveSightingRequest appSighting);
@@ -36,7 +36,7 @@ namespace WhaleSpotting.Repositories
                 .Include(l => l.Location)
                 .Include(s => s.Species)
                 .Include(u => u.CreatedBy)
-                .Include(a => a.ApprovedBy)
+                .Include(u => u.ApprovedBy)
                 .ToList();
         }
 
@@ -47,9 +47,10 @@ namespace WhaleSpotting.Repositories
                 .Include(l => l.Location)
                 .Include(s => s.Species)
                 .Include(u => u.CreatedBy)
+                .Include(u => u.ApprovedBy)
                 .OrderByDescending(x => x.Date).First();
         }
-        public Sighting Create(CreateSightingRequest newSighting)
+        public Sighting Create(CreateSightingRequest newSighting, int userId)
         {
             var insertedResult = _context.Sightings.Add( new Sighting
             {
@@ -57,7 +58,7 @@ namespace WhaleSpotting.Repositories
                 LocationId = newSighting.LocationId,
                 Description = newSighting.Description,
                 PhotoUrl = newSighting.PhotoUrl,
-                CreatedByUserId = newSighting.UserId,
+                CreatedByUserId = userId,
                 SpeciesId = newSighting.SpeciesId,
 
             });
