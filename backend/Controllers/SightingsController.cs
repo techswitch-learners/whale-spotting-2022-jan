@@ -170,6 +170,7 @@ namespace WhaleSpotting.Controllers
                 );
             }
         }
+
         [HttpPatch]
         [Route("{id}/approve")]
         public ActionResult Approve(
@@ -272,7 +273,6 @@ namespace WhaleSpotting.Controllers
                 
             var sighting = _sightingsRepo.GetById(id);
             
-            
             if (user.Id != sighting.CreatedByUserId && user.Role == 0)
             {
                 return StatusCode(
@@ -285,5 +285,4 @@ namespace WhaleSpotting.Controllers
             return Ok();
         }
     }
-
 }

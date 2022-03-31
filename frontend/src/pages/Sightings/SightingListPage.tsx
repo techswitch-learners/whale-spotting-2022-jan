@@ -1,6 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import "./SightingListPage.scss";
-import { approveSighting, Sighting } from "../../clients/apiClients";
+import {
+  approveSighting,
+  deleteSighting,
+  Sighting,
+} from "../../clients/apiClients";
 import { GetAllSightings } from "../../clients/apiClients";
 import { LoginContext } from "../../components/login/LoginManager";
 
@@ -15,6 +19,13 @@ export function SightingListPage(): JSX.Element {
   const confirmWhaleSighting = (sightingId: number) => {
     if (sightingId) {
       approveSighting(sightingId, username, password).then(() =>
+        GetAllSightings().then(setSightings)
+      );
+    }
+  };
+  const deleteWhaleSighting = (sightingId: number) => {
+    if (sightingId) {
+      deleteSighting(sightingId, username, password).then(() =>
         GetAllSightings().then(setSightings)
       );
     }
@@ -58,8 +69,15 @@ export function SightingListPage(): JSX.Element {
                     >
                       Confirm
                     </button>
-
-                    <button type="submit">Delete</button>
+                    <button
+                      value={s.id}
+                      onClick={() => {
+                        deleteWhaleSighting(s.id);
+                      }}
+                      type="submit"
+                    >
+                      Delete
+                    </button>
                   </div>
                 ) : (
                   <> </>

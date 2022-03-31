@@ -3,6 +3,7 @@ export interface User {
   name: string;
   username: string;
 }
+
 export interface NewUser {
   name: string;
   username: string;
@@ -36,10 +37,6 @@ export interface Sighting {
   approvedBy: User;
 }
 
-function getAuthorizationHeader(username: string, password: string) {
-  return `Basic ${btoa(`${username}:${password}`)}`;
-}
-
 export interface Species {
   id: number;
   name: string;
@@ -55,6 +52,10 @@ export interface NewSighting {
   speciesId: number;
   description: string;
   photoUrl: string;
+}
+
+function getAuthorizationHeader(username: string, password: string) {
+  return `Basic ${btoa(`${username}:${password}`)}`;
 }
 
 export async function GetAllSightings(): Promise<Array<Sighting>> {
@@ -115,6 +116,24 @@ export async function approveSighting(
     throw new Error(await response.json());
   }
 }
+
+export async function deleteSighting(
+  id: number,
+  username: string,
+  password: string
+) {
+  const response = await fetch(`https://localhost:5001/sightings/${id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: getAuthorizationHeader(username, password),
+    },
+  });
+  if (!response.ok) {
+    throw new Error(await response.json());
+  }
+}
+
 export const getMostRecentSighting = async () => {
   const response = await fetch(`https://localhost:5001/sightings/recent`);
   const data = await response.json();
