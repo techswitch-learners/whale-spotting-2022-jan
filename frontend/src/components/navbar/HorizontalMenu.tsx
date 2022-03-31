@@ -11,33 +11,55 @@ export const HorizontalMenu: React.FunctionComponent = () => {
       <Link to="/">
         <img src="/logo.png" alt="Whale Spotting logo" />
       </Link>
-      <div>
-        {" "}
-        <span></span>
-        {loginContext.isLoggedIn ? (
-          <span>
-            {"Whale-come " + loginContext.username + "!"}
-            <Link
-              to="/"
-              className="button is-primary"
-              onClick={loginContext.logOut}
-            >
-              Logout
-            </Link>
-          </span>
-        ) : (
-          <Link to="/login"> Login </Link>
-        )}
-      </div>
 
-      <Link to="/plantrip" className="button is-primary">
-        Plan a Trip!
-      </Link>
-      <Link to="/sign-up">Sign Up</Link>
-      <span> </span>
-      <Link to="/sightings/create">Report Sighting</Link>
-      <span> </span>
-      <Link to="/sightings">All Sightings</Link>
+      <div className="navbar__horizontal_content">
+        <div className="navbar__horizontal_content_left">
+          {" "}
+          <span></span>
+          {loginContext.isLoggedIn ? (
+            <span>
+              {"Whale-come " + loginContext.username + "!"}
+              <Link
+                to="/"
+                className="button is-primary"
+                onClick={loginContext.logOut}
+              >
+                Logout
+              </Link>
+            </span>
+          ) : (
+            <Link to="/login"> Login </Link>
+          )}
+        </div>
+
+        <div className="navbar__horizontal_content_right">
+          <Link id="home" className="menu-item" to="/">
+            Home
+          </Link>
+
+          <Link id="sightings" className="menu-item" to="/sightings">
+            List of sightings
+          </Link>
+          <Link
+            id="ReportSighting"
+            className="menu-item"
+            to={loginContext.isLoggedIn ? "/sightings/create" : "/login"}
+          >
+            Report a sighting
+          </Link>
+
+          <Link id="plantrip" className="menu-item" to="/plantrip">
+            Plan a Trip!
+          </Link>
+          {!loginContext.isLoggedIn ? (
+            <Link id="signup" className="menu-item" to="/sign-up">
+              Sign Up
+            </Link>
+          ) : (
+            <></>
+          )}
+        </div>
+      </div>
     </div>
   );
 };
