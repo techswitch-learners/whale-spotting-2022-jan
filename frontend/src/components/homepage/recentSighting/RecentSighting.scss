@@ -6,7 +6,7 @@
 }
 
 .recent-sighting__img-front img {
-  width: 80vw;
+  width: 100vw;
 }
 .recent-sighting__img-front :hover {
   cursor: pointer;
@@ -24,17 +24,18 @@
   background-color: adjust-hue($color: #00000071, $degrees: 0);
   color: $color-font;
   font-size: large;
-  width: 80vw;
+  width: 100vw;
   padding: 0.5rem;
 }
 .recent-sighting__text {
   background-color: $color-background;
   color: $color-font;
-  width: 80vw;
+  width: 50vw;
   font-size: small;
   background-color: adjust-hue($color: #0000002a, $degrees: 0);
   padding: 0.5rem;
   list-style: none;
+  margin: 0.5em;
 }
 .recent-sighting__text__description {
   font-style: italic;

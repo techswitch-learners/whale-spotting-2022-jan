@@ -36,40 +36,24 @@ export function RecentSighting() {
 
     return (
       <section className="recent-sighting">
+        <section>
+          <div className="recent-sighting__img-front">
+            <img
+              src={recentSighting.photoUrl}
+              width="500px"
+              onClick={handleClick}
+            ></img>
+          </div>
+        </section>
         <h1 className="recent-sighting__title">Most Recent Whale Sighting</h1>
-        <p className="recent-sighting__text">
-          {article} {recentSighting?.species.name} Spotted {diffDays} days ago
-          at {recentSighting?.location.name}
-        </p>
-        <ReactCardFlip isFlipped={isFlipped} flipDirection="vertical">
-          <section>
-            <div className="recent-sighting__img-front">
-              <img
-                src={recentSighting.photoUrl}
-                width="500px"
-                onClick={handleClick}
-              ></img>
-            </div>
-          </section>
-
-          <section>
-            <div className="recent-sighting__img-back" onClick={handleClick}>
-              <ol className="recent-sighting__text">
-                <li>{recentSighting.species.latinName}</li>
-                <li>Spotted By:{recentSighting.user.username}</li>
-                <li>
-                  {" "}
-                  Want to see it yourself? Plan your own trip to{" "}
-                  <Link to="/login">{recentSighting.location.name}</Link>
-                </li>
-              </ol>
-            </div>
-          </section>
-        </ReactCardFlip>
-        <p className="recent-sighting__text recent-sighting__text__description">
-          &quot;{recentSighting?.description}&quot; -{" "}
-          {recentSighting.user.username}
-        </p>
+        <section className="recent-sighting__text">
+          <p>
+            {article} {recentSighting?.species.name} (Latin name:{" "}
+            {recentSighting.species.latinName}) spotted {diffDays} days ago at{" "}
+            {recentSighting?.location.name} by {recentSighting.user.username}.
+          </p>
+          <p>Description of the sighting: {recentSighting?.description}</p>
+        </section>
       </section>
     );
   }
