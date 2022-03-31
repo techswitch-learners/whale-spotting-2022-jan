@@ -46,12 +46,19 @@ export function RecentSighting() {
             <p>Description of the sighting: {recentSighting?.description}</p>
           </section>
           <section className="recent-sighting__text recent-sighting__right">
-            <h2 className="">Report your own sighting!</h2>
+            <h2 className="recent-sighting__box-heading">
+              Report your own sighting!
+            </h2>
             <Button
               variant="light"
               className="recent-sighting__post-sighting-button"
             >
-              +
+              <Link to="/sightings/create">
+                <img
+                  src="https://freepngimg.com/download/icon/1000188-spouting-whale-emoji-free-icon-hq.png"
+                  width="30px"
+                />
+              </Link>
             </Button>{" "}
           </section>
         </section>

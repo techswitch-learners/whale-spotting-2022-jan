@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { getPopularLocations, Location } from "../../../clients/apiClients";
 import "./PopularLocations.scss";
 import { Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
+
 export function PopularLocations() {
   const [popularLocations, setPopularLocations] = useState<Array<Location>>();
   useEffect(() => {
@@ -28,14 +30,17 @@ export function PopularLocations() {
           </ol>
         </section>
         <section className="popular-locations__text popular-locations__right">
-          <h2 className="">
-            Plan a trip to a popular whale sighting location!
-          </h2>
+          <h2 className="recent-sighting__box-heading">Plan a whale trip!</h2>
           <Button
             variant="light"
             className="popular-locations__post-sighting-button"
           >
-            +
+            <Link to="/planatrip">
+              <img
+                src="https://freepngimg.com/download/icon/1000188-spouting-whale-emoji-free-icon-hq.png"
+                width="30px"
+              />
+            </Link>
           </Button>{" "}
         </section>
       </section>
