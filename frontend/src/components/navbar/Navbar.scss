@@ -1,5 +1,12 @@
 @import "../../styles/constants.scss";
 
+.navbar__horizontal {
+  display: none;
+}
+.navbar__burger {
+  display: block;
+}
+
 .navbar__menu {
   background-color: #bfd2d9; //$color-background;
   img {
@@ -79,4 +86,13 @@
 /* Styling of overlay */
 .bm-overlay {
   background: rgba(0, 0, 0, 0.3);
+}
+
+@media (min-width: 900px) {
+  .navbar__horizontal {
+    display: block;
+  }
+  .navbar__burger {
+    display: none;
+  }
 }
