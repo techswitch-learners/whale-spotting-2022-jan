@@ -1,6 +1,7 @@
 @import "../../../styles/constants.scss";
 .popular-locations__title {
   background-color: $color-background;
+  background-color: adjust-hue($color: #00000071, $degrees: 0);
   color: $color-font;
   font-size: large;
   width: 80vw;
