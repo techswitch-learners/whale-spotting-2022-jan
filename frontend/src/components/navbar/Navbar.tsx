@@ -61,14 +61,18 @@ export const Navbar: React.FunctionComponent = () => {
         >
           Plan a Trip!
         </Link>
-        <Link
-          id="signup"
-          className="menu-item"
-          to="/sign-up"
-          onClick={() => closeMenu()}
-        >
-          Sign Up
-        </Link>
+        {!loginContext.isLoggedIn ? (
+          <Link
+            id="signup"
+            className="menu-item"
+            to="/sign-up"
+            onClick={() => closeMenu()}
+          >
+            Sign Up
+          </Link>
+        ) : (
+          <></>
+        )}
         <div>
           {!loginContext.isLoggedIn ? (
             <div>
