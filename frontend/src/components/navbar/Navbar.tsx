@@ -6,7 +6,6 @@ import { slide as Menu } from "react-burger-menu";
 
 export const Navbar: React.FunctionComponent = () => {
   const loginContext = useContext(LoginContext);
-  const { username } = useContext(LoginContext);
   const [navbarOpen, setNavbarOpen] = useState(false);
   const closeMenu = () => {
     setNavbarOpen(false);
@@ -17,15 +16,18 @@ export const Navbar: React.FunctionComponent = () => {
 
   return (
     <div className="navbar__menu">
-      <Link to="/">
+      <Link to="/" onClick={() => closeMenu()}>
         <img src="/logo.png" alt="Whale Spotting logo" />
       </Link>
       <div>
         {" "}
         {loginContext.isLoggedIn ? (
-          "Whale-come " + username + "!"
+          "Whale-come " + loginContext.username + "!"
         ) : (
-          <Link to="/login"> Login </Link>
+          <Link to="/login" onClick={() => closeMenu()}>
+            {" "}
+            Login{" "}
+          </Link>
         )}
       </div>
       <Menu isOpen={navbarOpen} onClose={closeMenu} onOpen={openMenu} right>
