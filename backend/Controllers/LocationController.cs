@@ -40,7 +40,7 @@ namespace WhaleSpotting.Controllers {
                     Description = s.Description,
                     SpeciesId = s.SpeciesId,
                     PhotoUrl = s.PhotoUrl,
-                    UserId = s.UserId
+                    UserId = s.CreatedByUserId
                     })
                   .ToList(),
                 Amenities = l.Amenities

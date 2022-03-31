@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WhaleSpotting.Models.Database
 {
@@ -12,7 +13,10 @@ namespace WhaleSpotting.Models.Database
         public Species Species { get; set; }
         public int SpeciesId { get; set; }
         public string PhotoUrl { get; set; }
-        public int UserId { get; set; }
-        public User User { get; set; }
+        [ForeignKey("CreatedBy")]
+        public int CreatedByUserId { get; set; }
+        public User CreatedBy { get; set; }
+        [ForeignKey("ApprovedByUserId")]
+        public User ApprovedBy { get; set; }
     }
 }

@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { GetPopularLocations, Location } from "../../../clients/apiClients";
-import "./PopularLocations.scss";
+import { useEffect, useState } from "react";
+import { getPopularLocations, Location } from "../../../clients/apiClients";
 
 export function PopularLocations() {
   const [popularLocations, setPopularLocations] = useState<Array<Location>>();
   useEffect(() => {
-    GetPopularLocations().then(setPopularLocations);
+    getPopularLocations().then(setPopularLocations);
   }, []);
   if (popularLocations === undefined) {
     return <section>Loading...</section>;

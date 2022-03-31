@@ -1,6 +1,5 @@
-import ar from "date-fns/esm/locale/ar/index.js";
-import React, { useEffect, useState } from "react";
-import { GetMostRecentSighting, Sighting } from "../../../clients/apiClients";
+import { useEffect, useState } from "react";
+import { getMostRecentSighting, Sighting } from "../../../clients/apiClients";
 import "./RecentSighting.scss";
 import ReactCardFlip from "react-card-flip";
 import { Link } from "react-router-dom";
@@ -11,7 +10,7 @@ export function RecentSighting() {
   const [isFlipped, setIsFlipped] = useState(false);
 
   useEffect(() => {
-    GetMostRecentSighting().then(setRecentSighting);
+    getMostRecentSighting().then(setRecentSighting);
   }, []);
 
   if (recentSighting == undefined) {
