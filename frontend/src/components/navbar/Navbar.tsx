@@ -1,5 +1,4 @@
-import React, { useContext } from "react";
-//import { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { LoginContext } from "../login/LoginManager";
 import "./Navbar.scss";
@@ -7,68 +6,77 @@ import { slide as Menu } from "react-burger-menu";
 
 export const Navbar: React.FunctionComponent = () => {
   const loginContext = useContext(LoginContext);
-  //const [isLoggedIn, setisLoggedIn] = useState(loginContext.isLoggedIn)
+  const { username } = useContext(LoginContext);
+  const [navbarOpen, setNavbarOpen] = useState(false);
+  const closeMenu = () => {
+    setNavbarOpen(false);
+  };
+  const openMenu = () => {
+    setNavbarOpen(true);
+  };
 
   return (
-    // <nav className="navbar" role="navigation" aria-label="main navigation">
-    //   <Link to="/">
-    //     <img src="/logo.png" width={"100px"} alt="Whale Spotting logo" />
-    //   </Link>
-    //   <Link to="/plantrip" className="button is-primary">
-    //     Plan a Trip!
-    //   </Link>
-    //   <Link to="/sign-up">Sign Up</Link>
-    //   <span> </span>
-    //   <Link to="/sightings/create">Report Sighting</Link>
-    //   <span> </span>
-    //   <Link to="/sightings">All Sightings</Link>
-    //   <div>
-    //     {!loginContext.isLoggedIn ? (
-    //       <div>
-    //         <Link className="button is-primary" to="/login">
-    //           Login
-    //         </Link>
-    //       </div>
-    //     ) : (
-    //       <Link
-    //         to="/"
-    //         className="button is-primary"
-    //         onClick={loginContext.logOut}
-    //       >
-    //         Logout
-    //       </Link>
-    //     )}
-    //   </div>
     <div className="navbar__menu">
       <Link to="/">
         <img src="/logo.png" alt="Whale Spotting logo" />
       </Link>
-      <Menu right>
-        <Link id="home" className="menu-item" to="/">
+      <div>
+        {" "}
+        {loginContext.isLoggedIn ? (
+          "Whale-come " + username + "!"
+        ) : (
+          <Link to="/login"> Login </Link>
+        )}
+      </div>
+      <Menu isOpen={navbarOpen} onClose={closeMenu} onOpen={openMenu} right>
+        <Link
+          id="home"
+          className="menu-item"
+          to="/"
+          onClick={() => closeMenu()}
+        >
           Home
         </Link>
-        <Link id="sightings" className="menu-item" to="/sightings">
+        <Link
+          id="sightings"
+          className="menu-item"
+          to="/sightings"
+          onClick={() => closeMenu()}
+        >
           Sightings
         </Link>
         <Link
           id="ReportSighting"
-          className={
-            !loginContext.isLoggedIn ? "menu-item-disabled" : "menu-item"
-          }
-          to="/sightings/create"
+          className="menu-item"
+          to={loginContext.isLoggedIn ? "/sightings/create" : "/login"}
+          onClick={() => closeMenu()}
         >
           Report a sighting
         </Link>
-        <Link id="plantrip" className="menu-item" to="/plantrip">
+        <Link
+          id="plantrip"
+          className="menu-item"
+          to="/plantrip"
+          onClick={() => closeMenu()}
+        >
           Plan a Trip!
         </Link>
-        <Link id="signup" className="menu-item" to="/sign-up">
+        <Link
+          id="signup"
+          className="menu-item"
+          to="/sign-up"
+          onClick={() => closeMenu()}
+        >
           Sign Up
         </Link>
         <div>
           {!loginContext.isLoggedIn ? (
             <div>
-              <Link className="button is-primary" to="/login">
+              <Link
+                className="button is-primary"
+                to="/login"
+                onClick={() => closeMenu()}
+              >
                 Login
               </Link>
             </div>
@@ -76,15 +84,15 @@ export const Navbar: React.FunctionComponent = () => {
             <Link
               to="/"
               className="button is-primary"
-              onClick={loginContext.logOut}
+              onClick={() => {
+                loginContext.logOut();
+                closeMenu();
+              }}
             >
               Logout
             </Link>
           )}
         </div>
-        {/* <a id="Login" className="menu-item" href="/Login">
-          Login
-        </a> */}
       </Menu>
     </div>
   );
