@@ -1,8 +1,9 @@
 import { FormEvent, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { createUser } from "../../clients/apiClients";
 import "../../styles/constants.scss";
 import "./SignUp.scss";
+
 type FromStatus = "READY" | "SUBMITTING" | "ERROR" | "FINISHED";
 
 export function SignUpForm(): JSX.Element {
@@ -21,12 +22,7 @@ export function SignUpForm(): JSX.Element {
   }
 
   if (status === "FINISHED") {
-    return (
-      <div>
-        <p>Thanks for signing up!</p>
-        <Link to="/login">Please login here to continue</Link>
-      </div>
-    );
+    return <Redirect to="/login" />;
   }
 
   return (
@@ -89,7 +85,11 @@ export function SignUpForm(): JSX.Element {
         >
           Sign Up
         </button>
-        {status === "ERROR" && <p>Something went wrong! Please try again!</p>}
+        {status === "ERROR" && (
+          <p className="signup__unsuccessful__notification">
+            Something went wrong! Please try again!
+          </p>
+        )}
       </form>
       <p className="signup__page__login__link">
         Already a member? <Link to="/login">Log in here!</Link>
