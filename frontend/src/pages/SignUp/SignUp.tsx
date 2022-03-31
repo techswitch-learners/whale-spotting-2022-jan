@@ -3,6 +3,7 @@ import { Link, Redirect } from "react-router-dom";
 import { createUser } from "../../clients/apiClients";
 import "../../styles/constants.scss";
 import "./SignUp.scss";
+import { notifyOfSuccessfulSignup } from "./SignupNotification";
 
 type FromStatus = "READY" | "SUBMITTING" | "ERROR" | "FINISHED";
 
@@ -18,6 +19,7 @@ export function SignUpForm(): JSX.Element {
     setStatus("SUBMITTING");
     createUser({ name, username, email, password })
       .then(() => setStatus("FINISHED"))
+      .then(() => notifyOfSuccessfulSignup())
       .catch(() => setStatus("ERROR"));
   }
 
