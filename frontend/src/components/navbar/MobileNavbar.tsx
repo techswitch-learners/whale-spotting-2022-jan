@@ -1,10 +1,10 @@
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { LoginContext } from "../login/LoginManager";
-import "./Navbar.scss";
+import "./MobileNavbar.scss";
 import { slide as Menu } from "react-burger-menu";
 
-export const BurgerMenu: React.FunctionComponent = () => {
+export const MobileNavbar: React.FunctionComponent = () => {
   const loginContext = useContext(LoginContext);
   const [navbarOpen, setNavbarOpen] = useState(false);
   const closeMenu = () => {
@@ -50,7 +50,7 @@ export const BurgerMenu: React.FunctionComponent = () => {
         <Link
           id="ReportSighting"
           className="menu-item"
-          to={loginContext.isLoggedIn ? "/sightings/create" : "/login"}
+          to="/sightings/create"
           onClick={() => closeMenu()}
         >
           Report a sighting

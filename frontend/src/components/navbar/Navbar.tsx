@@ -1,16 +1,12 @@
-import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
-import { LoginContext } from "../login/LoginManager";
-import "./Navbar.scss";
-import { BurgerMenu } from "./BurgerMenu";
-import { HorizontalMenu } from "./HorizontalMenu";
-import { slide as Menu } from "react-burger-menu";
+import React from "react";
+import { MobileNavbar } from "./MobileNavbar";
+import { DesktopNavbar } from "./DesktopNavbar";
 
 export const Navbar: React.FunctionComponent = () => {
   return (
     <>
-      <BurgerMenu />
-      <HorizontalMenu />
+      <MobileNavbar />
+      <DesktopNavbar />
     </>
   );
 };

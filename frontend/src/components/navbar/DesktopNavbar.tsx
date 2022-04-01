@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { LoginContext } from "../login/LoginManager";
-import "./Navbar.scss";
+import "./DesktopNavbar.scss";
 
-export const HorizontalMenu: React.FunctionComponent = () => {
+export const DesktopNavbar: React.FunctionComponent = () => {
   const loginContext = useContext(LoginContext);
 
   return (
@@ -43,7 +43,7 @@ export const HorizontalMenu: React.FunctionComponent = () => {
           <Link
             id="ReportSighting"
             className="menu-item"
-            to={loginContext.isLoggedIn ? "/sightings/create" : "/login"}
+            to="/sightings/create"
           >
             Report a sighting
           </Link>
