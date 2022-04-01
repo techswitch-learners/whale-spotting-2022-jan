@@ -7,6 +7,7 @@ import {
 } from "../../clients/apiClients";
 import { GetAllSightings } from "../../clients/apiClients";
 import { LoginContext } from "../../components/login/LoginManager";
+import { parseJSON } from "date-fns";
 
 export function SightingListPage(): JSX.Element {
   const [sightings, setSightings] = useState<Array<Sighting>>([]);
@@ -46,12 +47,11 @@ export function SightingListPage(): JSX.Element {
                 src={s.photoUrl}
                 alt={s.description}
                 width="250px"
-                // height="300"
               />
               <div className="sighting__card__info">
                 <p>About: {s.description}</p>
                 <p>Sighting Location: {s.location.name}</p>
-                <p>On: {s.date}</p>
+                <p>On: {new Date(s.date).toLocaleDateString("en-gb")}</p>
                 <p>
                   Seen by: {s.user.name} ({s.user.username})
                 </p>
