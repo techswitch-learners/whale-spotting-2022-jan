@@ -40,8 +40,12 @@ export function RecentSighting() {
           <section className="recent-sighting__text recent-sighting__left">
             <p>
               {article} {recentSighting?.species.name} (Latin name:{" "}
-              {recentSighting.species.latinName}) spotted {diffDays} days ago at{" "}
-              {recentSighting?.location.name} by {recentSighting.user.username}.
+              {recentSighting.species.latinName}) spotted{" "}
+              <strong>
+                {diffDays} day{diffDays != 1 ? `s` : ``}
+              </strong>{" "}
+              ago at {recentSighting?.location.name} by{" "}
+              {recentSighting.user.username}.
             </p>
             <p className="recent-sighting__text__description">
               {" "}
