@@ -50,7 +50,7 @@ export const Navbar: React.FunctionComponent = () => {
         <Link
           id="ReportSighting"
           className="menu-item"
-          to={loginContext.isLoggedIn ? "/sightings/create" : "/login"}
+          to="/sightings/create"
           onClick={() => closeMenu()}
         >
           Report a sighting
