@@ -1,10 +1,39 @@
 @import "../../styles/constants.scss";
 
-.navbar__horizontal {
-  display: none;
+.desktop-navbar {
+  background-color: #bfd2d9; //$color-background;
+  display: flex;
+  height: 100px;
+
+  @media (max-width: 900px) {
+    display: none;
+  }
 }
 
-@media (min-width: 900px) {
+.desktop__login {
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+}
+
+.desktop__logo {
+  height: 100%;
+}
+
+.desktop__menubar {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: top;
+  overflow: visible;
+
+  .desktop__menuitem {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 10px;
+  }
 }
 
 // .navbar__horizontal {
