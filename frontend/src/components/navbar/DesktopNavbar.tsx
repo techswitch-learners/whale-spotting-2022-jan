@@ -8,38 +8,38 @@ export const DesktopNavbar: React.FunctionComponent = () => {
 
   return (
     <div className="desktop-navbar">
-      <Link to="/">
+      <Link className="desktop__logo-link" to="/">
         <img
           className="desktop__logo"
           src="/logo.png"
           alt="Whale Spotting logo"
         />
-      </Link>{" "}
-      <div className="desktop__login">
-        {" "}
+      </Link>
+      <div className="desktop__welcome">
         {loginContext.isLoggedIn ? (
-          "Whale-come " + loginContext.username + "!"
-        ) : (
-          <Link to="/login"> Login </Link>
-        )}
+          <span className="desktop__welcome-message">
+            Whale-come {loginContext.username}!
+          </span>
+        ) : null}
       </div>
       <ul className="desktop__menubar">
         <li className="desktop__menuitem">
           <Link to="/"> Home </Link>
         </li>
-        <li>
+        <li className="desktop__menuitem">
           <span>Sighting</span>
-          <div>
+          <span className="desktop_down-arrow">&#9660;</span>
+          <ul className="desktop__submenu">
             <li className="desktop__menuitem">
               <Link to="/sightings">All sightings </Link>
             </li>
             <li className="desktop__menuitem">
               <Link to="/sightings/create">Report a sighting </Link>
             </li>
-          </div>
+          </ul>
         </li>
         <li className="desktop__menuitem">
-          <Link to="/plantrip"> Plan a Trip! </Link>
+          <Link to="/plantrip"> Plan a Trip</Link>
         </li>
         {!loginContext.isLoggedIn ? (
           <li className="desktop__menuitem">

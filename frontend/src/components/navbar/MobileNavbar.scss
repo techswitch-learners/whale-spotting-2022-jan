@@ -5,10 +5,11 @@
 }
 
 .navbar__menu {
-  background-color: #bfd2d9; //$color-background;
-  img {
-    width: 10rem;
-  }
+  display: flex;
+  background-color: $color-block-blackground;
+  height: 100px;
+  padding: 0 20px;
+
   .menu-item-disabled {
     color: currentColor;
     cursor: not-allowed;
@@ -16,6 +17,42 @@
     text-decoration: none;
   }
 }
+@media (min-width: 900px) {
+  .navbar__burger {
+    display: none;
+  }
+}
+
+.mobile__logo-link {
+  display: flex;
+  align-items: center;
+}
+
+.mobile__logo {
+  height: 60%;
+}
+
+.mobile__welcome {
+  display: flex;
+  align-items: center;
+}
+
+.mobile__welcome-message {
+  color: white;
+  font-size: 1.15em;
+  margin: 15px;
+}
+
+.menu-item {
+  color: white;
+  text-decoration: none;
+  padding: 15px;
+
+  &:hover {
+    color: $color-block-blackground;
+  }
+}
+
 /* Position and sizing of burger button */
 .bm-burger-button {
   position: fixed;
@@ -27,12 +64,12 @@
 
 /* Color/shape of burger icon bars */
 .bm-burger-bars {
-  background: #373a47;
+  background: white;
 }
 
 /* Color/shape of burger icon bars on hover*/
 .bm-burger-bars-hover {
-  background: #a90000;
+  background: white;
 }
 
 /* Position and sizing of clickable cross button */
@@ -83,10 +120,9 @@
 /* Styling of overlay */
 .bm-overlay {
   background: rgba(0, 0, 0, 0.3);
-}
-
-@media (min-width: 900px) {
-  .navbar__burger {
-    display: none;
-  }
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
 }

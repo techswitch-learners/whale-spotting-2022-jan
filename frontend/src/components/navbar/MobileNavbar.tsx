@@ -16,19 +16,19 @@ export const MobileNavbar: React.FunctionComponent = () => {
 
   return (
     <div className="navbar__menu navbar__burger">
-      <Link to="/" onClick={() => closeMenu()}>
-        <img src="/logo.png" alt="Whale Spotting logo" />
+      <Link className="mobile__logo-link" to="/" onClick={() => closeMenu()}>
+        <img
+          className="mobile__logo"
+          src="/logo.png"
+          alt="Whale Spotting logo"
+        />
       </Link>
-      <div>
-        {" "}
+      <div className="mobile__welcome">
         {loginContext.isLoggedIn ? (
-          "Whale-come " + loginContext.username + "!"
-        ) : (
-          <Link to="/login" onClick={() => closeMenu()}>
-            {" "}
-            Login{" "}
-          </Link>
-        )}
+          <span className="mobile__welcome-message">
+            Whale-come {loginContext.username}!
+          </span>
+        ) : null}
       </div>
       <Menu isOpen={navbarOpen} onClose={closeMenu} onOpen={openMenu} right>
         <Link
@@ -45,7 +45,7 @@ export const MobileNavbar: React.FunctionComponent = () => {
           to="/sightings"
           onClick={() => closeMenu()}
         >
-          Sightings
+          All sightings
         </Link>
         <Link
           id="ReportSighting"
@@ -61,7 +61,7 @@ export const MobileNavbar: React.FunctionComponent = () => {
           to="/plantrip"
           onClick={() => closeMenu()}
         >
-          Plan a Trip!
+          Plan a Trip
         </Link>
         {!loginContext.isLoggedIn ? (
           <Link
@@ -75,30 +75,22 @@ export const MobileNavbar: React.FunctionComponent = () => {
         ) : (
           <></>
         )}
-        <div>
-          {!loginContext.isLoggedIn ? (
-            <div>
-              <Link
-                className="button is-primary"
-                to="/login"
-                onClick={() => closeMenu()}
-              >
-                Login
-              </Link>
-            </div>
-          ) : (
-            <Link
-              to="/"
-              className="button is-primary"
-              onClick={() => {
-                loginContext.logOut();
-                closeMenu();
-              }}
-            >
-              Logout
-            </Link>
-          )}
-        </div>
+        {!loginContext.isLoggedIn ? (
+          <Link className="menu-item" to="/login" onClick={() => closeMenu()}>
+            Login
+          </Link>
+        ) : (
+          <Link
+            to="/"
+            className="menu-item"
+            onClick={() => {
+              loginContext.logOut();
+              closeMenu();
+            }}
+          >
+            Logout
+          </Link>
+        )}
       </Menu>
     </div>
   );

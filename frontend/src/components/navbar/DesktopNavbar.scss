@@ -1,23 +1,14 @@
 @import "../../styles/constants.scss";
 
 .desktop-navbar {
-  background-color: #bfd2d9; //$color-background;
+  background-color: $color-block-blackground;
   display: flex;
   height: 100px;
+  padding: 0 20px;
 
   @media (max-width: 900px) {
     display: none;
   }
-}
-
-.desktop__login {
-  display: flex;
-  flex-grow: 1;
-  align-items: center;
-}
-
-.desktop__logo {
-  height: 100%;
 }
 
 .desktop__menubar {
@@ -25,52 +16,65 @@
   margin: 0;
   padding: 0;
   display: flex;
-  align-items: top;
+  align-items: center;
   overflow: visible;
 
   .desktop__menuitem {
     display: flex;
     align-items: center;
     height: 100%;
-    padding: 10px;
+    padding: 15px;
+    position: relative;
+
+    a,
+    span {
+      color: $color-font;
+      text-decoration: none;
+    }
+
+    &:hover {
+      & > a,
+      span {
+        color: $color-background;
+      }
+
+      .desktop__submenu {
+        display: block;
+      }
+    }
   }
 }
 
-// .navbar__horizontal {
-//   display: block;
-//   .navbar__horizontal_content {
-//     display: grid;
-//     grid-template-columns: 0.3fr 0.7fr;
-//     height: 2rem;
-//     .navbar__horizontal_content_left {
-//       grid-column: 1/2;
-//     }
-//     .navbar__horizontal_content_right {
-//       grid-column: 2/3;
-//       text-align: right;
-//       overflow: hidden;
-//       .ul {
-//         list-style-type: none;
-//         margin: 0;
-//         padding: 0;
-//         overflow: hidden;
-//         background-color: #38444d;
-//       }
+.desktop__submenu {
+  background-color: $color-block-blackground;
+  display: none;
+  padding: 0 15px 0;
+  position: absolute;
+  top: 100%;
+  width: max-content;
+}
 
-//       .li {
-//         float: left;
-//       }
+.desktop__welcome {
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+}
 
-//       .menu-item {
-//         text-align: center;
-//         padding: 14px 16px;
-//         text-decoration: none;
+.desktop__logo {
+  height: 60%;
+}
 
-//       }
-//       .menu-item:hover {
-//         background-color: $color-background;
-//         color: white;
-//       }
-//     }
-//   }
-// }
+.desktop__logo-link {
+  display: flex;
+  align-items: center;
+}
+
+.desktop__welcome-message {
+  color: white;
+  margin: 15px;
+}
+
+.desktop_down-arrow {
+  font-size: 0.6em;
+  padding: 2px 5px 0;
+}
