@@ -8,9 +8,11 @@ export const DesktopNavbar: React.FunctionComponent = () => {
 
   return (
     <div className="navbar__menu navbar__horizontal">
-      <Link to="/">
-        <img src="/logo.png" alt="Whale Spotting logo" />
-      </Link>
+      <li>
+        <Link to="/">
+          <img src="/logo.png" alt="Whale Spotting logo" />
+        </Link>{" "}
+      </li>
 
       <div className="navbar__horizontal_content">
         <div className="navbar__horizontal_content_left">
@@ -33,31 +35,27 @@ export const DesktopNavbar: React.FunctionComponent = () => {
         </div>
 
         <div className="navbar__horizontal_content_right">
-          <Link id="home" className="menu-item" to="/">
-            Home
-          </Link>
-
-          <Link id="sightings" className="menu-item" to="/sightings">
-            Sightings
-          </Link>
-          <Link
-            id="ReportSighting"
-            className="menu-item"
-            to="/sightings/create"
-          >
-            Report a sighting
-          </Link>
-
-          <Link id="plantrip" className="menu-item" to="/plantrip">
-            Plan a Trip!
-          </Link>
-          {!loginContext.isLoggedIn ? (
-            <Link id="signup" className="menu-item" to="/sign-up">
-              Sign Up
-            </Link>
-          ) : (
-            <></>
-          )}
+          <ul>
+            <li>
+              <Link to="/"> Home </Link>
+            </li>
+            <li>
+              <Link to="/sightings"> Sightings </Link>
+            </li>
+            <li>
+              <Link to="/sightings/create">Report a sighting </Link>
+            </li>
+            <li>
+              <Link to="/plantrip"> Plan a Trip! </Link>
+            </li>
+            {!loginContext.isLoggedIn ? (
+              <li>
+                <Link to="/sign-up"> Sign Up </Link>
+              </li>
+            ) : (
+              <></>
+            )}
+          </ul>
         </div>
       </div>
     </div>

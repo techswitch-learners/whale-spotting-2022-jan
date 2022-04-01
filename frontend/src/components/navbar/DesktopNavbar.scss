@@ -5,30 +5,43 @@
 }
 
 @media (min-width: 900px) {
-  .navbar__horizontal {
-    display: block;
-    .navbar__horizontal_content {
-      display: grid;
-      grid-template-columns: 0.3fr 0.7fr;
-      height: 2rem;
-      .navbar__horizontal_content_left {
-        grid-column: 1/2;
-      }
-      .navbar__horizontal_content_right {
-        grid-column: 2/3;
-        text-align: right;
-        overflow: hidden;
-
-        .menu-item {
-          text-align: center;
-          padding: 14px 16px;
-          text-decoration: none;
-        }
-        .menu-item:hover {
-          background-color: $color-background;
-          color: white;
-        }
-      }
-    }
-  }
 }
+
+// .navbar__horizontal {
+//   display: block;
+//   .navbar__horizontal_content {
+//     display: grid;
+//     grid-template-columns: 0.3fr 0.7fr;
+//     height: 2rem;
+//     .navbar__horizontal_content_left {
+//       grid-column: 1/2;
+//     }
+//     .navbar__horizontal_content_right {
+//       grid-column: 2/3;
+//       text-align: right;
+//       overflow: hidden;
+//       .ul {
+//         list-style-type: none;
+//         margin: 0;
+//         padding: 0;
+//         overflow: hidden;
+//         background-color: #38444d;
+//       }
+
+//       .li {
+//         float: left;
+//       }
+
+//       .menu-item {
+//         text-align: center;
+//         padding: 14px 16px;
+//         text-decoration: none;
+
+//       }
+//       .menu-item:hover {
+//         background-color: $color-background;
+//         color: white;
+//       }
+//     }
+//   }
+// }
