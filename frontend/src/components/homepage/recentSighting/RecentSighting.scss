@@ -1,11 +1,5 @@
 @import "../../../styles/constants.scss";
 
-@media (min-width: 1280px) {
-  .recent-sighting {
-    font-size: 5em;
-  }
-}
-
 .recent-sighting__img {
   border-color: $color-background;
   border-radius: 45%;
@@ -69,8 +63,23 @@
 }
 .recent-sighting__text__description {
   font-style: italic;
+  font-size: medium;
 }
 
 .recent-sighting__box-heading {
   font-size: 1.2em;
+}
+@media (min-width: 1024px) {
+  .recent-sighting__text__description {
+    font-size: 1em;
+  }
+  .recent-sighting__text {
+    font-size: 1.8em;
+  }
+  .recent-sighting__left {
+    font-size: 1.8em;
+  }
+  .recent-sighting__box-heading {
+    font-size: 1.5em;
+  }
 }

@@ -21,11 +21,15 @@ export function PopularLocations() {
           <section className="popular-locations__text popular-locations__left">
             <ul className="popular-locations__list-item">
               <li>
-                <h5>{popularLocations[0].name}:</h5>
+                <h5 className="popular-locations__list-item-heading">
+                  {popularLocations[0].name}:
+                </h5>
                 {popularLocations[0].sightings.length} whale sightings
               </li>
               <li>
-                <h5>{popularLocations[1].name}:</h5>
+                <h5 className="popular-locations__list-item-heading">
+                  {popularLocations[1].name}:
+                </h5>
                 {popularLocations[1].sightings.length} whale sightings
               </li>
             </ul>
