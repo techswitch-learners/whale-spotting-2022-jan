@@ -49,6 +49,29 @@
   padding-left: 0;
   font-size: medium;
 }
+.popular-locations__list-item-heading {
+  font-size: 1.2em;
+}
 .popular-locations__box-heading {
   font-size: 1.2em;
+}
+@media (min-width: 1024px) {
+  .popular-locations__text__description {
+    font-size: 1em;
+  }
+  .popular-locations__text {
+    font-size: 1.8em;
+  }
+  .popular-locations__left {
+    font-size: 1.3em;
+  }
+  .popular-locations__box-heading {
+    font-size: 1.5em;
+  }
+  .popular-locations__list-item {
+    font-size: 1.3em;
+  }
+  .popular-locations__list-item-heading {
+    font-size: 1.4em;
+  }
 }
