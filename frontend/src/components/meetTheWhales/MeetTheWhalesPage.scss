@@ -1,0 +1,128 @@
+@import "../../styles/constants.scss";
+.species__list__body {
+  font-family: $font-family;
+  background-color: $color-background;
+}
+.species__list__title {
+  padding-top: 0.5em;
+  color: $color-font;
+  text-align: center;
+}
+.species__list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  list-style-type: none;
+  box-sizing: content-box;
+}
+.species__list__item {
+  list-style-type: none;
+  flex-grow: 1;
+  align-self: end;
+  position: relative;
+  margin: 1rem;
+}
+
+.species__card {
+  background-color: $color-secondary;
+  border: solid;
+  border-width: 0.2rem;
+  border-color: #3b89ac;
+  border-radius: 25px;
+
+  .species__card__title {
+    padding-top: 0.5em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    text-align: center;
+    color: #22646e;
+  }
+
+  .species__image {
+    margin-top: 2.75em;
+    text-align: center;
+    border-radius: 5%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    max-width: 90%;
+    margin-bottom: 2.75em;
+  }
+
+  .species__card__info {
+    padding-left: 1.5em;
+    margin-bottom: 0.5em;
+    margin: 0.3rem;
+    color: #003851;
+  }
+}
+
+@media (min-width: 900px) {
+  .species__card {
+    margin-left: 5em;
+    margin-right: 5em;
+    display: grid;
+    grid-template-columns: 0.4fr 0.6fr;
+    grid-template-rows: 0.2fr 0.8fr;
+    .species__card__title {
+      padding-top: 2em;
+      text-align: left;
+      grid-column: 2/3;
+      grid-row: 1/1;
+      width: 100%;
+    }
+    .species__image {
+      max-width: 90%;
+      margin-bottom: 8em;
+      border: #003851;
+      grid-column: 1/2;
+      grid-row: 2/2;
+    }
+    .species__card__info {
+      font-size: large;
+      padding-top: 2.75em;
+      grid-column: 2/3;
+      grid-row: 2/3;
+    }
+  }
+  .species__list__item {
+    padding: 1em;
+    width: 100%;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 900px) {
+  .species__card {
+    margin-left: 3em;
+    margin-right: 3em;
+    display: grid;
+    grid-template-columns: 0.5fr 0.5fr;
+    grid-template-rows: 0.2fr 0.8fr;
+    .species__card__title {
+      padding-top: 2em;
+      text-align: center;
+      grid-column: 1/3;
+      grid-row: 1/1;
+      width: 100%;
+    }
+    .species__image {
+      max-width: 90%;
+      margin-bottom: 8em;
+      border: #003851;
+      grid-column: 1/2;
+      grid-row: 2/2;
+    }
+    .species__card__info {
+      align-items: center;
+      font-size: medium;
+      padding-top: 2.75em;
+      grid-column: 2/3;
+      grid-row: 2/3;
+    }
+  }
+  .species__list__item {
+    width: 100%;
+  }
+}
