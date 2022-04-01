@@ -56,8 +56,11 @@ function getAuthorizationHeader(username: string, password: string) {
   return `Basic ${btoa(`${username}:${password}`)}`;
 }
 
-export async function GetAllSightings(): Promise<Array<Sighting>> {
-  const response = await fetch(`https://localhost:5001/sightings`, {
+export async function GetAllSightings(
+  locationId: number
+): Promise<Array<Sighting>> {
+  const query = locationId ? `?locationId=${locationId}` : "";
+  const response = await fetch(`https://localhost:5001/sightings${query}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

@@ -7,14 +7,16 @@ import { LocationSelector } from "../../components/planATripPage/Locations/Locat
 
 export function SightingListPage(): JSX.Element {
   const [sightings, setSightings] = useState<Array<Sighting>>([]);
+  const [selectedLocationId, setSelectedLocationId] = useState<string>("");
+
   useEffect(() => {
-    GetAllSightings().then(setSightings);
-  }, []);
+    GetAllSightings(+selectedLocationId).then(setSightings);
+  }, [selectedLocationId]);
 
   return (
     <div className="sighting__list__body">
       <h1 className="sigthing__list__title">Sightings</h1>
-      <LocationSelector />
+      <LocationSelector setSelectedLocationId={setSelectedLocationId} />
       <ul className="list-group list-group-flush">
         {sightings.map((s, i) => (
           <li className="sighting__list__item" key={i}>

@@ -7,9 +7,10 @@ type Options = {
   label: string;
 };
 
-export function LocationSelector() {
+export function LocationSelector(props: {
+  setSelectedLocationId: (arg: string) => void;
+}) {
   const [locations, setLocations] = useState<Array<Location>>();
-  const [selectedLocationId, setSelectedLocationId] = useState<string>("");
   const options: Array<Options> = [];
 
   useEffect(() => {
@@ -37,8 +38,7 @@ export function LocationSelector() {
         <Select
           onChange={(v) => {
             if (isSelectOption(v)) {
-              setSelectedLocationId(v.value);
-              const selectedLocation = locations.find((e) => e.id == +v.value);
+              props.setSelectedLocationId(v.value);
             }
           }}
           options={options}
