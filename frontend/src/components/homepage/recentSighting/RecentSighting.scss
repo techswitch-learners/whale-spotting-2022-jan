@@ -1,5 +1,11 @@
 @import "../../../styles/constants.scss";
 
+@media (min-width: 1280px) {
+  .recent-sighting {
+    font-size: 5em;
+  }
+}
+
 .recent-sighting__img {
   border-color: $color-background;
   border-radius: 45%;
@@ -40,10 +46,10 @@
 .recent-sighting__text-container {
   display: flex;
   width: 98vw;
+  margin: 0 auto;
 }
 .recent-sighting__left {
   width: 60vw;
-  height: 40vh;
 }
 .recent-sighting__right {
   width: 30vw;
