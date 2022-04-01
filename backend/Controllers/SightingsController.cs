@@ -33,10 +33,9 @@ namespace WhaleSpotting.Controllers
         }
 
         [HttpGet("")]
-        public ActionResult<List<ExtendedSightingResponse>> GetAllSightings()
+        public ActionResult<List<ExtendedSightingResponse>> GetSightings([FromQuery] SearchRequest SearchTerm)
         {
-
-            return _sightingsRepo.GetAllSightings()
+            var results = _sightingsRepo.GetAllSightings()
             .Select( s => new ExtendedSightingResponse
             {
                 Id = s.Id,
@@ -68,7 +67,13 @@ namespace WhaleSpotting.Controllers
                         Email = s.CreatedBy.Email,
                         Username = s.CreatedBy.Username
                     }
-            }).ToList();
+            });
+
+            if (SearchTerm.LocationId != null)
+            {
+                return results.Where(s => s.Location.Id == SearchTerm.LocationId).ToList();
+            }
+            return results.ToList();
         }
 
         [HttpGet("recent")]
@@ -276,5 +281,4 @@ namespace WhaleSpotting.Controllers
             return Ok();
         }
     }
-
 }
