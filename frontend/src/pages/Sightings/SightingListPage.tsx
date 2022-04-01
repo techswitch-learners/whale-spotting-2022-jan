@@ -3,6 +3,7 @@ import "./SightingListPage.scss";
 import "../../styles/constants.scss";
 import { Sighting } from "../../clients/apiClients";
 import { GetAllSightings } from "../../clients/apiClients";
+import { LocationSelector } from "../../components/planATripPage/Locations/LocationSelector/LocationSelector";
 
 export function SightingListPage(): JSX.Element {
   const [sightings, setSightings] = useState<Array<Sighting>>([]);
@@ -13,6 +14,7 @@ export function SightingListPage(): JSX.Element {
   return (
     <div className="sighting__list__body">
       <h1 className="sigthing__list__title">Sightings</h1>
+      <LocationSelector />
       <ul className="list-group list-group-flush">
         {sightings.map((s, i) => (
           <li className="sighting__list__item" key={i}>
