@@ -1,11 +1,9 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./MeetTheWhalesPage.scss";
 import { fetchSpecies, Species } from "../../clients/apiClients";
-import { GetAllSightings } from "../../clients/apiClients";
 
 export function MeetTheWhalesPage(): JSX.Element {
   const [species, setSpecies] = useState<Array<Species>>([]);
-  const [speciesId, setSpeciesId] = useState<number>();
 
   useEffect(() => {
     fetchSpecies().then(setSpecies);
@@ -13,7 +11,7 @@ export function MeetTheWhalesPage(): JSX.Element {
 
   return (
     <div className="species__list__body">
-      <h1 className="species__list__title">Sightings</h1>
+      <h1 className="species__list__title">Meet the Whales!</h1>
       <ul className="list-group list-group-flush">
         {species.map((s, i) => (
           <li className="species__list__item" key={i}>
@@ -21,16 +19,19 @@ export function MeetTheWhalesPage(): JSX.Element {
               <h2 className="species__card__title">
                 {s.name} ({s.latinName})
               </h2>
-              <img
-                className="species__image"
-                src={s.photoUrl}
-                alt={s.description}
-                width="250px"
-                // height="300"
-              />
+              <figure className="species__image">
+                <img
+                  className="species__image"
+                  src={s.photoUrl}
+                  alt={s.description}
+                  width="250px"
+                />
+                <figcaption className="species__card__info--emphasis">
+                  Conservation status: {s.endangeredStatus}
+                </figcaption>
+              </figure>
               <div className="species__card__info">
-                <p>About: {s.description}</p>
-                <p>Conservation status: {s.endangeredStatus}</p>
+                <p>{s.description}</p>
               </div>
             </div>
           </li>
