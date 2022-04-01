@@ -14,11 +14,15 @@ export const Navbar: React.FunctionComponent = () => {
       <Link to="/plantrip" className="button is-primary">
         Plan a Trip!
       </Link>
+
       <Link to="/sign-up">Sign Up</Link>
       <span> </span>
       <Link to="/sightings/create">Report Sighting</Link>
       <span> </span>
       <Link to="/sightings">All Sightings</Link>
+      <Link to="/leaderboard" className="button is-primary">
+        Leaderboard
+      </Link>
       <div>
         {!loginContext.isLoggedIn ? (
           <div>

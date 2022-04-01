@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using WhaleSpotting.Models.Database;
 using WhaleSpotting.Models.Request;
+using  WhaleSpotting.Models.Response;
 using System.Security.Cryptography;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 
@@ -18,7 +19,7 @@ namespace WhaleSpotting.Repositories
         User GetByUsername(string username);
         User UpdateRole(int id, UpdateUserRoleRequest update);
 
-        List<User> GetLeaderboard();
+        List<LeaderboardEntry> GetLeaderboard();
     }
 
     public class UsersRepo : IUsersRepo
@@ -87,9 +88,9 @@ namespace WhaleSpotting.Repositories
             return user;
         }
 
-        public List<User> GetLeaderboard()
+        public List<LeaderboardEntry> GetLeaderboard()
         {
-            var x = 
+            var leaderboard = 
             _context.Sightings
             .GroupBy(sighting => sighting.CreatedByUserId)
             .Select(sighting => new {count = sighting.Count(), userId = sighting.Key})
@@ -97,9 +98,19 @@ namespace WhaleSpotting.Repositories
             .Join(_context.Users, sighting => sighting.userId, user => user.Id, (sighting, user) => 
             new{username = user.Username, count = sighting.count});
 
-            
-            
-            
+            List<LeaderboardEntry> leaderboardList = new List<LeaderboardEntry>();
+
+
+            foreach(var item in leaderboard)
+            {
+                leaderboardList.Add(new LeaderboardEntry{
+                    Username = item.username,
+                    Count = item.count});
+
+            }
+
+            return leaderboardList;
+
         }
     }
 }
