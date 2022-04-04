@@ -39,7 +39,7 @@
 
   .reportSighting__button {
     margin-bottom: 2em;
-    width: 50%;
+    width: 100%;
   }
 }
 
@@ -64,11 +64,19 @@
 @media (min-width: 900px) {
   .reportSighting__form {
     width: 50%;
+    .reportSighting__button {
+      margin-bottom: 2em;
+      width: 50%;
+    }
   }
 }
 
 @media (min-width: 600px) and (max-width: 900px) {
   .reportSighting__form {
     width: 70%;
+    .reportSighting__button {
+      margin-bottom: 2em;
+      width: 60%;
+    }
   }
 }
