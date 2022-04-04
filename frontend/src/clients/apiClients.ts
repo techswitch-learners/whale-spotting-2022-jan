@@ -1,3 +1,5 @@
+import { BsPrefixProps } from "react-bootstrap/esm/helpers";
+
 export interface User {
   id: number;
   name: string;
@@ -81,6 +83,12 @@ export const login = async (
   if (!response.ok) {
     throw new Error(JSON.stringify(await response.json()));
   }
+};
+
+export const isAdmin = async (username: string): Promise<boolean> => {
+  const response = await fetch(`https://localhost:5001/users/${username}`);
+  const user = await response.json();
+  return user.role === 0 ? false : true;
 };
 
 export async function createUser(newUser: NewUser) {

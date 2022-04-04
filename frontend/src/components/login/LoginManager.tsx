@@ -5,7 +5,7 @@ type LoginContextType = {
   isAdmin: boolean;
   username: string;
   password: string;
-  logIn: (username: string, password: string) => void;
+  logIn: (username: string, password: string, idAdmin: boolean) => void;
   logOut: () => void;
 };
 
@@ -28,11 +28,11 @@ export const LoginManager: React.FunctionComponent = ({ children }) => {
   const [contextPassword, setPassword] = useState("");
   const [Admin, setAdmin] = useState(false);
 
-  function logIn(username: string, password: string) {
+  function logIn(username: string, password: string, isAdmin: boolean) {
     setUsername(username);
     setPassword(password);
     setLoggedIn(true);
-    setAdmin(true);
+    setAdmin(isAdmin);
   }
 
   function logOut() {
