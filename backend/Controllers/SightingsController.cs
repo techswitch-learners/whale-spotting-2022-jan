@@ -79,48 +79,50 @@ namespace WhaleSpotting.Controllers
                     .Where(s => s.User.Id == UserSearchTerm.CreatedByUserId)
                     .ToList();
             }
-            else if (SearchTerm.LocationId != null)
+            
+            if (SearchTerm.LocationId != null && SpeciesSearchTerm.SpeciesId == null && UserSearchTerm.CreatedByUserId == null)
             {
-                if (UserSearchTerm != null) 
-                {
-                    return results
-                    .Where(s => s.Location.Id == SearchTerm.LocationId)
-                    .Where(s => s.User.Id == UserSearchTerm.CreatedByUserId)
-                    .ToList();
-                }
-
                 return results
                 .Where(s => s.Location.Id == SearchTerm.LocationId)
                 .ToList();
             }
-            else if (SpeciesSearchTerm.SpeciesId != null) 
-            {
-                if (SearchTerm.LocationId != null) 
-                {
-                    return results
-                     .Where(s => s.Location.Id == SearchTerm.LocationId)
-                     .Where(s => s.Species.Id == SpeciesSearchTerm.SpeciesId)
-                     .ToList();
-                }
 
+            if (SearchTerm.LocationId != null && UserSearchTerm != null && SpeciesSearchTerm.SpeciesId == null) 
+            {
                 return results
-                .Where(s => s.Species.Id == SpeciesSearchTerm.SpeciesId)
+                .Where(s => s.Location.Id == SearchTerm.LocationId)
+                .Where(s => s.User.Id == UserSearchTerm.CreatedByUserId)
                 .ToList();
             }
-            else if (UserSearchTerm.CreatedByUserId != null)
-            {
-                if (SpeciesSearchTerm != null) 
-                {
-                    return results
-                    .Where(s => s.User.Id == UserSearchTerm.CreatedByUserId)
-                    .Where(s => s.Species.Id == SpeciesSearchTerm.SpeciesId)
-                    .ToList();
-                }
 
-                return results
-                    .Where(s => s.User.Id == UserSearchTerm.CreatedByUserId)
-                    .ToList();
-            }
+            // else if (SpeciesSearchTerm.SpeciesId != null) 
+            // {
+            //     if (SearchTerm.LocationId != null) 
+            //     {
+            //         return results
+            //          .Where(s => s.Location.Id == SearchTerm.LocationId)
+            //          .Where(s => s.Species.Id == SpeciesSearchTerm.SpeciesId)
+            //          .ToList();
+            //     }
+
+            //     return results
+            //     .Where(s => s.Species.Id == SpeciesSearchTerm.SpeciesId)
+            //     .ToList();
+            // }
+            // else if (UserSearchTerm.CreatedByUserId != null)
+            // {
+            //     if (SpeciesSearchTerm != null) 
+            //     {
+            //         return results
+            //         .Where(s => s.User.Id == UserSearchTerm.CreatedByUserId)
+            //         .Where(s => s.Species.Id == SpeciesSearchTerm.SpeciesId)
+            //         .ToList();
+            //     }
+
+            //     return results
+            //         .Where(s => s.User.Id == UserSearchTerm.CreatedByUserId)
+            //         .ToList();
+            // }
 
             return results.ToList();
                 
