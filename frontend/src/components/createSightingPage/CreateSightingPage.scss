@@ -24,7 +24,7 @@
 
   label {
     grid-column: labels;
-    width: 100px;
+    width: 95%;
   }
 
   input,
@@ -34,6 +34,7 @@
     border: none;
     padding: 0.2em;
     grid-row: auto;
+    width: 100%;
   }
 
   .reportSighting__button {
