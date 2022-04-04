@@ -126,3 +126,24 @@
     width: 100%;
   }
 }
+
+.sighting__paginate {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  list-style: none;
+  text-decoration: none;
+  padding: 2em;
+}
+
+.nextLabel,
+.previousLabel {
+  text-decoration: none;
+  padding: 2em;
+}
+
+.sighting__paginate li {
+  padding: 0.25em;
+  text-decoration: none;
+}

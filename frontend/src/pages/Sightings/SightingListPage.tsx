@@ -53,6 +53,7 @@ export function SightingListPage(): JSX.Element {
       </ul>
 
       <ReactPaginate
+        className="sighting__paginate"
         previousLabel={"Previous"}
         nextLabel={"Next"}
         pageCount={pageCount}
