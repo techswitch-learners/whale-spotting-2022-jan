@@ -37,13 +37,19 @@ export interface Sighting {
   approvedBy: User;
 }
 
+export interface EndangeredStatus {
+  id: number;
+  name: string;
+  description: string;
+}
+
 export interface Species {
   id: number;
   name: string;
   latinName: string;
   photoUrl: string;
   description: string;
-  endangeredStatus: string;
+  endangeredStatus: EndangeredStatus;
 }
 
 export interface NewSighting {

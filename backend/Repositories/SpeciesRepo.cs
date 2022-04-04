@@ -1,10 +1,7 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using WhaleSpotting.Models.Database;
-using WhaleSpotting.Models.Request;
-using System.Security.Cryptography;
-using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+using Microsoft.EntityFrameworkCore;
 
 namespace WhaleSpotting.Repositories
 {
@@ -26,6 +23,7 @@ namespace WhaleSpotting.Repositories
         {
             return _context
                 .Species
+                .Include(e => e.EndangeredStatus)
                 .ToList();
         }
         public Species Create(Species newSpecies, int userId)
