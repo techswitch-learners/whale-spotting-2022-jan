@@ -25,6 +25,18 @@ export function SightingListPage(): JSX.Element {
   return (
     <div className="sighting__list__body">
       <h1 className="sigthing__list__title">Sightings</h1>
+      <ReactPaginate
+        className="sighting__paginate"
+        previousLabel={"Previous"}
+        nextLabel={"Next"}
+        pageCount={pageCount}
+        onPageChange={handlePageClick}
+        containerClassName={"pagination"}
+        previousLinkClassName={"pagintion__link"}
+        nextLinkClassName={"pagintion__link"}
+        disabledClassName={"pagintion__link--disabled"}
+        activeClassName={"pagintion__link--active"}
+      />
       <ul className="list-group list-group-flush">
         {sightings.slice(offset, offset + perPage).map((s, i) => (
           <li className="sighting__list__item" key={i}>
