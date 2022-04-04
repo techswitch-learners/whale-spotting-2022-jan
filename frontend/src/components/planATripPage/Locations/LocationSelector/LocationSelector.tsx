@@ -34,8 +34,8 @@ export function LocationSelector(props: {
   return (
     <div>
       <section className="plan-a-trip__location">
-        <p className="plan-a-trip__text">Choose a location</p>
         <Select
+          placeholder="filter by location"
           onChange={(v) => {
             if (isSelectOption(v)) {
               props.setSelectedLocationId(v.value);
