@@ -212,3 +212,10 @@ export const getPopularLocations = async () => {
   }
   return data;
 };
+
+export async function fetchEndangeredStatus(): Promise<
+  Array<EndangeredStatus>
+> {
+  const response = await fetch(`https://localhost:5001/endangered`);
+  return await response.json();
+}
