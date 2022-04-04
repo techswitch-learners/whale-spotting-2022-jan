@@ -17,6 +17,7 @@ namespace WhaleSpotting.Models.Database
         public string Description { get; set; }
         [ForeignKey("EndangeredStatusId")]
         public int EndangeredStatusId { get; set; }
+        public EndangeredStatus EndangeredStatus { get; set; }
         
     }
 }
