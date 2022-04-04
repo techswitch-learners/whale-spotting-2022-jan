@@ -10,7 +10,8 @@ namespace WhaleSpotting.Repositories
 {
     public interface ISpeciesRepo
     {
-        public List<Species> GetAllSpecies();
+        List<Species> GetAllSpecies();
+        Species Create(Species newSpecies, int userId);
     }
 
     public class SpeciesRepo : ISpeciesRepo
@@ -26,6 +27,20 @@ namespace WhaleSpotting.Repositories
             return _context
                 .Species
                 .ToList();
+        }
+        public Species Create(Species newSpecies, int userId)
+        {
+            var insertedResult = _context.Species.Add( 
+                new Species
+                {
+                    Name = newSpecies.Name,
+                    LatinName = newSpecies.LatinName,
+                    PhotoUrl = newSpecies.PhotoUrl,
+                    Description = newSpecies.Description,
+                    EndangeredStatus = newSpecies.EndangeredStatus
+                });
+            _context.SaveChanges();
+            return insertedResult.Entity;
         }
     }
 }
