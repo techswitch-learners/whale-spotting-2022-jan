@@ -41,6 +41,9 @@ export const DesktopNavbar: React.FunctionComponent = () => {
         <li className="desktop__menuitem">
           <Link to="/plantrip"> Plan a Trip</Link>
         </li>
+        <li className="desktop__menuitem">
+          <Link to="/species/meetwhales"> Meet the Whales</Link>
+        </li>
         {!loginContext.isLoggedIn ? (
           <li className="desktop__menuitem">
             <Link to="/sign-up"> Sign Up </Link>

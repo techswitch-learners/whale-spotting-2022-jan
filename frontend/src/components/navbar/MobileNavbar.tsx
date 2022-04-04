@@ -63,6 +63,14 @@ export const MobileNavbar: React.FunctionComponent = () => {
         >
           Plan a Trip
         </Link>
+        <Link
+          id="meetwhales"
+          className="menu-item"
+          to="/species/meetwhales"
+          onClick={() => closeMenu()}
+        >
+          Meet the Whales
+        </Link>
         {!loginContext.isLoggedIn ? (
           <Link
             id="signup"
