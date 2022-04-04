@@ -128,13 +128,14 @@
 }
 
 .sighting__paginate {
-  text-align: center;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 15px 10px;
+  color: aliceblue;
   list-style: none;
-  text-decoration: none;
-  padding: 2em;
 }
 
 .nextLabel,
@@ -146,4 +147,11 @@
 .sighting__paginate li {
   padding: 0.25em;
   text-decoration: none;
+}
+.sighting__paginate a {
+  text-decoration: none;
+  border: 2px solid #3b89ac;
+  border-radius: 7px;
+  padding: 5px 12px;
+  color: white;
 }

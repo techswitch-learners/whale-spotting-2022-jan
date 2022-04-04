@@ -51,19 +51,20 @@ export function SightingListPage(): JSX.Element {
           </li>
         ))}
       </ul>
-
-      <ReactPaginate
-        className="sighting__paginate"
-        previousLabel={"Previous"}
-        nextLabel={"Next"}
-        pageCount={pageCount}
-        onPageChange={handlePageClick}
-        containerClassName={"pagination"}
-        previousLinkClassName={"pagintion__link"}
-        nextLinkClassName={"pagintion__link"}
-        disabledClassName={"pagintion__link--disabled"}
-        activeClassName={"pagintion__link--active"}
-      />
+      <div className="paginate__wrapper">
+        <ReactPaginate
+          className="sighting__paginate"
+          previousLabel={"Previous"}
+          nextLabel={"Next"}
+          pageCount={pageCount}
+          onPageChange={handlePageClick}
+          containerClassName={"pagination"}
+          previousLinkClassName={"pagintion__link"}
+          nextLinkClassName={"pagintion__link"}
+          disabledClassName={"pagintion__link--disabled"}
+          activeClassName={"pagintion__link--active"}
+        />
+      </div>
     </div>
   );
 }
