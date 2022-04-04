@@ -60,6 +60,14 @@ export interface NewSighting {
   photoUrl: string;
 }
 
+export interface NewSpecies {
+  name: string;
+  latinName: string;
+  photoUrl: string;
+  description: string;
+  endangeredStatusId: number;
+}
+
 function getAuthorizationHeader(username: string, password: string) {
   return `Basic ${btoa(`${username}:${password}`)}`;
 }
@@ -218,4 +226,23 @@ export async function fetchEndangeredStatus(): Promise<
 > {
   const response = await fetch(`https://localhost:5001/endangered`);
   return await response.json();
+}
+
+export async function createSpecies(
+  newSpecies: NewSpecies,
+  username: string,
+  password: string
+) {
+  const response = await fetch(`https://localhost:5001/species/create`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: getAuthorizationHeader(username, password),
+    },
+    body: JSON.stringify(newSpecies),
+  });
+
+  if (!response.ok) {
+    throw new Error(await response.json());
+  }
 }

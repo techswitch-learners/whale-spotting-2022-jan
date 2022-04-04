@@ -36,7 +36,7 @@ namespace WhaleSpotting.Controllers
                 
         [HttpPost]
         [Route("create")]
-        public ActionResult Create([FromBody] Species newSpecies, [FromHeader(Name = "Authorization")] string authHeader)
+        public ActionResult Create([FromBody] CreateSpeciesRequest newSpecies, [FromHeader(Name = "Authorization")] string authHeader)
         {
             if (!ModelState.IsValid)
             {
