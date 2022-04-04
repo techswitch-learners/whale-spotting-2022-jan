@@ -33,7 +33,10 @@ namespace WhaleSpotting.Controllers
         }
 
         [HttpGet("")]
-        public ActionResult<List<ExtendedSightingResponse>> GetSightings([FromQuery] LocationSearchRequest SearchTerm, [FromQuery] SpeciesSearchRequest SpeciesSearchTerm)
+        public ActionResult<List<ExtendedSightingResponse>> GetSightings([FromQuery] LocationSearchRequest SearchTerm, 
+        [FromQuery] SpeciesSearchRequest SpeciesSearchTerm, 
+        [FromQuery] UserSearchRequest UserSearchTerm)
+
         {
             var results = _sightingsRepo.GetAllSightings()
             .Select( s => new ExtendedSightingResponse
@@ -69,25 +72,63 @@ namespace WhaleSpotting.Controllers
                     }
             });
 
-            if (SearchTerm.LocationId != null)
+            if (SearchTerm.LocationId != null && SpeciesSearchTerm.SpeciesId != null && UserSearchTerm != null) {
+             return results
+                    .Where(s => s.Location.Id == SearchTerm.LocationId)
+                    .Where(s => s.Species.Id == SpeciesSearchTerm.SpeciesId)
+                    .Where(s => s.User.Id == UserSearchTerm.CreatedByUserId)
+                    .ToList();
+            }
+            else if (SearchTerm.LocationId != null)
             {
-                if (SpeciesSearchTerm.SpeciesId != null)
+                if (UserSearchTerm != null) 
                 {
+                    return results
+                    .Where(s => s.Location.Id == SearchTerm.LocationId)
+                    .Where(s => s.User.Id == UserSearchTerm.CreatedByUserId)
+                    .ToList();
+                }
+
                 return results
                 .Where(s => s.Location.Id == SearchTerm.LocationId)
+                .ToList();
+            }
+            else if (SpeciesSearchTerm.SpeciesId != null) 
+            {
+                if (SearchTerm.LocationId != null) 
+                {
+                    return results
+                     .Where(s => s.Location.Id == SearchTerm.LocationId)
+                     .Where(s => s.Species.Id == SpeciesSearchTerm.SpeciesId)
+                     .ToList();
+                }
+
+                return results
                 .Where(s => s.Species.Id == SpeciesSearchTerm.SpeciesId)
                 .ToList();
-                }
-                return results
-                .Where(s => s.Location.Id == SearchTerm.LocationId).ToList();
             }
-            if (SpeciesSearchTerm.SpeciesId != null)
+            else if (UserSearchTerm.CreatedByUserId != null)
             {
-                return results.Where(s => s.Species.Id == SpeciesSearchTerm.SpeciesId)
-                .ToList();
+                if (SpeciesSearchTerm != null) 
+                {
+                    return results
+                    .Where(s => s.User.Id == UserSearchTerm.CreatedByUserId)
+                    .Where(s => s.Species.Id == SpeciesSearchTerm.SpeciesId)
+                    .ToList();
+                }
+
+                return results
+                    .Where(s => s.User.Id == UserSearchTerm.CreatedByUserId)
+                    .ToList();
             }
+
             return results.ToList();
+                
         }
+
+        
+
+        
 
         [HttpGet("recent")]
         public ActionResult<ExtendedSightingResponse> GetMostRecentSighting()
