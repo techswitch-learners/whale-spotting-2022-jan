@@ -57,15 +57,21 @@ function getAuthorizationHeader(username: string, password: string) {
 }
 
 export async function GetAllSightings(
-  locationId: number
+  locationId: number,
+  speciesId: number
 ): Promise<Array<Sighting>> {
-  const query = locationId ? `?locationId=${locationId}` : "";
-  const response = await fetch(`https://localhost:5001/sightings${query}`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+  const extraQueries = locationId || speciesId ? `?` : "";
+  const query = locationId ? `locationId=${locationId}&` : "";
+  const query2 = speciesId ? `speciesId=${speciesId}&` : "";
+  const response = await fetch(
+    `https://localhost:5001/sightings${extraQueries}${query}${query2}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
 
   return await response.json();
 }

@@ -33,7 +33,7 @@ namespace WhaleSpotting.Controllers
         }
 
         [HttpGet("")]
-        public ActionResult<List<ExtendedSightingResponse>> GetSightings([FromQuery] SearchRequest SearchTerm)
+        public ActionResult<List<ExtendedSightingResponse>> GetSightings([FromQuery] LocationSearchRequest SearchTerm, [FromQuery] SpeciesSearchRequest SpeciesSearchTerm)
         {
             var results = _sightingsRepo.GetAllSightings()
             .Select( s => new ExtendedSightingResponse
@@ -71,7 +71,20 @@ namespace WhaleSpotting.Controllers
 
             if (SearchTerm.LocationId != null)
             {
-                return results.Where(s => s.Location.Id == SearchTerm.LocationId).ToList();
+                if (SpeciesSearchTerm.SpeciesId != null)
+                {
+                return results
+                .Where(s => s.Location.Id == SearchTerm.LocationId)
+                .Where(s => s.Species.Id == SpeciesSearchTerm.SpeciesId)
+                .ToList();
+                }
+                return results
+                .Where(s => s.Location.Id == SearchTerm.LocationId).ToList();
+            }
+            if (SpeciesSearchTerm.SpeciesId != null)
+            {
+                return results.Where(s => s.Species.Id == SpeciesSearchTerm.SpeciesId)
+                .ToList();
             }
             return results.ToList();
         }

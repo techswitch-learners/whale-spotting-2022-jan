@@ -1,6 +1,6 @@
 namespace WhaleSpotting.Models.Request
 {
-    public class SearchRequest
+    public class LocationSearchRequest
     {
         public int? LocationId { get; set; }
     }

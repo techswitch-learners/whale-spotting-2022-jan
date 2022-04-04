@@ -4,19 +4,22 @@ import "../../styles/constants.scss";
 import { Sighting } from "../../clients/apiClients";
 import { GetAllSightings } from "../../clients/apiClients";
 import { LocationSelector } from "../../components/planATripPage/Locations/LocationSelector/LocationSelector";
+import { SpeciesSelector } from "./SpeciesSelector/SpeciesSelector";
 
 export function SightingListPage(): JSX.Element {
   const [sightings, setSightings] = useState<Array<Sighting>>([]);
   const [selectedLocationId, setSelectedLocationId] = useState<string>("");
+  const [selectedSpeciesId, setSelectedSpeciesId] = useState<string>("");
 
   useEffect(() => {
-    GetAllSightings(+selectedLocationId).then(setSightings);
-  }, [selectedLocationId]);
+    GetAllSightings(+selectedLocationId, +selectedSpeciesId).then(setSightings);
+  }, [selectedLocationId, selectedSpeciesId]);
 
   return (
     <div className="sighting__list__body">
       <h1 className="sigthing__list__title">Sightings</h1>
       <LocationSelector setSelectedLocationId={setSelectedLocationId} />
+      <SpeciesSelector setSelectedSpeciesId={setSelectedSpeciesId} />
       <ul className="list-group list-group-flush">
         {sightings.map((s, i) => (
           <li className="sighting__list__item" key={i}>
