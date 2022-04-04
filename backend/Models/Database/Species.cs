@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WhaleSpotting.Models.Database
 {
@@ -14,7 +15,8 @@ namespace WhaleSpotting.Models.Database
         public string PhotoUrl { get; set; }
 
         public string Description { get; set; }
-
-        public string EndangeredStatus { get; set; }
+        [ForeignKey("EndangeredStatusId")]
+        public int EndangeredStatusId { get; set; }
+        
     }
 }

@@ -37,7 +37,7 @@ namespace WhaleSpotting.Repositories
                     LatinName = newSpecies.LatinName,
                     PhotoUrl = newSpecies.PhotoUrl,
                     Description = newSpecies.Description,
-                    EndangeredStatus = newSpecies.EndangeredStatus
+                    EndangeredStatusId = newSpecies.EndangeredStatusId
                 });
             _context.SaveChanges();
             return insertedResult.Entity;

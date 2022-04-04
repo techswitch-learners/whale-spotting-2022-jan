@@ -58,7 +58,7 @@ namespace WhaleSpotting.Controllers
                         LatinName = s.Species.LatinName,
                         PhotoUrl = s.Species.PhotoUrl,
                         Description = s.Species.Description,
-                        EndangeredStatus = s.Species.EndangeredStatus
+                        EndangeredStatusId = s.Species.EndangeredStatusId
                     },
                 PhotoUrl = s.PhotoUrl,
                 User = new UserResponse
@@ -105,7 +105,7 @@ namespace WhaleSpotting.Controllers
                         LatinName = s.Species.LatinName,
                         PhotoUrl = s.Species.PhotoUrl,
                         Description = s.Species.Description,
-                        EndangeredStatus = s.Species.EndangeredStatus
+                        EndangeredStatusId = s.Species.EndangeredStatusId
                     },
                 PhotoUrl = s.PhotoUrl,
                 User = new UserResponse
