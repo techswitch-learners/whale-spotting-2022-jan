@@ -18,8 +18,14 @@ export function SightingListPage(): JSX.Element {
   return (
     <div className="sighting__list__body">
       <h1 className="sigthing__list__title">Sightings</h1>
-      <LocationSelector setSelectedLocationId={setSelectedLocationId} />
-      <SpeciesSelector setSelectedSpeciesId={setSelectedSpeciesId} />
+      <section className="sightings__filters">
+        <div className="sighting__filters__location">
+          <LocationSelector setSelectedLocationId={setSelectedLocationId} />
+        </div>
+        <div className="sighting__filters__species">
+          <SpeciesSelector setSelectedSpeciesId={setSelectedSpeciesId} />
+        </div>
+      </section>
       <ul className="list-group list-group-flush">
         {sightings.map((s, i) => (
           <li className="sighting__list__item" key={i}>
