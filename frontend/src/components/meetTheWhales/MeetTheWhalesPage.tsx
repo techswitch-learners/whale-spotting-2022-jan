@@ -1,38 +1,41 @@
 import { useEffect, useState } from "react";
 import "./MeetTheWhalesPage.scss";
-import { fetchSpecies, Species } from "../../clients/apiClients";
+import {
+  fetchSpecies,
+  Species,
+  Whales,
+  GetAllWhales,
+} from "../../clients/apiClients";
 
 export function MeetTheWhalesPage(): JSX.Element {
-  const [species, setSpecies] = useState<Array<Species>>([]);
+  const [whales, setWhales] = useState<Array<Whales>>([]);
 
   useEffect(() => {
-    fetchSpecies().then(setSpecies);
+    GetAllWhales().then(setWhales);
   }, []);
 
   return (
-    <div className="species__list__body">
-      <h1 className="species__list__title">Meet the Whales!</h1>
+    <div className="whales__list__body">
+      <h1 className="whales__list__title">Meet the Whales!</h1>
       <ul className="list-group list-group-flush">
-        {species.map((s, i) => (
-          <li className="species__list__item" key={i}>
-            <div className="species__card">
-              <h2 className="species__card__title">
-                {s.name} ({s.latinName})
-              </h2>
-              <figure className="species__image">
+        {whales.map((w, i) => (
+          <li className="whales__list__item" key={i}>
+            <div className="whales__card">
+              <h2 className="whales__card__title">{w.name}</h2>
+              <h3 className="whales__card__common-name">
+                ({w.species.name} {w.species.latinName})
+              </h3>
+              <figure className="whales__image">
                 <img
-                  className="species__image"
-                  src={s.photoUrl}
-                  alt={s.description}
+                  className="whales__image"
+                  src={w.photoUrl}
+                  alt={w.name}
                   width="250px"
                 />
-                <figcaption className="species__card__info--emphasis">
-                  Conservation status: {s.endangeredStatus}
+                <figcaption className="whales__card__info--emphasis">
+                  Conservation status: {w.species.endangeredStatus}
                 </figcaption>
               </figure>
-              <div className="species__card__info">
-                <p>{s.description}</p>
-              </div>
             </div>
           </li>
         ))}

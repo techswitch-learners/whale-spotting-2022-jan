@@ -22,5 +22,7 @@ namespace WhaleSpotting.Models.Database
         public string HashedPassword { get; set; }
 
         public byte[] Salt { get; set; }
+
+        public List<Whale> Whale { get; set; }
     }
 }

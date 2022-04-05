@@ -60,6 +60,13 @@ export interface Species {
   description: string;
   endangeredStatus: string;
 }
+export interface Whales {
+  id: number;
+  name: string;
+  photoUrl: string;
+  species: Species;
+  description: string;
+}
 
 export interface NewSighting {
   date: Date;
@@ -75,6 +82,16 @@ function getAuthorizationHeader(username: string, password: string) {
 
 export async function GetAllSightings(): Promise<Array<Sighting>> {
   const response = await fetch(`https://localhost:5001/sightings`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  return await response.json();
+}
+export async function GetAllWhales(): Promise<Array<Whales>> {
+  const response = await fetch(`https://localhost:5001/species/meetwhales`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

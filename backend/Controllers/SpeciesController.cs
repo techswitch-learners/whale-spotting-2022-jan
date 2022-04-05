@@ -14,12 +14,15 @@ namespace WhaleSpotting.Controllers
     public class SpeciesController : ControllerBase
     {
         private readonly ISpeciesRepo _speciesRepo;
+        private readonly IWhalesRepo _whalesRepo;
 
         public SpeciesController(
-            ISpeciesRepo speciesRepo
+            ISpeciesRepo speciesRepo,
+            IWhalesRepo whalesRepo
         )
         {
             _speciesRepo = speciesRepo;
+            _whalesRepo = whalesRepo;
         }
 
         [HttpGet("")]
@@ -27,6 +30,13 @@ namespace WhaleSpotting.Controllers
         {
             return _speciesRepo.GetAllSpecies();
         }
+
+         [HttpGet("meetwhales")]
+        public ActionResult<List<Whale>> WhaleList()
+        {
+            return _whalesRepo.GetAllWhales();
+        }
+
 
     }
 }
