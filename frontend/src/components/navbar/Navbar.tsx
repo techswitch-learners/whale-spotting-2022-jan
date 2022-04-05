@@ -21,6 +21,8 @@ export const Navbar: React.FunctionComponent = () => {
       <Link to="/sightings">All Sightings</Link>
       <Link to="/species/meetwhales">Meet the Whales!</Link>
       <span> </span>
+      <Link to="/admin">Admin</Link>
+      <span> </span>
       <div>
         {!loginContext.isLoggedIn ? (
           <div>

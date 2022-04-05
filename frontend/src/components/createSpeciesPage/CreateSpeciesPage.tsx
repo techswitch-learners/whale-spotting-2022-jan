@@ -55,19 +55,26 @@ export function CreateSpeciesPage(): JSX.Element {
   };
 
   return (
-    <main className="reportSighting">
-      <div className="reportSighting__header">
+    <main className="createSpecies">
+      <div className="createSpecies__header">
         <h1>Create Species</h1>
       </div>
 
       <form onSubmit={submitForm}>
-        <div className="reportSighting__form">
+        <div className="createSpecies__form">
           <label htmlFor="name">Name</label>
           <input
             id="name"
             placeholder="Name"
             value={name}
             onChange={(event) => setName(event.target.value)}
+          />
+          <label htmlFor="latinName">Latin Name</label>
+          <input
+            id="latinName"
+            placeholder="Latin Name"
+            value={latinName}
+            onChange={(event) => setLatinName(event.target.value)}
           />
           <label htmlFor="endangeredStatus">Endangered Status</label>
           <select
@@ -87,7 +94,7 @@ export function CreateSpeciesPage(): JSX.Element {
           <label htmlFor="description">Description</label>
           <textarea
             id="description"
-            placeholder="Describe your sighting"
+            placeholder="Describe whale species"
             rows={3}
             value={description}
             onChange={(event) => setDescription(event.target.value)}
@@ -101,21 +108,21 @@ export function CreateSpeciesPage(): JSX.Element {
           />
 
           <button
-            className="reportSighting__button btn btn-primary"
+            className="createSpecies__button btn btn-primary"
             disabled={status === "SUBMITTING"}
             type="submit"
           >
-            Create Sighting
+            Create Species
           </button>
           {status === "ERROR" ? (
-            <div className="reportSighting__error">
+            <div className="createSpecies__error">
               <p>ERROR: Please make sure all fields have been filled in</p>
             </div>
           ) : (
             <></>
           )}
           {status === "FINISHED" ? (
-            <div className="reportSighting__success">
+            <div className="createSpecies__success">
               Form submitted successfully.&ensp;
               <Link to="/species">List of species</Link>
             </div>

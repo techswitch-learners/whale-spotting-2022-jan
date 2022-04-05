@@ -24,7 +24,7 @@ export function MeetTheWhalesPage(): JSX.Element {
                   className="species__image"
                   src={s.photoUrl}
                   alt={s.description}
-                  width="250px"
+                  width="250"
                 />
                 <figcaption className="species__card__info--emphasis">
                   Conservation status: {s.endangeredStatus.name}
