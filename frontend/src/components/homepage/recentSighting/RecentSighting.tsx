@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import { getMostRecentSighting, Sighting } from "../../../clients/apiClients";
 import "./RecentSighting.scss";
+import { Link } from "react-router-dom";
+import { Button } from "react-bootstrap";
 
 export function RecentSighting() {
   const [recentSighting, setRecentSighting] = useState<Sighting>();
+
   useEffect(() => {
     getMostRecentSighting().then(setRecentSighting);
   }, []);
@@ -27,20 +30,45 @@ export function RecentSighting() {
 
     return (
       <section className="recent-sighting">
-        <h1>Most Recent Whale Sighting 🐳</h1>
-        <p>
-          {article} {recentSighting?.species.name} Spotted {diffDays} days ago
-          at {recentSighting?.location.name}
-        </p>
-        <div className="img-container">
-          <img
-            src={recentSighting?.photoUrl}
-            width="250px"
-            className="rounded-pill"
-          />
-          <p>Spotted by {recentSighting.user.username}</p>
-        </div>
-        <p className="p-5">{recentSighting?.description}</p>
+        <section>
+          <div className="recent-sighting__img-front">
+            <img src={recentSighting.photoUrl}></img>
+          </div>
+        </section>
+        <h1 className="recent-sighting__title">Most Recent Whale Sighting</h1>
+        <section className="recent-sighting__text-container">
+          <section className="recent-sighting__text recent-sighting__left">
+            <p>
+              {article} {recentSighting?.species.name} (Latin name:{" "}
+              {recentSighting.species.latinName}) spotted{" "}
+              <strong>
+                {diffDays} day{diffDays != 1 ? `s` : ``}
+              </strong>{" "}
+              ago at {recentSighting?.location.name} by{" "}
+              {recentSighting.user.username}.
+            </p>
+            <p className="recent-sighting__text__description">
+              {" "}
+              {recentSighting?.description}{" "}
+            </p>
+          </section>
+          <section className="recent-sighting__text recent-sighting__right">
+            <h2 className="recent-sighting__box-heading">
+              Report your whale sighting!
+            </h2>
+            <Link to="/sightings/create">
+              <Button
+                variant="light"
+                className="recent-sighting__post-sighting-button"
+              >
+                <img
+                  src="https://freepngimg.com/download/icon/1000188-spouting-whale-emoji-free-icon-hq.png"
+                  width="30"
+                />
+              </Button>{" "}
+            </Link>
+          </section>
+        </section>
       </section>
     );
   }

@@ -63,8 +63,7 @@ export function CreateSightingPage(): JSX.Element {
   return (
     <main className="reportSighting">
       <div className="reportSighting__header">
-        <h1>Hello {username}!</h1>
-        <h2>Report a Sighting</h2>
+        <h1>Report a Sighting</h1>
       </div>
 
       <form onSubmit={submitForm}>
