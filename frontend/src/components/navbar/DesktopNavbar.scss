@@ -1,0 +1,80 @@
+@import "../../styles/constants.scss";
+
+.desktop-navbar {
+  background-color: $color-block-blackground;
+  display: flex;
+  height: 100px;
+  padding: 0 20px;
+
+  @media (max-width: 900px) {
+    display: none;
+  }
+}
+
+.desktop__menubar {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  overflow: visible;
+
+  .desktop__menuitem {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 15px;
+    position: relative;
+
+    a,
+    span {
+      color: $color-font;
+      text-decoration: none;
+    }
+
+    &:hover {
+      & > a,
+      span {
+        color: $color-background;
+      }
+
+      .desktop__submenu {
+        display: block;
+      }
+    }
+  }
+}
+
+.desktop__submenu {
+  background-color: $color-block-blackground;
+  display: none;
+  padding: 0 15px 0;
+  position: absolute;
+  top: 100%;
+  width: max-content;
+}
+
+.desktop__welcome {
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+}
+
+.desktop__logo {
+  height: 60%;
+}
+
+.desktop__logo-link {
+  display: flex;
+  align-items: center;
+}
+
+.desktop__welcome-message {
+  color: white;
+  margin: 15px;
+}
+
+.desktop_down-arrow {
+  font-size: 0.6em;
+  padding: 2px 5px 0;
+}
