@@ -25,6 +25,9 @@ export function SightingListPage(): JSX.Element {
         <div className="sighting__filters__species">
           <SpeciesSelector setSelectedSpeciesId={setSelectedSpeciesId} />
         </div>
+        <div className="sighting__filters__species">
+          <UserSelector setSelectedSpeciesId={setSelectedSpeciesId} />
+        </div>
       </section>
       <ul className="list-group list-group-flush">
         {sightings.map((s, i) => (
