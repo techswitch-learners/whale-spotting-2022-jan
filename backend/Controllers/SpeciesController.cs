@@ -6,6 +6,8 @@ using WhaleSpotting.Repositories;
 using WhaleSpotting.Helpers;
 using System.Collections.Generic;
 using WhaleSpotting.Models.Database;
+using WhaleSpotting.Models.Response;
+using System.Linq;
 
 namespace WhaleSpotting.Controllers
 {
@@ -31,12 +33,38 @@ namespace WhaleSpotting.Controllers
             return _speciesRepo.GetAllSpecies();
         }
 
-         [HttpGet("meetwhales")]
-        public ActionResult<List<Whale>> WhaleList()
-        {
-            return _whalesRepo.GetAllWhales();
-        }
+        [HttpGet("meetwhales")]
+        // public ActionResult<List<Whale>> WhaleList()
+        // {
+        //     return _whalesRepo.GetAllWhales();
+        // }
 
+        public ActionResult<List<ExtendedWhaleResponse>> GetAllWhales()
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            return _whalesRepo.GetAllWhales()
+            .Select(w => new ExtendedWhaleResponse
+            {
+                Id = w.Id,
+                Name = w.Name,
+                Description = w.Description,
+                Species = w.Species,
+                PhotoUrl = w.PhotoUrl,
+                Users = w.User
+                        .Select(u => new UserResponse
+                        {
+                            Id = u.Id,
+                            Name = u.Name,
+                            Username = u.Username,
+                            Email = u.Email,
+                        })
+                        .ToList(),
+            }).ToList();
+        }
 
     }
 }
