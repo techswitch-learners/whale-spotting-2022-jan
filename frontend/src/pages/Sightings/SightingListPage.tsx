@@ -7,6 +7,7 @@ import {
 } from "../../clients/apiClients";
 import { GetAllSightings } from "../../clients/apiClients";
 import { LoginContext } from "../../components/login/LoginManager";
+import { parseJSON } from "date-fns";
 
 export function SightingListPage(): JSX.Element {
   const [sightings, setSightings] = useState<Array<Sighting>>([]);
@@ -33,7 +34,7 @@ export function SightingListPage(): JSX.Element {
 
   return (
     <div className="sighting__list__body">
-      <h1 className="sigthing__list__title">Sightings</h1>
+      <h1 className="sighting__list__title">Sightings</h1>
       <ul className="list-group list-group-flush">
         {sightings.map((s, i) => (
           <li className="sighting__list__item" key={i}>
@@ -45,22 +46,21 @@ export function SightingListPage(): JSX.Element {
                 className="sighting__image"
                 src={s.photoUrl}
                 alt={s.description}
-                width="700"
-                height="300"
+                width="250"
               />
               <div className="sighting__card__info">
                 <p>About: {s.description}</p>
                 <p>Sighting Location: {s.location.name}</p>
-                <p>On: {s.date}</p>
+                <p>On: {new Date(s.date).toLocaleDateString("en-gb")}</p>
                 <p>
                   Seen by: {s.user.name} ({s.user.username})
                 </p>
                 {s.approvedBy !== null ? <p>Confirmed ☑</p> : <></>}
 
                 {isAdmin ? (
-                  <div>
+                  <div className="sighting__card__btns">
                     <button
-                      value={s.id}
+                      className="sighting__button btn btn-primary"
                       disabled={!!s.approvedBy}
                       onClick={() => {
                         confirmWhaleSighting(s.id);
@@ -70,7 +70,7 @@ export function SightingListPage(): JSX.Element {
                       Confirm
                     </button>
                     <button
-                      value={s.id}
+                      className="sighting__button btn btn-primary"
                       onClick={() => {
                         deleteWhaleSighting(s.id);
                       }}

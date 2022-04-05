@@ -12,6 +12,21 @@ export interface NewUser {
   email: string;
   password: string;
 }
+export interface Species {
+  description: string;
+  name: string;
+  latinName: string;
+}
+
+export interface Sighting {
+  id: number;
+  date: Date;
+  location: Location;
+  description: string;
+  species: Species;
+  photoUrl: string;
+  user: User;
+}
 
 export interface Location {
   id: number;
