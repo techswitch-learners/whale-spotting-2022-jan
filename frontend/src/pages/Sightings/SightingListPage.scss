@@ -3,7 +3,7 @@
   font-family: $font-family;
   background-color: $color-background;
 }
-.sigthing__list__title {
+.sighting__list__title {
   padding-top: 0.5em;
   color: $color-font;
   text-align: center;
@@ -17,9 +17,10 @@
   box-sizing: content-box;
 }
 .sighting__list__item {
+  width: 95%;
   list-style-type: none;
   flex-grow: 1;
-  align-self: end;
+  align-self: center;
   position: relative;
   margin: 1rem;
 }
@@ -56,6 +57,20 @@
     margin-bottom: 0.5em;
     margin: 0.3rem;
     color: #003851;
+  }
+  .sighting__button {
+    margin-bottom: 2em;
+    width: 50%;
+    border: 1px solid transparent;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    border-radius: 0.25rem;
+    background-color: #3b89ac;
+    border-color: #3b89ac;
+  }
+  .sighting__card__btns {
+    align-items: center;
+    padding-right: 1.5em;
   }
 }
 
