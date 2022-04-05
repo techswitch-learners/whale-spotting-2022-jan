@@ -69,6 +69,10 @@ export interface NewSighting {
   photoUrl: string;
 }
 
+export interface ExternalSighting {
+  sightings: Sighting[];
+}
+
 function getAuthorizationHeader(username: string, password: string) {
   return `Basic ${btoa(`${username}:${password}`)}`;
 }
@@ -81,6 +85,19 @@ export async function GetAllSightings(): Promise<Array<Sighting>> {
     },
   });
 
+  return await response.json();
+}
+
+export async function GetExternalSightings(): Promise<ExternalSighting> {
+  const response = await fetch(
+    `https://whale-spotting-external-api.herokuapp.com/api/sightings`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
   return await response.json();
 }
 

@@ -4,16 +4,25 @@ import {
   approveSighting,
   deleteSighting,
   Sighting,
+  ExternalSighting,
 } from "../../clients/apiClients";
-import { GetAllSightings } from "../../clients/apiClients";
+import {
+  GetAllSightings,
+  GetExternalSightings,
+} from "../../clients/apiClients";
 import { LoginContext } from "../../components/login/LoginManager";
 
 export function SightingListPage(): JSX.Element {
   const [sightings, setSightings] = useState<Array<Sighting>>([]);
+  const [externalSightingsObject, setExternalSightingsObject] =
+    useState<ExternalSighting>();
+  const [combined, setCombined] = useState<Array<Sighting>>([]);
+
   const { username, password, isAdmin } = useContext(LoginContext);
 
   useEffect(() => {
-    GetAllSightings().then(setSightings);
+    // GetAllSightings().then(setSightings)
+    GetExternalSightings().then(setExternalSightingsObject);
   }, []);
 
   const confirmWhaleSighting = (sightingId: number) => {
@@ -31,11 +40,15 @@ export function SightingListPage(): JSX.Element {
     }
   };
 
+  if (externalSightingsObject == null) {
+    return <div>loading...</div>;
+  }
+
   return (
     <div className="sighting__list__body">
       <h1 className="sigthing__list__title">Sightings</h1>
       <ul className="list-group list-group-flush">
-        {sightings.map((s, i) => (
+        {externalSightingsObject.sightings.map((s, i) => (
           <li className="sighting__list__item" key={i}>
             <div className="sighting__card">
               <h2 className="sighting__card__title">
