@@ -28,9 +28,6 @@ const Routes: React.FunctionComponent = () => {
       <Route path="/sightings/create">
         {loginContext.isLoggedIn ? <CreateSightingPage /> : <Login />}
       </Route>
-      <Route path="/admin">
-        {loginContext.isAdmin ? <CreateSpeciesPage /> : <Login />}
-      </Route>
       <Route path="/sightings">
         <SightingListPage />
       </Route>
@@ -47,6 +44,9 @@ const Routes: React.FunctionComponent = () => {
       </Route>
       <Route path="/species/meetwhales">
         <MeetTheWhalesPage />
+      </Route>
+      <Route path="/species/create">
+        {loginContext.isAdmin ? <CreateSpeciesPage /> : <Login />}
       </Route>
       <Route path="/">
         <Home />

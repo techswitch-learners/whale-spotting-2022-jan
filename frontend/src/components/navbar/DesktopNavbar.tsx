@@ -44,6 +44,22 @@ export const DesktopNavbar: React.FunctionComponent = () => {
         <li className="desktop__menuitem">
           <Link to="/species/meetwhales"> Meet the Whales</Link>
         </li>
+        {loginContext.isAdmin ? (
+          <li className="desktop__menuitem">
+            <span>Admin</span>
+            <span className="desktop_down-arrow">&#9660;</span>
+            <ul className="desktop__submenu">
+              <li className="desktop__menuitem">
+                <Link to="/species/create">Create species </Link>
+              </li>
+              <li className="desktop__menuitem">
+                <Link to="/sightings/create">New Item</Link>
+              </li>
+            </ul>
+          </li>
+        ) : (
+          <></>
+        )}
         {!loginContext.isLoggedIn ? (
           <li className="desktop__menuitem">
             <Link to="/sign-up"> Sign Up </Link>
