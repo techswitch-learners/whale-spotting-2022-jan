@@ -15,15 +15,32 @@ import { parseJSON } from "date-fns";
 
 export function SightingListPage(): JSX.Element {
   const [sightings, setSightings] = useState<Array<Sighting>>([]);
-  const [externalSightingsObject, setExternalSightingsObject] =
-    useState<ExternalSighting>();
+  const [externalSightings, setExternalSightings] = useState<Array<Sighting>>(
+    []
+  );
   const [combined, setCombined] = useState<Array<Sighting>>([]);
 
   const { username, password, isAdmin } = useContext(LoginContext);
 
   useEffect(() => {
-    // GetAllSightings().then(setSightings)
-    GetExternalSightings().then(setExternalSightingsObject);
+    GetAllSightings().then(setSightings);
+    GetExternalSightings()
+      .then(setExternalSightings)
+      .then(() => setCombined(externalSightings.concat(sightings)));
+    Promise.all([GetAllSightings(), GetExternalSightings()]).then(
+      ([sightings, externalSightings]) => {
+        setCombined(
+          sightings
+            .concat(externalSightings)
+            .sort(
+              (a, b) =>
+                Date.parse(a.date.toString()) - Date.parse(b.date.toString())
+            )
+            .reverse()
+        );
+        console.log(combined);
+      }
+    );
   }, []);
 
   const confirmWhaleSighting = (sightingId: number) => {
@@ -41,7 +58,7 @@ export function SightingListPage(): JSX.Element {
     }
   };
 
-  if (externalSightingsObject == null) {
+  if (combined == null) {
     return <div>loading...</div>;
   }
 
@@ -49,7 +66,7 @@ export function SightingListPage(): JSX.Element {
     <div className="sighting__list__body">
       <h1 className="sighting__list__title">Sightings</h1>
       <ul className="list-group list-group-flush">
-        {externalSightingsObject.sightings.map((s, i) => (
+        {combined.map((s, i) => (
           <li className="sighting__list__item" key={i}>
             <div className="sighting__card">
               <h2 className="sighting__card__title">
@@ -65,9 +82,13 @@ export function SightingListPage(): JSX.Element {
                 <p>About: {s.description}</p>
                 <p>Sighting Location: {s.location.name}</p>
                 <p>On: {new Date(s.date).toLocaleDateString("en-gb")}</p>
-                <p>
-                  Seen by: {s.user.name} ({s.user.username})
-                </p>
+                {s.user ? (
+                  <p>
+                    Seen by: {s.user.name} ({s.user.username})
+                  </p>
+                ) : (
+                  <></>
+                )}
                 {s.approvedBy !== null ? <p>Confirmed ☑</p> : <></>}
 
                 {isAdmin ? (

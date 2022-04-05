@@ -88,7 +88,7 @@ export async function GetAllSightings(): Promise<Array<Sighting>> {
   return await response.json();
 }
 
-export async function GetExternalSightings(): Promise<ExternalSighting> {
+export async function GetExternalSightings(): Promise<Array<Sighting>> {
   const response = await fetch(
     `https://whale-spotting-external-api.herokuapp.com/api/sightings`,
     {
@@ -98,7 +98,8 @@ export async function GetExternalSightings(): Promise<ExternalSighting> {
       },
     }
   );
-  return await response.json();
+  const sightingsArray = await response.json();
+  return sightingsArray.sightings;
 }
 
 export const login = async (
