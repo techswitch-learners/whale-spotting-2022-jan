@@ -2,6 +2,7 @@ import { useEffect, useState, useContext } from "react";
 import "./MeetTheWhalesPage.scss";
 import { fetchSpecies, Species } from "../../clients/apiClients";
 import { LoginContext } from "../../components/login/LoginManager";
+import { Link } from "react-router-dom";
 
 export function MeetTheWhalesPage(): JSX.Element {
   const [species, setSpecies] = useState<Array<Species>>([]);
@@ -36,7 +37,7 @@ export function MeetTheWhalesPage(): JSX.Element {
                 <p>{s.description}</p>
               </div>
             </div>
-            {isAdmin ? (
+            {/* {isAdmin ? (
               <div className="species__card__btns">
                 <button
                   className="species__button btn btn-primary"
@@ -45,8 +46,16 @@ export function MeetTheWhalesPage(): JSX.Element {
                   }}
                   type="submit"
                 >
+                  Update */}
+            {/* </button> */}
+            {isAdmin ? (
+              <div className="species__card__btns">
+                <Link
+                  className="species__button btn btn-primary"
+                  to={`/species/${s.id}/update`}
+                >
                   Update
-                </button>
+                </Link>
               </div>
             ) : (
               <> </>

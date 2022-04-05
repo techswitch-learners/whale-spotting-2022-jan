@@ -283,7 +283,7 @@ export async function updateSpecies(
   username: string,
   password: string
 ) {
-  const response = await fetch(`https://localhost:5001/species/${id}`, {
+  const response = await fetch(`https://localhost:5001/species/${id}/update`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",

@@ -49,7 +49,7 @@ const Routes: React.FunctionComponent = () => {
       <Route path="/species/create">
         {loginContext.isAdmin ? <CreateSpeciesPage /> : <Login />}
       </Route>
-      <Route path="/species/update">
+      <Route path="/species/:id/update">
         {loginContext.isAdmin ? <UpdateSpeciesPage /> : <Login />}
       </Route>
       <Route path="/">
