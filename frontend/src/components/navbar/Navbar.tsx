@@ -4,11 +4,9 @@ import { DesktopNavbar } from "./DesktopNavbar";
 
 export const Navbar: React.FunctionComponent = () => {
   return (
-
     <>
       <MobileNavbar />
       <DesktopNavbar />
     </>
-
   );
 };
