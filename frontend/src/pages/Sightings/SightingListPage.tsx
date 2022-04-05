@@ -46,7 +46,7 @@ export function SightingListPage(): JSX.Element {
                 className="sighting__image"
                 src={s.photoUrl}
                 alt={s.description}
-                width="250px"
+                width="250"
               />
               <div className="sighting__card__info">
                 <p>About: {s.description}</p>
@@ -61,7 +61,6 @@ export function SightingListPage(): JSX.Element {
                   <div className="sighting__card__btns">
                     <button
                       className="sighting__button btn btn-primary"
-
                       disabled={!!s.approvedBy}
                       onClick={() => {
                         confirmWhaleSighting(s.id);
