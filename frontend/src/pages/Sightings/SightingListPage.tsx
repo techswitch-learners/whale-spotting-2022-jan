@@ -60,7 +60,6 @@ export function SightingListPage(): JSX.Element {
                 {isAdmin ? (
                   <div>
                     <button
-                      value={s.id}
                       disabled={!!s.approvedBy}
                       onClick={() => {
                         confirmWhaleSighting(s.id);
@@ -70,7 +69,6 @@ export function SightingListPage(): JSX.Element {
                       Confirm
                     </button>
                     <button
-                      value={s.id}
                       onClick={() => {
                         deleteWhaleSighting(s.id);
                       }}

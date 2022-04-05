@@ -67,7 +67,7 @@ namespace WhaleSpotting.Controllers
                         Name = s.CreatedBy.Name,
                         Email = s.CreatedBy.Email,
                         Username = s.CreatedBy.Username
-                 },
+                    },
                 ApprovedBy = s.ApprovedBy != null
                     ?   new UserResponse
                         {
