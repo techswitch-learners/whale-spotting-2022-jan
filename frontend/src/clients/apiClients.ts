@@ -10,11 +10,11 @@ export interface NewUser {
   email: string;
   password: string;
 }
-export interface Species {
-  description: string;
-  name: string;
-  latinName: string;
-}
+// export interface Species {
+//   description: string;
+//   name: string;
+//   latinName: string;
+// }
 
 export interface Sighting {
   id: number;
@@ -65,6 +65,14 @@ export interface Species {
   photoUrl: string;
   description: string;
   endangeredStatus: EndangeredStatus;
+}
+
+export interface UpdateSpecies {
+  name: string;
+  latinName: string;
+  photoUrl: string;
+  description: string;
+  endangeredStatusId: number;
 }
 
 export interface NewSighting {
@@ -207,6 +215,13 @@ export async function fetchSpecies(): Promise<Array<Species>> {
   return await response.json();
 }
 
+export async function fetchSpeciesById(
+  speciesId: number
+): Promise<UpdateSpecies> {
+  const response = await fetch(`https://localhost:5001/species/${speciesId}`);
+  return await response.json();
+}
+
 export async function createSighting(
   newSighting: NewSighting,
   username: string,
@@ -255,6 +270,26 @@ export async function createSpecies(
       Authorization: getAuthorizationHeader(username, password),
     },
     body: JSON.stringify(newSpecies),
+  });
+
+  if (!response.ok) {
+    throw new Error(await response.json());
+  }
+}
+
+export async function updateSpecies(
+  id: number,
+  updatedSpecies: UpdateSpecies,
+  username: string,
+  password: string
+) {
+  const response = await fetch(`https://localhost:5001/species/${id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: getAuthorizationHeader(username, password),
+    },
+    body: JSON.stringify(updatedSpecies),
   });
 
   if (!response.ok) {

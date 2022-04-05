@@ -1,33 +1,25 @@
-using System.ComponentModel.DataAnnotations;
-using System;
 using WhaleSpotting.Models.Database;
 
 namespace WhaleSpotting.Models.Request
 {
-    public class CreateSpeciesRequest
+    public class UpdatedSpeciesResponse
     {
-        [Required]
-        public string Name{ get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
         public string LatinName { get; set; }
-
-        [Required]
-        [StringLength(400)]
-        public string Description {get; set; }
-
-        [Required]
+        public string Description { get; set; }
         public string PhotoUrl { get; set; }
-
-        [Required]
         public int EndangeredStatusId { get; set; }
-        public CreateSpeciesRequest (Species species)
+        public UpdatedSpeciesResponse(Species species)
         {
+            Id = species.Id;
             Name = species.Name;
             LatinName = species.LatinName;
             Description = species.Description;
             PhotoUrl = species.PhotoUrl;
             EndangeredStatusId = species.EndangeredStatusId;
         }
-        public CreateSpeciesRequest ()
+        public UpdatedSpeciesResponse()
         {
         }
     }

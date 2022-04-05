@@ -92,7 +92,79 @@ namespace WhaleSpotting.Controllers
                 );
             }
         }
+        [HttpPatch]
+        [Route("{id}/update")]
+        public ActionResult<UpdatedSpeciesResponse> Update(
+            [FromRoute] int id,
+            [FromHeader(Name = "Authorization")] 
+            string authHeader,
+            [FromBody] CreateSpeciesRequest updatedSpecies
+        )
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
+            if (authHeader is null)
+            {
+                return new UnauthorizedResult();
+            }
+
+            string username = AuthHelper.GetUsernamePassword(authHeader).Split(":")[0];
+            string usernamePassword = AuthHelper.GetUsernamePassword(authHeader);
+
+            var user = new User();
+
+            try
+            {
+                user = _usersRepo.GetByUsername(username);
+            }
+
+            catch (InvalidOperationException)
+            {
+                return StatusCode(
+                    StatusCodes.Status401Unauthorized,
+                    "The given username is not valid"
+                );
+            }
+            
+            if (user.Role == 0)
+            {
+                return StatusCode(
+                    StatusCodes.Status403Forbidden,
+                    "You are not allowed to update a species"
+                );
+            }
+
+            var check = _authservice.IsAuthenticated(usernamePassword);
+
+            if (!check)
+                return new UnauthorizedResult();
+
+            try
+            {
+                var speciesUpdate = _speciesRepo.Update(id, updatedSpecies);
+                return new UpdatedSpeciesResponse(speciesUpdate);
+            }
+            catch (BadHttpRequestException)
+            {
+                return StatusCode(
+                    StatusCodes.Status400BadRequest,
+                    "Could not update species"
+                );
+            }
+        }
+        [HttpGet("{speciesId}")]
+        public ActionResult<UpdatedSpeciesResponse> GetSpeciesById(
+            [FromRoute]int speciesId) 
+        {
+        if (!ModelState.IsValid) {
+            return BadRequest(ModelState);
+        }
+        var species = _speciesRepo.GetSpeciesById(speciesId);
+        
+        return new UpdatedSpeciesResponse(species);
+        }   
     }
 }
-

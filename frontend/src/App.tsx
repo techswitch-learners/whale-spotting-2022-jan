@@ -18,6 +18,7 @@ import { SightingListPage } from "./pages/Sightings/SightingListPage";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { MeetTheWhalesPage } from "./components/meetTheWhales/MeetTheWhalesPage";
 import { CreateSpeciesPage } from "./components/createSpeciesPage/CreateSpeciesPage";
+import { UpdateSpeciesPage } from "./components/updateSpeciesPage/UpdateSpeciesPage";
 
 const Routes: React.FunctionComponent = () => {
   const loginContext = useContext(LoginContext);
@@ -47,6 +48,9 @@ const Routes: React.FunctionComponent = () => {
       </Route>
       <Route path="/species/create">
         {loginContext.isAdmin ? <CreateSpeciesPage /> : <Login />}
+      </Route>
+      <Route path="/species/update">
+        {loginContext.isAdmin ? <UpdateSpeciesPage /> : <Login />}
       </Route>
       <Route path="/">
         <Home />

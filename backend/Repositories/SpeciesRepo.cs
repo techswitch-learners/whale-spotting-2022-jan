@@ -12,7 +12,9 @@ namespace WhaleSpotting.Repositories
     public interface ISpeciesRepo
     {
         List<Species> GetAllSpecies();
+        Species GetSpeciesById(int id);
         Species Create(CreateSpeciesRequest newSpecies, int userId);
+        Species Update(int speciesId, CreateSpeciesRequest speciesToUpdate);
     }
 
     public class SpeciesRepo : ISpeciesRepo
@@ -30,6 +32,11 @@ namespace WhaleSpotting.Repositories
                 .Include(e => e.EndangeredStatus)
                 .ToList();
         }
+        public Species GetSpeciesById(int id)
+        {
+            return _context
+                .Species.Single(species => species.Id == id);
+        }
         public Species Create(CreateSpeciesRequest newSpecies, int userId)
         {
             var insertedResult = _context.Species.Add( 
@@ -43,6 +50,24 @@ namespace WhaleSpotting.Repositories
                 });
             _context.SaveChanges();
             return insertedResult.Entity;
+        }
+    
+        public Species Update(
+            int speciesId, 
+            CreateSpeciesRequest speciesToUpdate
+            )
+        {
+            var updatedResult = GetSpeciesById(speciesId);
+            
+            updatedResult.Name = speciesToUpdate.Name;
+            updatedResult.LatinName = speciesToUpdate.LatinName;
+            updatedResult.PhotoUrl = speciesToUpdate.PhotoUrl;
+            updatedResult.Description = speciesToUpdate.Description;
+            updatedResult.EndangeredStatusId = speciesToUpdate.EndangeredStatusId;
+        
+            _context.Species.Update(updatedResult);
+            _context.SaveChanges();
+            return updatedResult;
         }
     }
 }
