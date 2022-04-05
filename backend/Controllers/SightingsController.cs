@@ -33,44 +33,53 @@ namespace WhaleSpotting.Controllers
         }
 
         [HttpGet("")]
-        public ActionResult<List<ExtendedSightingResponse>> GetSightings([FromQuery] LocationSearchRequest SearchTerm, 
-        [FromQuery] SpeciesSearchRequest SpeciesSearchTerm, 
+        public ActionResult<List<ExtendedSightingResponse>> GetSightings([FromQuery] LocationSearchRequest SearchTerm,
+        [FromQuery] SpeciesSearchRequest SpeciesSearchTerm,
         [FromQuery] UserSearchRequest UserSearchTerm)
 
         {
             var results = _sightingsRepo.GetAllSightings()
-            .Select( s => new ExtendedSightingResponse
+            .Select(s => new ExtendedSightingResponse
             {
                 Id = s.Id,
                 Date = s.Date,
                 Location = new Location
-                    {
-                       Id = s.LocationId,
-                       Name = s.Location.Name,
-                       Latitude = s.Location.Latitude,
-                       Longitude = s.Location.Longitude,
-                       Description = s.Location.Description,
-                       Amenities = s.Location.Amenities
-                    },
+                {
+                    Id = s.LocationId,
+                    Name = s.Location.Name,
+                    Latitude = s.Location.Latitude,
+                    Longitude = s.Location.Longitude,
+                    Description = s.Location.Description,
+                    Amenities = s.Location.Amenities
+                },
                 Description = s.Description,
                 Species = new Species
-                    {
-                        Id = s.SpeciesId,
-                        Name = s.Species.Name,
-                        LatinName = s.Species.LatinName,
-                        PhotoUrl = s.Species.PhotoUrl,
-                        Description = s.Species.Description,
-                        EndangeredStatus = s.Species.EndangeredStatus
-                    },
+                {
+                    Id = s.SpeciesId,
+                    Name = s.Species.Name,
+                    LatinName = s.Species.LatinName,
+                    PhotoUrl = s.Species.PhotoUrl,
+                    Description = s.Species.Description,
+                    EndangeredStatus = s.Species.EndangeredStatus
+                },
                 PhotoUrl = s.PhotoUrl,
                 User = new UserResponse
-                    {
-                        Id = s.CreatedByUserId,
-                        Name = s.CreatedBy.Name,
-                        Email = s.CreatedBy.Email,
-                        Username = s.CreatedBy.Username
-                    }
-            });
+                {
+                    Id = s.CreatedByUserId,
+                    Name = s.CreatedBy.Name,
+                    Email = s.CreatedBy.Email,
+                    Username = s.CreatedBy.Username
+                },
+                ApprovedBy = s.ApprovedBy != null
+                   ? new UserResponse
+                   {
+                       Id = s.ApprovedBy.Id,
+                       Name = s.ApprovedBy.Name,
+                       Email = s.ApprovedBy.Email,
+                       Username = s.ApprovedBy.Username
+                   }
+                   : null,
+            }).ToList();
 
             if (SearchTerm.LocationId == null)
             {
@@ -90,60 +99,60 @@ namespace WhaleSpotting.Controllers
                     }
                 }
                 else if (UserSearchTerm.CreatedByUserId == null)
-                    {
-                        return results
-                                .Where(s => s.Species.Id == SpeciesSearchTerm.SpeciesId)
-                                .ToList();
-                    }
-                    else
-                    {
-                        return results
-                        .Where(s => s.Species.Id == SpeciesSearchTerm.SpeciesId)
-                        .Where(s => s.User.Id == UserSearchTerm.CreatedByUserId)
-                        .ToList();
-                    }
-                }
-                else if (SpeciesSearchTerm.SpeciesId == null)
                 {
-                    if (UserSearchTerm.CreatedByUserId == null)
-                    {
-                        return results
-                    .Where(s => s.Location.Id == SearchTerm.LocationId)
-                    .ToList();
-                    }
-                    else
-                    {
-                        return results
-                    .Where(s => s.Location.Id == SearchTerm.LocationId)
-                    .Where(s => s.User.Id == UserSearchTerm.CreatedByUserId)
-                    .ToList();
-                    }
+                    return results
+                            .Where(s => s.Species.Id == SpeciesSearchTerm.SpeciesId)
+                            .ToList();
                 }
                 else
                 {
-                    if (UserSearchTerm.CreatedByUserId == null)
-                    {
-                        return results
-                            .Where(s => s.Location.Id == SearchTerm.LocationId)
-                            .Where(s => s.Species.Id == SpeciesSearchTerm.SpeciesId)
-                            .ToList();
-                    }
-                    else
-                    {
-                        return results
-                               .Where(s => s.Location.Id == SearchTerm.LocationId)
-                               .Where(s => s.Species.Id == SpeciesSearchTerm.SpeciesId)
-                               .Where(s => s.User.Id == UserSearchTerm.CreatedByUserId)
-                               .ToList();
-                    }
+                    return results
+                    .Where(s => s.Species.Id == SpeciesSearchTerm.SpeciesId)
+                    .Where(s => s.User.Id == UserSearchTerm.CreatedByUserId)
+                    .ToList();
                 }
             }
+            else if (SpeciesSearchTerm.SpeciesId == null)
+            {
+                if (UserSearchTerm.CreatedByUserId == null)
+                {
+                    return results
+                .Where(s => s.Location.Id == SearchTerm.LocationId)
+                .ToList();
+                }
+                else
+                {
+                    return results
+                .Where(s => s.Location.Id == SearchTerm.LocationId)
+                .Where(s => s.User.Id == UserSearchTerm.CreatedByUserId)
+                .ToList();
+                }
+            }
+            else
+            {
+                if (UserSearchTerm.CreatedByUserId == null)
+                {
+                    return results
+                        .Where(s => s.Location.Id == SearchTerm.LocationId)
+                        .Where(s => s.Species.Id == SpeciesSearchTerm.SpeciesId)
+                        .ToList();
+                }
+                else
+                {
+                    return results
+                           .Where(s => s.Location.Id == SearchTerm.LocationId)
+                           .Where(s => s.Species.Id == SpeciesSearchTerm.SpeciesId)
+                           .Where(s => s.User.Id == UserSearchTerm.CreatedByUserId)
+                           .ToList();
+                }
+            }
+        }
 
 
 
 
 
-            [HttpGet("recent")]
+        [HttpGet("recent")]
         public ActionResult<ExtendedSightingResponse> GetMostRecentSighting()
         {
             var s = _sightingsRepo.GetMostRecentSighting();
@@ -152,32 +161,32 @@ namespace WhaleSpotting.Controllers
                 Id = s.Id,
                 Date = s.Date,
                 Location = new Location
-                    {
-                        Id = s.LocationId,
-                        Name = s.Location.Name,
-                        Latitude = s.Location.Latitude,
-                        Longitude = s.Location.Longitude,
-                        Description = s.Location.Description,
-                        Amenities = s.Location.Amenities
-                    },
+                {
+                    Id = s.LocationId,
+                    Name = s.Location.Name,
+                    Latitude = s.Location.Latitude,
+                    Longitude = s.Location.Longitude,
+                    Description = s.Location.Description,
+                    Amenities = s.Location.Amenities
+                },
                 Description = s.Description,
                 Species = new Species
-                    {
-                        Id = s.SpeciesId,
-                        Name = s.Species.Name,
-                        LatinName = s.Species.LatinName,
-                        PhotoUrl = s.Species.PhotoUrl,
-                        Description = s.Species.Description,
-                        EndangeredStatus = s.Species.EndangeredStatus
-                    },
+                {
+                    Id = s.SpeciesId,
+                    Name = s.Species.Name,
+                    LatinName = s.Species.LatinName,
+                    PhotoUrl = s.Species.PhotoUrl,
+                    Description = s.Species.Description,
+                    EndangeredStatus = s.Species.EndangeredStatus
+                },
                 PhotoUrl = s.PhotoUrl,
                 User = new UserResponse
-                    {
-                        Id = s.CreatedByUserId,
-                        Name = s.CreatedBy.Name,
-                        Email = s.CreatedBy.Email,
-                        Username = s.CreatedBy.Username
-                    }
+                {
+                    Id = s.CreatedByUserId,
+                    Name = s.CreatedBy.Name,
+                    Email = s.CreatedBy.Email,
+                    Username = s.CreatedBy.Username
+                }
             };
             return result;
         }
@@ -213,7 +222,7 @@ namespace WhaleSpotting.Controllers
                     "The given username is not valid"
                 );
             }
-            
+
 
             var check = _authservice.IsAuthenticated(usernamePassword);
 
@@ -233,11 +242,12 @@ namespace WhaleSpotting.Controllers
                 );
             }
         }
+
         [HttpPatch]
         [Route("{id}/approve")]
         public ActionResult Approve(
             [FromRoute] int id,
-            [FromHeader(Name = "Authorization")] 
+            [FromHeader(Name = "Authorization")]
             string authHeader)
         {
             if (!ModelState.IsValid)
@@ -267,7 +277,7 @@ namespace WhaleSpotting.Controllers
                     "The given username is not valid"
                 );
             }
-            
+
             if (user.Role == 0)
             {
                 return StatusCode(
@@ -327,15 +337,14 @@ namespace WhaleSpotting.Controllers
             }
 
             var check = _authservice.IsAuthenticated(usernamePassword);
-            
+
             if (!check)
             {
                 return new UnauthorizedResult();
             }
-                
+
             var sighting = _sightingsRepo.GetById(id);
-            
-            
+
             if (user.Id != sighting.CreatedByUserId && user.Role == 0)
             {
                 return StatusCode(
@@ -343,7 +352,7 @@ namespace WhaleSpotting.Controllers
                     "You are not allowed to delete other people's sightings..."
                 );
             }
-         
+
             _sightingsRepo.Delete(id);
             return Ok();
         }
