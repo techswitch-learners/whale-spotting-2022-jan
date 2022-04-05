@@ -230,3 +230,8 @@ export const getPopularLocations = async () => {
   }
   return data;
 };
+
+export async function fetchUsers(): Promise<Array<User>> {
+  const response = await fetch(`https://localhost:5001/users`);
+  return await response.json();
+}
