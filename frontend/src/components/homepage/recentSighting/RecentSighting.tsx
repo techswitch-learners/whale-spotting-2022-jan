@@ -63,7 +63,7 @@ export function RecentSighting() {
               >
                 <img
                   src="https://freepngimg.com/download/icon/1000188-spouting-whale-emoji-free-icon-hq.png"
-                  width="30px"
+                  width="30"
                 />
               </Button>{" "}
             </Link>
