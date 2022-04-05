@@ -12,6 +12,7 @@ namespace WhaleSpotting.Models.Response
         public Species Species { get; set; }
         public string PhotoUrl { get; set; }
         public UserResponse User { get; set; }
+        public UserResponse ApprovedBy { get; set; }
         public ExtendedSightingResponse(Sighting sighting)
         {
             Id = sighting.Id;
@@ -22,10 +23,16 @@ namespace WhaleSpotting.Models.Response
             PhotoUrl = sighting.PhotoUrl;
             User = new UserResponse
             {
-                Id = sighting.Id,
+                Id = sighting.CreatedByUserId,
                 Name = sighting.CreatedBy.Name,
-                Username = sighting.CreatedBy.Username,
-                Email = sighting.CreatedBy.Email
+                Email = sighting.CreatedBy.Email,
+                Username = sighting.CreatedBy.Username
+            };
+            ApprovedBy = new UserResponse{
+                Id = sighting.ApprovedBy.Id,
+                Name = sighting.ApprovedBy.Name,
+                Email = sighting.ApprovedBy.Email,
+                Username = sighting.ApprovedBy.Username
             };
         }
         public ExtendedSightingResponse()
