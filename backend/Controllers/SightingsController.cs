@@ -67,7 +67,16 @@ namespace WhaleSpotting.Controllers
                         Name = s.CreatedBy.Name,
                         Email = s.CreatedBy.Email,
                         Username = s.CreatedBy.Username
-                    }
+                    },
+                ApprovedBy = s.ApprovedBy != null
+                    ?   new UserResponse
+                        {
+                            Id = s.ApprovedBy.Id,
+                            Name = s.ApprovedBy.Name,
+                            Email = s.ApprovedBy.Email,
+                            Username = s.ApprovedBy.Username
+                        }
+                    : null,
             }).ToList();
         }
 
@@ -161,6 +170,7 @@ namespace WhaleSpotting.Controllers
                 );
             }
         }
+
         [HttpPatch]
         [Route("{id}/approve")]
         public ActionResult Approve(
@@ -263,7 +273,6 @@ namespace WhaleSpotting.Controllers
                 
             var sighting = _sightingsRepo.GetById(id);
             
-            
             if (user.Id != sighting.CreatedByUserId && user.Role == 0)
             {
                 return StatusCode(
@@ -276,5 +285,4 @@ namespace WhaleSpotting.Controllers
             return Ok();
         }
     }
-
 }

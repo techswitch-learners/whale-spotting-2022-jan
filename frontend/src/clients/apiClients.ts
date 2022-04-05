@@ -3,6 +3,7 @@ export interface User {
   name: string;
   username: string;
 }
+
 export interface NewUser {
   name: string;
   username: string;
@@ -33,6 +34,7 @@ export interface Sighting {
   species: Species;
   photoUrl: string;
   user: User;
+  approvedBy: User;
 }
 
 export interface Species {
@@ -90,6 +92,43 @@ export async function createUser(newUser: NewUser) {
     body: JSON.stringify(newUser),
   });
 
+  if (!response.ok) {
+    throw new Error(await response.json());
+  }
+}
+
+export async function approveSighting(
+  id: number,
+  username: string,
+  password: string
+) {
+  const response = await fetch(
+    `https://localhost:5001/sightings/${id}/approve`,
+    {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: getAuthorizationHeader(username, password),
+      },
+    }
+  );
+  if (!response.ok) {
+    throw new Error(await response.json());
+  }
+}
+
+export async function deleteSighting(
+  id: number,
+  username: string,
+  password: string
+) {
+  const response = await fetch(`https://localhost:5001/sightings/${id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: getAuthorizationHeader(username, password),
+    },
+  });
   if (!response.ok) {
     throw new Error(await response.json());
   }
