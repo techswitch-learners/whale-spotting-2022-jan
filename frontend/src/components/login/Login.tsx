@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { login } from "../../clients/apiClients";
 import { LoginContext } from "../login/LoginManager";
 import "./Login.scss";
+import { notifyOfSuccessfulLogin } from "./LoginNotification";
 
 export const Login: React.FunctionComponent = () => {
   const [username, setUsername] = useState("");
@@ -19,12 +20,17 @@ export const Login: React.FunctionComponent = () => {
       return;
     }
     loginContext.logIn(username, password);
+    notifyOfSuccessfulLogin();
     setError(undefined);
   }
 
   return (
     <div className="login">
-      {error && <p>Login failed</p>}
+      {error && (
+        <p className="login__failure__notification">
+          Login failed. Please try again.
+        </p>
+      )}
       <h1 className="mb-4 mt-2">Whale-come!</h1>
       <h3>Please login below</h3>
       <form onSubmit={tryLogin} className="login-form">
