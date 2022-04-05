@@ -82,7 +82,7 @@ export function CreateSpeciesPage(): JSX.Element {
             onChange={(e) => handleEndangeredStatusChange(e)}
           >
             <option selected disabled>
-              Select Endangered Status
+              Select Status
             </option>
             {endangeredStatuses.map((status) => (
               <option key={status.id} value={status.id}>
@@ -106,7 +106,7 @@ export function CreateSpeciesPage(): JSX.Element {
             value={photoUrl}
             onChange={(event) => setPhotoUrl(event.target.value)}
           />
-
+          <label></label>
           <button
             className="createSpecies__button btn btn-primary"
             disabled={status === "SUBMITTING"}

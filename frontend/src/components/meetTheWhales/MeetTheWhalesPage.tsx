@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import "./MeetTheWhalesPage.scss";
 import { fetchSpecies, Species } from "../../clients/apiClients";
+import { LoginContext } from "../../components/login/LoginManager";
 
 export function MeetTheWhalesPage(): JSX.Element {
   const [species, setSpecies] = useState<Array<Species>>([]);
+  const { username, password, isAdmin } = useContext(LoginContext);
 
   useEffect(() => {
     fetchSpecies().then(setSpecies);
@@ -34,6 +36,21 @@ export function MeetTheWhalesPage(): JSX.Element {
                 <p>{s.description}</p>
               </div>
             </div>
+            {isAdmin ? (
+              <div className="species__card__btns">
+                <button
+                  className="species__button btn btn-primary"
+                  onClick={() => {
+                    s.id;
+                  }}
+                  type="submit"
+                >
+                  Update
+                </button>
+              </div>
+            ) : (
+              <> </>
+            )}
           </li>
         ))}
       </ul>
