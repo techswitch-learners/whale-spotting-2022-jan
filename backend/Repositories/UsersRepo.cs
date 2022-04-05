@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using WhaleSpotting.Models.Database;
 using WhaleSpotting.Models.Request;
-using  WhaleSpotting.Models.Response;
 using System.Security.Cryptography;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
-
 
 namespace WhaleSpotting.Repositories
 {
@@ -90,27 +88,19 @@ namespace WhaleSpotting.Repositories
 
         public List<LeaderboardEntry> GetLeaderboard()
         {
-            var leaderboard = 
-            _context.Sightings
-            .GroupBy(sighting => sighting.CreatedByUserId)
-            .Select(sighting => new {count = sighting.Count(), userId = sighting.Key})
-            .OrderByDescending(g => g.count)
-            .Join(_context.Users, sighting => sighting.userId, user => user.Id, (sighting, user) => 
-            new{username = user.Username, count = sighting.count});
-
-            List<LeaderboardEntry> leaderboardList = new List<LeaderboardEntry>();
-
-
-            foreach(var item in leaderboard)
-            {
-                leaderboardList.Add(new LeaderboardEntry{
-                    Username = item.username,
-                    Count = item.count});
-
-            }
-
-            return leaderboardList;
-
+            return _context.Sightings
+                .GroupBy(sighting => sighting.CreatedByUserId)
+                .Select(sighting => new {count = sighting.Count(), userId = sighting.Key})
+                .OrderByDescending(g => g.count)
+                .Join(
+                    _context.Users, 
+                    sighting => sighting.userId, 
+                    user => user.Id, 
+                    (sighting, user) => new LeaderboardEntry { 
+                        Username = user.Username, 
+                        Count = sighting.count 
+                    }
+                ).ToList();
         }
     }
 }
