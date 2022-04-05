@@ -1,26 +1,5 @@
 @import "../../../styles/constants.scss";
-
-.recent-sighting__img {
-  border-color: $color-background;
-  border-radius: 45%;
-}
-
-.recent-sighting__img-front img {
-  width: 100vw;
-  height: min-content;
-}
-.recent-sighting__img-front :hover {
-  cursor: pointer;
-  opacity: 0.8;
-}
-.recent-sighting__img-back {
-  height: 40vh;
-}
-.recent-sighting__img-back .recent-sighting__text {
-  height: 80%;
-}
-
-.recent-sighting__title {
+.popular-locations__title {
   background-color: $color-background;
   background-color: adjust-hue($color: #00000071, $degrees: 0);
   color: $color-font;
@@ -28,24 +7,24 @@
   width: 100vw;
   padding: 1rem;
 }
-.recent-sighting__text {
+.popular-locations__text {
   background-color: $color-background;
   color: $color-font;
   font-size: medium;
   background-color: adjust-hue($color: #0000005d, $degrees: 0);
   padding: 0.5rem;
-  list-style: none;
   margin: 0.5em;
+  text-decoration: none;
 }
-.recent-sighting__text-container {
+.popular-locations__text-container {
   display: flex;
   width: 98vw;
-  margin: 0 auto;
 }
-.recent-sighting__left {
+.popular-locations__left {
   width: 60vw;
+  height: 40vh;
 }
-.recent-sighting__right {
+.popular-locations__right {
   width: 30vw;
   height: 40vh;
   display: flex;
@@ -57,32 +36,44 @@
   border-radius: 1em;
   opacity: 0.9;
 }
-.recent-sighting__post-sighting-button {
+.popular-locations__post-location-button {
   width: 6em;
   height: 3em;
 }
-.recent-sighting__text__description {
+.popular-locations__text__description {
   font-style: italic;
+}
+.popular-locations__list-item {
+  list-style: none;
+  padding-left: 0;
   font-size: medium;
 }
-
-.recent-sighting__box-heading {
+.popular-locations__list-item-heading {
+  font-size: 1.2em;
+}
+.popular-locations__box-heading {
   font-size: 1.2em;
 }
 @media (min-width: 1024px) {
-  .recent-sighting__text__description {
+  .popular-locations__text__description {
     font-size: 1em;
   }
-  .recent-sighting__text {
+  .popular-locations__text {
     font-size: 1.8em;
   }
-  .recent-sighting__left {
-    font-size: 1.8em;
+  .popular-locations__left {
+    font-size: 1.3em;
   }
-  .recent-sighting__box-heading {
+  .popular-locations__box-heading {
+    font-size: 1.5em;
+  }
+  .popular-locations__list-item {
+    font-size: 1.3em;
+  }
+  .popular-locations__list-item-heading {
     font-size: 1.1em;
   }
-  .recent-sighting__title {
+  .popular-locations__title {
     font-size: 1.8em;
   }
 }

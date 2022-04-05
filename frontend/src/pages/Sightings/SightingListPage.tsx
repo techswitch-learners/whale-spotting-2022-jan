@@ -61,7 +61,7 @@ export function SightingListPage(): JSX.Element {
                   <div className="sighting__card__btns">
                     <button
                       className="sighting__button btn btn-primary"
-                      value={s.id}
+
                       disabled={!!s.approvedBy}
                       onClick={() => {
                         confirmWhaleSighting(s.id);
@@ -72,7 +72,6 @@ export function SightingListPage(): JSX.Element {
                     </button>
                     <button
                       className="sighting__button btn btn-primary"
-                      value={s.id}
                       onClick={() => {
                         deleteWhaleSighting(s.id);
                       }}
