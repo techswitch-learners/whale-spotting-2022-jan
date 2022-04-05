@@ -5,7 +5,7 @@ type LoginContextType = {
   isAdmin: boolean;
   username: string;
   password: string;
-  logIn: (username: string, password: string, idAdmin: boolean) => void;
+  logIn: (username: string, password: string, isAdmin: boolean) => void;
   logOut: () => void;
 };
 
