@@ -56,6 +56,14 @@ export const Navbar: React.FunctionComponent = () => {
           Report a sighting
         </Link>
         <Link
+          id="leaderboard"
+          className="menu-item"
+          to="/leaderboard"
+          onClick={() => closeMenu()}
+        >
+          Leaderboard
+        </Link>
+        <Link
           id="plantrip"
           className="menu-item"
           to="/plantrip"
