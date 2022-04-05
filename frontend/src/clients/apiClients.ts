@@ -75,13 +75,15 @@ function getAuthorizationHeader(username: string, password: string) {
 
 export async function GetAllSightings(
   locationId: number,
-  speciesId: number
+  speciesId: number,
+  createdByUserId: number
 ): Promise<Array<Sighting>> {
-  const extraQueries = locationId || speciesId ? `?` : "";
+  const extraQueries = locationId || speciesId || createdByUserId ? `?` : "";
   const query = locationId ? `locationId=${locationId}&` : "";
   const query2 = speciesId ? `speciesId=${speciesId}&` : "";
+  const query3 = createdByUserId ? `userId=${createdByUserId}&` : "";
   const response = await fetch(
-    `https://localhost:5001/sightings${extraQueries}${query}${query2}`,
+    `https://localhost:5001/sightings${extraQueries}${query}${query2}${query3}`,
     {
       method: "GET",
       headers: {
