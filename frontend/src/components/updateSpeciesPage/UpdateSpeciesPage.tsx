@@ -8,11 +8,12 @@ import {
 } from "../../clients/apiClients";
 import { LoginContext } from "../login/LoginManager";
 import "./UpdateSpeciesPage.scss";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 type FromStatus = "READY" | "SUBMITTING" | "ERROR" | "FINISHED";
 
 export function UpdateSpeciesPage(): JSX.Element {
+  const { id } = useParams<{ id: string }>();
   const [species, setSpecies] = useState<UpdateSpecies>();
   const [endangeredStatuses, setEndangeredStatuses] = useState<
     EndangeredStatus[]
@@ -25,7 +26,7 @@ export function UpdateSpeciesPage(): JSX.Element {
   const [status, setStatus] = useState<FromStatus>("READY");
   const { username, password } = useContext(LoginContext);
 
-  const speciesId = 1;
+  const speciesId = parseInt(id);
 
   const submitForm = (event: FormEvent) => {
     event.preventDefault();
