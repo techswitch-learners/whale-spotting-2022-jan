@@ -16,9 +16,8 @@ namespace WhaleSpotting.Repositories
         List<Location> GetPopularLocations();
         Location GetLocationById(int locationId);
         Location CreateLocation(CreateLocationRequest newLocation, int userId);
-
         Location UpdateLocation(UpdateLocationRequest updatedLocation, int locationId);
-
+        void Delete(int id);
         }
     public class LocationsRepo : ILocationsRepo
     {
@@ -79,9 +78,17 @@ namespace WhaleSpotting.Repositories
         location.Description = updatedLocation.Description;
         location.Sightings = updatedLocation.Sightings;
         location.Amenities = updatedLocation.Amenities;
+
         _context.SaveChanges();
         return location;
 
+        }
+
+        public void Delete(int id)
+        {
+            var location = GetLocationById(id);
+            _context.Locations.Remove(location);
+            _context.SaveChanges();
         }
     }
 }
