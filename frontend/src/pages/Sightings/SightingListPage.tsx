@@ -11,7 +11,7 @@ import {
   getExternalSightings,
 } from "../../clients/apiClients";
 import { LoginContext } from "../../components/login/LoginManager";
-import { SightingList } from "../../components/SightingListPage/sightingList/SightingList";
+import { SightingList } from "../../components/SightingListPage/SightingList/SightingList";
 
 export function SightingListPage(): JSX.Element {
   const [sightings, setSightings] = useState<Array<Sighting>>([]);
