@@ -11,7 +11,6 @@ import {
   GetExternalSightings,
 } from "../../clients/apiClients";
 import { LoginContext } from "../../components/login/LoginManager";
-import { parseJSON } from "date-fns";
 
 export function SightingListPage(): JSX.Element {
   const [sightings, setSightings] = useState<Array<Sighting>>([]);
@@ -24,14 +23,11 @@ export function SightingListPage(): JSX.Element {
   const { username, password, isAdmin } = useContext(LoginContext);
 
   useEffect(() => {
-    /* GetAllSightings().then(setSightings);
-    GetExternalSightings()
-      .then(setExternalSightings)
-      .then(() => setCombined(combined.concat(sightings, externalSightings))); */
     Promise.all([GetAllSightings(), GetExternalSightings()]).then(
       ([sightings, externalSightings]) => {
+        const combinedSightings: Array<Sighting | ExternalSighting> = [];
         setCombined(
-          combined
+          combinedSightings
             .concat(sightings, externalSightings)
             .sort(
               (a, b) =>
@@ -39,7 +35,6 @@ export function SightingListPage(): JSX.Element {
             )
             .reverse()
         );
-        console.log(combined);
       }
     );
   }, []);
@@ -60,7 +55,7 @@ export function SightingListPage(): JSX.Element {
   };
 
   function isExternalSighting(s: Sighting | ExternalSighting): s is Sighting {
-    return (s as Sighting).approvedBy == undefined;
+    return (s as Sighting).approvedBy !== undefined;
   }
 
   if (combined.length == 0) {
@@ -89,7 +84,7 @@ export function SightingListPage(): JSX.Element {
                   <p>Sighting Location: {s.location.name}</p>
                   <p>On: {new Date(s.date).toLocaleDateString("en-gb")}</p>
                   <p>
-                    Seen by: {s.user?.name} ({s.user?.username})
+                    Seen by: {s.user.name} ({s.user.username})
                   </p>
                   {s.approvedBy !== null ? <p>Confirmed ☑</p> : <></>}
                   {isAdmin ? (
@@ -123,9 +118,9 @@ export function SightingListPage(): JSX.Element {
           ) : (
             <li className="sighting__list__item" key={i}>
               <div className="sighting__card">
-                {/* <h2 className="sighting__card__title">
-                {s.species[0].name} ({s.species[0].latinName})
-              </h2> */}
+                <h2 className="sighting__card__title">
+                  {s.species[0].name} ({s.species[0].latinName})
+                </h2>
                 <img
                   className="sighting__image"
                   src={s.photoUrl}
