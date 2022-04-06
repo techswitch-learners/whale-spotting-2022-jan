@@ -1,5 +1,3 @@
-using System.ComponentModel.DataAnnotations;
-using System;
 using WhaleSpotting.Models.Database;
 using System.Collections.Generic;
 

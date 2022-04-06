@@ -145,7 +145,7 @@ namespace WhaleSpotting.Controllers {
             {
                 return StatusCode(
                     StatusCodes.Status400BadRequest,
-                    "Could not approve sighting"
+                    "Could not create location"
                 );
             }
         }
@@ -209,7 +209,7 @@ namespace WhaleSpotting.Controllers {
             {
                 return StatusCode(
                     StatusCodes.Status400BadRequest,
-                    "Could not approve sighting"
+                    "Could not update location"
                 );
             }
         }

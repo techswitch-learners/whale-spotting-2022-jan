@@ -71,20 +71,17 @@ namespace WhaleSpotting.Repositories
 
         public Location UpdateLocation(UpdateLocationRequest updatedLocation, int locationId)
         {
-            var locationToUpdate = GetLocationById(locationId);
-
-            locationToUpdate.Latitude = updatedLocation.Latitude;
-            locationToUpdate.Longitude = updatedLocation.Longitude;
-            locationToUpdate.Name = updatedLocation.Name;
-            locationToUpdate.Description = updatedLocation.Description;
-            locationToUpdate.Sightings = updatedLocation.Sightings;
-            locationToUpdate.Amenities = updatedLocation.Amenities;
             
-            var updatedResult = _context.Locations.Update(locationToUpdate);
-          
+        var location = _context.Locations.Where(l => l.Id == locationId).First();
+        location.Latitude = updatedLocation.Latitude;
+        location.Longitude = updatedLocation.Longitude;
+        location.Name = updatedLocation.Name;
+        location.Description = updatedLocation.Description;
+        location.Sightings = updatedLocation.Sightings;
+        location.Amenities = updatedLocation.Amenities;
+        _context.SaveChanges();
+        return location;
 
-            _context.SaveChanges();
-            return updatedResult.Entity;
         }
     }
 }
