@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Sighting } from "../../../clients/apiClients";
-import { LoginContext } from "../../../components/login/LoginManager";
+import { LoginContext } from "../../login/LoginManager";
 
 export function InternalSighting({
   s,

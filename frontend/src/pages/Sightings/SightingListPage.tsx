@@ -11,14 +11,10 @@ import {
   GetExternalSightings,
 } from "../../clients/apiClients";
 import { LoginContext } from "../../components/login/LoginManager";
-import { InternalSighting } from "./Sighting/InternalSighting";
-import { ExternalApiSighting } from "./Sighting/ExternalApiSighting";
+import { SightingList } from "../../components/SightingListPage/SightingList/SightingList";
 
 export function SightingListPage(): JSX.Element {
   const [sightings, setSightings] = useState<Array<Sighting>>([]);
-  const [externalSightings, setExternalSightings] = useState<
-    Array<ExternalSighting>
-  >([]);
   const [combined, setCombined] = useState<Array<Sighting | ExternalSighting>>(
     []
   );
@@ -56,10 +52,6 @@ export function SightingListPage(): JSX.Element {
     }
   };
 
-  function isInternalSighting(s: Sighting | ExternalSighting): s is Sighting {
-    return (s as Sighting).approvedBy !== undefined;
-  }
-
   if (combined.length == 0) {
     return <div>loading...</div>;
   }
@@ -67,20 +59,11 @@ export function SightingListPage(): JSX.Element {
   return (
     <div className="sighting__list__body">
       <h1 className="sighting__list__title">Sightings</h1>
-      <ul className="list-group list-group-flush">
-        {combined.map((s, i) =>
-          isInternalSighting(s) ? (
-            <InternalSighting
-              s={s}
-              confirmWhaleSighting={confirmWhaleSighting}
-              deleteWhaleSighting={deleteWhaleSighting}
-              i={i}
-            />
-          ) : (
-            <ExternalApiSighting s={s} i={i} />
-          )
-        )}
-      </ul>
+      <SightingList
+        combined={combined}
+        confirmWhaleSighting={confirmWhaleSighting}
+        deleteWhaleSighting={deleteWhaleSighting}
+      />
     </div>
   );
 }
