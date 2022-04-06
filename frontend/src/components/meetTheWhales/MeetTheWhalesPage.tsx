@@ -66,6 +66,7 @@ export function MeetTheWhalesPage(): JSX.Element {
                   className="btn btn-primary"
                   type="submit"
                   disabled={status === "SUBMITTING"}
+                  onClick={(event) => setWhaleId(w.id)}
                 >
                   Sponsore Me!
                 </button>
