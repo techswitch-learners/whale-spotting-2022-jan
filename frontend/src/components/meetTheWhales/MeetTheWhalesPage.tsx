@@ -37,17 +37,6 @@ export function MeetTheWhalesPage(): JSX.Element {
                 <p>{s.description}</p>
               </div>
             </div>
-            {/* {isAdmin ? (
-              <div className="species__card__btns">
-                <button
-                  className="species__button btn btn-primary"
-                  onClick={() => {
-                    s.id;
-                  }}
-                  type="submit"
-                >
-                  Update */}
-            {/* </button> */}
             {isAdmin ? (
               <div className="species__card__btns">
                 <Link

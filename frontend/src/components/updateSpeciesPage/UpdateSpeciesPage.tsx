@@ -51,7 +51,15 @@ export function UpdateSpeciesPage(): JSX.Element {
       .catch(() => setStatus("ERROR"));
   };
   useEffect(() => {
-    fetchSpeciesById(speciesId).then((response) => setSpecies(response));
+    fetchSpeciesById(speciesId).then(
+      (response) => (
+        setName(response.name),
+        setLatinName(response.latinName),
+        setDescription(response.description),
+        setEndangeredStatusId(response.endangeredStatusId),
+        setPhotoUrl(response.photoUrl)
+      )
+    );
   }, []);
 
   useEffect(() => {
@@ -69,33 +77,30 @@ export function UpdateSpeciesPage(): JSX.Element {
       <div className="updateSpecies__header">
         <h1>Update Species</h1>
       </div>
-
       <form onSubmit={submitForm}>
         <div className="updateSpecies__form">
           <label htmlFor="name">Name</label>
           <input
             id="name"
             placeholder="Name"
-            value={species?.name}
+            value={name}
             onChange={(event) => setName(event.target.value)}
           />
           <label htmlFor="latinName">Latin Name</label>
           <input
             id="latinName"
             placeholder="Latin Name"
-            value={species?.latinName}
+            value={latinName}
             onChange={(event) => setLatinName(event.target.value)}
           />
           <label htmlFor="endangeredStatus">Endangered Status</label>
           <select
             id="endangeredStatus"
             onChange={(e) => handleEndangeredStatusChange(e)}
+            defaultValue={endangeredStatusId}
           >
-            <option selected disabled>
-              Select Status
-            </option>
             {endangeredStatuses.map((status) => (
-              <option key={status.id} value={status.id}>
+              <option key={status.id} value={endangeredStatusId}>
                 {status.name}
               </option>
             ))}
@@ -106,14 +111,14 @@ export function UpdateSpeciesPage(): JSX.Element {
             id="description"
             placeholder="Describe whale species"
             rows={3}
-            value={species?.description}
+            value={description}
             onChange={(event) => setDescription(event.target.value)}
           />
           <label htmlFor="photo">Photo</label>
           <input
             id="photo"
             placeholder="Photo URL"
-            value={species?.photoUrl}
+            value={photoUrl}
             onChange={(event) => setPhotoUrl(event.target.value)}
           />
           <label></label>
