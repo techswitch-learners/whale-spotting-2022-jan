@@ -3,14 +3,14 @@ import "./MeetTheWhalesPage.scss";
 import { deleteSpecies, fetchSpecies, Species } from "../../clients/apiClients";
 import { LoginContext } from "../../components/login/LoginManager";
 import { Link } from "react-router-dom";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 toast.configure();
 
 export const notifyOfSuccessfulDelete = () => {
   toast.success("Species deleted!", {
     position: toast.POSITION.TOP_CENTER,
+    hideProgressBar: true,
   });
 };
 
