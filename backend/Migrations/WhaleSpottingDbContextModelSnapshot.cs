@@ -20,21 +20,6 @@ namespace WhaleSpotting.Migrations
                 .HasAnnotation("ProductVersion", "5.0.11")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-            modelBuilder.Entity("UserWhale", b =>
-                {
-                    b.Property<int>("UserId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("WhaleId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("UserId", "WhaleId");
-
-                    b.HasIndex("WhaleId");
-
-                    b.ToTable("UserWhale");
-                });
-
             modelBuilder.Entity("WhaleSpotting.Models.Database.Location", b =>
                 {
                     b.Property<int>("Id")
@@ -167,9 +152,6 @@ namespace WhaleSpotting.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<string>("Description")
-                        .HasColumnType("text");
-
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
@@ -184,21 +166,6 @@ namespace WhaleSpotting.Migrations
                     b.HasIndex("SpeciesId");
 
                     b.ToTable("Whales");
-                });
-
-            modelBuilder.Entity("UserWhale", b =>
-                {
-                    b.HasOne("WhaleSpotting.Models.Database.User", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("WhaleSpotting.Models.Database.Whale", null)
-                        .WithMany()
-                        .HasForeignKey("WhaleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("WhaleSpotting.Models.Database.Sighting", b =>
