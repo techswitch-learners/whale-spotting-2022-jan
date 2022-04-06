@@ -11,7 +11,8 @@ namespace WhaleSpotting.Models.Database
         public Species Species { get ; set; }
 
         public string Description { get; set; }
-        public List<User> User { get; set; }
+
+        public ICollection<Interaction> Interactions { get; set; } = new List<Interaction>();
 
     }
 }

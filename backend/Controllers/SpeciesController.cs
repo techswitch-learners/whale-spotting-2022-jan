@@ -34,10 +34,6 @@ namespace WhaleSpotting.Controllers
         }
 
         [HttpGet("meetwhales")]
-        // public ActionResult<List<Whale>> WhaleList()
-        // {
-        //     return _whalesRepo.GetAllWhales();
-        // }
 
         public ActionResult<List<ExtendedWhaleResponse>> GetAllWhales()
         {
@@ -54,13 +50,13 @@ namespace WhaleSpotting.Controllers
                 Description = w.Description,
                 Species = w.Species,
                 PhotoUrl = w.PhotoUrl,
-                Users = w.User
-                        .Select(u => new UserResponse
+                Users = w.Interactions
+                        .Select(i => new UserResponse
                         {
-                            Id = u.Id,
-                            Name = u.Name,
-                            Username = u.Username,
-                            Email = u.Email,
+                            Id = i.User.Id,
+                            Name = i.User.Name,
+                            Username = i.User.Username,
+                            Email = i.User.Email,
                         })
                         .ToList(),
             }).ToList();

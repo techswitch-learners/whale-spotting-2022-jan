@@ -21,7 +21,10 @@ namespace WhaleSpotting.Models.Response
             Description = whale.Description;
             Species = whale.Species;
             PhotoUrl = whale.PhotoUrl;
-            Users = whale.User.Select(l => new UserResponse()).ToList();
+            Users = whale.Interactions.Select(i => new UserResponse(){
+                Name = i.User.Name,
+                Username = i.User.Username
+            }).ToList();
            
         }
         public ExtendedWhaleResponse()

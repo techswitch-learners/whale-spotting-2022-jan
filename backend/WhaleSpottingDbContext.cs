@@ -12,6 +12,7 @@ namespace WhaleSpotting
         public DbSet<Location> Locations{ get; set; }
         public DbSet<Sighting> Sightings { get; set; }
         public DbSet<Whale> Whales { get; set; }
+        public DbSet<Interaction> Interaction {get; set; }
 
         protected override void OnConfiguring(
             DbContextOptionsBuilder optionsBuilder
