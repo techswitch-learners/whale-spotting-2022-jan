@@ -27,11 +27,7 @@ export function SightingListPage(): JSX.Element {
         setCombined(
           combinedSightings
             .concat(sightings, externalSightings)
-            .sort(
-              (a, b) =>
-                Date.parse(a.date.toString()) - Date.parse(b.date.toString())
-            )
-            .reverse()
+            .sort((a, b) => +new Date(b.date) - +new Date(a.date))
         );
       }
     );
