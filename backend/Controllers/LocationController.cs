@@ -149,5 +149,69 @@ namespace WhaleSpotting.Controllers {
                 );
             }
         }
+
+    [HttpPatch]
+    [Route("{locationId}/update")]
+    public ActionResult UpdateLocation(
+        [FromBody] UpdateLocationRequest updatedLocation, 
+        [FromRoute] int locationId,
+        [FromHeader(Name = "Authorization")] string authHeader)
+    {
+      if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (authHeader is null)
+            {
+                return new UnauthorizedResult();
+            }
+
+            string username = AuthHelper.GetUsernamePassword(authHeader).Split(":")[0];
+            string usernamePassword = AuthHelper.GetUsernamePassword(authHeader);
+
+            var user = new User();
+
+            try
+            {
+                user = _users.GetByUsername(username);
+            }
+
+            catch (InvalidOperationException)
+            {
+                return StatusCode(
+                    StatusCodes.Status401Unauthorized,
+                    "The given username is not valid"
+                );
+            }
+            
+            if (user.Role == 0)
+            {
+                return StatusCode(
+                    StatusCodes.Status403Forbidden,
+                    "You are not allowed to edit a location."
+                );
+            }
+
+            var check = _authservice.IsAuthenticated(usernamePassword);
+
+            if (!check)
+                return new UnauthorizedResult();
+
+            try
+            {
+                var editedLocation = new UpdateLocationRequest();
+                var location = _locations.UpdateLocation(editedLocation, locationId);
+                return Ok();
+             
+            }
+            catch (BadHttpRequestException)
+            {
+                return StatusCode(
+                    StatusCodes.Status400BadRequest,
+                    "Could not approve sighting"
+                );
+            }
+        }
     }
   }

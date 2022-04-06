@@ -17,6 +17,8 @@ namespace WhaleSpotting.Repositories
         Location GetLocationById(int locationId);
         Location CreateLocation(CreateLocationRequest newLocation, int userId);
 
+        Location UpdateLocation(UpdateLocationRequest updatedLocation, int locationId);
+
         }
     public class LocationsRepo : ILocationsRepo
     {
@@ -65,6 +67,24 @@ namespace WhaleSpotting.Repositories
             
             _context.SaveChanges();
             return insertedResult.Entity;
+        }
+
+        public Location UpdateLocation(UpdateLocationRequest updatedLocation, int locationId)
+        {
+            var locationToUpdate = GetLocationById(locationId);
+
+            locationToUpdate.Latitude = updatedLocation.Latitude;
+            locationToUpdate.Longitude = updatedLocation.Longitude;
+            locationToUpdate.Name = updatedLocation.Name;
+            locationToUpdate.Description = updatedLocation.Description;
+            locationToUpdate.Sightings = updatedLocation.Sightings;
+            locationToUpdate.Amenities = updatedLocation.Amenities;
+            
+            var updatedResult = _context.Locations.Update(locationToUpdate);
+          
+
+            _context.SaveChanges();
+            return updatedResult.Entity;
         }
     }
 }
