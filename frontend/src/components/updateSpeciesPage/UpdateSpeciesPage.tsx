@@ -110,6 +110,7 @@ export function UpdateSpeciesPage(): JSX.Element {
           <textarea
             id="description"
             placeholder="Describe whale species"
+            maxLength={2048}
             rows={3}
             value={description}
             onChange={(event) => setDescription(event.target.value)}
@@ -131,7 +132,10 @@ export function UpdateSpeciesPage(): JSX.Element {
           </button>
           {status === "ERROR" ? (
             <div className="updateSpecies__error">
-              <p>ERROR: Please make sure all fields have been filled in</p>
+              <p>
+                ERROR: Please make sure all fields have been filled in and the
+                description is not too long
+              </p>
             </div>
           ) : (
             <></>
