@@ -1,3 +1,5 @@
+import internal from "stream";
+
 export interface User {
   id: number;
   name: string;
@@ -89,6 +91,10 @@ export interface NewSpecies {
   photoUrl: string;
   description: string;
   endangeredStatusId: number;
+}
+
+export interface UpdateUser {
+  role: number;
 }
 
 function getAuthorizationHeader(username: string, password: string) {
@@ -309,6 +315,29 @@ export async function deleteSpecies(
       Authorization: getAuthorizationHeader(username, password),
     },
   });
+  if (!response.ok) {
+    throw new Error(await response.json());
+  }
+}
+
+export async function addAdmin(
+  id: number,
+  update: UpdateUser,
+  username: string,
+  password: string
+) {
+  const response = await fetch(
+    `https://localhost:5001/users/${id}/update/role`,
+    {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: getAuthorizationHeader(username, password),
+      },
+      body: JSON.stringify(update),
+    }
+  );
+
   if (!response.ok) {
     throw new Error(await response.json());
   }
