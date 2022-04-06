@@ -12,6 +12,7 @@ import {
 } from "../../clients/apiClients";
 import { LoginContext } from "../../components/login/LoginManager";
 import { InternalSighting } from "./Sighting/InternalSighting";
+import { ExternalApiSighting } from "./Sighting/ExternalApiSighting";
 
 export function SightingListPage(): JSX.Element {
   const [sightings, setSightings] = useState<Array<Sighting>>([]);
@@ -76,26 +77,7 @@ export function SightingListPage(): JSX.Element {
               i={i}
             />
           ) : (
-            <li className="sighting__list__item" key={i}>
-              <div className="sighting__card">
-                <h2 className="sighting__card__title">
-                  {s.species[0].name} ({s.species[0].latinName})
-                </h2>
-                <img
-                  className="sighting__image"
-                  src={s.photoUrl}
-                  alt={s.description}
-                  width="250"
-                />
-                <div className="sighting__card__info">
-                  <p>About: {s.description}</p>
-                  <p>Sighting Location: {s.location.name}</p>
-                  <p>On: {new Date(s.date).toLocaleDateString("en-gb")}</p>
-                  <p>Seen by: {s.email}</p>
-                  <p>Confirmed ☑</p>
-                </div>
-              </div>
-            </li>
+            <ExternalApiSighting s={s} i={i} />
           )
         )}
       </ul>
