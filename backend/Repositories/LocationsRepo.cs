@@ -14,7 +14,9 @@ namespace WhaleSpotting.Repositories
     {
         List<Location> GetAllLocations();
         List<Location> GetPopularLocations();
-        Location GetLocationById(int locationId);   
+        Location GetLocationById(int locationId);
+        Location CreateLocation(CreateLocationRequest newLocation, int userId);
+
         }
     public class LocationsRepo : ILocationsRepo
     {
@@ -46,6 +48,24 @@ namespace WhaleSpotting.Repositories
                 .Locations
                 .Include(l => l.Sightings)
                 .Single(location => location.Id == locationId);
+        }
+
+        public Location CreateLocation(CreateLocationRequest newLocation, int userId)
+        {
+            var insertedResult = _context.Locations.Add( new Location
+            {
+                Id = newLocation.Id,
+                Latitude = newLocation.Latitude,
+                Longitude = newLocation.Longitude,
+                Name = newLocation.Name,
+                Description = newLocation.Description,
+                Sightings = newLocation.Sightings,
+                Amenities = newLocation.Amenities
+
+            });
+            
+            _context.SaveChanges();
+            return insertedResult.Entity;
         }
     }
 }
