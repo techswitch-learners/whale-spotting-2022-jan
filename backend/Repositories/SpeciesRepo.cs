@@ -15,6 +15,7 @@ namespace WhaleSpotting.Repositories
         Species GetSpeciesById(int id);
         Species Create(CreateSpeciesRequest newSpecies, int userId);
         Species Update(int speciesId, CreateSpeciesRequest speciesToUpdate);
+        void Delete(int id);
     }
 
     public class SpeciesRepo : ISpeciesRepo
@@ -68,6 +69,12 @@ namespace WhaleSpotting.Repositories
             _context.Species.Update(updatedResult);
             _context.SaveChanges();
             return updatedResult;
+        }
+        public void Delete(int id)
+        {
+            var species = GetSpeciesById(id);
+            _context.Species.Remove(species);
+            _context.SaveChanges();
         }
     }
 }
