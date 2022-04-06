@@ -28,6 +28,12 @@ namespace WhaleSpotting.Controllers
             _authservice = authservice;
         }
 
+        [HttpGet("")]
+        public ActionResult<List<User>> UsersList()
+        {
+            return _users.GetAllUsers();
+        }
+
         [HttpPost]
         public IActionResult CreateUser([FromBody] CreateUserRequest userRequest)
         {
