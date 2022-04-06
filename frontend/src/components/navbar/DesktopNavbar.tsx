@@ -53,7 +53,7 @@ export const DesktopNavbar: React.FunctionComponent = () => {
                 <Link to="/species/create">Create species </Link>
               </li>
               <li className="desktop__menuitem">
-                <Link to="/species/update">Update species </Link>
+                <Link to="/species/meetwhales">Update species </Link>
               </li>
               <li className="desktop__menuitem">
                 <Link to="/sightings/create">New Item</Link>

@@ -35,20 +35,20 @@ export function MeetTheWhalesPage(): JSX.Element {
               </figure>
               <div className="species__card__info">
                 <p>{s.description}</p>
+                {isAdmin ? (
+                  <div className="species__card__btns">
+                    <Link
+                      className="species__button btn btn-primary"
+                      to={`/species/${s.id}/update`}
+                    >
+                      Update
+                    </Link>
+                  </div>
+                ) : (
+                  <> </>
+                )}
               </div>
             </div>
-            {isAdmin ? (
-              <div className="species__card__btns">
-                <Link
-                  className="species__button btn btn-primary"
-                  to={`/species/${s.id}/update`}
-                >
-                  Update
-                </Link>
-              </div>
-            ) : (
-              <> </>
-            )}
           </li>
         ))}
       </ul>

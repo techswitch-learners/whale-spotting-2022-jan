@@ -85,7 +85,7 @@ export const MobileNavbar: React.FunctionComponent = () => {
         {loginContext.isAdmin ? (
           <Link
             className="menu-item"
-            to="/species/update"
+            to="/species/meetwhales"
             onClick={() => closeMenu()}
           >
             Update Species

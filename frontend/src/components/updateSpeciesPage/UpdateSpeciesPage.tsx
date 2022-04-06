@@ -97,10 +97,10 @@ export function UpdateSpeciesPage(): JSX.Element {
           <select
             id="endangeredStatus"
             onChange={(e) => handleEndangeredStatusChange(e)}
-            defaultValue={endangeredStatusId}
+            value={endangeredStatusId}
           >
             {endangeredStatuses.map((status) => (
-              <option key={status.id} value={endangeredStatusId}>
+              <option key={status.id} value={status.id}>
                 {status.name}
               </option>
             ))}
@@ -139,7 +139,7 @@ export function UpdateSpeciesPage(): JSX.Element {
           {status === "FINISHED" ? (
             <div className="updateSpecies__success">
               Form submitted successfully.&ensp;
-              <Link to="/species">List of species</Link>
+              <Link to="/species/meetwhales">Back to Meet The Whales</Link>
             </div>
           ) : (
             <></>
