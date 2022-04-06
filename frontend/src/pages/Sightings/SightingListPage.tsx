@@ -22,7 +22,7 @@ export function SightingListPage(): JSX.Element {
   const [combined, setCombined] = useState<Array<Sighting | ExternalSighting>>(
     []
   );
-  const { username, password, isAdmin } = useContext(LoginContext);
+  const { username, password } = useContext(LoginContext);
 
   useEffect(() => {
     Promise.all([GetAllSightings(), GetExternalSightings()]).then(
