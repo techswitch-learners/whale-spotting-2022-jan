@@ -10,7 +10,8 @@ using WhaleSpotting.Controllers;
 namespace WhaleSpotting.Repositories
 { public interface IInteractionRepo
     {
-        Interaction Create(InteractionRequest create);
+        Interaction Create(InteractionRequest create, int userId);
+    
       
     }
     public class InteractionRepo : IInteractionRepo
@@ -22,13 +23,13 @@ namespace WhaleSpotting.Repositories
             _context = context;
         }
 
-        public Interaction Create(InteractionRequest create)
+        public Interaction Create(InteractionRequest create, int userId)
         {
             var insertResult = _context.Interaction.Add(new Interaction
             {
                 Date = DateTime.Now,
                 WhaleId = create.WhaleId,
-                UserId = create.UserId,
+                UserId = userId,
             });
             _context.SaveChanges();
             return insertResult.Entity;

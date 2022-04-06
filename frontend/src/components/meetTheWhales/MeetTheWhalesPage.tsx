@@ -18,6 +18,7 @@ export function MeetTheWhalesPage(): JSX.Element {
   const [status, setStatus] = useState<FromStatus>("READY");
 
   const { username, password } = useContext(LoginContext);
+  console.log(username);
 
   const submitForm = (event: FormEvent) => {
     event.preventDefault();

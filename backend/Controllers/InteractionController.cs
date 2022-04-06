@@ -66,7 +66,7 @@ namespace WhaleSpotting.Controllers
 
             try
             {
-                var interaction = _interaction.Create(newInteraction);
+                var interaction = _interaction.Create(newInteraction, user.Id);
                 return Created("/", newInteraction);
             }
             catch (BadHttpRequestException)
