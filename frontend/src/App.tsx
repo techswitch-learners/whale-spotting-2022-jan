@@ -16,6 +16,7 @@ import { CreateUser } from "./pages/SignUp/SignUp";
 import { Login } from "./components/login/Login";
 import { SightingListPage } from "./pages/Sightings/SightingListPage";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { MeetTheWhalesPage } from "./components/meetTheWhales/MeetTheWhalesPage";
 
 const Routes: React.FunctionComponent = () => {
   const loginContext = useContext(LoginContext);
@@ -39,6 +40,9 @@ const Routes: React.FunctionComponent = () => {
       </Route>
       <Route path="/plantrip">
         <PlanATripPage />
+      </Route>
+      <Route path="/species/meetwhales">
+        <MeetTheWhalesPage />
       </Route>
       <Route path="/">
         <Home />
