@@ -55,9 +55,6 @@ export const DesktopNavbar: React.FunctionComponent = () => {
               <li className="desktop__menuitem">
                 <Link to="/species/meetwhales">Update species </Link>
               </li>
-              <li className="desktop__menuitem">
-                <Link to="/sightings/create">New Item</Link>
-              </li>
             </ul>
           </li>
         ) : (
