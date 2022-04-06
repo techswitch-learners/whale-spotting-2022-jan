@@ -63,7 +63,7 @@ function getAuthorizationHeader(username: string, password: string) {
   return `Basic ${btoa(`${username}:${password}`)}`;
 }
 
-export async function GetAllSightings(): Promise<Array<Sighting>> {
+export async function getAllSightings(): Promise<Array<Sighting>> {
   const response = await fetch(`https://localhost:5001/sightings`, {
     method: "GET",
     headers: {
@@ -74,7 +74,7 @@ export async function GetAllSightings(): Promise<Array<Sighting>> {
   return await response.json();
 }
 
-export async function GetExternalSightings(): Promise<Array<ExternalSighting>> {
+export async function getExternalSightings(): Promise<Array<ExternalSighting>> {
   const response = await fetch(
     `https://whale-spotting-external-api.herokuapp.com/api/sightings`,
     {

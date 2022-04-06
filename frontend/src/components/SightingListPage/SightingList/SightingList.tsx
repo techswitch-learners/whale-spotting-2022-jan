@@ -1,7 +1,7 @@
 import React from "react";
 import { ExternalSighting, Sighting } from "../../../clients/apiClients";
-import { ExternalApiSighting } from "../Sighting/ExternalApiSighting";
-import { InternalSighting } from "../Sighting/InternalSighting";
+import { ExternalApiSighting } from "../sighting/ExternalApiSighting";
+import { InternalSighting } from "../sighting/InternalSighting";
 
 export function SightingList({
   combined,

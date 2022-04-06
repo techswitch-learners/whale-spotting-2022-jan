@@ -7,11 +7,11 @@ import {
   ExternalSighting,
 } from "../../clients/apiClients";
 import {
-  GetAllSightings,
-  GetExternalSightings,
+  getAllSightings,
+  getExternalSightings,
 } from "../../clients/apiClients";
 import { LoginContext } from "../../components/login/LoginManager";
-import { SightingList } from "../../components/SightingListPage/SightingList/SightingList";
+import { SightingList } from "../../components/SightingListPage/sightingList/SightingList";
 
 export function SightingListPage(): JSX.Element {
   const [sightings, setSightings] = useState<Array<Sighting>>([]);
@@ -21,7 +21,7 @@ export function SightingListPage(): JSX.Element {
   const { username, password } = useContext(LoginContext);
 
   useEffect(() => {
-    Promise.all([GetAllSightings(), GetExternalSightings()]).then(
+    Promise.all([getAllSightings(), getExternalSightings()]).then(
       ([sightings, externalSightings]) => {
         const combinedSightings: Array<Sighting | ExternalSighting> = [];
         setCombined(
@@ -40,14 +40,14 @@ export function SightingListPage(): JSX.Element {
   const confirmWhaleSighting = (sightingId: number) => {
     if (sightingId) {
       approveSighting(sightingId, username, password).then(() =>
-        GetAllSightings().then(setSightings)
+        getAllSightings().then(setSightings)
       );
     }
   };
   const deleteWhaleSighting = (sightingId: number) => {
     if (sightingId) {
       deleteSighting(sightingId, username, password).then(() =>
-        GetAllSightings().then(setSightings)
+        getAllSightings().then(setSightings)
       );
     }
   };
