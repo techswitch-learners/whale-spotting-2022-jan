@@ -89,7 +89,8 @@ namespace WhaleSpotting.Controllers {
       return new ExtendedLocationResponse(location);
     } 
 
-    [HttpPost("create")]
+   [HttpPost]
+   [Route("create")]
     public ActionResult CreateLocation([FromBody] CreateLocationRequest newLocation, [FromHeader(Name = "Authorization")] string authHeader)
     {
       if (!ModelState.IsValid)
@@ -124,7 +125,7 @@ namespace WhaleSpotting.Controllers {
             {
                 return StatusCode(
                     StatusCodes.Status403Forbidden,
-                    "You are not allowed to approve a sighting"
+                    "You are not allowed to add a new location."
                 );
             }
 
@@ -135,9 +136,10 @@ namespace WhaleSpotting.Controllers {
 
             try
             {
-                var appSighting = new ApproveSightingRequest(user);
-                var sighting = _sightingsRepo.Approve(id, appSighting);
-                return Ok();
+                var location = _locations.CreateLocation(newLocation, user.Id);
+                return Created("/", newLocation);
+
+             
             }
             catch (BadHttpRequestException)
             {

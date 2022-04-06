@@ -8,9 +8,6 @@ namespace WhaleSpotting.Models.Request
     public class CreateLocationRequest
     {
         [Required]
-        public int Id { get; set; }
-
-        [Required]
         public float Latitude { get; set; }
 
         [Required]

@@ -50,11 +50,10 @@ namespace WhaleSpotting.Repositories
                 .Single(location => location.Id == locationId);
         }
 
-        public Location CreateLocation(CreateLocationRequest newLocation, int userId)
+        public Location CreateLocation(CreateLocationRequest newLocation , int userId)
         {
             var insertedResult = _context.Locations.Add( new Location
             {
-                Id = newLocation.Id,
                 Latitude = newLocation.Latitude,
                 Longitude = newLocation.Longitude,
                 Name = newLocation.Name,
