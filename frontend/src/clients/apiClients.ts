@@ -75,6 +75,15 @@ export interface NewSighting {
   description: string;
   photoUrl: string;
 }
+export interface Interaction {
+  date: Date;
+  whaleId: number;
+  wserId: number;
+}
+export interface NewInteraction {
+  date: Date;
+  whaleId: number;
+}
 
 function getAuthorizationHeader(username: string, password: string) {
   return `Basic ${btoa(`${username}:${password}`)}`;
@@ -222,6 +231,24 @@ export async function createSighting(
       Authorization: getAuthorizationHeader(username, password),
     },
     body: JSON.stringify(newSighting),
+  });
+
+  if (!response.ok) {
+    throw new Error(await response.json());
+  }
+}
+export async function createInteraction(
+  newInteraction: NewInteraction,
+  username: string,
+  password: string
+) {
+  const response = await fetch(`https://localhost:5001/interactions/create`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: getAuthorizationHeader(username, password),
+    },
+    body: JSON.stringify(newInteraction),
   });
 
   if (!response.ok) {

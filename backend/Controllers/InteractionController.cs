@@ -28,9 +28,6 @@ namespace WhaleSpotting.Controllers
             _usersRepo = usersRepo;
         }
 
-        [HttpPost("create")]
-
-
         [HttpPost]
         [Route("create")]
         public ActionResult Create([FromBody] InteractionRequest newInteraction, [FromHeader(Name = "Authorization")] string authHeader)
