@@ -124,7 +124,7 @@ export function CreateSpeciesPage(): JSX.Element {
           {status === "FINISHED" ? (
             <div className="createSpecies__success">
               Form submitted successfully.&ensp;
-              <Link to="/species">List of species</Link>
+              <Link to="/species/meetwhales">Meet the Whales</Link>
             </div>
           ) : (
             <></>

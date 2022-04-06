@@ -296,3 +296,20 @@ export async function updateSpecies(
     throw new Error(await response.json());
   }
 }
+
+export async function deleteSpecies(
+  id: number,
+  username: string,
+  password: string
+) {
+  const response = await fetch(`https://localhost:5001/species/${id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: getAuthorizationHeader(username, password),
+    },
+  });
+  if (!response.ok) {
+    throw new Error(await response.json());
+  }
+}

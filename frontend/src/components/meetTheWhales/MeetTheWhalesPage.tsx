@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext } from "react";
 import "./MeetTheWhalesPage.scss";
-import { fetchSpecies, Species } from "../../clients/apiClients";
+import { deleteSpecies, fetchSpecies, Species } from "../../clients/apiClients";
 import { LoginContext } from "../../components/login/LoginManager";
 import { Link } from "react-router-dom";
 
@@ -11,6 +11,14 @@ export function MeetTheWhalesPage(): JSX.Element {
   useEffect(() => {
     fetchSpecies().then(setSpecies);
   }, []);
+
+  const onDeleteSpecies = (speciesId: number) => {
+    if (speciesId) {
+      deleteSpecies(speciesId, username, password).then(() =>
+        fetchSpecies().then(setSpecies)
+      );
+    }
+  };
 
   return (
     <div className="species__list__body">
@@ -43,6 +51,15 @@ export function MeetTheWhalesPage(): JSX.Element {
                     >
                       Update
                     </Link>
+                    <button
+                      className="species__button btn btn-primary"
+                      onClick={() => {
+                        onDeleteSpecies(s.id);
+                      }}
+                      type="submit"
+                    >
+                      Delete
+                    </button>
                   </div>
                 ) : (
                   <> </>
