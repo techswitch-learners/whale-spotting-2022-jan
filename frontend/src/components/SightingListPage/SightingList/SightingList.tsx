@@ -4,13 +4,11 @@ import { ExternalApiSighting } from "../Sighting/ExternalApiSighting";
 import { InternalSighting } from "../Sighting/InternalSighting";
 
 export function SightingList({
+  setSightings,
   combined,
-  confirmWhaleSighting,
-  deleteWhaleSighting,
 }: {
+  setSightings: React.Dispatch<React.SetStateAction<Sighting[]>>;
   combined: (Sighting | ExternalSighting)[];
-  confirmWhaleSighting: (sightingId: number) => void;
-  deleteWhaleSighting: (sightingId: number) => void;
 }) {
   const isInternalSighting = (
     s: Sighting | ExternalSighting
@@ -24,9 +22,8 @@ export function SightingList({
         {combined.map((s, i) =>
           isInternalSighting(s) ? (
             <InternalSighting
+              setSightings={setSightings}
               sighting={s}
-              confirmWhaleSighting={confirmWhaleSighting}
-              deleteWhaleSighting={deleteWhaleSighting}
               index={i}
             />
           ) : (

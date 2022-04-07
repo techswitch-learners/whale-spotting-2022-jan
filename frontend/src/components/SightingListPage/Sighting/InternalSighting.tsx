@@ -1,16 +1,15 @@
 import React, { useContext } from "react";
 import { Sighting } from "../../../clients/apiClients";
 import { LoginContext } from "../../login/LoginManager";
+import { AdminButtons } from "../AdminButtons/AdminButtons";
 
 export function InternalSighting({
+  setSightings,
   sighting,
-  confirmWhaleSighting,
-  deleteWhaleSighting,
   index,
 }: {
+  setSightings: React.Dispatch<React.SetStateAction<Sighting[]>>;
   sighting: Sighting;
-  confirmWhaleSighting: (sightingId: number) => void;
-  deleteWhaleSighting: (sightingId: number) => void;
   index: number;
 }) {
   const { isAdmin } = useContext(LoginContext);
@@ -36,27 +35,7 @@ export function InternalSighting({
           </p>
           {sighting.approvedBy !== null ? <p>Confirmed ☑</p> : <></>}
           {isAdmin ? (
-            <div className="sighting__card__btns">
-              <button
-                className="sighting__button btn btn-primary"
-                disabled={!!sighting.approvedBy}
-                onClick={() => {
-                  confirmWhaleSighting(sighting.id);
-                }}
-                type="submit"
-              >
-                Confirm
-              </button>
-              <button
-                className="sighting__button btn btn-primary"
-                onClick={() => {
-                  deleteWhaleSighting(sighting.id);
-                }}
-                type="submit"
-              >
-                Delete
-              </button>
-            </div>
+            <AdminButtons sighting={sighting} setSightings={setSightings} />
           ) : (
             <> </>
           )}

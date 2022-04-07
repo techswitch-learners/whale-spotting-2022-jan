@@ -33,21 +33,6 @@ export function SightingListPage(): JSX.Element {
     );
   }, []);
 
-  const confirmWhaleSighting = (sightingId: number) => {
-    if (sightingId) {
-      approveSighting(sightingId, username, password).then(() =>
-        getAllSightings().then(setSightings)
-      );
-    }
-  };
-  const deleteWhaleSighting = (sightingId: number) => {
-    if (sightingId) {
-      deleteSighting(sightingId, username, password).then(() =>
-        getAllSightings().then(setSightings)
-      );
-    }
-  };
-
   if (combined.length == 0) {
     return <div>loading...</div>;
   }
@@ -55,11 +40,7 @@ export function SightingListPage(): JSX.Element {
   return (
     <div className="sighting__list__body">
       <h1 className="sighting__list__title">Sightings</h1>
-      <SightingList
-        combined={combined}
-        confirmWhaleSighting={confirmWhaleSighting}
-        deleteWhaleSighting={deleteWhaleSighting}
-      />
+      <SightingList setSightings={setSightings} combined={combined} />
     </div>
   );
 }
