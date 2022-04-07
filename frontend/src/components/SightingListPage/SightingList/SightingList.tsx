@@ -24,13 +24,13 @@ export function SightingList({
         {combined.map((s, i) =>
           isInternalSighting(s) ? (
             <InternalSighting
-              s={s}
+              sighting={s}
               confirmWhaleSighting={confirmWhaleSighting}
               deleteWhaleSighting={deleteWhaleSighting}
-              i={i}
+              index={i}
             />
           ) : (
-            <ExternalApiSighting s={s} i={i} />
+            <ExternalApiSighting sighting={s} index={i} />
           )
         )}
       </ul>
