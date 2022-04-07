@@ -15,7 +15,7 @@ namespace WhaleSpotting.Repositories
         User GetById(int id);
 
         User GetByUsername(string username);
-        User UpdateRole(int id, UpdateUserRoleRequest update);
+        User UpdateRole(UpdateUserRoleRequest update);
         public List<User> GetAllUsers();
 
         List<LeaderboardEntry> GetLeaderboard();
@@ -75,9 +75,9 @@ namespace WhaleSpotting.Repositories
                 .Single(user => user.Username == username);
         }
 
-        public User UpdateRole(int id, UpdateUserRoleRequest update)
+        public User UpdateRole(UpdateUserRoleRequest update)
         {
-            var user = GetById(id);
+            var user = GetById(update.UserId);
 
             user.Role = update.Role;
 

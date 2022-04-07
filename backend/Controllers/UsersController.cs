@@ -71,8 +71,8 @@ namespace WhaleSpotting.Controllers
             return new ReducedUserResponse(user);
         }
 
-        [HttpPatch("{id}/update/role")]
-        public ActionResult<ReducedUserResponse> UpdateRole([FromRoute] int id, [FromBody] UpdateUserRoleRequest update)
+        [HttpPatch("update/role")]
+        public ActionResult<ReducedUserResponse> UpdateRole([FromBody] UpdateUserRoleRequest update)
         {
             if (!ModelState.IsValid)
             {
@@ -119,7 +119,7 @@ namespace WhaleSpotting.Controllers
 
             try
             {
-                var userUpdate = _users.UpdateRole(id, update);
+                var userUpdate = _users.UpdateRole(update);
                 return new ReducedUserResponse(userUpdate);
             }
 
