@@ -1,3 +1,5 @@
+import internal from "stream";
+
 export interface User {
   id: number;
   name: string;
@@ -67,6 +69,11 @@ export interface NewSighting {
   speciesId: number;
   description: string;
   photoUrl: string;
+}
+
+export interface LeaderboardEntry {
+  username: string;
+  count: number;
 }
 
 function getAuthorizationHeader(username: string, password: string) {
@@ -214,6 +221,16 @@ export async function createSighting(
 
 export const getPopularLocations = async () => {
   const response = await fetch(`https://localhost:5001/locations/popular`);
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(await response.json());
+  }
+  return data;
+};
+
+export const getLeaderboard = async () => {
+  const response = await fetch(`https://localhost:5001/leaderboard`);
   const data = await response.json();
 
   if (!response.ok) {
