@@ -70,18 +70,18 @@ export function MeetTheWhalesPage(): JSX.Element {
                   <p className="whales__card__info--emphasis">
                     <span className="whales__card__info__title">
                       Conservation status:
-                    </span>{" "}
+                    </span>
                     {w.species.endangeredStatus}
                   </p>
                   <p className="whales__card__info--emphasis">
                     <span className="whales__card__info__title">
-                      Description:{" "}
-                    </span>{" "}
+                      Description:
+                    </span>
                     {w.description}
                   </p>
                   <p className="whales__card__info--sponsors">
                     <span className="whales__card__info__title">
-                      Sponsored by our members:{" "}
+                      Sponsored by our members:
                     </span>
                     {stringOfUsers(w.users)}
                   </p>
