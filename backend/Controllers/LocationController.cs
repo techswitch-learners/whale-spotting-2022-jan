@@ -98,7 +98,7 @@ namespace WhaleSpotting.Controllers
 
         [HttpPost]
         [Route("create")]
-        public ActionResult CreateLocation([FromBody] CreateLocationRequest newLocation, [FromHeader(Name = "Authorization")] string authHeader)
+        public ActionResult<CreateLocationRequest> CreateLocation([FromBody] CreateLocationRequest newLocation, [FromHeader(Name = "Authorization")] string authHeader)
         {
             if (!ModelState.IsValid)
             {
@@ -159,8 +159,8 @@ namespace WhaleSpotting.Controllers
 
         [HttpPatch]
         [Route("{locationId}/update")]
-        public ActionResult UpdateLocation(
-            [FromBody] UpdateLocationRequest updatedLocation,
+        public ActionResult<UpdateLocationRequest> UpdateLocation(
+            [FromBody] CreateLocationRequest updatedLocation,
             [FromRoute] int locationId,
             [FromHeader(Name = "Authorization")] string authHeader)
         {
@@ -207,9 +207,8 @@ namespace WhaleSpotting.Controllers
 
             try
             {
-                var editedLocation = new UpdateLocationRequest();
-                var location = _locations.UpdateLocation(editedLocation, locationId);
-                return Ok();
+                var locationUpdate = _locations.UpdateLocation(updatedLocation, locationId);
+                return new UpdateLocationRequest(locationUpdate);
 
             }
             catch (BadHttpRequestException)
