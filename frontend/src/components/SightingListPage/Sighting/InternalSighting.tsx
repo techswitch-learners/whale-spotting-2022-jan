@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { ExternalSighting, Sighting } from "../../../clients/apiClients";
 import { LoginContext } from "../../login/LoginManager";
 import { AdminButtons } from "../AdminButtons/AdminButtons";
@@ -15,6 +15,17 @@ export function InternalSighting({
   index: number;
 }) {
   const { isAdmin } = useContext(LoginContext);
+  const [actionOnConfirm, setActionOnConfirm] = useState<boolean>(false);
+  const [actionOnDelete, setActionOnDelete] = useState<boolean>(false);
+
+  if (actionOnDelete)
+    return (
+      <li className="sighting__list__item" key={index}>
+        <div className="sighting__card">
+          <h2 className="sighting__card__title">This post was deleted</h2>
+        </div>
+      </li>
+    );
 
   return (
     <li className="sighting__list__item" key={index}>
@@ -35,11 +46,14 @@ export function InternalSighting({
           <p>
             Seen by: {sighting.user.name} ({sighting.user.username})
           </p>
-          {sighting.approvedBy !== null ? <p>Confirmed ☑</p> : <></>}
-          {isAdmin ? (
+          {actionOnConfirm ? (
+            <p>Confirmed ☑</p>
+          ) : isAdmin ? (
             <AdminButtons
-              sighting={sighting}
-              setCombinedSightingList={setCombinedSightingList}
+              approvedBy={sighting.approvedBy}
+              sightingId={sighting.id}
+              setActionOnConfirm={setActionOnConfirm}
+              setActionOnDelete={setActionOnDelete}
             />
           ) : (
             <> </>
