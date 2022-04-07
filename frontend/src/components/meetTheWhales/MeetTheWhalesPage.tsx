@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 toast.configure();
 
 export const notifyOfSuccessfulDelete = () => {
-  toast.success("Species deleted!", {
+  toast.info("Species deleted!", {
     position: toast.POSITION.TOP_CENTER,
     hideProgressBar: true,
   });
