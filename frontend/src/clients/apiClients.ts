@@ -86,6 +86,7 @@ export interface NewSpecies {
 
 export interface UpdateUser {
   role: number;
+  userId: number;
 }
 
 export interface LeaderboardEntry {
@@ -329,22 +330,18 @@ export async function deleteSpecies(
 }
 
 export async function addAdmin(
-  id: number,
   update: UpdateUser,
   username: string,
   password: string
 ) {
-  const response = await fetch(
-    `https://localhost:5001/users/${id}/update/role`,
-    {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: getAuthorizationHeader(username, password),
-      },
-      body: JSON.stringify(update),
-    }
-  );
+  const response = await fetch(`https://localhost:5001/users/update/role`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: getAuthorizationHeader(username, password),
+    },
+    body: JSON.stringify(update),
+  });
 
   if (!response.ok) {
     throw new Error(await response.json());

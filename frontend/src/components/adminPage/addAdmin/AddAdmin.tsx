@@ -21,9 +21,9 @@ export function AddAdmin(): JSX.Element {
       return;
     }
     addAdmin(
-      userId,
       {
         role,
+        userId,
       },
       username,
       password
@@ -40,11 +40,17 @@ export function AddAdmin(): JSX.Element {
     setUserId(Number(event.target.value));
   };
 
+  const handleUserRoleChange = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    setRole(Number(event.target.value));
+  };
+
   return (
     <form onSubmit={submitForm}>
       <div className="reportSighting__form">
-        <label htmlFor="location">User</label>
-        <select id="location" onChange={(e) => handleUserIdChange(e)}>
+        <label htmlFor="user">User</label>
+        <select id="user" onChange={(e) => handleUserIdChange(e)}>
           <option selected disabled>
             Select User
           </option>
@@ -53,6 +59,18 @@ export function AddAdmin(): JSX.Element {
               {user.username} {user.role === 0 ? "(user)" : "(admin)"}
             </option>
           ))}
+        </select>
+        <label htmlFor="role">Role</label>
+        <select id="role" onChange={(e) => handleUserRoleChange(e)}>
+          <option selected disabled>
+            Select Role
+          </option>
+          <option key="0" value="0">
+            user
+          </option>
+          <option key="1" value="1">
+            admin
+          </option>
         </select>
         <button
           className="reportSighting__button btn btn-primary"
