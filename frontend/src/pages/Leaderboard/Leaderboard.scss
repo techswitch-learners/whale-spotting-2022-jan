@@ -1,0 +1,28 @@
+@import "../../styles/constants.scss";
+
+.leaderboard__body {
+  background-color: $color-background;
+  display: flex;
+  flex-direction: column;
+  align-items: space-between;
+  font-family: $font-family;
+}
+
+.leaderboard__title {
+  padding: 1em;
+  text-align: center;
+  color: $color-font;
+  flex-direction: column;
+}
+
+.leaderboard__table {
+  color: $color-font;
+  font-size: larger;
+  justify-content: space-between;
+  margin-bottom: 3em !important;
+}
+
+table {
+  width: 75% !important;
+  margin-left: 12%;
+}

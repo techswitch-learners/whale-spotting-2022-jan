@@ -124,6 +124,14 @@ namespace WhaleSpotting.Controllers
                     "Could not update user role"
                 );
             }
+ 
         }
+
+        [HttpGet("/leaderboard")]
+        public ActionResult<List<LeaderboardEntry>>GetLeaderboard()
+        {
+            return _users.GetLeaderboard();
+        }
+
     }
 }
