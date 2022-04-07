@@ -40,7 +40,7 @@ export function SightingListPage(): JSX.Element {
   return (
     <div className="sighting__list__body">
       <h1 className="sighting__list__title">Sightings</h1>
-      <SightingList setSightings={setSightings} combined={combined} />
+      <SightingList setCombined={setCombined} combined={combined} />
     </div>
   );
 }

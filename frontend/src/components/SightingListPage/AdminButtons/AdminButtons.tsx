@@ -2,32 +2,54 @@ import React, { useContext } from "react";
 import {
   approveSighting,
   deleteSighting,
+  ExternalSighting,
   getAllSightings,
+  getExternalSightings,
   Sighting,
 } from "../../../clients/apiClients";
 import { LoginContext } from "../../login/LoginManager";
 
 export function AdminButtons({
   sighting,
-  setSightings,
+  setCombined: setCombined,
 }: {
   sighting: Sighting;
-  setSightings: React.Dispatch<React.SetStateAction<Sighting[]>>;
+  setCombined: React.Dispatch<
+    React.SetStateAction<(Sighting | ExternalSighting)[]>
+  >;
 }): JSX.Element {
   const { username, password } = useContext(LoginContext);
 
   const confirmWhaleSighting = (sightingId: number) => {
     if (sightingId) {
-      approveSighting(sightingId, username, password).then(() =>
-        getAllSightings().then(setSightings)
-      );
+      approveSighting(sightingId, username, password).then(() => {
+        Promise.all([getAllSightings(), getExternalSightings()]).then(
+          ([sightings, externalSightings]) => {
+            const combinedSightings: Array<Sighting | ExternalSighting> = [];
+            setCombined(
+              combinedSightings
+                .concat(sightings, externalSightings)
+                .sort((a, b) => +new Date(b.date) - +new Date(a.date))
+            );
+          }
+        );
+      });
     }
   };
   const deleteWhaleSighting = (sightingId: number) => {
     if (sightingId) {
-      deleteSighting(sightingId, username, password).then(() =>
-        getAllSightings().then(setSightings)
-      );
+      deleteSighting(sightingId, username, password).then(() => {
+        Promise.all([getAllSightings(), getExternalSightings()]).then(
+          ([sightings, externalSightings]) => {
+            const combinedSightings: Array<Sighting | ExternalSighting> = [];
+            setCombined(
+              combinedSightings
+                .concat(sightings, externalSightings)
+                .sort((a, b) => +new Date(b.date) - +new Date(a.date))
+            );
+          }
+        );
+      });
     }
   };
 

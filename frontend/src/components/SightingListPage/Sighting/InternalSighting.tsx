@@ -1,14 +1,16 @@
 import React, { useContext } from "react";
-import { Sighting } from "../../../clients/apiClients";
+import { ExternalSighting, Sighting } from "../../../clients/apiClients";
 import { LoginContext } from "../../login/LoginManager";
 import { AdminButtons } from "../AdminButtons/AdminButtons";
 
 export function InternalSighting({
-  setSightings,
+  setCombined,
   sighting,
   index,
 }: {
-  setSightings: React.Dispatch<React.SetStateAction<Sighting[]>>;
+  setCombined: React.Dispatch<
+    React.SetStateAction<(Sighting | ExternalSighting)[]>
+  >;
   sighting: Sighting;
   index: number;
 }) {
@@ -35,7 +37,7 @@ export function InternalSighting({
           </p>
           {sighting.approvedBy !== null ? <p>Confirmed ☑</p> : <></>}
           {isAdmin ? (
-            <AdminButtons sighting={sighting} setSightings={setSightings} />
+            <AdminButtons sighting={sighting} setCombined={setCombined} />
           ) : (
             <> </>
           )}
