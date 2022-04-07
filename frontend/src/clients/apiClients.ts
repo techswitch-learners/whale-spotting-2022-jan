@@ -4,6 +4,7 @@ export interface User {
   id: number;
   name: string;
   username: string;
+  role: number;
 }
 
 export interface NewUser {
@@ -12,11 +13,6 @@ export interface NewUser {
   email: string;
   password: string;
 }
-// export interface Species {
-//   description: string;
-//   name: string;
-//   latinName: string;
-// }
 
 export interface Sighting {
   id: number;
@@ -36,11 +32,6 @@ export interface Location {
   description: string;
   sightings: Sighting[];
   amenities: string[];
-}
-
-export interface User {
-  name: string;
-  username: string;
 }
 
 export interface Sighting {
@@ -358,4 +349,14 @@ export async function addAdmin(
   if (!response.ok) {
     throw new Error(await response.json());
   }
+}
+
+export async function fetchAllUsers(): Promise<Array<User>> {
+  const response = await fetch(`https://localhost:5001/users`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
 }
