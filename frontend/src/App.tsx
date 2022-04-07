@@ -18,6 +18,7 @@ import { SightingListPage } from "./pages/Sightings/SightingListPage";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { MeetTheWhalesPage } from "./components/meetTheWhales/MeetTheWhalesPage";
 import { GetAllWhales } from "./clients/apiClients";
+import { Leaderboard } from "./pages/Leaderboard/Leaderboard";
 
 const Routes: React.FunctionComponent = () => {
   const loginContext = useContext(LoginContext);
@@ -31,6 +32,9 @@ const Routes: React.FunctionComponent = () => {
       <Route path="/sightings">
         <SightingListPage />
       </Route>
+      <Route path="/species/meetwhales">
+        <MeetTheWhalesPage />
+      </Route>
       <Route path="/login">
         <Login />
         {loginContext.isLoggedIn ? (
@@ -42,8 +46,8 @@ const Routes: React.FunctionComponent = () => {
       <Route path="/plantrip">
         <PlanATripPage />
       </Route>
-      <Route path="/species/meetwhales">
-        <MeetTheWhalesPage />
+      <Route path="/leaderboard">
+        <Leaderboard />
       </Route>
       <Route path="/">
         <Home />
