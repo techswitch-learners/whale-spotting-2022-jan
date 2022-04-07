@@ -11,10 +11,10 @@ import { LoginContext } from "../../login/LoginManager";
 
 export function AdminButtons({
   sighting,
-  setCombined: setCombined,
+  setCombinedSightingList,
 }: {
   sighting: Sighting;
-  setCombined: React.Dispatch<
+  setCombinedSightingList: React.Dispatch<
     React.SetStateAction<(Sighting | ExternalSighting)[]>
   >;
 }): JSX.Element {
@@ -26,7 +26,7 @@ export function AdminButtons({
         Promise.all([getAllSightings(), getExternalSightings()]).then(
           ([sightings, externalSightings]) => {
             const combinedSightings: Array<Sighting | ExternalSighting> = [];
-            setCombined(
+            setCombinedSightingList(
               combinedSightings
                 .concat(sightings, externalSightings)
                 .sort((a, b) => +new Date(b.date) - +new Date(a.date))
@@ -42,7 +42,7 @@ export function AdminButtons({
         Promise.all([getAllSightings(), getExternalSightings()]).then(
           ([sightings, externalSightings]) => {
             const combinedSightings: Array<Sighting | ExternalSighting> = [];
-            setCombined(
+            setCombinedSightingList(
               combinedSightings
                 .concat(sightings, externalSightings)
                 .sort((a, b) => +new Date(b.date) - +new Date(a.date))

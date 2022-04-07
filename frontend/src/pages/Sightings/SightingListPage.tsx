@@ -15,16 +15,16 @@ import { SightingList } from "../../components/SightingListPage/SightingList/Sig
 
 export function SightingListPage(): JSX.Element {
   const [sightings, setSightings] = useState<Array<Sighting>>([]);
-  const [combined, setCombined] = useState<Array<Sighting | ExternalSighting>>(
-    []
-  );
+  const [combinedSightingList, setCombinedSightingList] = useState<
+    Array<Sighting | ExternalSighting>
+  >([]);
   const { username, password } = useContext(LoginContext);
 
   useEffect(() => {
     Promise.all([getAllSightings(), getExternalSightings()]).then(
       ([sightings, externalSightings]) => {
         const combinedSightings: Array<Sighting | ExternalSighting> = [];
-        setCombined(
+        setCombinedSightingList(
           combinedSightings
             .concat(sightings, externalSightings)
             .sort((a, b) => +new Date(b.date) - +new Date(a.date))
@@ -33,14 +33,17 @@ export function SightingListPage(): JSX.Element {
     );
   }, []);
 
-  if (combined.length == 0) {
+  if (combinedSightingList.length == 0) {
     return <div>loading...</div>;
   }
 
   return (
     <div className="sighting__list__body">
       <h1 className="sighting__list__title">Sightings</h1>
-      <SightingList setCombined={setCombined} combined={combined} />
+      <SightingList
+        setCombinedSightingList={setCombinedSightingList}
+        combinedSightingList={combinedSightingList}
+      />
     </div>
   );
 }

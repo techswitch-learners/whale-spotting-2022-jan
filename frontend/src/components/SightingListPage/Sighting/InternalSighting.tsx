@@ -4,11 +4,11 @@ import { LoginContext } from "../../login/LoginManager";
 import { AdminButtons } from "../AdminButtons/AdminButtons";
 
 export function InternalSighting({
-  setCombined,
+  setCombinedSightingList,
   sighting,
   index,
 }: {
-  setCombined: React.Dispatch<
+  setCombinedSightingList: React.Dispatch<
     React.SetStateAction<(Sighting | ExternalSighting)[]>
   >;
   sighting: Sighting;
@@ -37,7 +37,10 @@ export function InternalSighting({
           </p>
           {sighting.approvedBy !== null ? <p>Confirmed ☑</p> : <></>}
           {isAdmin ? (
-            <AdminButtons sighting={sighting} setCombined={setCombined} />
+            <AdminButtons
+              sighting={sighting}
+              setCombinedSightingList={setCombinedSightingList}
+            />
           ) : (
             <> </>
           )}
