@@ -105,6 +105,12 @@ export const login = async (
   }
 };
 
+export const isAdmin = async (username: string): Promise<boolean> => {
+  const response = await fetch(`https://localhost:5001/users/${username}`);
+  const user = await response.json();
+  return user.role;
+};
+
 export async function createUser(newUser: NewUser) {
   const response = await fetch(`https://localhost:5001/users/`, {
     method: "POST",
