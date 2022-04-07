@@ -1,26 +1,18 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./SightingListPage.scss";
-import {
-  approveSighting,
-  deleteSighting,
-  Sighting,
-  ExternalSighting,
-} from "../../clients/apiClients";
+import { Sighting, ExternalSighting } from "../../clients/apiClients";
 import {
   getAllSightings,
   getExternalSightings,
 } from "../../clients/apiClients";
-import { LoginContext } from "../../components/login/LoginManager";
 import { SightingList } from "../../components/SightingListPage/SightingList/SightingList";
 import { Link } from "react-router-dom";
 
 export function SightingListPage(): JSX.Element {
-  const [sightings, setSightings] = useState<Array<Sighting>>([]);
   const [combinedSightingList, setCombinedSightingList] = useState<
     Array<Sighting | ExternalSighting>
   >([]);
   const [loading, setLoading] = useState<boolean>(false);
-  const { username, password } = useContext(LoginContext);
 
   useEffect(() => {
     setLoading(true);

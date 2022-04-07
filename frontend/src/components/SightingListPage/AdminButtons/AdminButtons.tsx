@@ -20,21 +20,19 @@ export function AdminButtons({
 }): JSX.Element {
   const { username, password } = useContext(LoginContext);
 
-  const confirmWhaleSighting = (sightingId: number) => {
-    if (sightingId) {
-      approveSighting(sightingId, username, password).then(() => {
-        Promise.all([getAllSightings(), getExternalSightings()]).then(
-          ([sightings, externalSightings]) => {
-            const combinedSightings: Array<Sighting | ExternalSighting> = [];
-            setCombinedSightingList(
-              combinedSightings
-                .concat(sightings, externalSightings)
-                .sort((a, b) => +new Date(b.date) - +new Date(a.date))
-            );
-          }
-        );
-      });
-    }
+  const confirmWhaleSighting = () => {
+    approveSighting(sighting.id, username, password).then(() => {
+      Promise.all([getAllSightings(), getExternalSightings()]).then(
+        ([sightings, externalSightings]) => {
+          const combinedSightings: Array<Sighting | ExternalSighting> = [];
+          setCombinedSightingList(
+            combinedSightings
+              .concat(sightings, externalSightings)
+              .sort((a, b) => +new Date(b.date) - +new Date(a.date))
+          );
+        }
+      );
+    });
   };
   const deleteWhaleSighting = (sightingId: number) => {
     if (sightingId) {
@@ -59,7 +57,7 @@ export function AdminButtons({
         className="sighting__button btn btn-primary"
         disabled={!!sighting.approvedBy}
         onClick={() => {
-          confirmWhaleSighting(sighting.id);
+          confirmWhaleSighting();
         }}
         type="submit"
       >
