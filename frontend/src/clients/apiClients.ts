@@ -1,3 +1,5 @@
+import internal from "stream";
+
 export interface User {
   id: number;
   name: string;
@@ -89,6 +91,11 @@ export interface NewSpecies {
   photoUrl: string;
   description: string;
   endangeredStatusId: number;
+}
+
+export interface LeaderboardEntry {
+  username: string;
+  count: number;
 }
 
 function getAuthorizationHeader(username: string, password: string) {
@@ -251,6 +258,16 @@ export const getPopularLocations = async () => {
   return data;
 };
 
+export const getLeaderboard = async () => {
+  const response = await fetch(`https://localhost:5001/leaderboard`);
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(await response.json());
+  }
+  return data;
+};
+
 export async function fetchEndangeredStatus(): Promise<
   Array<EndangeredStatus>
 > {
@@ -271,7 +288,6 @@ export async function createSpecies(
     },
     body: JSON.stringify(newSpecies),
   });
-
   if (!response.ok) {
     throw new Error(await response.json());
   }
