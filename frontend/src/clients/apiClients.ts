@@ -97,6 +97,11 @@ export interface UpdateUser {
   role: number;
 }
 
+export interface LeaderboardEntry {
+  username: string;
+  count: number;
+}
+
 function getAuthorizationHeader(username: string, password: string) {
   return `Basic ${btoa(`${username}:${password}`)}`;
 }
@@ -124,6 +129,12 @@ export const login = async (
   if (!response.ok) {
     throw new Error(JSON.stringify(await response.json()));
   }
+};
+
+export const isAdmin = async (username: string): Promise<boolean> => {
+  const response = await fetch(`https://localhost:5001/users/${username}`);
+  const user = await response.json();
+  return user.role;
 };
 
 export async function createUser(newUser: NewUser) {
@@ -277,11 +288,17 @@ export async function createSpecies(
     },
     body: JSON.stringify(newSpecies),
   });
+}
+
+export const getLeaderboard = async () => {
+  const response = await fetch(`https://localhost:5001/leaderboard`);
+  const data = await response.json();
 
   if (!response.ok) {
     throw new Error(await response.json());
   }
-}
+  return data;
+};
 
 export async function updateSpecies(
   id: number,
