@@ -27,7 +27,7 @@ export const DesktopNavbar: React.FunctionComponent = () => {
           <Link to="/"> Home </Link>
         </li>
         <li className="desktop__menuitem">
-          <span>Sighting</span>
+          <span>Sightings</span>
           <span className="desktop_down-arrow">&#9660;</span>
           <ul className="desktop__submenu">
             <li className="desktop__menuitem">
@@ -35,6 +35,9 @@ export const DesktopNavbar: React.FunctionComponent = () => {
             </li>
             <li className="desktop__menuitem">
               <Link to="/sightings/create">Report a sighting </Link>
+            </li>
+            <li className="desktop__menuitem">
+              <Link to="/leaderboard">Leaderboard </Link>
             </li>
           </ul>
         </li>

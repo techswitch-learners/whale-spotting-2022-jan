@@ -64,6 +64,14 @@ export const MobileNavbar: React.FunctionComponent = () => {
           Plan a Trip
         </Link>
         <Link
+          id="leaderboard"
+          className="menu-item"
+          to="/leaderboard"
+          onClick={() => closeMenu()}
+        >
+          Leaderboard
+        </Link>
+        <Link
           id="meetwhales"
           className="menu-item"
           to="/species/meetwhales"
