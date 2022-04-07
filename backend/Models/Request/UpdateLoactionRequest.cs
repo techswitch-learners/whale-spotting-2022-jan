@@ -17,5 +17,20 @@ namespace WhaleSpotting.Models.Request
         public List<Sighting> Sightings { get; set; }
 
         public List<string> Amenities { get; set; }
+
+        public UpdateLocationRequest(Location location)
+        {
+
+            Latitude = location.Latitude;
+            Longitude = location.Longitude;
+            Name = location.Name;
+            Description = location.Description;
+            Sightings = location.Sightings;
+            Amenities = location.Amenities;
+        }
+        public UpdateLocationRequest()
+        {
+            
+        }
     }
 }
