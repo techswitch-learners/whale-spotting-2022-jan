@@ -69,13 +69,13 @@ export function MeetTheWhalesPage(): JSX.Element {
                 <div className="whales__card__info--wrapper">
                   <p className="whales__card__info--emphasis">
                     <span className="whales__card__info__title">
-                      Conservation status:
+                      Conservation status: &nbsp;
                     </span>
                     {w.species.endangeredStatus}
                   </p>
                   <p className="whales__card__info--emphasis">
                     <span className="whales__card__info__title">
-                      Description:
+                      Description: &nbsp;
                     </span>
                     {w.description}
                   </p>
