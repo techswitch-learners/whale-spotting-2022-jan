@@ -66,6 +66,7 @@ export interface Whales {
   photoUrl: string;
   species: Species;
   description: string;
+  users: User[];
 }
 
 export interface NewSighting {

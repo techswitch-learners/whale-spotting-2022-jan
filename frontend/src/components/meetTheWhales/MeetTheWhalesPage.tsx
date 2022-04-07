@@ -4,7 +4,7 @@ import {
   Whales,
   GetAllWhales,
   createInteraction,
-  Interaction,
+  User,
 } from "../../clients/apiClients";
 import { LoginContext } from "../login/LoginManager";
 
@@ -14,11 +14,10 @@ export function MeetTheWhalesPage(): JSX.Element {
   const [whales, setWhales] = useState<Array<Whales>>([]);
   const [date, setDate] = useState<Date>(new Date());
   const [whaleId, setWhaleId] = useState<number>(1);
-  const [interactions, setInteractions] = useState<Array<Interaction>>([]);
   const [status, setStatus] = useState<FromStatus>("READY");
 
   const { username, password } = useContext(LoginContext);
-  console.log(username);
+  const loginContext = useContext(LoginContext);
 
   const submitForm = (event: FormEvent) => {
     event.preventDefault();
@@ -31,9 +30,26 @@ export function MeetTheWhalesPage(): JSX.Element {
       username,
       password
     )
-      .then(() => setStatus("FINISHED"))
+      .then(() => {
+        setStatus("FINISHED");
+        GetAllWhales().then(setWhales);
+      })
       .catch(() => setStatus("ERROR"));
   };
+
+  function stringOfUsers(arr: User[]) {
+    if (arr.length > 0) {
+      return arr.slice(1).reduce(function (acc, currVal) {
+        return acc + (", " + currVal.name + " (" + currVal.username + ") ");
+      }, " " + arr[0].name + " (" + arr[0].username + ")");
+    } else return "";
+  }
+
+  function AlreadySponsor(name: string, arr: User[]) {
+    return arr.some((el) => {
+      return el.username == name;
+    });
+  }
 
   useEffect(() => {
     GetAllWhales().then(setWhales);
@@ -60,12 +76,23 @@ export function MeetTheWhalesPage(): JSX.Element {
                 <figcaption className="whales__card__info--emphasis">
                   Conservation status: {w.species.endangeredStatus}
                 </figcaption>
+                <figcaption className="whales__card__info--emphasis">
+                  Description: {w.description}
+                </figcaption>
+                <p className="whales__card__info--sponsors">
+                  Sponsored by our members:
+                  {stringOfUsers(w.users)}
+                </p>
               </figure>
-              <form onSubmit={submitForm}>
+              <form className="submit__form" onSubmit={submitForm}>
                 <button
                   className="btn btn-primary"
                   type="submit"
-                  disabled={status === "SUBMITTING"}
+                  disabled={
+                    status === "SUBMITTING" ||
+                    !loginContext.isLoggedIn ||
+                    AlreadySponsor(username, w.users)
+                  }
                   onClick={(event) => setWhaleId(w.id)}
                 >
                   Sponsore Me!

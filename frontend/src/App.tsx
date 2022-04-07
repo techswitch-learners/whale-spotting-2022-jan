@@ -17,6 +17,7 @@ import { Login } from "./components/login/Login";
 import { SightingListPage } from "./pages/Sightings/SightingListPage";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { MeetTheWhalesPage } from "./components/meetTheWhales/MeetTheWhalesPage";
+import { GetAllWhales } from "./clients/apiClients";
 
 const Routes: React.FunctionComponent = () => {
   const loginContext = useContext(LoginContext);
@@ -26,9 +27,6 @@ const Routes: React.FunctionComponent = () => {
       <Route path="/sign-up">{<CreateUser />}</Route>
       <Route path="/sightings/create">
         {loginContext.isLoggedIn ? <CreateSightingPage /> : <Login />}
-      </Route>
-      <Route path="/interactions/create">
-        {loginContext.isLoggedIn ? <MeetTheWhalesPage /> : <Login />}
       </Route>
       <Route path="/sightings">
         <SightingListPage />
