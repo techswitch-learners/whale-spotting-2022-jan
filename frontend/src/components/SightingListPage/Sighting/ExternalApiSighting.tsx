@@ -24,7 +24,7 @@ export function ExternalApiSighting({
           <p>Sighting Location: {sighting.location.name}</p>
           <p>On: {new Date(sighting.date).toLocaleDateString("en-gb")}</p>
           <p>Seen by: {sighting.email}</p>
-          <p>Confirmed ☑</p>
+          <p>Worldwide 🌍</p>
         </div>
       </div>
     </li>
