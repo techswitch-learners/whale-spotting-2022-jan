@@ -88,7 +88,7 @@ export async function GetAllSightings(
   const extraQueries = locationId || speciesId || createdByUserId ? `?` : "";
   const query = locationId ? `locationId=${locationId}&` : "";
   const query2 = speciesId ? `speciesId=${speciesId}&` : "";
-  const query3 = createdByUserId ? `userId=${createdByUserId}&` : "";
+  const query3 = createdByUserId ? `createdByUserId=${createdByUserId}&` : "";
   const response = await fetch(
     `https://localhost:5001/sightings${extraQueries}${query}${query2}${query3}`,
     {
