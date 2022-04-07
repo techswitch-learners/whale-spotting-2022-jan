@@ -2,7 +2,8 @@ import React from "react";
 import "./Home.scss";
 import { PopularLocations } from "./popularLocations/PopularLocations";
 import { RecentSighting } from "./recentSighting/RecentSighting";
-import { HomeLeaderboard } from "./homepageLeaderboard/HomepageLeaderboard";
+import { HomeLeaderboard } from "./homepageLeaderboard/homepageLeaderboard";
+
 export const Home: React.FunctionComponent = () => {
   return (
     <div className="homepage">
