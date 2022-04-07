@@ -1,10 +1,10 @@
 import React, { useContext, useState } from "react";
 import { ExternalSighting, Sighting } from "../../../clients/apiClients";
 import { LoginContext } from "../../login/LoginManager";
-import { AdminButtons } from "../AdminButtons/AdminButtons";
+import { ConfirmButton } from "../AdminButtons/ConfirmButton";
+import { DeleteButton } from "../AdminButtons/DeleteButton";
 
 export function InternalSighting({
-  setCombinedSightingList,
   sighting,
   index,
 }: {
@@ -46,15 +46,26 @@ export function InternalSighting({
           <p>
             Seen by: {sighting.user.name} ({sighting.user.username})
           </p>
-          {actionOnConfirm ? (
-            <p>Confirmed ☑</p>
+          {actionOnConfirm || sighting.approvedBy ? (
+            <>
+              <p>Confirmed ☑</p>
+              <DeleteButton
+                sightingId={sighting.id}
+                setActionOnDelete={setActionOnDelete}
+              />
+            </>
           ) : isAdmin ? (
-            <AdminButtons
-              approvedBy={sighting.approvedBy}
-              sightingId={sighting.id}
-              setActionOnConfirm={setActionOnConfirm}
-              setActionOnDelete={setActionOnDelete}
-            />
+            <div className="sighting__card__btns">
+              <ConfirmButton
+                approvedBy={sighting.approvedBy}
+                sightingId={sighting.id}
+                setActionOnConfirm={setActionOnConfirm}
+              />
+              <DeleteButton
+                sightingId={sighting.id}
+                setActionOnDelete={setActionOnDelete}
+              />
+            </div>
           ) : (
             <> </>
           )}
