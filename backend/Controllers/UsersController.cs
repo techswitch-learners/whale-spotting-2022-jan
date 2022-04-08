@@ -46,6 +46,30 @@ namespace WhaleSpotting.Controllers
             return _users.GetAllUsers();
         }
 
+        [HttpGet("{username}")]
+        public ActionResult<ReducedUserResponse> GetUser([FromRoute] string username)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            
+            var user = new User();
+            try
+            {
+                user = _users.GetByUsername(username);
+            }
+            catch (InvalidOperationException)
+            {
+                return StatusCode(
+                    StatusCodes.Status401Unauthorized,
+                    "The given username is not valid"
+                );
+            }
+            
+            return new ReducedUserResponse(user);
+        }
+
         [HttpPatch("{id}/update/role")]
         public ActionResult<ReducedUserResponse> UpdateRole([FromRoute] int id, [FromBody] UpdateUserRoleRequest update)
         {
