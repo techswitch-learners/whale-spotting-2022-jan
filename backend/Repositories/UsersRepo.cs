@@ -5,6 +5,7 @@ using WhaleSpotting.Models.Database;
 using WhaleSpotting.Models.Request;
 using System.Security.Cryptography;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+using WhaleSpotting.Models.Response;
 
 namespace WhaleSpotting.Repositories
 {
@@ -16,9 +17,9 @@ namespace WhaleSpotting.Repositories
 
         List<User> GetAllUsers();
         User GetByUsername(string username);
-        User UpdateRole(int id, UpdateUserRoleRequest update);
-
+        User UpdateRole(UpdateUserRoleRequest update);
         List<LeaderboardEntry> GetLeaderboard();
+        List<UserRoleResponse> GetUserRoles();
     }
 
     public class UsersRepo : IUsersRepo
@@ -75,9 +76,9 @@ namespace WhaleSpotting.Repositories
                 .Single(user => user.Username == username);
         }
 
-        public User UpdateRole(int id, UpdateUserRoleRequest update)
+        public User UpdateRole(UpdateUserRoleRequest update)
         {
-            var user = GetById(id);
+            var user = GetById(update.UserId);
 
             user.Role = update.Role;
 
@@ -108,6 +109,32 @@ namespace WhaleSpotting.Repositories
                         Count = sighting.count 
                     }
                 ).ToList();
+        }
+        public List<UserRoleResponse> GetUserRoles()
+        {
+            /* var roleIntValues = Enum.GetValues(typeof(UserType)).Cast<UserType>().ToList();
+
+            foreach (var i in Enum.GetValues(typeof(UserType)))
+            {
+                String name = i.ToString();
+                var number = i.Cast<UserType>();
+                UserRoleResponse thing = new UserRoleResponse
+                {
+                    RoleInt = i,
+                    RoleType = name,
+                };
+            }
+
+            foreach (var enumValue in Enum.GetValues(typeof(UserType)))
+            {
+                UserRoleResponse thing = new UserRoleResponse
+                {
+                    RoleInt = (int)Enum.ToObject(enumValue.GetType(), enumValue),
+                    RoleType = enumValue.ToString(),
+                };
+            } */
+
+            return new List<UserRoleResponse>();
         }
     }
 }

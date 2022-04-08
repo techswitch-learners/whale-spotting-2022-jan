@@ -4,6 +4,11 @@ export interface User {
   id: number;
   name: string;
   username: string;
+  role: number;
+}
+
+export interface UserRoleType {
+  roles: number[];
 }
 
 export interface NewUser {
@@ -81,6 +86,11 @@ export interface NewSpecies {
   photoUrl: string;
   description: string;
   endangeredStatusId: number;
+}
+
+export interface UpdateUser {
+  role: number;
+  userId: number;
 }
 
 export interface LeaderboardEntry {
@@ -348,4 +358,43 @@ export async function deleteSpecies(
   if (!response.ok) {
     throw new Error(await response.json());
   }
+}
+
+export async function addAdmin(
+  update: UpdateUser,
+  username: string,
+  password: string
+) {
+  const response = await fetch(`https://localhost:5001/users/update/role`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: getAuthorizationHeader(username, password),
+    },
+    body: JSON.stringify(update),
+  });
+
+  if (!response.ok) {
+    throw new Error(await response.json());
+  }
+}
+
+export async function fetchAllUsers(): Promise<Array<User>> {
+  const response = await fetch(`https://localhost:5001/users`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+}
+
+export async function fetchUserRoleType(): Promise<Array<UserRoleType>> {
+  const response = await fetch(`https://localhost:5001/users/roles`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
 }

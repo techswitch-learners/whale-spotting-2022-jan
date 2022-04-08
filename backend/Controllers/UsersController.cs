@@ -28,6 +28,12 @@ namespace WhaleSpotting.Controllers
             _authservice = authservice;
         }
 
+        [HttpGet("")]
+        public ActionResult<List<User>> UsersList()
+        {
+            return _users.GetAllUsers();
+        }
+
         [HttpPost]
         public IActionResult CreateUser([FromBody] CreateUserRequest userRequest)
         {
@@ -70,8 +76,8 @@ namespace WhaleSpotting.Controllers
             return new ReducedUserResponse(user);
         }
 
-        [HttpPatch("{id}/update/role")]
-        public ActionResult<ReducedUserResponse> UpdateRole([FromRoute] int id, [FromBody] UpdateUserRoleRequest update)
+        [HttpPatch("update/role")]
+        public ActionResult<ReducedUserResponse> UpdateRole([FromBody] UpdateUserRoleRequest update)
         {
             if (!ModelState.IsValid)
             {
@@ -118,7 +124,7 @@ namespace WhaleSpotting.Controllers
 
             try
             {
-                var userUpdate = _users.UpdateRole(id, update);
+                var userUpdate = _users.UpdateRole(update);
                 return new ReducedUserResponse(userUpdate);
             }
 
@@ -136,6 +142,12 @@ namespace WhaleSpotting.Controllers
         public ActionResult<List<LeaderboardEntry>>GetLeaderboard()
         {
             return _users.GetLeaderboard();
+        }
+
+        [HttpGet("roles")]
+        public ActionResult<List<UserRoleResponse>>GetUserRoles()
+        {
+            return _users.GetUserRoles();
         }
 
     }

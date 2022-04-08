@@ -6,5 +6,6 @@ namespace WhaleSpotting.Models.Request
     public class UpdateUserRoleRequest
     {
         public UserType Role { get; set; }
+        public int UserId { get; set; }
     }
 }
