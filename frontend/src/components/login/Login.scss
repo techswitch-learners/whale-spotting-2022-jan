@@ -26,3 +26,8 @@
 .login__failure__notification {
   color: red;
 }
+
+:root {
+  --toastify-color-success: #3b89ac;
+  --toastify-icon-color-success: var(--toastify-color-success);
+}

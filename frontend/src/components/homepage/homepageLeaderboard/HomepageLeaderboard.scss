@@ -1,0 +1,79 @@
+@import "../../../styles/constants.scss";
+.home-leaderboard__title {
+  background-color: $color-background;
+  background-color: adjust-hue($color: #00000071, $degrees: 0);
+  color: $color-font;
+  font-size: large;
+  width: 100vw;
+  padding: 1rem;
+}
+.home-leaderboard__text {
+  background-color: $color-background;
+  color: $color-font;
+  font-size: medium;
+  background-color: adjust-hue($color: #0000005d, $degrees: 0);
+  padding: 0.5rem;
+  margin: 0.5em;
+  text-decoration: none;
+}
+.home-leaderboard__text-container {
+  display: flex;
+  width: 98vw;
+}
+.home-leaderboard__left {
+  width: 60vw;
+  height: 40vh;
+}
+.home-leaderboard__right {
+  width: 30vw;
+  height: 40vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-color: $color-background;
+  border-radius: 1em;
+  opacity: 0.9;
+}
+.home-leaderboard__post-location-button {
+  width: 6em;
+  height: 3em;
+}
+.home-leaderboard__text__description {
+  font-style: italic;
+}
+.home-leaderboard__list-item {
+  list-style: none;
+  padding-left: 0;
+  font-size: medium;
+}
+.home-leaderboard__list-item-heading {
+  font-size: 1.2em;
+}
+.home-leaderboard__box-heading {
+  font-size: 1.2em;
+}
+@media (min-width: 1024px) {
+  .home-leaderboard__text__description {
+    font-size: 1em;
+  }
+  .home-leaderboard__text {
+    font-size: 1.8em;
+  }
+  .home-leaderboard__left {
+    font-size: 1.3em;
+  }
+  .home-leaderboard__box-heading {
+    font-size: 1.5em;
+  }
+  .home-leaderboard__list-item {
+    font-size: 1.3em;
+  }
+  .home-leaderboard__list-item-heading {
+    font-size: 1.1em;
+  }
+  .home-leaderboard__title {
+    font-size: 1.8em;
+  }
+}
