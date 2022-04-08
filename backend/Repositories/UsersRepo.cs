@@ -5,6 +5,7 @@ using WhaleSpotting.Models.Database;
 using WhaleSpotting.Models.Request;
 using System.Security.Cryptography;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+using WhaleSpotting.Models.Response;
 
 namespace WhaleSpotting.Repositories
 {
@@ -19,7 +20,7 @@ namespace WhaleSpotting.Repositories
         List<User> GetAllUsers();
 
         List<LeaderboardEntry> GetLeaderboard();
-        List<UserType> GetUserRoles();
+        List<UserRoleResponse> GetUserRoles();
     }
 
     public class UsersRepo : IUsersRepo
@@ -107,9 +108,31 @@ namespace WhaleSpotting.Repositories
                     }
                 ).ToList();
         }
-        public List<UserType> GetUserRoles()
+        public List<UserRoleResponse> GetUserRoles()
         {
-            return Enum.GetValues(typeof(UserType)).Cast<UserType>().ToList();
+            /* var roleIntValues = Enum.GetValues(typeof(UserType)).Cast<UserType>().ToList();
+
+            foreach (var i in Enum.GetValues(typeof(UserType)))
+            {
+                String name = i.ToString();
+                var number = i.Cast<UserType>();
+                UserRoleResponse thing = new UserRoleResponse
+                {
+                    RoleInt = i,
+                    RoleType = name,
+                };
+            }
+
+            foreach (var enumValue in Enum.GetValues(typeof(UserType)))
+            {
+                UserRoleResponse thing = new UserRoleResponse
+                {
+                    RoleInt = (int)Enum.ToObject(enumValue.GetType(), enumValue),
+                    RoleType = enumValue.ToString(),
+                };
+            } */
+
+            return new List<UserRoleResponse>();
         }
     }
 }

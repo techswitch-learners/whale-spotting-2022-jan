@@ -140,7 +140,7 @@ namespace WhaleSpotting.Controllers
         }
 
         [HttpGet("roles")]
-        public ActionResult<List<UserType>>GetUserRoles()
+        public ActionResult<List<UserRoleResponse>>GetUserRoles()
         {
             return _users.GetUserRoles();
         }

@@ -7,6 +7,10 @@ export interface User {
   role: number;
 }
 
+export interface UserRoleType {
+  roles: number[];
+}
+
 export interface NewUser {
   name: string;
   username: string;
@@ -350,6 +354,16 @@ export async function addAdmin(
 
 export async function fetchAllUsers(): Promise<Array<User>> {
   const response = await fetch(`https://localhost:5001/users`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+}
+
+export async function fetchUserRoleType(): Promise<Array<UserRoleType>> {
+  const response = await fetch(`https://localhost:5001/users/roles`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
