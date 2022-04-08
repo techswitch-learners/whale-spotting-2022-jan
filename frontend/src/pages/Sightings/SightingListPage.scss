@@ -170,3 +170,9 @@
   padding: 5px 12px;
   color: white;
 }
+.pagintion__link--disabled a {
+  color: grey;
+}
+.pagintion__link--active {
+  color: grey;
+}
