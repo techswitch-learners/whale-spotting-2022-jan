@@ -18,6 +18,8 @@ import { SightingListPage } from "./pages/Sightings/SightingListPage";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { MeetTheWhalesPage } from "./components/meetTheWhales/MeetTheWhalesPage";
 import { GetAllWhales } from "./clients/apiClients";
+import { CreateSpeciesPage } from "./components/createSpeciesPage/CreateSpeciesPage";
+import { UpdateSpeciesPage } from "./components/updateSpeciesPage/UpdateSpeciesPage";
 import { Leaderboard } from "./pages/Leaderboard/Leaderboard";
 
 const Routes: React.FunctionComponent = () => {
@@ -48,6 +50,15 @@ const Routes: React.FunctionComponent = () => {
       </Route>
       <Route path="/leaderboard">
         <Leaderboard />
+      </Route>
+      <Route path="/species/meetwhales">
+        <MeetTheWhalesPage />
+      </Route>
+      <Route path="/species/create">
+        {loginContext.isAdmin ? <CreateSpeciesPage /> : <Login />}
+      </Route>
+      <Route path="/species/:id/update">
+        {loginContext.isAdmin ? <UpdateSpeciesPage /> : <Login />}
       </Route>
       <Route path="/">
         <Home />

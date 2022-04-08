@@ -12,11 +12,6 @@ export interface NewUser {
   email: string;
   password: string;
 }
-export interface Species {
-  description: string;
-  name: string;
-  latinName: string;
-}
 
 export interface Sighting {
   id: number;
@@ -54,13 +49,27 @@ export interface Sighting {
   approvedBy: User;
 }
 
+export interface EndangeredStatus {
+  id: number;
+  name: string;
+  description: string;
+}
+
 export interface Species {
   id: number;
   name: string;
   latinName: string;
   photoUrl: string;
   description: string;
-  endangeredStatus: string;
+  endangeredStatus: EndangeredStatus;
+}
+
+export interface UpdateSpecies {
+  name: string;
+  latinName: string;
+  photoUrl: string;
+  description: string;
+  endangeredStatusId: number;
 }
 export interface Whales {
   id: number;
@@ -86,6 +95,14 @@ export interface Interaction {
 export interface NewInteraction {
   date: Date;
   whaleId: number;
+}
+
+export interface NewSpecies {
+  name: string;
+  latinName: string;
+  photoUrl: string;
+  description: string;
+  endangeredStatusId: number;
 }
 
 export interface LeaderboardEntry {
@@ -227,6 +244,13 @@ export async function fetchSpecies(): Promise<Array<Species>> {
   return await response.json();
 }
 
+export async function fetchSpeciesById(
+  speciesId: number
+): Promise<UpdateSpecies> {
+  const response = await fetch(`${baseUrl}/species/${speciesId}`);
+  return await response.json();
+}
+
 export async function createSighting(
   newSighting: NewSighting,
   username: string,
@@ -283,3 +307,65 @@ export const getLeaderboard = async () => {
   }
   return data;
 };
+
+export async function fetchEndangeredStatus(): Promise<
+  Array<EndangeredStatus>
+> {
+  const response = await fetch(`${baseUrl}/endangered`);
+  return await response.json();
+}
+
+export async function createSpecies(
+  newSpecies: NewSpecies,
+  username: string,
+  password: string
+) {
+  const response = await fetch(`${baseUrl}/species/create`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: getAuthorizationHeader(username, password),
+    },
+    body: JSON.stringify(newSpecies),
+  });
+  if (!response.ok) {
+    throw new Error(await response.json());
+  }
+}
+
+export async function updateSpecies(
+  id: number,
+  updatedSpecies: UpdateSpecies,
+  username: string,
+  password: string
+) {
+  const response = await fetch(`${baseUrl}/species/${id}/update`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: getAuthorizationHeader(username, password),
+    },
+    body: JSON.stringify(updatedSpecies),
+  });
+
+  if (!response.ok) {
+    throw new Error(await response.json());
+  }
+}
+
+export async function deleteSpecies(
+  id: number,
+  username: string,
+  password: string
+) {
+  const response = await fetch(`${baseUrl}/species/${id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: getAuthorizationHeader(username, password),
+    },
+  });
+  if (!response.ok) {
+    throw new Error(await response.json());
+  }
+}
