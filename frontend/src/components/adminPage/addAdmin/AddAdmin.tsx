@@ -21,6 +21,11 @@ export function AddAdmin(): JSX.Element {
     { id: 1, name: "Admin" },
   ];
 
+  const handleReset = () => {
+    const selectors = document.querySelectorAll("select");
+    selectors.forEach((s) => (s.value = s[0].innerHTML));
+  };
+
   const submitForm = (event: FormEvent) => {
     event.preventDefault();
     setStatus("SUBMITTING");
@@ -39,6 +44,7 @@ export function AddAdmin(): JSX.Element {
       .then(() => {
         setStatus("FINISHED");
         toast("User role updated!");
+        handleReset();
       })
       .catch(() => setStatus("ERROR"));
   };
