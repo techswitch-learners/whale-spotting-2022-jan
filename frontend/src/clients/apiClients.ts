@@ -81,7 +81,7 @@ export interface NewSighting {
 export interface Interaction {
   date: Date;
   whaleId: number;
-  wserId: number;
+  userId: number;
 }
 export interface NewInteraction {
   date: Date;

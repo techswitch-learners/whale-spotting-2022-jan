@@ -45,7 +45,7 @@ export function MeetTheWhalesPage(): JSX.Element {
     } else return "";
   }
 
-  function AlreadySponsor(name: string, arr: User[]) {
+  function alreadySponsor(name: string, arr: User[]) {
     return arr.some((el) => {
       return el.username == name;
     });
@@ -91,11 +91,11 @@ export function MeetTheWhalesPage(): JSX.Element {
                   disabled={
                     status === "SUBMITTING" ||
                     !loginContext.isLoggedIn ||
-                    AlreadySponsor(username, w.users)
+                    alreadySponsor(username, w.users)
                   }
                   onClick={(event) => setWhaleId(w.id)}
                 >
-                  Sponsore Me!
+                  Sponsor Me!
                 </button>
               </form>
             </div>

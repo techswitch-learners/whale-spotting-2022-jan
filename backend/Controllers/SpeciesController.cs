@@ -43,23 +43,8 @@ namespace WhaleSpotting.Controllers
             }
 
             return _whalesRepo.GetAllWhales()
-            .Select(w => new ExtendedWhaleResponse
-            {
-                Id = w.Id,
-                Name = w.Name,
-                Description = w.Description,
-                Species = w.Species,
-                PhotoUrl = w.PhotoUrl,
-                Users = w.Interactions
-                        .Select(i => new UserResponse
-                        {
-                            Id = i.User.Id,
-                            Name = i.User.Name,
-                            Username = i.User.Username,
-                            Email = i.User.Email,
-                        })
-                        .ToList(),
-            }).ToList();
+           .Select(w => new ExtendedWhaleResponse(w))
+           .ToList();
         }
 
     }
