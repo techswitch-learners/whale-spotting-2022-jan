@@ -3,15 +3,23 @@ import { fetchAllUsers, User } from "../../../clients/apiClients";
 import { LoginContext } from "../../login/LoginManager";
 import { Link } from "react-router-dom";
 import { addAdmin } from "../../../clients/apiClients";
+import { ToastContainer } from "react-bootstrap";
+import { toast } from "react-toastify";
 
 type FromStatus = "READY" | "SUBMITTING" | "ERROR" | "FINISHED";
 
 export function AddAdmin(): JSX.Element {
   const [users, setUsers] = useState<Array<User>>([]);
+  const [currentUser, setCurrentUser] = useState<User>();
   const [userId, setUserId] = useState<number>();
   const [role, setRole] = useState<number>();
   const [status, setStatus] = useState<FromStatus>("READY");
   const { username, password } = useContext(LoginContext);
+
+  const roles = [
+    { id: 0, name: "User" },
+    { id: 1, name: "Admin" },
+  ];
 
   const submitForm = (event: FormEvent) => {
     event.preventDefault();
@@ -28,7 +36,10 @@ export function AddAdmin(): JSX.Element {
       username,
       password
     )
-      .then(() => setStatus("FINISHED"))
+      .then(() => {
+        setStatus("FINISHED");
+        toast("User role updated!");
+      })
       .catch(() => setStatus("ERROR"));
   };
 
@@ -37,7 +48,9 @@ export function AddAdmin(): JSX.Element {
   }, []);
 
   const handleUserIdChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setUserId(Number(event.target.value));
+    const newUserId = Number(event.target.value);
+    setUserId(newUserId);
+    setCurrentUser(users.filter((u) => u.id === newUserId)[0]);
   };
 
   const handleUserRoleChange = (
@@ -48,6 +61,7 @@ export function AddAdmin(): JSX.Element {
 
   return (
     <form onSubmit={submitForm}>
+      <ToastContainer />
       <div className="reportSighting__form">
         <label htmlFor="user">User</label>
         <select id="user" onChange={(e) => handleUserIdChange(e)}>
@@ -65,12 +79,13 @@ export function AddAdmin(): JSX.Element {
           <option selected disabled>
             Select Role
           </option>
-          <option key="0" value="0">
-            user
-          </option>
-          <option key="1" value="1">
-            admin
-          </option>
+          {roles
+            .filter((r) => r.id !== currentUser?.role)
+            .map((r) => (
+              <option key={r.id} value={r.id}>
+                {r.name}
+              </option>
+            ))}
         </select>
         <button
           className="reportSighting__button btn btn-primary"
