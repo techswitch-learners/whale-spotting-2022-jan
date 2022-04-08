@@ -66,8 +66,7 @@ namespace WhaleSpotting.Repositories
             updatedResult.Description = speciesToUpdate.Description;
             updatedResult.EndangeredStatusId = speciesToUpdate.EndangeredStatusId;
         
-            _context.Species.Update(updatedResult);
-            _context.SaveChanges();
+             _context.SaveChanges();
             return updatedResult;
         }
         public void Delete(int id)

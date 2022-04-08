@@ -66,7 +66,7 @@ namespace WhaleSpotting.Controllers
                 );
             }
             
-            if (user.Role == 0)
+            if (user.Role != UserType.ADMIN)
             {
                 return StatusCode(
                     StatusCodes.Status403Forbidden,
@@ -129,7 +129,7 @@ namespace WhaleSpotting.Controllers
                 );
             }
             
-            if (user.Role == 0)
+            if (user.Role != UserType.ADMIN)
             {
                 return StatusCode(
                     StatusCodes.Status403Forbidden,
@@ -204,7 +204,7 @@ namespace WhaleSpotting.Controllers
                 return new UnauthorizedResult();
             }
             
-             if (user.Role == 0)
+             if (user.Role != UserType.ADMIN)
             {
                 return StatusCode(
                     StatusCodes.Status403Forbidden,

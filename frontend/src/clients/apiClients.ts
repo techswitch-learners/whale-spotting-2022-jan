@@ -1,4 +1,4 @@
-import internal from "stream";
+const baseUrl = process.env["REACT_APP_BACKEND_DOMAIN"];
 
 export interface User {
   id: number;
@@ -103,7 +103,7 @@ function getAuthorizationHeader(username: string, password: string) {
 }
 
 export async function GetAllSightings(): Promise<Array<Sighting>> {
-  const response = await fetch(`https://localhost:5001/sightings`, {
+  const response = await fetch(`${baseUrl}/sightings`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -117,7 +117,7 @@ export const login = async (
   username: string,
   password: string
 ): Promise<void> => {
-  const response = await fetch("https://localhost:5001/login", {
+  const response = await fetch(`${baseUrl}/login`, {
     headers: {
       Authorization: `Basic ${btoa(`${username}:${password}`)}`,
     },
@@ -128,13 +128,13 @@ export const login = async (
 };
 
 export const isAdmin = async (username: string): Promise<boolean> => {
-  const response = await fetch(`https://localhost:5001/users/${username}`);
+  const response = await fetch(`${baseUrl}/users/${username}`);
   const user = await response.json();
   return user.role;
 };
 
 export async function createUser(newUser: NewUser) {
-  const response = await fetch(`https://localhost:5001/users/`, {
+  const response = await fetch(`${baseUrl}/users/`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -152,16 +152,13 @@ export async function approveSighting(
   username: string,
   password: string
 ) {
-  const response = await fetch(
-    `https://localhost:5001/sightings/${id}/approve`,
-    {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: getAuthorizationHeader(username, password),
-      },
-    }
-  );
+  const response = await fetch(`${baseUrl}/sightings/${id}/approve`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: getAuthorizationHeader(username, password),
+    },
+  });
   if (!response.ok) {
     throw new Error(await response.json());
   }
@@ -172,7 +169,7 @@ export async function deleteSighting(
   username: string,
   password: string
 ) {
-  const response = await fetch(`https://localhost:5001/sightings/${id}`, {
+  const response = await fetch(`${baseUrl}/sightings/${id}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
@@ -185,7 +182,7 @@ export async function deleteSighting(
 }
 
 export const getMostRecentSighting = async () => {
-  const response = await fetch(`https://localhost:5001/sightings/recent`);
+  const response = await fetch(`${baseUrl}/sightings/recent`);
   const data = await response.json();
   if (!response.ok) {
     throw new Error(await response.json());
@@ -194,7 +191,7 @@ export const getMostRecentSighting = async () => {
 };
 
 export async function fetchLocations(): Promise<Array<Location>> {
-  const response = await fetch(`https://localhost:5001/locations`, {
+  const response = await fetch(`${baseUrl}/locations`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -208,15 +205,12 @@ export async function fetchLocations(): Promise<Array<Location>> {
 }
 
 export async function fetchLocationById(locationId: number): Promise<Location> {
-  const response = await fetch(
-    `https://localhost:5001/locations/${locationId}`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  );
+  const response = await fetch(`${baseUrl}/locations/${locationId}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
   if (!response.ok) {
     throw new Error(await response.json());
   }
@@ -224,14 +218,14 @@ export async function fetchLocationById(locationId: number): Promise<Location> {
 }
 
 export async function fetchSpecies(): Promise<Array<Species>> {
-  const response = await fetch(`https://localhost:5001/species`);
+  const response = await fetch(`${baseUrl}/species`);
   return await response.json();
 }
 
 export async function fetchSpeciesById(
   speciesId: number
 ): Promise<UpdateSpecies> {
-  const response = await fetch(`https://localhost:5001/species/${speciesId}`);
+  const response = await fetch(`${baseUrl}/species/${speciesId}`);
   return await response.json();
 }
 
@@ -240,7 +234,7 @@ export async function createSighting(
   username: string,
   password: string
 ) {
-  const response = await fetch(`https://localhost:5001/sightings/create`, {
+  const response = await fetch(`${baseUrl}/sightings/create`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -255,7 +249,17 @@ export async function createSighting(
 }
 
 export const getPopularLocations = async () => {
-  const response = await fetch(`https://localhost:5001/locations/popular`);
+  const response = await fetch(`${baseUrl}/locations/popular`);
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(await response.json());
+  }
+  return data;
+};
+
+export const getLeaderboard = async () => {
+  const response = await fetch(`${baseUrl}/leaderboard`);
   const data = await response.json();
 
   if (!response.ok) {
@@ -267,7 +271,7 @@ export const getPopularLocations = async () => {
 export async function fetchEndangeredStatus(): Promise<
   Array<EndangeredStatus>
 > {
-  const response = await fetch(`https://localhost:5001/endangered`);
+  const response = await fetch(`${baseUrl}/endangered`);
   return await response.json();
 }
 
@@ -276,7 +280,7 @@ export async function createSpecies(
   username: string,
   password: string
 ) {
-  const response = await fetch(`https://localhost:5001/species/create`, {
+  const response = await fetch(`${baseUrl}/species/create`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -284,17 +288,10 @@ export async function createSpecies(
     },
     body: JSON.stringify(newSpecies),
   });
-}
-
-export const getLeaderboard = async () => {
-  const response = await fetch(`https://localhost:5001/leaderboard`);
-  const data = await response.json();
-
   if (!response.ok) {
     throw new Error(await response.json());
   }
-  return data;
-};
+}
 
 export async function updateSpecies(
   id: number,
@@ -302,7 +299,7 @@ export async function updateSpecies(
   username: string,
   password: string
 ) {
-  const response = await fetch(`https://localhost:5001/species/${id}/update`, {
+  const response = await fetch(`${baseUrl}/species/${id}/update`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
@@ -321,7 +318,7 @@ export async function deleteSpecies(
   username: string,
   password: string
 ) {
-  const response = await fetch(`https://localhost:5001/species/${id}`, {
+  const response = await fetch(`${baseUrl}/species/${id}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",

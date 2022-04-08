@@ -3,6 +3,16 @@ import "./MeetTheWhalesPage.scss";
 import { deleteSpecies, fetchSpecies, Species } from "../../clients/apiClients";
 import { LoginContext } from "../../components/login/LoginManager";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
+
+toast.configure();
+
+export const notifyOfSuccessfulDelete = () => {
+  toast.success("Species deleted!", {
+    position: toast.POSITION.TOP_CENTER,
+    hideProgressBar: true,
+  });
+};
 
 export function MeetTheWhalesPage(): JSX.Element {
   const [species, setSpecies] = useState<Array<Species>>([]);
@@ -15,7 +25,7 @@ export function MeetTheWhalesPage(): JSX.Element {
   const onDeleteSpecies = (speciesId: number) => {
     if (speciesId) {
       deleteSpecies(speciesId, username, password).then(() =>
-        fetchSpecies().then(setSpecies)
+        fetchSpecies().then(setSpecies).then(notifyOfSuccessfulDelete)
       );
     }
   };

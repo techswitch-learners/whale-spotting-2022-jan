@@ -4,7 +4,6 @@ import {
   EndangeredStatus,
   updateSpecies,
   fetchSpeciesById,
-  UpdateSpecies,
 } from "../../clients/apiClients";
 import { LoginContext } from "../login/LoginManager";
 import "./UpdateSpeciesPage.scss";
@@ -14,7 +13,6 @@ type FromStatus = "READY" | "SUBMITTING" | "ERROR" | "FINISHED";
 
 export function UpdateSpeciesPage(): JSX.Element {
   const { id } = useParams<{ id: string }>();
-  const [species, setSpecies] = useState<UpdateSpecies>();
   const [endangeredStatuses, setEndangeredStatuses] = useState<
     EndangeredStatus[]
   >([]);
@@ -60,9 +58,6 @@ export function UpdateSpeciesPage(): JSX.Element {
         setPhotoUrl(response.photoUrl)
       )
     );
-  }, []);
-
-  useEffect(() => {
     fetchEndangeredStatus().then((response) => setEndangeredStatuses(response));
   }, []);
 

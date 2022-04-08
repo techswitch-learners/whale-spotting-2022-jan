@@ -48,6 +48,9 @@ const Routes: React.FunctionComponent = () => {
       <Route path="/leaderboard">
         <Leaderboard />
       </Route>
+      <Route path="/species/meetwhales">
+        <MeetTheWhalesPage />
+      </Route>
       <Route path="/species/create">
         {loginContext.isAdmin ? <CreateSpeciesPage /> : <Login />}
       </Route>
