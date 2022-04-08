@@ -40,48 +40,7 @@ namespace WhaleSpotting.Controllers
         {
             var results = _sightingsRepo
                 .GetAllSightings()
-                .Select(s => new ExtendedSightingResponse
-                    {
-                        Id = s.Id,
-                        Date = s.Date,
-                        Location = new Location
-                        {
-                            Id = s.LocationId,
-                            Name = s.Location.Name,
-                            Latitude = s.Location.Latitude,
-                            Longitude = s.Location.Longitude,
-                            Description = s.Location.Description,
-                            Amenities = s.Location.Amenities
-                        },
-                        Description = s.Description,
-                        Species = new Species
-                        {
-                            Id = s.SpeciesId,
-                            Name = s.Species.Name,
-                            LatinName = s.Species.LatinName,
-                            PhotoUrl = s.Species.PhotoUrl,
-                            Description = s.Species.Description,
-                            EndangeredStatus = s.Species.EndangeredStatus
-                        },
-                        PhotoUrl = s.PhotoUrl,
-                        User = new UserResponse
-                        {
-                            Id = s.CreatedByUserId,
-                            Name = s.CreatedBy.Name,
-                            Email = s.CreatedBy.Email,
-                            Username = s.CreatedBy.Username
-                        },
-                        ApprovedBy = s.ApprovedBy != null
-                        ? new UserResponse
-                        {
-                            Id = s.ApprovedBy.Id,
-                            Name = s.ApprovedBy.Name,
-                            Email = s.ApprovedBy.Email,
-                            Username = s.ApprovedBy.Username
-                        }
-                        : null,
-                    }
-                )
+                .Select(s => new ExtendedSightingResponse(s))
                 .ToList();
             return results
                 .Where(s => SearchTerm.LocationId == null || s.Location.Id == SearchTerm.LocationId)
