@@ -13,16 +13,6 @@ export interface NewUser {
   password: string;
 }
 
-export interface Sighting {
-  id: number;
-  date: Date;
-  location: Location;
-  description: string;
-  species: Species;
-  photoUrl: string;
-  user: User;
-}
-
 export interface Location {
   id: number;
   latitude: number;
@@ -31,11 +21,6 @@ export interface Location {
   description: string;
   sightings: Sighting[];
   amenities: string[];
-}
-
-export interface User {
-  name: string;
-  username: string;
 }
 
 export interface Sighting {
@@ -80,6 +65,16 @@ export interface NewSighting {
   photoUrl: string;
 }
 
+export interface ExternalSighting {
+  id: number;
+  date: Date;
+  location: Location;
+  description: string;
+  species: Species[];
+  photoUrl: string;
+  email: string;
+}
+
 export interface NewSpecies {
   name: string;
   latinName: string;
@@ -97,7 +92,7 @@ function getAuthorizationHeader(username: string, password: string) {
   return `Basic ${btoa(`${username}:${password}`)}`;
 }
 
-export async function GetAllSightings(
+export async function getAllSightings(
   locationId: number,
   speciesId: number,
   createdByUserId: number
@@ -117,6 +112,20 @@ export async function GetAllSightings(
   );
 
   return await response.json();
+}
+
+export async function getExternalSightings(): Promise<Array<ExternalSighting>> {
+  const response = await fetch(
+    `https://whale-spotting-external-api.herokuapp.com/api/sightings`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  const sightingsArray = await response.json();
+  return sightingsArray.sightings;
 }
 
 export const login = async (
