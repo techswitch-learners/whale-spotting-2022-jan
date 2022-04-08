@@ -142,6 +142,11 @@
   }
 }
 
+.sightings__filters {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .sighting__paginate {
   display: flex;
   justify-content: center;
