@@ -1,6 +1,6 @@
 import React, { FormEvent, useState, useContext } from "react";
 import { Link } from "react-router-dom";
-import { login } from "../../clients/apiClients";
+import { isAdmin, login } from "../../clients/apiClients";
 import { LoginContext } from "../login/LoginManager";
 import "./Login.scss";
 import { notifyOfSuccessfulLogin } from "./LoginNotification";
@@ -13,13 +13,15 @@ export const Login: React.FunctionComponent = () => {
 
   async function tryLogin(event: FormEvent) {
     event.preventDefault();
+
     try {
       await login(username, password);
     } catch (e) {
       setError((e as Error).message);
       return;
     }
-    loginContext.logIn(username, password);
+    const isAdministrator = await isAdmin(username);
+    loginContext.logIn(username, password, isAdministrator);
     notifyOfSuccessfulLogin();
     setError(undefined);
   }
