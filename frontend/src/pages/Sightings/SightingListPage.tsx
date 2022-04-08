@@ -30,7 +30,7 @@ export function SightingListPage(): JSX.Element {
   }, []);
 
   if (loading) {
-    return <h1 className="sighting__list__loading">Loading...</h1>;
+    return <h1 className="sighting__list--loading">Loading...</h1>;
   }
 
   if (combinedSightingList.length === 0) {
