@@ -24,7 +24,8 @@
   position: relative;
   margin: 1rem;
 }
-.sighting__list--loading {
+.sighting__list--loading,
+.sighting__list--loaded {
   text-decoration: none;
   text-align: center;
   margin-top: 2em;

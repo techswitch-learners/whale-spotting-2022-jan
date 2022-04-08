@@ -33,9 +33,9 @@ export function SightingListPage(): JSX.Element {
     return <h1 className="sighting__list--loading">Loading...</h1>;
   }
 
-  if (combinedSightingList.length === 0) {
+  if (combinedSightingList.length !== 0) {
     return (
-      <h1 className="sighting__list__loading">
+      <h1 className="sighting__list--loaded">
         There are no whale sightings... yet!
         <Link to="/sightings/create"> Click here </Link>
         to report the first sighting.
