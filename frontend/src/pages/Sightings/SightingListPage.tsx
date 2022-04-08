@@ -46,10 +46,7 @@ export function SightingListPage(): JSX.Element {
   return (
     <div className="sighting__list__body">
       <h1 className="sighting__list__title">Sightings</h1>
-      <SightingList
-        setCombinedSightingList={setCombinedSightingList}
-        combinedSightingList={combinedSightingList}
-      />
+      <SightingList combinedSightingList={combinedSightingList} />
     </div>
   );
 }
