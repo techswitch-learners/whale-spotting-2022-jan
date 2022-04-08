@@ -1,10 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-  getLeaderboard,
-  getPopularLocations,
-  LeaderboardEntry,
-  Location,
-} from "../../../clients/apiClients";
+import { getLeaderboard, LeaderboardEntry } from "../../../clients/apiClients";
 import "./HomepageLeaderboard.scss";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
@@ -25,19 +20,19 @@ export function HomeLeaderboard() {
             <ul className="home-leaderboard__list-item">
               <li>
                 <h5 className="home-leaderboard__list-item-heading">
-                  🥇 {topEntries[0].username} with a total of
+                  🥇 {topEntries[0].username} with a total of{" "}
                   {topEntries[0].count} sightings
                 </h5>
               </li>
               <li>
                 <h5 className="home-leaderboard__list-item-heading">
-                  🥈 {topEntries[1].username} with a total of
+                  🥈 {topEntries[1].username} with a total of{" "}
                   {topEntries[1].count} sightings
                 </h5>
               </li>
               <li>
                 <h5 className="home-leaderboard__list-item-heading">
-                  🥉 {topEntries[2].username} with a total of
+                  🥉 {topEntries[2].username} with a total of{" "}
                   {topEntries[2].count} sightings
                 </h5>
               </li>
@@ -54,7 +49,7 @@ export function HomeLeaderboard() {
                   src="https://freepngimg.com/download/icon/1000188-spouting-whale-emoji-free-icon-hq.png"
                   width="30"
                 />
-              </Button>{" "}
+              </Button>
             </Link>
           </section>
         </section>
