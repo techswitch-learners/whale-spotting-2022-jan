@@ -34,13 +34,27 @@ export interface Sighting {
   approvedBy: User;
 }
 
+export interface EndangeredStatus {
+  id: number;
+  name: string;
+  description: string;
+}
+
 export interface Species {
   id: number;
   name: string;
   latinName: string;
   photoUrl: string;
   description: string;
-  endangeredStatus: string;
+  endangeredStatus: EndangeredStatus;
+}
+
+export interface UpdateSpecies {
+  name: string;
+  latinName: string;
+  photoUrl: string;
+  description: string;
+  endangeredStatusId: number;
 }
 
 export interface NewSighting {
@@ -61,6 +75,14 @@ export interface ExternalSighting {
   email: string;
 }
 
+export interface NewSpecies {
+  name: string;
+  latinName: string;
+  photoUrl: string;
+  description: string;
+  endangeredStatusId: number;
+}
+
 export interface LeaderboardEntry {
   username: string;
   count: number;
@@ -70,13 +92,24 @@ function getAuthorizationHeader(username: string, password: string) {
   return `Basic ${btoa(`${username}:${password}`)}`;
 }
 
-export async function getAllSightings(): Promise<Array<Sighting>> {
-  const response = await fetch(`${baseUrl}/sightings`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+export async function getAllSightings(
+  locationId: number,
+  speciesId: number,
+  createdByUserId: number
+): Promise<Array<Sighting>> {
+  const extraQueries = locationId || speciesId || createdByUserId ? `?` : "";
+  const query = locationId ? `locationId=${locationId}&` : "";
+  const query2 = speciesId ? `speciesId=${speciesId}&` : "";
+  const query3 = createdByUserId ? `createdByUserId=${createdByUserId}&` : "";
+  const response = await fetch(
+    `${baseUrl}/sightings${extraQueries}${query}${query2}${query3}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
 
   return await response.json();
 }
@@ -204,6 +237,13 @@ export async function fetchSpecies(): Promise<Array<Species>> {
   return await response.json();
 }
 
+export async function fetchSpeciesById(
+  speciesId: number
+): Promise<UpdateSpecies> {
+  const response = await fetch(`${baseUrl}/species/${speciesId}`);
+  return await response.json();
+}
+
 export async function createSighting(
   newSighting: NewSighting,
   username: string,
@@ -233,6 +273,11 @@ export const getPopularLocations = async () => {
   return data;
 };
 
+export async function fetchUsers(): Promise<Array<User>> {
+  const response = await fetch(`${baseUrl}/users`);
+  return await response.json();
+}
+
 export const getLeaderboard = async () => {
   const response = await fetch(`${baseUrl}/leaderboard`);
   const data = await response.json();
@@ -242,3 +287,65 @@ export const getLeaderboard = async () => {
   }
   return data;
 };
+
+export async function fetchEndangeredStatus(): Promise<
+  Array<EndangeredStatus>
+> {
+  const response = await fetch(`${baseUrl}/endangered`);
+  return await response.json();
+}
+
+export async function createSpecies(
+  newSpecies: NewSpecies,
+  username: string,
+  password: string
+) {
+  const response = await fetch(`${baseUrl}/species/create`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: getAuthorizationHeader(username, password),
+    },
+    body: JSON.stringify(newSpecies),
+  });
+  if (!response.ok) {
+    throw new Error(await response.json());
+  }
+}
+
+export async function updateSpecies(
+  id: number,
+  updatedSpecies: UpdateSpecies,
+  username: string,
+  password: string
+) {
+  const response = await fetch(`${baseUrl}/species/${id}/update`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: getAuthorizationHeader(username, password),
+    },
+    body: JSON.stringify(updatedSpecies),
+  });
+
+  if (!response.ok) {
+    throw new Error(await response.json());
+  }
+}
+
+export async function deleteSpecies(
+  id: number,
+  username: string,
+  password: string
+) {
+  const response = await fetch(`${baseUrl}/species/${id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: getAuthorizationHeader(username, password),
+    },
+  });
+  if (!response.ok) {
+    throw new Error(await response.json());
+  }
+}

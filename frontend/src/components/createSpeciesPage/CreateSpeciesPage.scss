@@ -1,0 +1,72 @@
+@import "../../styles/constants.scss";
+
+.createSpecies {
+  background-color: $color-background;
+  font-family: $font-family;
+  color: $color-font;
+}
+
+.createSpecies__header {
+  background-color: $color-block-blackground;
+  font-family: $font-family;
+  color: $color-font;
+  text-align: center;
+}
+
+.createSpecies__form {
+  display: grid;
+  grid-template-columns: [labels] auto [controls] auto;
+  grid-auto-flow: row;
+  grid-gap: 0.8em;
+  padding: 1.2em;
+  margin: auto;
+  width: 95%;
+
+  label {
+    grid-column: labels;
+    width: 100px;
+  }
+
+  input,
+  select,
+  textarea {
+    grid-column: controls;
+    border: none;
+    padding: 0.2em;
+    grid-row: auto;
+  }
+
+  .createSpecies__button {
+    margin-bottom: 2em;
+  }
+}
+
+.createSpecies__error {
+  color: pink;
+  font-size: larger;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  justify-self: center;
+}
+.createSpecies__success {
+  color: $color-font;
+  font-size: larger;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  justify-self: center;
+  a {
+    color: $color-font;
+  }
+}
+
+@media (min-width: 900px) {
+  .createSpecies__form {
+    width: 50%;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 900px) {
+  .createSpecies__form {
+    width: 70%;
+  }
+}

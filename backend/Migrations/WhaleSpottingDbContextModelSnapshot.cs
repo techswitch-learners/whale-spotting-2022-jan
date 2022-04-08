@@ -20,6 +20,24 @@ namespace WhaleSpotting.Migrations
                 .HasAnnotation("ProductVersion", "5.0.11")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
+            modelBuilder.Entity("WhaleSpotting.Models.Database.EndangeredStatus", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("EndangeredStatuses");
+                });
+
             modelBuilder.Entity("WhaleSpotting.Models.Database.Location", b =>
                 {
                     b.Property<int>("Id")
@@ -98,8 +116,8 @@ namespace WhaleSpotting.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("text");
 
-                    b.Property<string>("EndangeredStatus")
-                        .HasColumnType("text");
+                    b.Property<int>("EndangeredStatusId")
+                        .HasColumnType("integer");
 
                     b.Property<string>("LatinName")
                         .HasColumnType("text");
@@ -111,6 +129,8 @@ namespace WhaleSpotting.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("EndangeredStatusId");
 
                     b.ToTable("Species");
                 });
@@ -176,6 +196,17 @@ namespace WhaleSpotting.Migrations
                     b.Navigation("Location");
 
                     b.Navigation("Species");
+                });
+
+            modelBuilder.Entity("WhaleSpotting.Models.Database.Species", b =>
+                {
+                    b.HasOne("WhaleSpotting.Models.Database.EndangeredStatus", "EndangeredStatus")
+                        .WithMany()
+                        .HasForeignKey("EndangeredStatusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("EndangeredStatus");
                 });
 
             modelBuilder.Entity("WhaleSpotting.Models.Database.Location", b =>

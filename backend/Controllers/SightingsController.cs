@@ -14,13 +14,12 @@ namespace WhaleSpotting.Controllers
 {
     [ApiController]
     [Route("/sightings")]
-
     public class SightingsController : ControllerBase
     {
         private readonly IAuthService _authservice;
         private readonly ISightingsRepo _sightingsRepo;
-
         private readonly IUsersRepo _usersRepo;
+
         public SightingsController(
             IAuthService authservice,
             ISightingsRepo sightingsRepo,
@@ -33,52 +32,21 @@ namespace WhaleSpotting.Controllers
         }
 
         [HttpGet("")]
-        public ActionResult<List<ExtendedSightingResponse>> GetAllSightings()
+        public ActionResult<List<ExtendedSightingResponse>> GetSightings(
+            [FromQuery] LocationSearchRequest SearchTerm,
+            [FromQuery] SpeciesSearchRequest SpeciesSearchTerm,
+            [FromQuery] UserSearchRequest UserSearchTerm
+        )
         {
-
-            return _sightingsRepo.GetAllSightings()
-            .Select( s => new ExtendedSightingResponse
-            {
-                Id = s.Id,
-                Date = s.Date,
-                Location = new Location
-                    {
-                       Id = s.LocationId,
-                       Name = s.Location.Name,
-                       Latitude = s.Location.Latitude,
-                       Longitude = s.Location.Longitude,
-                       Description = s.Location.Description,
-                       Amenities = s.Location.Amenities
-                    },
-                Description = s.Description,
-                Species = new Species
-                    {
-                        Id = s.SpeciesId,
-                        Name = s.Species.Name,
-                        LatinName = s.Species.LatinName,
-                        PhotoUrl = s.Species.PhotoUrl,
-                        Description = s.Species.Description,
-                        EndangeredStatus = s.Species.EndangeredStatus
-                    },
-                PhotoUrl = s.PhotoUrl,
-                User = new UserResponse
-                    {
-                        Id = s.CreatedByUserId,
-                        Name = s.CreatedBy.Name,
-                        Email = s.CreatedBy.Email,
-                        Username = s.CreatedBy.Username
-
-                    },
-                ApprovedBy = s.ApprovedBy != null
-                    ?   new UserResponse
-                        {
-                            Id = s.ApprovedBy.Id,
-                            Name = s.ApprovedBy.Name,
-                            Email = s.ApprovedBy.Email,
-                            Username = s.ApprovedBy.Username
-                        }
-                    : null,
-            }).ToList();
+            var results = _sightingsRepo
+                .GetAllSightings()
+                .Select(s => new ExtendedSightingResponse(s))
+                .ToList();
+            return results
+                .Where(s => SearchTerm.LocationId == null || s.Location.Id == SearchTerm.LocationId)
+                .Where(s => SpeciesSearchTerm.SpeciesId == null || s.Species.Id == SpeciesSearchTerm.SpeciesId)
+                .Where(s => UserSearchTerm.CreatedByUserId == null || s.User.Id == UserSearchTerm.CreatedByUserId)
+                .ToList();
         }
 
         [HttpGet("recent")]
@@ -90,14 +58,14 @@ namespace WhaleSpotting.Controllers
                 Id = s.Id,
                 Date = s.Date,
                 Location = new Location
-                    {
-                        Id = s.LocationId,
-                        Name = s.Location.Name,
-                        Latitude = s.Location.Latitude,
-                        Longitude = s.Location.Longitude,
-                        Description = s.Location.Description,
-                        Amenities = s.Location.Amenities
-                    },
+                {
+                    Id = s.LocationId,
+                    Name = s.Location.Name,
+                    Latitude = s.Location.Latitude,
+                    Longitude = s.Location.Longitude,
+                    Description = s.Location.Description,
+                    Amenities = s.Location.Amenities
+                },
                 Description = s.Description,
                 Species = new Species
                     {
@@ -106,16 +74,16 @@ namespace WhaleSpotting.Controllers
                         LatinName = s.Species.LatinName,
                         PhotoUrl = s.Species.PhotoUrl,
                         Description = s.Species.Description,
-                        EndangeredStatus = s.Species.EndangeredStatus
+                        EndangeredStatusId = s.Species.EndangeredStatusId
                     },
                 PhotoUrl = s.PhotoUrl,
                 User = new UserResponse
-                    {
-                        Id = s.CreatedByUserId,
-                        Name = s.CreatedBy.Name,
-                        Email = s.CreatedBy.Email,
-                        Username = s.CreatedBy.Username
-                    }
+                {
+                    Id = s.CreatedByUserId,
+                    Name = s.CreatedBy.Name,
+                    Email = s.CreatedBy.Email,
+                    Username = s.CreatedBy.Username
+                }
             };
             return result;
         }
@@ -151,7 +119,7 @@ namespace WhaleSpotting.Controllers
                     "The given username is not valid"
                 );
             }
-            
+
 
             var check = _authservice.IsAuthenticated(usernamePassword);
 
@@ -176,7 +144,7 @@ namespace WhaleSpotting.Controllers
         [Route("{id}/approve")]
         public ActionResult Approve(
             [FromRoute] int id,
-            [FromHeader(Name = "Authorization")] 
+            [FromHeader(Name = "Authorization")]
             string authHeader)
         {
             if (!ModelState.IsValid)
@@ -206,7 +174,7 @@ namespace WhaleSpotting.Controllers
                     "The given username is not valid"
                 );
             }
-            
+
             if (user.Role == 0)
             {
                 return StatusCode(
@@ -266,14 +234,14 @@ namespace WhaleSpotting.Controllers
             }
 
             var check = _authservice.IsAuthenticated(usernamePassword);
-            
+
             if (!check)
             {
                 return new UnauthorizedResult();
             }
-                
+
             var sighting = _sightingsRepo.GetById(id);
-            
+
             if (user.Id != sighting.CreatedByUserId && user.Role == 0)
             {
                 return StatusCode(
@@ -281,7 +249,7 @@ namespace WhaleSpotting.Controllers
                     "You are not allowed to delete other people's sightings..."
                 );
             }
-         
+
             _sightingsRepo.Delete(id);
             return Ok();
         }
