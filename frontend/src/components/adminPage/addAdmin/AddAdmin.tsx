@@ -23,6 +23,7 @@ export function AddAdmin(): JSX.Element {
 
   const handleReset = () => {
     const selectors = document.querySelectorAll("select");
+    // reset initial values for each selector element
     selectors.forEach((s) => (s.value = s[0].innerHTML));
   };
 
