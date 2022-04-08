@@ -220,7 +220,7 @@ export async function fetchSpecies(): Promise<Array<Species>> {
 export async function fetchSpeciesById(
   speciesId: number
 ): Promise<UpdateSpecies> {
-  const response = await fetch(`https://localhost:5001/species/${speciesId}`);
+  const response = await fetch(`${baseUrl}/species/${speciesId}`);
   return await response.json();
 }
 
@@ -266,7 +266,7 @@ export const getLeaderboard = async () => {
 export async function fetchEndangeredStatus(): Promise<
   Array<EndangeredStatus>
 > {
-  const response = await fetch(`https://localhost:5001/endangered`);
+  const response = await fetch(`${baseUrl}/endangered`);
   return await response.json();
 }
 
@@ -275,7 +275,7 @@ export async function createSpecies(
   username: string,
   password: string
 ) {
-  const response = await fetch(`https://localhost:5001/species/create`, {
+  const response = await fetch(`${baseUrl}/species/create`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -294,7 +294,7 @@ export async function updateSpecies(
   username: string,
   password: string
 ) {
-  const response = await fetch(`https://localhost:5001/species/${id}/update`, {
+  const response = await fetch(`${baseUrl}/species/${id}/update`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
@@ -313,7 +313,7 @@ export async function deleteSpecies(
   username: string,
   password: string
 ) {
-  const response = await fetch(`https://localhost:5001/species/${id}`, {
+  const response = await fetch(`${baseUrl}/species/${id}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
