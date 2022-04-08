@@ -241,9 +241,10 @@ export const getPopularLocations = async () => {
 };
 
 export async function fetchUsers(): Promise<Array<User>> {
-  const response = await fetch(`${baseUrl}`);
+  const response = await fetch(`${baseUrl}/users`);
   return await response.json();
 }
+
 export const getLeaderboard = async () => {
   const response = await fetch(`${baseUrl}/leaderboard`);
   const data = await response.json();
