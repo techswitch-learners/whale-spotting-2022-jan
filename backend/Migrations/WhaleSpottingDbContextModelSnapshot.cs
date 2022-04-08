@@ -20,31 +20,6 @@ namespace WhaleSpotting.Migrations
                 .HasAnnotation("ProductVersion", "5.0.11")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-            modelBuilder.Entity("WhaleSpotting.Models.Database.Interaction", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("WhaleId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.HasIndex("WhaleId");
-
-                    b.ToTable("Interaction");
-                });
-
             modelBuilder.Entity("WhaleSpotting.Models.Database.Location", b =>
                 {
                     b.Property<int>("Id")
@@ -170,51 +145,6 @@ namespace WhaleSpotting.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("WhaleSpotting.Models.Database.Whale", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<string>("Description")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("text");
-
-                    b.Property<string>("PhotoUrl")
-                        .HasColumnType("text");
-
-                    b.Property<int?>("SpeciesId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("SpeciesId");
-
-                    b.ToTable("Whales");
-                });
-
-            modelBuilder.Entity("WhaleSpotting.Models.Database.Interaction", b =>
-                {
-                    b.HasOne("WhaleSpotting.Models.Database.User", "User")
-                        .WithMany("Interactions")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("WhaleSpotting.Models.Database.Whale", "Whale")
-                        .WithMany("Interactions")
-                        .HasForeignKey("WhaleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-
-                    b.Navigation("Whale");
-                });
-
             modelBuilder.Entity("WhaleSpotting.Models.Database.Sighting", b =>
                 {
                     b.HasOne("WhaleSpotting.Models.Database.User", "ApprovedBy")
@@ -248,28 +178,9 @@ namespace WhaleSpotting.Migrations
                     b.Navigation("Species");
                 });
 
-            modelBuilder.Entity("WhaleSpotting.Models.Database.Whale", b =>
-                {
-                    b.HasOne("WhaleSpotting.Models.Database.Species", "Species")
-                        .WithMany()
-                        .HasForeignKey("SpeciesId");
-
-                    b.Navigation("Species");
-                });
-
             modelBuilder.Entity("WhaleSpotting.Models.Database.Location", b =>
                 {
                     b.Navigation("Sightings");
-                });
-
-            modelBuilder.Entity("WhaleSpotting.Models.Database.User", b =>
-                {
-                    b.Navigation("Interactions");
-                });
-
-            modelBuilder.Entity("WhaleSpotting.Models.Database.Whale", b =>
-                {
-                    b.Navigation("Interactions");
                 });
 #pragma warning restore 612, 618
         }
