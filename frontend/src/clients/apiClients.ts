@@ -12,11 +12,6 @@ export interface NewUser {
   email: string;
   password: string;
 }
-// export interface Species {
-//   description: string;
-//   name: string;
-//   latinName: string;
-// }
 
 export interface Sighting {
   id: number;
