@@ -16,9 +16,10 @@ namespace WhaleSpotting.Repositories
 
         User GetByUsername(string username);
         User UpdateRole(UpdateUserRoleRequest update);
-        public List<User> GetAllUsers();
+        List<User> GetAllUsers();
 
         List<LeaderboardEntry> GetLeaderboard();
+        List<UserType> GetUserRoles();
     }
 
     public class UsersRepo : IUsersRepo
@@ -105,6 +106,10 @@ namespace WhaleSpotting.Repositories
                         Count = sighting.count 
                     }
                 ).ToList();
+        }
+        public List<UserType> GetUserRoles()
+        {
+            return Enum.GetValues(typeof(UserType)).Cast<UserType>().ToList();
         }
     }
 }

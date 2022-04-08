@@ -139,5 +139,11 @@ namespace WhaleSpotting.Controllers
             return _users.GetLeaderboard();
         }
 
+        [HttpGet("roles")]
+        public ActionResult<List<UserType>>GetUserRoles()
+        {
+            return _users.GetUserRoles();
+        }
+
     }
 }
