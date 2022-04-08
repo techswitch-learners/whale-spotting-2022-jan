@@ -1,13 +1,31 @@
+const baseUrl = process.env["REACT_APP_BACKEND_DOMAIN"];
+
 export interface User {
   id: number;
   name: string;
   username: string;
 }
+
 export interface NewUser {
   name: string;
   username: string;
   email: string;
   password: string;
+}
+export interface Species {
+  description: string;
+  name: string;
+  latinName: string;
+}
+
+export interface Sighting {
+  id: number;
+  date: Date;
+  location: Location;
+  description: string;
+  species: Species;
+  photoUrl: string;
+  user: User;
 }
 
 export interface Location {
@@ -33,6 +51,7 @@ export interface Sighting {
   species: Species;
   photoUrl: string;
   user: User;
+  approvedBy: User;
 }
 
 export interface Species {
@@ -52,12 +71,17 @@ export interface NewSighting {
   photoUrl: string;
 }
 
+export interface LeaderboardEntry {
+  username: string;
+  count: number;
+}
+
 function getAuthorizationHeader(username: string, password: string) {
   return `Basic ${btoa(`${username}:${password}`)}`;
 }
 
 export async function GetAllSightings(): Promise<Array<Sighting>> {
-  const response = await fetch(`https://localhost:5001/sightings`, {
+  const response = await fetch(`${baseUrl}/sightings`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -71,7 +95,7 @@ export const login = async (
   username: string,
   password: string
 ): Promise<void> => {
-  const response = await fetch("https://localhost:5001/login", {
+  const response = await fetch(`${baseUrl}/login`, {
     headers: {
       Authorization: `Basic ${btoa(`${username}:${password}`)}`,
     },
@@ -81,8 +105,14 @@ export const login = async (
   }
 };
 
+export const isAdmin = async (username: string): Promise<boolean> => {
+  const response = await fetch(`${baseUrl}/users/${username}`);
+  const user = await response.json();
+  return user.role;
+};
+
 export async function createUser(newUser: NewUser) {
-  const response = await fetch(`https://localhost:5001/users/`, {
+  const response = await fetch(`${baseUrl}/users/`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -95,8 +125,42 @@ export async function createUser(newUser: NewUser) {
   }
 }
 
+export async function approveSighting(
+  id: number,
+  username: string,
+  password: string
+) {
+  const response = await fetch(`${baseUrl}/sightings/${id}/approve`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: getAuthorizationHeader(username, password),
+    },
+  });
+  if (!response.ok) {
+    throw new Error(await response.json());
+  }
+}
+
+export async function deleteSighting(
+  id: number,
+  username: string,
+  password: string
+) {
+  const response = await fetch(`${baseUrl}/sightings/${id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: getAuthorizationHeader(username, password),
+    },
+  });
+  if (!response.ok) {
+    throw new Error(await response.json());
+  }
+}
+
 export const getMostRecentSighting = async () => {
-  const response = await fetch(`https://localhost:5001/sightings/recent`);
+  const response = await fetch(`${baseUrl}/sightings/recent`);
   const data = await response.json();
   if (!response.ok) {
     throw new Error(await response.json());
@@ -105,7 +169,7 @@ export const getMostRecentSighting = async () => {
 };
 
 export async function fetchLocations(): Promise<Array<Location>> {
-  const response = await fetch(`https://localhost:5001/locations`, {
+  const response = await fetch(`${baseUrl}/locations`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -119,15 +183,12 @@ export async function fetchLocations(): Promise<Array<Location>> {
 }
 
 export async function fetchLocationById(locationId: number): Promise<Location> {
-  const response = await fetch(
-    `https://localhost:5001/locations/${locationId}`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  );
+  const response = await fetch(`${baseUrl}/locations/${locationId}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
   if (!response.ok) {
     throw new Error(await response.json());
   }
@@ -135,7 +196,7 @@ export async function fetchLocationById(locationId: number): Promise<Location> {
 }
 
 export async function fetchSpecies(): Promise<Array<Species>> {
-  const response = await fetch(`https://localhost:5001/species`);
+  const response = await fetch(`${baseUrl}/species`);
   return await response.json();
 }
 
@@ -144,7 +205,7 @@ export async function createSighting(
   username: string,
   password: string
 ) {
-  const response = await fetch(`https://localhost:5001/sightings/create`, {
+  const response = await fetch(`${baseUrl}/sightings/create`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -159,7 +220,17 @@ export async function createSighting(
 }
 
 export const getPopularLocations = async () => {
-  const response = await fetch(`https://localhost:5001/locations/popular`);
+  const response = await fetch(`${baseUrl}/locations/popular`);
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(await response.json());
+  }
+  return data;
+};
+
+export const getLeaderboard = async () => {
+  const response = await fetch(`${baseUrl}/leaderboard`);
   const data = await response.json();
 
   if (!response.ok) {
