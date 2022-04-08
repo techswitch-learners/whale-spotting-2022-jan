@@ -16,7 +16,7 @@ export function AddAdmin(): JSX.Element {
   const submitForm = (event: FormEvent) => {
     event.preventDefault();
     setStatus("SUBMITTING");
-    if (!userId || !role) {
+    if (!userId || (role !== 0 && role !== 1)) {
       setStatus("ERROR");
       return;
     }

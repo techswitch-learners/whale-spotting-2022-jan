@@ -90,7 +90,7 @@ export const MobileNavbar: React.FunctionComponent = () => {
         ) : (
           <></>
         )}
-        {loginContext.isAdmin ? (
+        {loginContext.isAdmin && loginContext.isLoggedIn ? (
           <>
             <Link
               className="menu-item"
