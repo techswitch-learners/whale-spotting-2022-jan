@@ -24,7 +24,12 @@
   position: relative;
   margin: 1rem;
 }
-
+.sighting__list--loading,
+.sighting__list--loaded {
+  text-decoration: none;
+  text-align: center;
+  margin-top: 2em;
+}
 .sighting__card {
   background-color: $color-secondary;
   border: solid;
@@ -142,6 +147,11 @@
   }
 }
 
+.sightings__filters {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .sighting__paginate {
   display: flex;
   justify-content: center;

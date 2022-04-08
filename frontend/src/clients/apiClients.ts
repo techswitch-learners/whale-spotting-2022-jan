@@ -13,16 +13,6 @@ export interface NewUser {
   password: string;
 }
 
-export interface Sighting {
-  id: number;
-  date: Date;
-  location: Location;
-  description: string;
-  species: Species;
-  photoUrl: string;
-  user: User;
-}
-
 export interface Location {
   id: number;
   latitude: number;
@@ -31,11 +21,6 @@ export interface Location {
   description: string;
   sightings: Sighting[];
   amenities: string[];
-}
-
-export interface User {
-  name: string;
-  username: string;
 }
 
 export interface Sighting {
@@ -97,6 +82,16 @@ export interface NewInteraction {
   whaleId: number;
 }
 
+export interface ExternalSighting {
+  id: number;
+  date: Date;
+  location: Location;
+  description: string;
+  species: Species[];
+  photoUrl: string;
+  email: string;
+}
+
 export interface NewSpecies {
   name: string;
   latinName: string;
@@ -114,13 +109,24 @@ function getAuthorizationHeader(username: string, password: string) {
   return `Basic ${btoa(`${username}:${password}`)}`;
 }
 
-export async function GetAllSightings(): Promise<Array<Sighting>> {
-  const response = await fetch(`${baseUrl}/sightings`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+export async function getAllSightings(
+  locationId: number,
+  speciesId: number,
+  createdByUserId: number
+): Promise<Array<Sighting>> {
+  const extraQueries = locationId || speciesId || createdByUserId ? `?` : "";
+  const query = locationId ? `locationId=${locationId}&` : "";
+  const query2 = speciesId ? `speciesId=${speciesId}&` : "";
+  const query3 = createdByUserId ? `createdByUserId=${createdByUserId}&` : "";
+  const response = await fetch(
+    `${baseUrl}/sightings${extraQueries}${query}${query2}${query3}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
 
   return await response.json();
 }
@@ -133,6 +139,20 @@ export async function GetAllWhales(): Promise<Array<Whales>> {
   });
 
   return await response.json();
+}
+
+export async function getExternalSightings(): Promise<Array<ExternalSighting>> {
+  const response = await fetch(
+    `https://whale-spotting-external-api.herokuapp.com/api/sightings`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  const sightingsArray = await response.json();
+  return sightingsArray.sightings;
 }
 
 export const login = async (
@@ -297,6 +317,11 @@ export const getPopularLocations = async () => {
   }
   return data;
 };
+
+export async function fetchUsers(): Promise<Array<User>> {
+  const response = await fetch(`${baseUrl}/users`);
+  return await response.json();
+}
 
 export const getLeaderboard = async () => {
   const response = await fetch(`${baseUrl}/leaderboard`);

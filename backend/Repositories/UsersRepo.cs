@@ -14,6 +14,7 @@ namespace WhaleSpotting.Repositories
 
         User GetById(int id);
 
+        List<User> GetAllUsers();
         User GetByUsername(string username);
         User UpdateRole(int id, UpdateUserRoleRequest update);
 
@@ -86,6 +87,12 @@ namespace WhaleSpotting.Repositories
             return user;
         }
 
+         public List<User> GetAllUsers()
+        {
+            return _context
+                .Users
+                .ToList();
+        }
         public List<LeaderboardEntry> GetLeaderboard()
         {
             return _context.Sightings
