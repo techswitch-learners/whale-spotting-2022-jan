@@ -101,6 +101,7 @@ export function CreateSightingPage(): JSX.Element {
           </select>
           <label htmlFor="description">Description</label>
           <textarea
+            maxLength={2048}
             id="description"
             placeholder="Describe your sighting"
             rows={3}

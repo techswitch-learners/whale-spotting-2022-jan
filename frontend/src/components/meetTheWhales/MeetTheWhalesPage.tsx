@@ -7,6 +7,7 @@ import {
   User,
 } from "../../clients/apiClients";
 import { LoginContext } from "../login/LoginManager";
+import { notifyOfSuccessfulSponsor } from "./SponsorNotification";
 
 type FromStatus = "READY" | "SUBMITTING" | "ERROR" | "FINISHED";
 
@@ -34,6 +35,7 @@ export function MeetTheWhalesPage(): JSX.Element {
         setStatus("FINISHED");
         GetAllWhales().then(setWhales);
       })
+      .then(() => notifyOfSuccessfulSponsor())
       .catch(() => setStatus("ERROR"));
   };
 
@@ -63,30 +65,33 @@ export function MeetTheWhalesPage(): JSX.Element {
           <li className="whales__list__item" key={i}>
             <div className="whales__card">
               <h2 className="whales__card__title">{w.name}</h2>
-              <h3 className="whales__card__common-name">
-                ({w.species.name} {w.species.latinName})
-              </h3>
-              <figure className="whales__image">
-                <img
-                  className="whales__image"
-                  src={w.photoUrl}
-                  alt={w.name}
-                  width="250px"
-                />
-                <figcaption className="whales__card__info--emphasis">
-                  Conservation status: {w.species.endangeredStatus}
-                </figcaption>
-                <figcaption className="whales__card__info--emphasis">
-                  Description: {w.description}
-                </figcaption>
-                <p className="whales__card__info--sponsors">
-                  Sponsored by our members:
-                  {stringOfUsers(w.users)}
-                </p>
-              </figure>
+              <h5 className="whales__card__common-name">{w.species.name}</h5>
+              <div className="whales__card__grid">
+                <img className="whales__image" src={w.photoUrl} alt={w.name} />
+                <div className="whales__card__info--wrapper">
+                  <p className="whales__card__info--emphasis">
+                    <span className="whales__card__info__title">
+                      Conservation status: &nbsp;
+                    </span>
+                    {w.species.endangeredStatus}
+                  </p>
+                  <p className="whales__card__info--emphasis">
+                    <span className="whales__card__info__title">
+                      Description: &nbsp;
+                    </span>
+                    {w.description}
+                  </p>
+                  <p className="whales__card__info--sponsors">
+                    <span className="whales__card__info__title">
+                      Sponsored by our members:
+                    </span>
+                    {stringOfUsers(w.users)}
+                  </p>
+                </div>
+              </div>
               <form className="submit__form" onSubmit={submitForm}>
                 <button
-                  className="btn btn-primary"
+                  className="btn btn-primary whales__card__button"
                   type="submit"
                   disabled={
                     status === "SUBMITTING" ||

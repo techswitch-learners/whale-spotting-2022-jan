@@ -47,6 +47,7 @@
   }
 
   .whales__image {
+    width: 20rem;
     margin-top: 2.75em;
     text-align: center;
     border-radius: 5%;
@@ -57,15 +58,22 @@
     max-width: 90%;
     margin-bottom: 2.75em;
   }
+  .whales__card__info--wrapper {
+    text-align: left;
+    padding-left: 1.5em;
+    margin-bottom: 0.5em;
+    margin: 0.3rem;
+    color: #003851;
+  }
+  .whales__card__info__title {
+    font-weight: bold;
+  }
 
   .whales__card__info {
     padding-left: 1.5em;
     margin-bottom: 0.5em;
     margin: 0.3rem;
     color: #003851;
-    .whales__card__info--emphasis {
-      font-weight: bold;
-    }
   }
   .whales__button {
     margin-bottom: 2em;
@@ -82,25 +90,39 @@
     padding-right: 1.5em;
   }
 }
-.btn {
+.whales__card__button {
   margin-bottom: 2em;
   margin-left: auto;
   margin-right: auto;
   display: block;
-  font-weight: 400;
-  line-height: 1.5;
-  color: #003851;
-  text-align: center;
-  text-decoration: none;
-  cursor: pointer;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  background-color: transparent;
-  border: 1px solid transparent;
-  padding: 0.375rem 0.75rem;
-  font-size: 1rem;
-  border-radius: 0.25rem;
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
-    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+@media (min-width: 900px) {
+  .whales__card__grid {
+    display: grid;
+    grid-template-columns: 0.5fr 0.5fr;
+  }
+  .whales__card {
+    .whales__card__info--wrapper {
+      margin-top: 2.5em;
+    }
+    .whales__image {
+      width: 20rem;
+    }
+  }
+}
+
+@media (min-width: 600px) and (max-width: 900px) {
+  .whales__card {
+    .whales__card__info--wrapper {
+      text-align: left;
+      padding-left: 3em;
+      margin-bottom: 0.5em;
+      margin: 0.3rem;
+      color: #003851;
+    }
+    .whales__image {
+      width: 400px;
+    }
+  }
 }
