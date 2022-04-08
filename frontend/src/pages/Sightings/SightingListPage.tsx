@@ -6,16 +6,27 @@ import {
   Sighting,
 } from "../../clients/apiClients";
 import { GetAllSightings } from "../../clients/apiClients";
+import ReactPaginate from "react-paginate";
 import { LoginContext } from "../../components/login/LoginManager";
 import { parseJSON } from "date-fns";
 
 export function SightingListPage(): JSX.Element {
+  const [currentPage, setCurrentPage] = useState(0);
+  const perPage = 2;
   const [sightings, setSightings] = useState<Array<Sighting>>([]);
   const { username, password, isAdmin } = useContext(LoginContext);
 
   useEffect(() => {
     GetAllSightings().then(setSightings);
   }, []);
+
+  function handlePageClick({ selected: selectedPage }) {
+    setCurrentPage(selectedPage);
+  }
+
+  const offset = currentPage * perPage;
+
+  const pageCount = Math.ceil(sightings.length / perPage);
 
   const confirmWhaleSighting = (sightingId: number) => {
     if (sightingId) {
@@ -35,8 +46,22 @@ export function SightingListPage(): JSX.Element {
   return (
     <div className="sighting__list__body">
       <h1 className="sighting__list__title">Sightings</h1>
+      <div className="paginate__wrapper">
+        <ReactPaginate
+          className="sighting__paginate"
+          previousLabel={"Previous"}
+          nextLabel={"Next"}
+          pageCount={pageCount}
+          onPageChange={handlePageClick}
+          containerClassName={"pagination"}
+          previousLinkClassName={"pagintion__link"}
+          nextLinkClassName={"pagintion__link"}
+          disabledClassName={"pagintion__link--disabled"}
+          activeClassName={"pagintion__link--active"}
+        />
+      </div>
       <ul className="list-group list-group-flush">
-        {sightings.map((s, i) => (
+        {sightings.slice(offset, offset + perPage).map((s, i) => (
           <li className="sighting__list__item" key={i}>
             <div className="sighting__card">
               <h2 className="sighting__card__title">{s.species.name}</h2>
@@ -85,6 +110,20 @@ export function SightingListPage(): JSX.Element {
           </li>
         ))}
       </ul>
+      <div className="paginate__wrapper">
+        <ReactPaginate
+          className="sighting__paginate"
+          previousLabel={"Previous"}
+          nextLabel={"Next"}
+          pageCount={pageCount}
+          onPageChange={handlePageClick}
+          containerClassName={"pagination"}
+          previousLinkClassName={"pagintion__link"}
+          nextLinkClassName={"pagintion__link"}
+          disabledClassName={"pagintion__link--disabled"}
+          activeClassName={"pagintion__link--active"}
+        />
+      </div>
     </div>
   );
 }

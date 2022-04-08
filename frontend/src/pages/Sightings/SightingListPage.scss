@@ -141,3 +141,32 @@
     width: 100%;
   }
 }
+
+.sighting__paginate {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 15px 10px;
+  color: aliceblue;
+  list-style: none;
+}
+
+.next-Label,
+.previous-Label {
+  text-decoration: none;
+  padding: 2em;
+}
+
+.sighting__paginate li {
+  padding: 0.25em;
+  text-decoration: none;
+}
+.sighting__paginate a {
+  text-decoration: none;
+  border: 2px solid #3b89ac;
+  border-radius: 7px;
+  padding: 5px 12px;
+  color: white;
+}
