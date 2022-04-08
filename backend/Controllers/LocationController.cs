@@ -128,7 +128,7 @@ namespace WhaleSpotting.Controllers
                 );
             }
 
-            if (user.Role == 0)
+            if (user.Role != UserType.ADMIN)
             {
                 return StatusCode(
                     StatusCodes.Status403Forbidden,
@@ -142,12 +142,12 @@ namespace WhaleSpotting.Controllers
                 return new UnauthorizedResult();
 
             try
+
             {
                 var location = _locations.CreateLocation(newLocation, user.Id);
                 return Created("/", newLocation);
-
-
             }
+
             catch (BadHttpRequestException)
             {
                 return StatusCode(
