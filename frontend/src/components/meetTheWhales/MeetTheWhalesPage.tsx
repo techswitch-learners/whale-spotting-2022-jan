@@ -7,6 +7,7 @@ import {
   User,
 } from "../../clients/apiClients";
 import { LoginContext } from "../login/LoginManager";
+import { notifyOfSuccessfulSponsor } from "./SponsorNotification";
 
 type FromStatus = "READY" | "SUBMITTING" | "ERROR" | "FINISHED";
 
@@ -34,6 +35,7 @@ export function MeetTheWhalesPage(): JSX.Element {
         setStatus("FINISHED");
         GetAllWhales().then(setWhales);
       })
+      .then(() => notifyOfSuccessfulSponsor())
       .catch(() => setStatus("ERROR"));
   };
 
