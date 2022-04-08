@@ -39,9 +39,7 @@ export function SightingListPage(): JSX.Element {
         {sightings.map((s, i) => (
           <li className="sighting__list__item" key={i}>
             <div className="sighting__card">
-              <h2 className="sighting__card__title">
-                {s.species.name} ({s.species.latinName})
-              </h2>
+              <h2 className="sighting__card__title">{s.species.name}</h2>
               <img
                 className="sighting__image"
                 src={s.photoUrl}
