@@ -68,14 +68,14 @@ namespace WhaleSpotting.Controllers
                 },
                 Description = s.Description,
                 Species = new Species
-                {
-                    Id = s.SpeciesId,
-                    Name = s.Species.Name,
-                    LatinName = s.Species.LatinName,
-                    PhotoUrl = s.Species.PhotoUrl,
-                    Description = s.Species.Description,
-                    EndangeredStatus = s.Species.EndangeredStatus
-                },
+                    {
+                        Id = s.SpeciesId,
+                        Name = s.Species.Name,
+                        LatinName = s.Species.LatinName,
+                        PhotoUrl = s.Species.PhotoUrl,
+                        Description = s.Species.Description,
+                        EndangeredStatusId = s.Species.EndangeredStatusId
+                    },
                 PhotoUrl = s.PhotoUrl,
                 User = new UserResponse
                 {

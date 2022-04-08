@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using WhaleSpotting;
@@ -10,9 +11,10 @@ using WhaleSpotting;
 namespace WhaleSpotting.Migrations
 {
     [DbContext(typeof(WhaleSpottingDbContext))]
-    partial class WhaleSpottingDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220404143110_CreateEndangeredStatusTableAndUpdateSpeciesTable")]
+    partial class CreateEndangeredStatusTableAndUpdateSpeciesTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -130,8 +132,6 @@ namespace WhaleSpotting.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EndangeredStatusId");
-
                     b.ToTable("Species");
                 });
 
@@ -196,17 +196,6 @@ namespace WhaleSpotting.Migrations
                     b.Navigation("Location");
 
                     b.Navigation("Species");
-                });
-
-            modelBuilder.Entity("WhaleSpotting.Models.Database.Species", b =>
-                {
-                    b.HasOne("WhaleSpotting.Models.Database.EndangeredStatus", "EndangeredStatus")
-                        .WithMany()
-                        .HasForeignKey("EndangeredStatusId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("EndangeredStatus");
                 });
 
             modelBuilder.Entity("WhaleSpotting.Models.Database.Location", b =>

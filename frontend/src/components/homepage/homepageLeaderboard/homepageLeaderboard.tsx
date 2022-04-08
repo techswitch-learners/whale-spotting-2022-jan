@@ -24,18 +24,26 @@ export function HomeLeaderboard() {
                   {topEntries[0].count} sightings
                 </h5>
               </li>
-              <li>
-                <h5 className="home-leaderboard__list-item-heading">
-                  🥈 {topEntries[1].username} with a total of{" "}
-                  {topEntries[1].count} sightings
-                </h5>
-              </li>
-              <li>
-                <h5 className="home-leaderboard__list-item-heading">
-                  🥉 {topEntries[2].username} with a total of{" "}
-                  {topEntries[2].count} sightings
-                </h5>
-              </li>
+              {topEntries[1] ? (
+                <li>
+                  <h5 className="home-leaderboard__list-item-heading">
+                    🥈 {topEntries[1].username} with a total of{" "}
+                    {topEntries[1].count} sightings
+                  </h5>
+                </li>
+              ) : (
+                <></>
+              )}
+              {topEntries[2] ? (
+                <li>
+                  <h5 className="home-leaderboard__list-item-heading">
+                    🥉 {topEntries[2].username} with a total of{" "}
+                    {topEntries[2].count} sightings
+                  </h5>
+                </li>
+              ) : (
+                <></>
+              )}
             </ul>
           </section>
           <section className="home-leaderboard__text home-leaderboard__right">

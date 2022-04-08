@@ -79,6 +79,28 @@ export const MobileNavbar: React.FunctionComponent = () => {
         >
           Meet the Whales
         </Link>
+        {loginContext.isAdmin ? (
+          <Link
+            className="menu-item"
+            to="/species/create"
+            onClick={() => closeMenu()}
+          >
+            Create Species
+          </Link>
+        ) : (
+          <></>
+        )}
+        {loginContext.isAdmin ? (
+          <Link
+            className="menu-item"
+            to="/species/meetwhales"
+            onClick={() => closeMenu()}
+          >
+            Update Species
+          </Link>
+        ) : (
+          <></>
+        )}
         {!loginContext.isLoggedIn ? (
           <Link
             id="signup"
