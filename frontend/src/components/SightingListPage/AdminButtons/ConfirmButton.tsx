@@ -5,17 +5,17 @@ import { LoginContext } from "../../login/LoginManager";
 export function ConfirmButton({
   approvedBy,
   sightingId,
-  setActionOnConfirm,
+  setConfirmed: setConfirmed,
 }: {
   approvedBy: User;
   sightingId: number;
-  setActionOnConfirm: React.Dispatch<React.SetStateAction<boolean>>;
+  setConfirmed: React.Dispatch<React.SetStateAction<boolean>>;
 }): JSX.Element {
   const { username, password } = useContext(LoginContext);
 
   const confirmWhaleSighting = () => {
     approveSighting(sightingId, username, password).then(() =>
-      setActionOnConfirm(true)
+      setConfirmed(true)
     );
   };
 

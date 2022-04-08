@@ -8,17 +8,14 @@ export function InternalSighting({
   sighting,
   index,
 }: {
-  setCombinedSightingList: React.Dispatch<
-    React.SetStateAction<(Sighting | ExternalSighting)[]>
-  >;
   sighting: Sighting;
   index: number;
 }) {
   const { isAdmin } = useContext(LoginContext);
-  const [actionOnConfirm, setActionOnConfirm] = useState<boolean>(false);
-  const [actionOnDelete, setActionOnDelete] = useState<boolean>(false);
+  const [isConfirmed, setConfirmed] = useState<boolean>(false);
+  const [isDeleted, setDeleted] = useState<boolean>(false);
 
-  if (actionOnDelete)
+  if (isDeleted)
     return (
       <li className="sighting__list__item" key={index}>
         <div className="sighting__card">
@@ -46,25 +43,19 @@ export function InternalSighting({
           <p>
             Seen by: {sighting.user.name} ({sighting.user.username})
           </p>
-          {actionOnConfirm || sighting.approvedBy ? (
+          {isConfirmed || sighting.approvedBy ? (
             <>
               <p>Confirmed ☑</p>
-              <DeleteButton
-                sightingId={sighting.id}
-                setActionOnDelete={setActionOnDelete}
-              />
+              <DeleteButton sightingId={sighting.id} setDeleted={setDeleted} />
             </>
           ) : isAdmin ? (
             <div className="sighting__card__btns">
               <ConfirmButton
                 approvedBy={sighting.approvedBy}
                 sightingId={sighting.id}
-                setActionOnConfirm={setActionOnConfirm}
+                setConfirmed={setConfirmed}
               />
-              <DeleteButton
-                sightingId={sighting.id}
-                setActionOnDelete={setActionOnDelete}
-              />
+              <DeleteButton sightingId={sighting.id} setDeleted={setDeleted} />
             </div>
           ) : (
             <> </>

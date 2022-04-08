@@ -4,17 +4,15 @@ import { LoginContext } from "../../login/LoginManager";
 
 export function DeleteButton({
   sightingId,
-  setActionOnDelete,
+  setDeleted,
 }: {
   sightingId: number;
-  setActionOnDelete: React.Dispatch<React.SetStateAction<boolean>>;
+  setDeleted: React.Dispatch<React.SetStateAction<boolean>>;
 }): JSX.Element {
   const { username, password } = useContext(LoginContext);
 
   const deleteWhaleSighting = () => {
-    deleteSighting(sightingId, username, password).then(() =>
-      setActionOnDelete(true)
-    );
+    deleteSighting(sightingId, username, password).then(() => setDeleted(true));
   };
 
   return (
