@@ -8,7 +8,6 @@ namespace WhaleSpotting
     public class WhaleSpottingDbContext : DbContext
     {
         public DbSet<User> Users { get; set; }
-        public DbSet<Location> Locations{ get; set; }
 
         protected override void OnConfiguring(
             DbContextOptionsBuilder optionsBuilder
